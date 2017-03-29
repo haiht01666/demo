@@ -1,0 +1,207 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> -->
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+
+
+
+<style>
+  /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    .selected{
+	background-color : #1CB94E !important;
+}
+.btn-action{
+	    padding: 3px;
+}
+
+.nav li:hover { 
+    background-color: #1CB94E;
+}
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav" id="nav">
+        <li class="active"><a href="menu.html">Home</a></li>
+        <li><a href="accounts.html">Accounts</a></li>
+		 <li><a href="orders.html">Orders</a></li>
+        <li><a href="feedbacks.html">Feedbacks</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">    
+	<div class="table-responsive">
+
+				<div class="btn-action">
+					<button type="button" class="btn btn-default btn-sm" id="addRow">
+					  <span class="glyphicon glyphicon-plus"></span> Add
+					</button>
+				</div>
+	<table id="tbl-staff" class="display table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Sign up date</th>
+				 <th>Enable</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr data-id=1> 
+				<td>000001</td>
+                <td><a href="details.html">Tiger Nixon</a></td>
+                <td>2011/04/25</td>
+				<td>Active</td>
+                <td>Active</td>
+				
+            </tr>
+            <tr>
+				<td>000002</td>
+                <td><a href="details.html">Garrett Winters</a></td>
+                <td>2011/07/25</td>
+				<td>Active</td>
+                <td>Inactive</td>
+            </tr>
+            <tr>
+				<td>000003</td>
+                <td><a href="details.html">Ashton Cox</a></td>
+                <td>2009/01/12</td>
+				<td>Active</td>
+                <td>Active</td>
+            </tr>
+            <tr>
+				<td>000004</td>
+                <td><a href="details.html">Cedric Kelly</a></td>
+                <td>2012/03/29</td>
+				<td>Active</td>
+                <td>Active</td>
+            </tr>
+            <tr>
+				<td>000005</td>
+                <td><a href="details.html">Airi Satou</a></td>
+                <td>2008/11/28</td>
+				<td>Active</td>
+                <td>Active</td>
+            </tr>
+          
+        </tbody>
+    </table>
+</div>
+	
+<script>
+$(document).ready(function() {
+//check mobile device
+var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+
+    
+	var table = $('#tbl-staff').DataTable( {
+		responsive: false,
+		"paging":   true,
+        "ordering": true,
+        "info":     false,
+		"searching":true,
+		"pagingType": "full_numbers",
+		"scrollX": true,
+		 "language": {
+            //"lengthMenu": "Display _MENU_ records per page",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        },
+		//disable sort 
+		aoColumnDefs: [
+		  {
+			 bSortable: false,
+			 aTargets: [ 1 ]
+		  }
+		]
+	} );
+	//select row
+	  $('#tbl-staff tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+	//edit row
+	$('#edit-data').on( 'click', function () {
+		alert($('#tbl-staff tr.selected').data('id'));
+	});
+	//add row
+	var counter = 1;
+ 
+	 $('#addRow').on( 'click', function () {
+        table.row.add( [
+            '000000',
+            '',
+            '',
+            'Enable',
+            'Inactive'
+
+        ] ).draw( false );
+ 
+        counter++;
+    } );
+	//remove row
+	$('#remove-data').on('click',function(){
+		 table.row('.selected').remove().draw( false );
+	});
+	if (isMobile.matches) {
+       $('#tbl-staff_filter').parent().attr('style','padding:0;float:left');
+	   $('#tbl-staff_length').attr('style','float:left');
+    }
+	//click nav
+	  $(function() {
+        $('#nav li').click(function() {
+           $('#nav li').removeClass();
+           $(this).addClass('active');
+        });
+     });
+} );
+</script>
+</body>
+</html>
