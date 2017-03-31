@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
 <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> -->
 
+<!--Confirm css --->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -19,6 +21,9 @@
 <script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+
+
+
 
 
 
@@ -67,7 +72,7 @@
   </div>
 </nav>
 
-<div class="container">    
+<div class="col-xs-12">    
 	<div class="table-responsive">
 
 				<div class="btn-action">
@@ -133,6 +138,50 @@
     </table>
 </div>
 	
+	<!-- Modal -->
+  <div class="modal fade" id="add-order" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-header">Add new order</h4>
+        </div>
+        <div class="modal-body">
+			<div class="row">
+				<div class="col-xs-12">
+					 <form>
+						<div class="form-group">
+						  <input type="text" id="txt-member-id" class="form-control" placeholder="Enter member id">
+						</div>
+						
+						<div class="form-group">
+						  <input type="text" id="txt-member-name" class="form-control" placeholder="member name" readonly>
+						</div>
+						
+						<div class="form-group">
+						  <input type="text" id="txt-order-name" class="form-control" placeholder="Enter order name">
+						</div>
+						
+						<div class="form-group">
+						  <input type="text" id="txt-order-amount" class="form-control" placeholder="Enter order amount">
+						</div>
+					  </form>
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-default" id="btn-add-order">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>	
+<!-- moment library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/af.js"></script>
 <script>
 $(document).ready(function() {
 //check mobile device
@@ -174,26 +223,52 @@ var isMobile = window.matchMedia("only screen and (max-width: 760px)");
     } );
 	//edit row
 	$('#edit-data').on( 'click', function () {
-		alert($('#tbl-staff tr.selected').data('id'));
-	});
-	//add row
-	var counter = 1;
- 
-	 $('#addRow').on( 'click', function () {
-        table.row.add( [
-            counter +'.1',
-            counter +'.2',
-            counter +'.3',
-            counter +'.4',
-            counter +'.5',
-			counter +'.6'
+		$('#modal-header').text('Edit order');
+		$('#btn-add-order').text('Edit');
+		$('#txt-member-id').val(table.$('tr.selected td:nth-child(1)').text());
+		$('#txt-member-name').val(table.$('tr.selected td:nth-child(2)').text());
+		$('#txt-order-name').val(table.$('tr.selected td:nth-child(3)').text());
+		 $('#txt-order-amount').val(table.$('tr.selected td:nth-child(5)').text());
+		$('#add-order').modal('show');
+		$('#btn-add-order').on('click',function(){
+			table.row.add( [
+            $('#txt-member-id').val(),
+            $('#txt-member-name').val(),
+			$('#txt-order-name').val(),
+			moment(new Date()).format('MM/DD/YYYY'),
+            $('#txt-order-amount').val()
         ] ).draw( false );
- 
-        counter++;
+		$('#add-order').modal('hide');
+		});
+	});
+	//add row 
+	 $('#addRow').on( 'click', function () {
+		$('#add-order').modal('show');
+		$('#btn-add-order').on('click',function(){
+			table.row.add( [
+            $('#txt-member-id').val(),
+            $('#txt-member-name').val(),
+			$('#txt-order-name').val(),
+			moment(new Date()).format('MM/DD/YYYY'),
+            $('#txt-order-amount').val()
+        ] ).draw( false );
+		$('#add-order').modal('hide');
+		});
+       
     } );
 	//remove row
 	$('#remove-data').on('click',function(){
-		 table.row('.selected').remove().draw( false );
+		 $.confirm({
+			title: 'Confirm!',
+			buttons: {
+				Ok: function(){
+					table.row('.selected').remove().draw( false );
+				},
+				Cancel : function(){
+				}
+			}
+		});
+		 
 	});
 	if (isMobile.matches) {
        $('#tbl-staff_filter').parent().attr('style','padding:0;float:left');

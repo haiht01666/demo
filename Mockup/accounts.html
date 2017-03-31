@@ -70,7 +70,7 @@
   </div>
 </nav>
 
-<div class="container">    
+<div class="col-xs-12">    
 	<div class="table-responsive">
 
 				<div class="btn-action">
@@ -140,19 +140,40 @@
     </table>
 </div>
 
+<!-- Modal -->
+  <div class="modal fade" id="edit-role" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit role for member</h4>
+        </div>
+        <div class="modal-body">
+			<div class="container">
+			  <p>Please choose role</p>
+			   <form>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio" value="0">Admin
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="optradio" value="1" checked="checked">Member
+				</label>
+			  </form>
+			</div>
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-default" id="btn-edit-role">Edit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
 <script>
 $(document).ready(function() {
-
-$.confirm({
- title: 'Confirm!',
-	buttons: {
-        ok: function(){
-            // here the key 'something' will be used as the text.
-            $.alert('You clicked on something.');
-        }
-		}
-});
 //check mobile device
 var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
@@ -180,34 +201,58 @@ var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 		  }
 		]
 	} );
-	//select row
-	  $('#tbl-staff tbody').on( 'click', 'tr', function () {
-        if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
+	
+	//select multi row 
+	$('#tbl-staff tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
     } );
+	
 	//edit row
 	$('#edit-data').on( 'click', function () {
-		alert($('#tbl-staff tr.selected').data('id'));
+		$('#edit-role').modal('show');
+		$('#btn-edit-role').on('click',function(){
+			if($('form input[type=radio]:checked').val() === '0'){
+				$('tr.selected td:nth-child(4)').html("Admin");
+			}
+			else{
+				$('tr.selected td:nth-child(4)').html("Member");
+			}
+			$('#edit-role').modal('hide');
+		})
 	});
 	//add row
 	 $('#addRow').on( 'click', function () {
-        table.row.add( [
-            '000000',
-            '',
-            '',
-			'Member',
-            'Enable',
-            'Inactive'
-        ] ).draw( false );
+	 $.confirm({
+		title: 'Confirm!',
+		buttons: {
+			Ok: function(){
+				table.row.add( [
+					'000000',
+					'',
+					'',
+					'Member',
+					'',
+					'Inactive'
+				] ).draw( false );
+			},
+			Cancel : function(){
+			}
+		}
+	});
     } );
 	//remove row
 	$('#remove-data').on('click',function(){
-		 table.row('.selected').remove().draw( false );
+		 $.confirm({
+			title: 'Confirm!',
+			buttons: {
+				Ok: function(){
+					table.row('.selected').remove().draw( false );
+				},
+				Cancel : function(){
+				}
+			}
+		});
+		 
 	});
 	if (isMobile.matches) {
        $('#tbl-staff_filter').parent().attr('style','padding:0;float:left');
