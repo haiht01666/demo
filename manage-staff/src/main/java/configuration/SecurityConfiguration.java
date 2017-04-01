@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
         .antMatchers("/", "/home", "/member").access("hasRole('ADMIN') or hasRole('STAFF') or hasRole('SPADMIN')")
-        .antMatchers("/manage/**").access("hasRole('SPADMIN')")
+        .antMatchers("/account").access("hasRole('SPADMIN')")
         .antMatchers("/manage").access("hasRole('ADMIN') or hasRole('SPADMIN')")
         .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
         .usernameParameter("ssoId").passwordParameter("password")

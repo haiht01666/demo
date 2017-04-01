@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,11 @@ import org.springframework.context.MessageSource;
 public class DBManager {
 	@Autowired
 	private MessageSource messageSource;
+	
+	PreparedStatement stmt = null;
+	Statement st = null;
+	Connection conn = null;
+	ResultSet rs = null;
 
 	public Connection getConnection() {
 		Connection conn = null;

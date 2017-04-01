@@ -6,15 +6,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Access Denied</title>
+<title>System Busy</title>
 <%@ include file="../common/library.jsp"%>
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
 	<div class="container">
-		<h3 style="color: red;">Access Denied</h3>
+		<h3 style="color: red;">System Busy</h3>
 		<br>
-		<p>You do not permission to access this page!</p>
+		<p>The system is busy please try again later!</p>
 		<br> <a href="<c:url value="/home"/>">Back to home page</a>
 	</div>
 </body>

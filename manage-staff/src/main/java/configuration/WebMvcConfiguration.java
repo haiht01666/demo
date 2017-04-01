@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "controller,dao,service")
+@ComponentScan(basePackages = "controller,dao,service,exception")
 @Import(value = { SecurityConfiguration.class })
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 	@Bean(name = "HelloWorld")
@@ -45,5 +45,5 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 		CustomSuccessHandler customSuccessHandler = new CustomSuccessHandler();
 		return customSuccessHandler;
 	}
-
+	
 }

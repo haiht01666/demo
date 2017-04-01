@@ -22,7 +22,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 	@Override
 	public User getUserByCode(String code) {
 		User user = new User();
-		String sql = "SELECT code ,password,dispname,enable,role FROM users u join user_role r on u.code = r.usercode where code=?;";
+		String sql = "SELECT u.id ,password,name,enable,role FROM users u join roles r on u.id = r.user_id where u.id=?";
 		List<String> roles = new ArrayList<>();
 		try {
 			conn = getConnection();

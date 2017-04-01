@@ -8,111 +8,178 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Login page</title>
-<link href="<c:url value='/static/css/common/bootstrap.min.css' />"
+<!-- css -->
+<link href="<c:url value='/static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='/static/css/login/login.css' />"
 	rel="stylesheet"></link>
+<!-- js -->
 <script type="text/javascript"
 	src="<c:url value='/static/js/common/bootstrap.min.js' />"></script>
 <script type="text/javascript"
 	src="<c:url value='/static/js/common/jquery.min.js' />"></script>
-<script type="text/javascript"
-	src="<c:url value='/static/js/login/login.js' />"></script>
+
 </head>
 
 <body>
-	<div class="col-xs-12 col-md-6 col-md-offset-3">
-		<div class="panel panel-login">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-6">
-						<a href="#" class="active" id="login-form-link">Login</a>
-					</div>
-					<div class="col-xs-6">
-						<a href="#" id="register-form-link">Register</a>
+	<div class="container">
+		<div id="loginbox" style="margin-top: 50px;"
+			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">Sign In</div>
+					<div
+						style="float: right; font-size: 80%; position: relative; top: -10px">
+						<a href="#">Forgot password?</a>
 					</div>
 				</div>
-				<hr>
-				<c:if test="${param.error != null}">
-					<div id="msg-error" style="margin-top: 10px;">
+
+				<div style="padding-top: 30px" class="panel-body">
+				
+					<c:if test="${param.error != null}">
 						<div class="alert alert-danger">
-							<p>Sai tên đăng nhặp hoặc mật khẩu .</p>
+							<p>Wrong id or password.</p>
 						</div>
-					</div>
-				</c:if>
+					</c:if>
+					
+					<div style="display: none" id="login-alert"
+						class="alert alert-danger col-sm-12"></div>
+
+					<c:url var="loginUrl" value="/login" />
+					<form id="loginform" class="form-horizontal" role="form"
+						action="${loginUrl}" method="post">
+
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
+								type="text" class="form-control" name="ssoId" value=""
+								placeholder="id" required="required">
+						</div>
+
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
+								type="password" class="form-control" name="password"
+								placeholder="password">
+						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<div style="margin-top: 10px" class="form-group">
+							<!-- Button -->
+
+							<div class="col-sm-12 controls">
+								<input type="submit" value="Login" id="btn-login"
+									class="btn btn-success">
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-md-12 control">
+								<div
+									style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
+									Don't have an account! <a href="#"
+										onClick="$('#loginbox').hide(); $('#signupbox').show()">
+										Sign Up Here </a>
+								</div>
+							</div>
+						</div>
+					</form>
+
+
+
+				</div>
 			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-lg-12">
-						<c:url var="loginUrl" value="/login" />
-						<form id="login-form" action="${loginUrl}" method="post"
-							role="form" style="display: block;">
-							<div class="form-group">
-								<input type="text" name="ssoId" id="username" tabindex="1"
-									class="form-control" placeholder="Username" value="">
-							</div>
-							<div class="form-group">
-								<input type="password" name="password" id="password"
-									tabindex="2" class="form-control" placeholder="Password">
-							</div>
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
-							<div class="form-group">
-								<div class="row">
-									<div class="col-sm-6 col-sm-offset-3">
-										<input type="submit" name="login-submit" id="login-submit"
-											tabindex="4" class="form-control btn btn-login"
-											value="Log In">
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="text-center">
-											<a href="" tabindex="5"
-												class="forgot-password">Forgot Password?</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-						<form id="register-form"
-							action="http://phpoll.com/register/process" method="post"
-							role="form" style="display: none;">
-							<div class="form-group">
-								<input type="text" name="username" id="username" tabindex="1"
-									class="form-control" placeholder="Username" value="">
-							</div>
-							<div class="form-group">
-								<input type="email" name="email" id="email" tabindex="1"
-									class="form-control" placeholder="Email Address" value="">
-							</div>
-							<div class="form-group">
-								<input type="password" name="password" id="password"
-									tabindex="2" class="form-control" placeholder="Password">
-							</div>
-							<div class="form-group">
-								<input type="password" name="confirm-password"
-									id="confirm-password" tabindex="2" class="form-control"
-									placeholder="Confirm Password">
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-sm-6 col-sm-offset-3">
-										<input type="submit" name="register-submit"
-											id="register-submit" tabindex="4"
-											class="form-control btn btn-register" value="Register Now">
-									</div>
-								</div>
-							</div>
-						</form>
+		</div>
+		<div id="signupbox" style="display: none; margin-top: 50px"
+			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">Sign Up</div>
+					<div
+						style="float: right; font-size: 85%; position: relative; top: -10px">
+						<a id="signinlink" href="#"
+							onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign
+							In</a>
 					</div>
+				</div>
+				<div class="panel-body">
+					<form id="signupform" class="form-horizontal" role="form">
+
+						<div id="signupalert" style="display: none"
+							class="alert alert-danger">
+							<p>Error:</p>
+							<span></span>
+						</div>
+
+
+
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="email"
+									placeholder="id">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="firstname"
+									placeholder="Name">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="email" class="form-control" name="lastname"
+									placeholder="Email">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="lastname"
+									placeholder="Phone">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="lastname"
+									placeholder="Bank account number">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="lastname"
+									placeholder="Bank address">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="password" class="form-control" name="passwd"
+									placeholder="Password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-12">
+								<input type="password" class="form-control" name="icode"
+									placeholder="Repassword">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<!-- Button -->
+							<div class="col-md-12">
+								<button id="btn-signup" type="button" class="btn btn-info">
+									<i class="icon-hand-right"></i> Sign Up
+								</button>
+
+							</div>
+						</div>
+
+
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>

@@ -1,8 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * id
@@ -22,12 +28,12 @@ public class User {
 	 * Display name
 	 */
 	private String dispName;
-	
+
 	/**
-	 * enable 
+	 * enable
 	 */
 	private boolean enable;
-	
+
 	/**
 	 * User code
 	 */

@@ -1,0 +1,16 @@
+.navbar {
+	margin-bottom: 50px;
+	border-radius: 0;
+}
+
+.selected {
+	background-color: #1CB94E !important;
+}
+
+.btn-action {
+	padding: 3px;
+}
+
+.nav li:hover {
+	background-color: #1CB94E;
+}
