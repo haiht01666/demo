@@ -7,7 +7,7 @@ USE DB_MANAGE_STAFF;
 CREATE TABLE DB_MANAGE_STAFF.users(
 	id integer auto_increment not null,
 	email varchar(50),
-	password varchar(59),
+	password varchar(100),
 	name varchar(50),
 	phone varchar(50),
 	enable tinyint(1),
@@ -53,4 +53,8 @@ CREATE TABLE DB_MANAGE_STAFF.feedbacks(
 );
 
 -- set first value increment
-ALTER TABLE users AUTO_INCREMENT = 100000
+ALTER TABLE users AUTO_INCREMENT = 100000;
+
+-- Insert user 
+Insert into users(id,password,enable) values (100001,'123456',true);
+Insert into roles(id,role,user_id) values (1,'ADMIN',100000);
