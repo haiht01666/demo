@@ -26,9 +26,7 @@ public class LoginController{
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) throws Exception {
 		model.addAttribute("mesage",messageSource.getMessage("message.12",null, Locale.US));
-		//userMapper.getAllUsers();
-		throw new Exception();
-		//return "common/home";
+		return "common/home";
 	}
 	
 	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
@@ -50,7 +48,7 @@ public class LoginController{
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		return "login";
+		return "login/login";
 	}
 	
 //	private String converCurrency(Double amount){

@@ -1,11 +1,15 @@
 package dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Locale;
+
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -36,6 +40,15 @@ public class DBManager {
 			return null;
 		}
 		return conn;
+	}
+	
+	public String encryptMd5(String item){
+		try {
+			return (new HexBinaryAdapter()).marshal(MessageDigest.getInstance("MD5").digest(item.getBytes()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

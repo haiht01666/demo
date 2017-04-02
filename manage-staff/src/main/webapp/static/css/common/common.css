@@ -14,3 +14,12 @@
 .nav li:hover {
 	background-color: #1CB94E;
 }
+.color-red{
+	color: red;
+}
+.error-area{
+  padding: 25px;
+  background: #f2dede;
+  text-align: center;
+  color: #a94442;
+}

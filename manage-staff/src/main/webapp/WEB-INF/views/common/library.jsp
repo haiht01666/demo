@@ -10,9 +10,9 @@
 	rel="stylesheet"></link>
 
 <script type="text/javascript"
-	src="<c:url value='/static/js/common/bootstrap.min.js' />"></script>
-<script type="text/javascript"
 	src="<c:url value='/static/js/common/jquery.min.js' />"></script>
+<script type="text/javascript"
+	src="<c:url value='/static/js/common/bootstrap.min.js' />"></script>
 <script type="text/javascript"
 	src="<c:url value='/static/js/common/common.js' />"></script>
 <script type="text/javascript"

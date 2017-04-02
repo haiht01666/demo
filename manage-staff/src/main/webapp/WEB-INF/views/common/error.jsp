@@ -12,10 +12,10 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 	<div class="container">
-		<h3 style="color: red;">System Busy</h3>
-		<br>
-		<p>The system is busy please try again later!</p>
-		<br> <a href="<c:url value="/home"/>">Back to home page</a>
+		<div class="error-area">
+			<h2>System Busy</h2>
+			<p class="alert">The system is busy please visit later!</p>
+		</div>
 	</div>
 </body>
 </html>

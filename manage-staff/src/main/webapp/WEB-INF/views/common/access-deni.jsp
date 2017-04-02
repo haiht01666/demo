@@ -12,10 +12,10 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 	<div class="container">
-		<h3 style="color: red;">Access Denied</h3>
-		<br>
-		<p>You do not permission to access this page!</p>
-		<br> <a href="<c:url value="/home"/>">Back to home page</a>
+		<div class="error-area">
+			<h2>Access Denined</h2>
+			<p class="alert">You don't have permission to access this page.</p>
+		</div>
 	</div>
 </body>
 </html>
