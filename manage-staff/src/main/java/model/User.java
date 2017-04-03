@@ -38,6 +38,8 @@ public class User implements Serializable {
 	 * User code
 	 */
 	private String userCode;
+	
+	private String childId;
 
 	public int getId() {
 		return id;
@@ -85,6 +87,14 @@ public class User implements Serializable {
 
 	public void setUserCode(String userCode) {
 		this.userCode = userCode;
+	}
+
+	public String getChildId() {
+		return childId;
+	}
+
+	public void setChildId(String childId) {
+		this.childId = childId;
 	}
 
 }

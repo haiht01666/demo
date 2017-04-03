@@ -14,9 +14,9 @@ public class ManageServiceImpl implements ManageService {
 	ManageDao dao;
 
 	@Override
-	public int createMember(int parentId) throws SQLException {
+	public int createMember(int parentId,String childId) throws SQLException {
 
-		return dao.createMember(parentId);
+		return dao.createMember(parentId,childId);
 	}
 
 }

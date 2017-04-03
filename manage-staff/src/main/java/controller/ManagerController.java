@@ -42,7 +42,7 @@ public class ManagerController {
 		User user = (User) session.getAttribute("ss-user");
 		AjaxResult result = new AjaxResult();
 		try {
-			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode())));
+			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode()),user.getChildId()));
 			result.setResult(true);
 			result.setMessage(messageSource.getMessage("S001", null,Locale.US));
 		} catch (Exception e) {

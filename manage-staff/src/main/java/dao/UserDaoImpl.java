@@ -20,7 +20,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 	@Override
 	public User getUserByCode(String code) {
 		User user = new User();
-		String sql = "SELECT u.id ,password,name,enable,role FROM users u join roles r on u.id = r.user_id where u.id=?";
+		String sql = "SELECT u.id ,password,name,enable,role,child_id FROM users u join roles r on u.id = r.user_id where u.id=?";
 		List<String> roles = new ArrayList<>();
 		try {
 			conn = getConnection();
@@ -33,6 +33,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 				user.setDispName(rs.getString(3));
 				user.setEnable(rs.getBoolean(4));
 				roles.add(rs.getString(5));
+				user.setChildId(rs.getString(6));
 				break;
 			}
 			user.setRoles(roles);
@@ -85,7 +86,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 
 	@Override
 	public int createUser(UserForm user) {
-		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_address = ? , password = ? , enable = ?  where id = ? ";
+		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_address = ? , password = ? , enable = ? , signup_date = now() where id = ? ";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
