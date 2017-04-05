@@ -1,0 +1,248 @@
+{
+  "125280711": [
+    {
+      "nppId": "125280713",
+      "country": "VN",
+      "nppSponsorId": "125280754",
+      "city": "Hà nôi",
+      "nppName": "PHẠM VĂN HẢI",
+      "loginDate": "15/03/2017",
+      "mobile": "0987768765",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280714",
+      "country": "VN",
+      "nppSponsorId": "125430754",
+      "city": "Hà nôi",
+      "nppName": "ĐẶNG THẾ CHUYỀN",
+      "loginDate": "26/08/2017",
+      "mobile": "0987754465",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280715",
+      "country": "VN",
+      "nppSponsorId": "125286554",
+      "city": "Hà nôi",
+      "nppName": "PHAN VĂN TÀI",
+      "loginDate": "07/02/2017",
+      "mobile": "0954754465",
+      "status": "1",
+      "rank": "0"
+    },
+    {
+      "nppId": "125280716",
+      "country": "VN",
+      "nppSponsorId": "125280790",
+      "city": "Hà nôi",
+      "nppName": "HOÀNG THỊ XUÂN",
+      "loginDate": "09/12/2016",
+      "mobile": "0934754565",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280717",
+      "country": "VN",
+      "nppSponsorId": "125280732",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THỊ TÌNH",
+      "loginDate": "10/10/2016",
+      "mobile": "0934432565",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280718",
+      "country": "VN",
+      "nppSponsorId": "125280765",
+      "city": "Hà nôi",
+      "nppName": "CAO THỊ LOAN",
+      "loginDate": "17/01/2016",
+      "mobile": "0914433265",
+      "status": "1",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280719",
+      "country": "VN",
+      "nppSponsorId": "125280799",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN SƠN HÙNG",
+      "loginDate": "06/03/2017",
+      "mobile": "0909833265",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280720",
+      "country": "VN",
+      "nppSponsorId": "125280986",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THỊ KIM THANH",
+      "loginDate": "01/02/2016",
+      "mobile": "0982983265",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280721",
+      "country": "VN",
+      "nppSponsorId": "125280098",
+      "city": "Hà nôi",
+      "nppName": "ĐỖ MẠNH QUỲNH",
+      "loginDate": "28/11/2016",
+      "mobile": "0912773265",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "1252807122",
+      "country": "VN",
+      "nppSponsorId": "125283254",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THẾ KHẢI",
+      "loginDate": "14/05/2016",
+      "mobile": "0965773265",
+      "status": "1",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280723",
+      "country": "VN",
+      "nppSponsorId": "125234154",
+      "city": "Hà nôi",
+      "nppName": "HOÀNG TIẾN HẢI",
+      "loginDate": "20/03/2017",
+      "mobile": "0909873265",
+      "status": "0",
+      "rank": "1"
+    }
+  ],
+  "125280712": [
+    {
+      "nppId": "125280713",
+      "country": "VN",
+      "nppSponsorId": "125280754",
+      "city": "Hà nôi",
+      "nppName": "PHẠM VĂN HẢI",
+      "loginDate": "15/03/2017",
+      "mobile": "0987768765",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280714",
+      "country": "VN",
+      "nppSponsorId": "125430754",
+      "city": "Hà nôi",
+      "nppName": "ĐẶNG THẾ CHUYỀN",
+      "loginDate": "26/08/2017",
+      "mobile": "0987754465",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280715",
+      "country": "VN",
+      "nppSponsorId": "125286554",
+      "city": "Hà nôi",
+      "nppName": "PHAN VĂN TÀI",
+      "loginDate": "07/02/2017",
+      "mobile": "0954754465",
+      "status": "1",
+      "rank": "0"
+    },
+    {
+      "nppId": "125280716",
+      "country": "VN",
+      "nppSponsorId": "125280790",
+      "city": "Hà nôi",
+      "nppName": "HOÀNG THỊ XUÂN",
+      "loginDate": "09/12/2016",
+      "mobile": "0934754565",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280717",
+      "country": "VN",
+      "nppSponsorId": "125280732",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THỊ TÌNH",
+      "loginDate": "10/10/2016",
+      "mobile": "0934432565",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280718",
+      "country": "VN",
+      "nppSponsorId": "125280765",
+      "city": "Hà nôi",
+      "nppName": "CAO THỊ LOAN",
+      "loginDate": "17/01/2016",
+      "mobile": "0914433265",
+      "status": "1",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280719",
+      "country": "VN",
+      "nppSponsorId": "125280799",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN SƠN HÙNG",
+      "loginDate": "06/03/2017",
+      "mobile": "0909833265",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280720",
+      "country": "VN",
+      "nppSponsorId": "125280986",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THỊ KIM THANH",
+      "loginDate": "01/02/2016",
+      "mobile": "0982983265",
+      "status": "0",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280721",
+      "country": "VN",
+      "nppSponsorId": "125280098",
+      "city": "Hà nôi",
+      "nppName": "ĐỖ MẠNH QUỲNH",
+      "loginDate": "28/11/2016",
+      "mobile": "0912773265",
+      "status": "0",
+      "rank": "1"
+    },
+    {
+      "nppId": "125280722",
+      "country": "VN",
+      "nppSponsorId": "125283254",
+      "city": "Hà nôi",
+      "nppName": "NGUYỄN THẾ KHẢI",
+      "loginDate": "14/05/2016",
+      "mobile": "0965773265",
+      "status": "1",
+      "rank": "2"
+    },
+    {
+      "nppId": "125280723",
+      "country": "VN",
+      "nppSponsorId": "125234154",
+      "city": "Hà nôi",
+      "nppName": "HOÀNG TIẾN HẢI",
+      "loginDate": "20/03/2017",
+      "mobile": "0909873265",
+      "status": "0",
+      "rank": "1"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "125280711": {
+    "fullname": "NGUYEN DINH HAN",
+    "birthday": "05/04/1989",
+    "userid": "125280711",
+    "address": "CAU DIEN TU LIEM HA NOI",
+    "mobile": "0985584989",
+    "email": "LONELY5489@GMAIL.COM",
+    "bankName": "Tien Phong Bank",
+    "bankDivice": "Chi nhánh TP Bank Cầu Giấy",
+    "bankAccount": "00130200001",
+    "bankAccountName": "NGUYEN DINH HAN",
+    "status" : "0",
+    "rank":"0",
+    "totalVolume" : "15000000",
+    "totalScore" : "120",
+    "destinationScore" : "300",
+    "standard" : "Qualified",
+    "sponsorName" : "DINH THI KIM NGAN",
+    "numberTL" : "10",
+    "numberMSD" : "7",
+    "numberDSD" : "9",
+    "numberGDSD" : "4"
+  },
+  "125280712": {
+    "fullname": "HOANG TIEN HAI",
+    "birthday": "08/01/1990",
+    "userid": "1252624598",
+    "address": "SOC SON GIA LAM HA NOI",
+    "mobile": "0965046393",
+    "email": "HAIHT@GMAIL.COM",
+    "bankName": "Tien Phong Bank",
+    "bankDivice": "Chi nhánh TP Bank Cầu Giấy",
+    "bankAccount": "00130200001",
+    "bankAccountName": "HOANG TIEN HAI",
+    "status" : "1",
+    "rank":"0",
+    "totalVolume" : "15000000",
+    "totalScore" : "120",
+    "destinationScore" : "300",
+    "standard" : "Qualified"
+  }
+}
