@@ -55,7 +55,7 @@ var pConstants_VN = {
 	 'CAPTCHA_ERROR_EMPTY'							: 'Quý khách vui lòng nhập mã kiểm tra!',
 	 'CAPTCHA_INPUT_HOLDER'							: 'Nhập mã',
 	 'WELCOME_TITLE'								: 'CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI TPBANK',
-	 'MAIN_SCR_HEADER_TITLE' 						: 'NGÂN HÀNG ĐIỆN TỬ',
+	 'MAIN_SCR_HEADER_TITLE' 						: '',
 	 'WELCOME_BTN_CHANGELANG'						: 'EN',
 	 'WELCOME_IN_USERNAME'							: 'Tài khoản đăng nhập',
 	 'WELCOME_IN_PASSWORD'							: 'Mật khẩu',
