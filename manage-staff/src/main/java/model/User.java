@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class User implements Serializable {
@@ -40,6 +41,12 @@ public class User implements Serializable {
 	private String userCode;
 	
 	private String childId;
+	
+	private Date signUpDate;
+	
+	private Date lastOrderDate;
+	
+	private boolean active; 
 
 	public int getId() {
 		return id;
@@ -73,11 +80,11 @@ public class User implements Serializable {
 		this.dispName = dispName;
 	}
 
-	public boolean isEnable() {
+	public Boolean getEnable() {
 		return enable;
 	}
 
-	public void setEnable(boolean enable) {
+	public void setEnable(Boolean enable) {
 		this.enable = enable;
 	}
 
@@ -95,6 +102,30 @@ public class User implements Serializable {
 
 	public void setChildId(String childId) {
 		this.childId = childId;
+	}
+
+	public Date getSignUpDate() {
+		return signUpDate;
+	}
+
+	public void setSignUpDate(Date signUpDate) {
+		this.signUpDate = signUpDate;
+	}
+
+	public Date getLastOrderDate() {
+		return lastOrderDate;
+	}
+
+	public void setLastOrderDate(Date lastOrderDate) {
+		this.lastOrderDate = lastOrderDate;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 }

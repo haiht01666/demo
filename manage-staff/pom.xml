@@ -8,6 +8,7 @@
 	<name>demo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>4.1.6.RELEASE</springframework.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
@@ -98,7 +99,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
 		</dependency>
-		
+
 		<!-- Json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

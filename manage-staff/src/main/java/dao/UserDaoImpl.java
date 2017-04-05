@@ -66,7 +66,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 				user.setId(rs.getInt(1));
 				user.setEnable(rs.getBoolean(2));
 			}
-			if (!user.isEnable())
+			if (!user.getEnable())
 				return true;
 		} catch (Exception e) {
 			e.printStackTrace();

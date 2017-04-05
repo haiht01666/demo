@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -30,10 +32,12 @@ public class ManagerController {
 	ManageService service;
 
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
-	public String index(ModelMap model) {
+	public String index(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
+		List<User> lstMember = service.lstUser(user.getRoles().get(0));
+		model.addAttribute("lstMember", lstMember);
 		return "manage-staff/index";
 	}
 

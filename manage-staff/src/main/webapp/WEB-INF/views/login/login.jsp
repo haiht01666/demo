@@ -54,7 +54,7 @@
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
 								type="text" class="form-control" name="ssoId" value=""
-								placeholder="id" required="required">
+								placeholder="id" required="required" maxlength="6">
 						</div>
 
 						<div style="margin-bottom: 25px" class="input-group">

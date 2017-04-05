@@ -18,7 +18,7 @@
 	<%@ include file="../common/header.jsp"%>
 	<div class="col-xs-12">
 		<div id="msg-error">
-			<div class="alert alert-danger">abc</div>
+			
 		</div>
 		<div class="table-responsive">
 
@@ -41,52 +41,25 @@
 				</thead>
 
 				<tbody>
-					<tr data-id=1>
-						<td>000001</td>
-						<td><a href="details.html">Tiger Nixon</a></td>
-						<td>2011/04/25</td>
-						<td><span class="glyphicon glyphicon-ok"
-							style="color: #41be47"></span></td>
-						<td>Active</td>
+					<c:forEach items="${lstMember }" var="member">
+						<tr data-id=${member.id }>
+							<td>${member.id }</td>
+							<td><a href="details.html">${member.dispName }</a></td>
+							<td>${member.signUpDate }</td>
+							<td><c:if test="${member.enable }">
+									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>
+								</c:if></td>
+							<td>${member.active }</td>
 
-					</tr>
-					<tr>
-						<td>000002</td>
-						<td><a href="details.html">Garrett Winters</a></td>
-						<td>2011/07/25</td>
-						<td><span class="glyphicon glyphicon-ok"
-							style="color: #41be47"></span></td>
-						<td>Inactive</td>
-					</tr>
-					<tr>
-						<td>000003</td>
-						<td><a href="details.html">Ashton Cox</a></td>
-						<td>2009/01/12</td>
-						<td></td>
-						<td>Active</td>
-					</tr>
-					<tr>
-						<td>000004</td>
-						<td><a href="details.html">Cedric Kelly</a></td>
-						<td>2012/03/29</td>
-						<td></td>
-						<td>Active</td>
-					</tr>
-					<tr>
-						<td>000005</td>
-						<td><a href="details.html">Airi Satou</a></td>
-						<td>2008/11/28</td>
-						<td><span class="glyphicon glyphicon-ok"
-							style="color: #41be47"></span></td>
-						<td>Active</td>
-					</tr>
-
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+
 	<script type="text/javascript">
+		
 	</script>
 </body>
 </html>

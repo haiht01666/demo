@@ -11,12 +11,12 @@ public interface ManageDao {
 	/*
 	 * Get staff only
 	 */
-	public List<User> getStaffs();
+	public List<User> getStaffs() throws SQLException;
 
 	/**
 	 * get all member
 	 * 
 	 * @return list user
 	 */
-	public List<User> getMembers();
+	public List<User> getMembers() throws SQLException;
 }

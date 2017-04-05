@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		session.setAttribute("ss-user", user);
 		return new org.springframework.security.core.userdetails.User(user.getUserCode(), user.getPassWord(),
-				user.isEnable(), true, true, true, getGrantedAuthorities(user));
+				user.getEnable(), true, true, true, getGrantedAuthorities(user));
 	}
 
 	/**

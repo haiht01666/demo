@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -48,15 +49,59 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	}
 
 	@Override
-	public List<User> getStaffs() {
-		String sql = "Select * from ";
-		return null;
+	public List<User> getStaffs() throws SQLException {
+		List<User> result = new ArrayList<>();
+		String sql = "SELECT u.id,u.name,u.signup_date,u.enable,o.order_date FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF'";
+		try{
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()){
+				User user = new User();
+				user.setId(rs.getInt(1));
+				user.setDispName(rs.getString(2));
+				user.setSignUpDate(rs.getDate(3));
+				user.setEnable(rs.getBoolean(4));
+				user.setLastOrderDate(rs.getDate(5));
+				result.add(user);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		}finally{
+			conn.close();
+			st.close();
+			rs.close();
+		}
+		return result;
 	}
 
 	@Override
-	public List<User> getMembers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getMembers() throws SQLException{
+		List<User> result = new ArrayList<>();
+		String sql = "SELECT u.id,u.name,u.signup_date,u.enable,o.order_date FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
+		try{
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()){
+				User user = new User();
+				user.setId(rs.getInt(1));
+				user.setDispName(rs.getString(2));
+				user.setSignUpDate(rs.getDate(3));
+				user.setEnable(rs.getBoolean(4));
+				user.setLastOrderDate(rs.getDate(5));
+				result.add(user);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		}finally{
+			conn.close();
+			st.close();
+			rs.close();
+		}
+		return result;
 	}
 
 }
