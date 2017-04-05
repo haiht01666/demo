@@ -28,7 +28,7 @@ public class AccountController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { "/create" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/create" }, method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
 	public String create(@Valid UserForm userForm, BindingResult result, ModelMap model) {
 		model.addAttribute("isError", true);
 		if (result.hasErrors())

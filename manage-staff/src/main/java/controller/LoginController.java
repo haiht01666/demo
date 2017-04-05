@@ -1,12 +1,8 @@
 package controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -19,13 +15,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class LoginController{
-
-	@Autowired
-	private MessageSource messageSource;
 	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) throws Exception {
-
 		return "frontend/index";
 	}
 	

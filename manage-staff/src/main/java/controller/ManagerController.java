@@ -29,7 +29,7 @@ public class ManagerController {
 	@Autowired
 	ManageService service;
 
-	@RequestMapping(value = { "" }, method = RequestMethod.GET)
+	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String index(ModelMap model) {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");

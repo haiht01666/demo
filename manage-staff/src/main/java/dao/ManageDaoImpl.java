@@ -1,8 +1,11 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
+import model.User;
 
 @Repository
 public class ManageDaoImpl extends DBManager implements ManageDao {
@@ -42,6 +45,18 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			}
 		}
 		return memberId;
+	}
+
+	@Override
+	public List<User> getStaffs() {
+		String sql = "Select * from ";
+		return null;
+	}
+
+	@Override
+	public List<User> getMembers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

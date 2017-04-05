@@ -44,7 +44,7 @@
 						<div class="alert alert-success">${message}</div>
 					</c:if>
 					<form:form method="POST" modelAttribute="userForm" id="signupform"
-						class="form-horizontal" role="form" accept-charset="UTF-8"
+						class="form-horizontal" role="form" acceptCharset="UTF-8"
 						action="/account/create">
 						<div class="form-group">
 							<div class="col-md-12">

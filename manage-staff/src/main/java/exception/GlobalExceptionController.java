@@ -11,6 +11,5 @@ public class GlobalExceptionController {
 	public ModelAndView handleAllException(Exception ex) {
 		ModelAndView model = new ModelAndView("common/error");
 		return model;
-
 	}
 }
