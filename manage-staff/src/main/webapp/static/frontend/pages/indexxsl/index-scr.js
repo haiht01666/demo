@@ -30,11 +30,11 @@ function viewDidLoadSuccess() {
 }
 
 function sendJSONRequest() {
-    loadData('./data/account.json', function (jsondata) {
+    loadData('./static/frontend/data/account.json', function (jsondata) {
         var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
         setVolumeHistory(accountDetail);
     });
-    loadData('./data/listVolumnesWeekly.json', function (jsondata) {
+    loadData('./static/frontend/data/listVolumnesWeekly.json', function (jsondata) {
         volumeHistoryList = JSON.parse(jsondata)[gUserInfo.accountId];
         parserVolumeHistory(volumeHistoryList);
     });

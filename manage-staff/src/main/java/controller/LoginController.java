@@ -25,8 +25,8 @@ public class LoginController{
 	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) throws Exception {
-		model.addAttribute("mesage",messageSource.getMessage("message.12",null, Locale.US));
-		return "common/home";
+
+		return "frontend/index";
 	}
 	
 	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)

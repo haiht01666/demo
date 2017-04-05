@@ -33,7 +33,7 @@ function viewDidLoadSuccess() {
 }
 
 function sendJSONRequest() {
-    loadData('./data/listVolumnesWeekly.json', function (jsondata) {
+    loadData('./static/frontend/data/listVolumnesWeekly.json', function (jsondata) {
         var volumeHistory = JSON.parse(jsondata)[gUserInfo.accountId];
         setCommissionInfo(commissionInfo);
     });

@@ -92,7 +92,7 @@ function viewDidLoadSuccess() {
 var gprsResp = new GprsRespObj("", "", "", "");
 
 function sendJSONRequest() {
-    loadData('./data/account.json', requestMBServiceSuccess);
+    loadData('./static/frontend/data/account.json', requestMBServiceSuccess);
 }
 
 //event listener: http request success

@@ -8,33 +8,45 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <div>
         <table>
           <tr>
-            <td colspan="2"><h5 id='account.changepasstitle' align="left" class="screen-title"   style="padding-left: 15px; padding-right: 15px;"><span>ACC_CHANGE_PASS_SCREEN_TITLE</span></h5>
+            <td colspan="2"><h5 id='requestsupport.requestSupporttitle' align="left" class="screen-title"   style="padding-left: 15px; padding-right: 15px;"><span>MENU_PERSONAL_INFO_SUPPORT</span></h5>
               <div class='line-separate' style="padding-left: 15px; padding-right: 15px;"></div></td>
           </tr>
           <tr>
-            <td colspan="2"><h5  style="padding:5px 15px 15px 15px;" id='acc-changepass-note' align="left" class=""><span>ACC_PASSWORD_NOTE</span></h5></td>
+            <td colspan="2"><h5  style="padding:5px 15px 15px 15px;" id='acc-changepass-note' align="left" class=""><span>REQUEST_SUPPORT_CONTENT</span></h5></td>
           </tr>
           <tr>
             <td><table width="92%" align="center">
-                <tr>
-                  <td colspan="2" align="center" valign="middle" class="td-text"><div class="input-group"> <span class="input-group-addon" style="width:30%">ACC_PASSWORD_TITLE_OLD</span>
-                      <input type="password" class="form-control form-control-righttext"  id="accpass.txt.passwordold" placeholder="COM_TXT_INPUT_PLACEHOLDER" onFocus='javascript:setKeyboardFocus("accpass.txt.passwordold"); javascript:setFieldFocus("accpass.txt.passwordold")' onblur="onBlurPassword('0')" onkeypress='' autocomplete="off"  maxlength="16"/>
-                      <span class="input-group-addon input-group-symbol"></span> </div></td>
+              <tr>
+                <td colspan="2" align="left" valign="middle">
+                        <span style="width:30%;font-size:15px">REQUEST_SUPPORT_TYPE</span>
+                </td>
+              </tr>
+              <tr>
+                  <td colspan="2" align="center" valign="middle" class="td-text">
+                    <div class="input-group" onClick="showRequestSuportType()">
+                      <input type="button" class="form-control form-control-righttext"  id="requestsupport.type" value="Đơn hàng" autocomplete="off"  maxlength="16"/>
+                      <span class="icon-movenext input-group-addon input-group-symbol"></span>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
-                  <td colspan="2" align="center" valign="middle" class="td-text"><div class="input-group"> <span class="input-group-addon" style="width:30%">ACC_PASSWORD_TITLE_NEW</span>
-                      <input type="password" class="form-control form-control-righttext"  id="accpass.txt.passwordnew" placeholder="COM_TXT_INPUT_PLACEHOLDER" onFocus='javascript:setKeyboardFocus("accpass.txt.passwordnew"); javascript:setFieldFocus("accpass.txt.passwordnew")' onblur="onBlurPassword('0')" onkeypress='' autocomplete="off"  maxlength="16"/>
-                      <span class="input-group-addon input-group-symbol"></span> </div></td>
+                    <td colspan="2" align="left" valign="middle">
+                        <span style="width:30%;font-size:15px">REQUEST_SUPPORT_INFO</span>
+                    </td>
                 </tr>
                 <tr>
-                  <td colspan="2" align="center" valign="middle" class="td-text"><div class="input-group"> <span class="input-group-addon" style="width:30%">ACC_PASSWORD_TITLE_RETYPE</span>
-                      <input type="password" class="form-control form-control-righttext"  id="accpass.txt.passwordretype" placeholder="COM_TXT_INPUT_PLACEHOLDER" onFocus='javascript:setKeyboardFocus("accpass.txt.passwordretype"); javascript:setFieldFocus("accpass.txt.passwordretype")' onblur="onBlurPassword('0')" onkeypress='' autocomplete="off" maxlength="16"/>
-                      <span class="input-group-addon input-group-symbol"></span> </div></td>
+                    <td colspan="2" align="center" valign="middle" class="td-text">
+                        <div class="input-group">
+                            <textarea rows="10" cols="50" class="form-control form-control-lefttext"  id="requestsupport.content"  autocomplete="off"  maxlength="200" style="height:120px;resize:none;margin-left: 0px;width: 100%;"></textarea>
+                            <span class="input-group-addon input-group-symbol"></span>
+                        </div>
+                    </td>
                 </tr>
+
                 <tr style="display:none;">
                   <td colspan="2"><!--<input type="button" class="btnshadow btn-second" id="accpass.btn.moreinfo"
 									onclick="showVirtualKeyboard();" value="Keyboard" />-->
-                                    <div align="left"><a href="javascript:void(0)" onclick="showVirtualKeyboard();"><img title="Keyboard" style="margin-right:5px;" src="css/img/keyboard.png"/></a></div>
+                                    <div align="left"><a href="javascript:void(0)" onclick="showVirtualKeyboard();"><img title="Keyboard" style="margin-right:5px;" src="static/frontend/css/img/keyboard.png"/></a></div>
                     </td>
                 </tr>
                 <tr>
@@ -42,34 +54,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                       <div id="login-keyboard">
                         <table style="background-color: #ccc;font-weight: bold;">
                           <tbody>
-                            <!--<tr>
-                              <td colspan="2"><div id="login-keyboard-special">
-                                  <table>
-                                    <tbody>
-                                      <tr> 
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div></td>
-                            </tr>-->
                             <tr>
                               <td><div id="login-keyboard-alpha">
                                   <table>
                                     <tbody>
-                                      <tr> 
+                                      <tr>
                                         <td><button id="elemA0" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">u</button></td>
                                         <td><button id="elemA1" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">r</button></td>
                                         <td><button id="elemA2" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">e</button></td>
@@ -106,7 +95,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                                     <tbody>
                                       <tr>
                                         <td class="clear"></td>
-                                        
+
                                         <td><button id="elemA19" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">q</button></td>
                                         <td><button id="elemA20" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">d</button></td>
                                         <td><button id="elemA21" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">p</button></td>
@@ -123,20 +112,20 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                               <td><div id="login-keyboard-numeric">
                                   <table style="padding-top: 25px;">
                                     <tbody>
-                                      <tr> 
-                                        
+                                      <tr>
+
                                         <td><button id="elemN0" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">8</button></td>
                                         <td><button id="elemN1" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">9</button></td>
                                         <td><button id="elemN2" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">1</button></td>
                                       </tr>
-                                      <tr> 
-                                       
+                                      <tr>
+
                                         <td><button id="elemN3" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">2</button></td>
                                         <td><button id="elemN4" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">5</button></td>
                                         <td><button id="elemN5" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">6</button></td>
                                       </tr>
-                                      <tr> 
-                                        
+                                      <tr>
+
                                         <td><button id="elemN6" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">0</button></td>
                                         <td><button id="elemN7" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">3</button></td>
                                         <td><button id="elemN8" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack();" onmouseout="return changeBack(),stopHover();" onclick="return showValue(this);">4</button></td>
@@ -162,10 +151,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                                       <td class="button"><button onclick="return setRandom();" onmouseout="return changeBack();" onmouseup="return changeBack();" onmousedown="return changeToStar();" id="elemC3"> Not Mixed </button></td>
                                       <td class="clear"></td>
                                     </tr>
-                                    <tr style="display:none;">
-                                      <td style="text-align:left;border:none;color:#FFFFFF" colspan="6"><input type="checkbox" name="elemC4" id="elemC4"/>
-                                        <nobr>Nhập mật khẩu bằng cách di chuột</nobr></td>
-                                    </tr>
                                   </tbody>
                                 </table>
                                 </span></td>
@@ -176,16 +161,23 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                     </div></td>
                 </tr>
                 <tr class="trow-space"></tr>
-                <tr> 
+                <tr>
                   <!--<td align="center" width='50%'><input type="button" class="btnshadow btn-primary" onClick="goBack()" id="accpass.btn.login"
 									value="REVIEW_BTN_CANCEL"/>
 								</td>-->
-                  <td  align="right" width='50%'><input type="button" class="btnshadow btn-second" id="accpass.btn.moreinfo"
-									onclick="requestChangePassword()" value="CHANGE_PASS_SUBMIT" /></td>
+                  <td  align="right" width='50%'><input type="button" class="btnshadow btn-second" id="requestsupport.submit"
+									onclick="requestSuport()" value="REQUEST_SUPPORT_SUBMIT" /></td>
                 </tr>
               </table></td>
           </tr>
         </table>
+      </div>
+      <div id="selection-dialog" class="dialog-blacktrans" align="center" style="display:none">
+        <div class="dialog-backgroundtrans" onClick="closeDialog(this)">
+        </div>
+        <div id="divListGroup" class="list-group dialog-list">
+
+        </div>
       </div>
     </div>
     </body>

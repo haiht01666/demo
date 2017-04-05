@@ -43,7 +43,7 @@ function drawChart() {
         data.addRows([
             [{
                 v: treeNpp[i].nppId,
-                f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + treeNpp[i].nppId + '</div>' + ((treeNpp[i].nppId === 'open') ? '' : '<div><img src="./assets/images/ico/' + treeNpp[i].rank + '.png"/></div>')
+                f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + treeNpp[i].nppId + '</div>' + ((treeNpp[i].nppId === 'open') ? '' : '<div><img src="./static/frontend/assets/images/ico/' + treeNpp[i].rank + '.png"/></div>')
             }, treeNpp[i].parentId]
         ]);
     }
@@ -65,8 +65,8 @@ function viewDidLoadSuccess() {
 }
 
 function sendJSONRequest() {
-    loadData('./data/treeNpp.json', drawGraphical);
-    loadData('./data/account.json', requestMBServiceSuccess);
+    loadData('./static/frontend/data/treeNpp.json', drawGraphical);
+    loadData('./static/frontend/data/account.json', requestMBServiceSuccess);
 }
 
 function drawGraphical(jsondata) {

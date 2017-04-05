@@ -3722,12 +3722,12 @@ function loadPage(page, haveJs, successCallback, failCallback) {
 			}
 			var pathFullOfFile;
 			if(CONST_BROWSER_MODE) {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.html' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.html' + '?id=' + gLoadPageID);
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.html' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.html' + '?id=' + gLoadPageID);
 			}
 			else {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.html') : (gDeviceWWWFolder + 'pages/' + page + '.html');
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.html') : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.html');
 			}
-			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.html') : (gDeviceWWWFolder + 'pages/' + page + '.html');
+			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.html') : (gDeviceWWWFolder + 'pages/' + page + '.html');
 			xhr.open("GET", pathFullOfFile); //assuming kgr.bss is plaintext
 
 			xhr.onreadystatechange = function () {
@@ -3852,12 +3852,12 @@ function loadJSfile(page, haveJsFile, successCallback, failCallback) {
 			pageJS.setAttribute("id", "pageJS");
 			pageJS.type = 'text/javascript';
 			if(CONST_BROWSER_MODE) {
-				pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.js' + '?id=' + gLoadPageID);
+				pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.js' + '?id=' + gLoadPageID);
 			}
 			else {
-				pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
+				pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
 			}
-			//pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
+			//pageJS.src = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
 			//head.appendChild(pageJS);
 			var tmpPageJS = document.getElementById('pageJS');
 			if ((tmpPageJS != undefined) && (tmpPageJS != null)) {
@@ -3887,12 +3887,12 @@ function loadJSfile(page, haveJsFile, successCallback, failCallback) {
 			}
 			var pathFullOfFile;
 			if(CONST_BROWSER_MODE) {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.js' + '?id=' + gLoadPageID);
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.js' + '?id=' + gLoadPageID);
 			}
 			else {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js') : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.js');
 			}
-			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
+			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.js') : (gDeviceWWWFolder + 'pages/' + page + '.js');
 			xhr.open("GET", pathFullOfFile); //assuming kgr.bss is plaintext
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState==4 && ((xhr.status==200) || (xhr.status==0))){
@@ -3986,12 +3986,12 @@ function loadPageXsl(page, haveJs, successCallback, failCallback) {
 			}
 			var pathFullOfFile;
 			if(CONST_BROWSER_MODE) {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.xsl' + '?id=' + gLoadPageID);
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.xsl' + '?id=' + gLoadPageID);
 			}
 			else {
-				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
+				pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl') : (gDeviceWWWFolder + 'static/frontend/pages/' + page + '.xsl');
 			}
-			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
+			//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
 			var tmpString = getCurrentTime();
 			xhr.open("GET", pathFullOfFile); //assuming kgr.bss is plaintext
 
@@ -4683,13 +4683,13 @@ function setCachePageXsl(page, inXsl) {
 function getCachePageXsl(page) {
 	if((navCachedXsl[page] == undefined) || (navCachedXsl[page] == null)) {
 		//return "";
-		//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
+		//var pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
 		var pathFullOfFile;
 		if(CONST_BROWSER_MODE) {
-			pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.xsl' + '?id=' + gLoadPageID);
+			pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl' + '?id=' + gLoadPageID) : (gDeviceWWWFolder + 'pages/' + page + '.xsl' + '?id=' + gLoadPageID);
 		}
 		else {
-			pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
+			pathFullOfFile = (gDeviceWWWFolder.length == 0) ? ('./static/frontend/pages/' + page + '.xsl') : (gDeviceWWWFolder + 'pages/' + page + '.xsl');
 		}
 		var tmpXMLDoc = loadXMLDoc(pathFullOfFile);
 		if(tmpXMLDoc != undefined) navCachedXsl[page] = tmpXMLDoc;
@@ -5323,15 +5323,15 @@ function loadPhoneGapJS() {
     phonegapJS.type = 'text/javascript';
     //alert('Load PG js');
     if (Environment.isIOS() && !Environment.isWindows()) {
-        phonegapJS.src = CONST_WEB_URL_LINK + 'assets/libs/cordova/' + 'cordova_iOS.js';
+        phonegapJS.src = CONST_WEB_URL_LINK + 'static/frontend/assets/libs/cordova/' + 'cordova_iOS.js';
 		loadedPGlib = true;
     }
     else if (Environment.isAndroid()) {
-        phonegapJS.src = CONST_WEB_URL_LINK + 'assets/libs/cordova/' + 'cordova_Android.js';
+        phonegapJS.src = CONST_WEB_URL_LINK + 'static/frontend/assets/libs/cordova/' + 'cordova_Android.js';
 		loadedPGlib = true;
     }
     else if (Environment.isWindows()) {
-        phonegapJS.src = CONST_WEB_URL_LINK + 'assets/libs/cordova/' + 'cordova_WP.js';
+        phonegapJS.src = CONST_WEB_URL_LINK + 'static/frontend/assets/libs/cordova/' + 'cordova_WP.js';
 		loadedPGlib = true;
     }
     head = document.getElementsByTagName('body')[0];
@@ -6507,30 +6507,30 @@ function initLanguageOnIB() {
 		/*
 		if (mode == 0)
 		{
-			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
+			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
 		}
 
 		if (mode == 1)
 		{
-			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/IB_Vietnamese.png' onClick='changeLanguageOnIB(1)'>";
+			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/IB_Vietnamese.png' onClick='changeLanguageOnIB(1)'>";
 		}
 		*/
-		nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB()'>";
+		nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB()'>";
 	}
 	else {
 		gUserInfo.lang = "VN";
 		/*
 		if (mode == 0)
 		{
-			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
+			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
 		}
 
 		if (mode == 1)
 		{
-			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/IB_English.png' onClick='changeLanguageOnIB(1)'>";
+			nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/IB_English.png' onClick='changeLanguageOnIB(1)'>";
 		}
 		*/
-		nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB()'>";
+		nodeBtnLang.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB()'>";
 	}
 
 	var nodeBtnLangIB = document.getElementById('btnChangLanguageIB'); //ib language button
@@ -6538,30 +6538,30 @@ function initLanguageOnIB() {
 		/*
 		if (mode == 0)
 		{
-			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
+			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
 		}
 
 		if (mode == 1)
 		{
-			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/IB_Vietnamese.png' onClick='changeLanguageOnIB(1)'>";
+			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/IB_Vietnamese.png' onClick='changeLanguageOnIB(1)'>";
 		}
 		*/
-		nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB()'>";
+		nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/Vietnam_flag_round_30.png' onClick='changeLanguageOnIB()'>";
 	}
 	else {
 		gUserInfo.lang = "VN";
 		/*
 		if (mode == 0)
 		{
-			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
+			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB(0)'>";
 		}
 
 		if (mode == 1)
 		{
-			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/IB_English.png' onClick='changeLanguageOnIB(1)'>";
+			nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/IB_English.png' onClick='changeLanguageOnIB(1)'>";
 		}
 		*/
-		nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB()'>";
+		nodeBtnLangIB.innerHTML = "<img class='languageEnglishFlag' src='./static/frontend/assets/images/English_flag_round_30.png' onClick='changeLanguageOnIB()'>";
 	}
 }
 function changeMenuLogout(){
@@ -8301,12 +8301,12 @@ function changeBackGround(){
         'background-image':  '',
     });
     $("#fullPage").css({
-         'background-image':  'url(./assets/images/' +imageID + '.jpg)',
+         'background-image':  'url(./static/frontend/assets/images/' +imageID + '.jpg)',
      });
 }
 function setBackGround(){
     $("#fullPage").css({
-        'background-image':  'url(./assets/images/1.jpg)',
+        'background-image':  'url(./static/frontend/assets/images/1.jpg)',
     });
 }
 function removeBackGround(){

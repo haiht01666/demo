@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,54 +22,54 @@
 
 
     <title>Bhip Việt Nam</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico"/>
-    <link rel="SHORTCUT ICON" href="assets/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="static/frontend/assets/images/favicon.ico"/>
+    <link rel="SHORTCUT ICON" href="static/frontend/assets/images/favicon.ico"/>
     <!-- eBank Desktop -->
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="only screen and (min-width:801px)"/>
-    <link rel="stylesheet" href="css/ebankstyle.css" type="text/css" media="only screen and (min-width:801px)"/>
+    <link rel="stylesheet" href="static/frontend/css/style.css" type="text/css" media="only screen and (min-width:801px)"/>
+    <link rel="stylesheet" href="static/frontend/css/ebankstyle.css" type="text/css" media="only screen and (min-width:801px)"/>
     <!-- eBank Mobile -->
-    <link rel="stylesheet" href="cssmb/style.css" type="text/css" media="only screen and (max-width:801px)">
-    <link rel="stylesheet" href="cssmb/ebankstyle.css" type="text/css" media="only screen and (max-width:801px)">
-    <link rel="stylesheet" href="assets/fonts/iconfonts.css" type="text/css"/>
-    <script type="text/javascript" src="assets/constants.js"></script>
-    <script type="text/javascript" src="assets/preload.js"></script>
-    <script type="text/javascript" src="assets/libs/es5-shim.js"></script>
-    <script type="text/javascript" src="pages/newsxsl/list_news_cat_menu_scr.js"></script>
-    <!--<script type="text/javascript" src="./assets/libs/fastclick.js"></script>
+    <link rel="stylesheet" href="static/frontend/cssmb/style.css" type="text/css" media="only screen and (max-width:801px)">
+    <link rel="stylesheet" href="static/frontend/cssmb/ebankstyle.css" type="text/css" media="only screen and (max-width:801px)">
+    <link rel="stylesheet" href="static/frontend/assets/fonts/iconfonts.css" type="text/css"/>
+    <script type="text/javascript" src="static/frontend/assets/constants.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/preload.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/es5-shim.js"></script>
+    <script type="text/javascript" src="static/frontend/pages/newsxsl/list_news_cat_menu_scr.js"></script>
+    <!--<script type="text/javascript" src="./static/frontend/assets/libs/fastclick.js"></script>
         <script type="application/javascript">
             window.addEventListener('load', function () {
                 FastClick.attach(document.body);
             }, false);
         </script> -->
-    <script type="text/javascript" src="assets/libs/slideinmenu.js"></script>
-    <script type="text/javascript" src="assets/libs/iscroll.js"></script>
-    <script type="text/javascript" src="assets/libs/virtualkeyboard.js"></script>
-    <script type="text/javascript" src="assets/common.js"></script>
-    <script type="text/javascript" src="assets/LangVN.js"></script>
-    <script type="text/javascript" src="assets/LangEN.js"></script>
-    <script type="text/javascript" src="assets/mb-service.js"></script>
-    <script type="text/javascript" src="assets/init.js"></script>
-    <script type="text/javascript" src="assets/libs/tabs.js"></script>
-    <script type="text/javascript" src="assets/libs/html2canvas.js"></script>
-    <!--<script type="text/javascript" src="./assets/system-data.js"></script>
-    <script type="text/javascript" src="./assets/system-payment-config.js"></script>-->
+    <script type="text/javascript" src="static/frontend/assets/libs/slideinmenu.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/iscroll.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/virtualkeyboard.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/common.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/LangVN.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/LangEN.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/mb-service.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/init.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/tabs.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/html2canvas.js"></script>
+    <!--<script type="text/javascript" src="./static/frontend/assets/system-data.js"></script>
+    <script type="text/javascript" src="./static/frontend/assets/system-payment-config.js"></script>-->
 
     <!-- LOAD IMAGE -->
-    <script type="text/javascript" src="assets/libs/carmera/load-image.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/load-image-ios.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/load-image-orientation.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/load-image-meta.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/load-image-exif.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/load-image-exif-map.js"></script>
-    <script type="text/javascript" src="assets/libs/carmera/canvas-to-blob.js"></script>
-    <link rel="stylesheet" href="assets/libs/slideshow/js-image-slider.css" type="text/css"/>
-    <script type="text/javascript" src="assets/libs/slideshow/js-image-slider.js"></script>
-    <link rel="stylesheet" href="assets/libs/pinpad/style_lockscreen.css" type="text/css"/>
-    <script type="text/javascript" src="assets/libs/pinpad/jquery.js"></script>
-    <script type="text/javascript" src="assets/libs/pinpad/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="assets/libs/crypto.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image-ios.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image-orientation.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image-meta.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image-exif.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/load-image-exif-map.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/carmera/canvas-to-blob.js"></script>
+    <link rel="stylesheet" href="static/frontend/assets/libs/slideshow/js-image-slider.css" type="text/css"/>
+    <script type="text/javascript" src="static/frontend/assets/libs/slideshow/js-image-slider.js"></script>
+    <link rel="stylesheet" href="static/frontend/assets/libs/pinpad/style_lockscreen.css" type="text/css"/>
+    <script type="text/javascript" src="static/frontend/assets/libs/pinpad/jquery.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/pinpad/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/libs/crypto.js"></script>
 
-    <script type="text/javascript" src="assets/cache-control.js"></script>
+    <script type="text/javascript" src="static/frontend/assets/cache-control.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
@@ -243,16 +247,16 @@
 <body>
 <div id="div-pinpad" style="display: none; height: 1024px; background-color: #471C51 !important">
     <div class="gradient-background-layer-pinpad"></div>
-    <div align="center" id="logo"><img src="assets/images/logo.png" height="25px"/></div>
-    <div align="center" id="divider"><img src="assets/images/hdivider.png" style="width:100%;"/></div>
+    <div align="center" id="logo"><img src="static/frontend/assets/images/logo.png" height="25px"/></div>
+    <div align="center" id="divider"><img src="static/frontend/assets/images/hdivider.png" style="width:100%;"/></div>
     <br/>
 
-    <!--<img src="../assets/images/diamond.png" style="height: 234px; width: 300px; right: 0; position: absolute; bottom: 20%; background-repeat: no-repeat; background-position: center; background-size: cover; z-index: -1000;" />-->
+    <!--<img src="../static/frontend/assets/images/diamond.png" style="height: 234px; width: 300px; right: 0; position: absolute; bottom: 20%; background-repeat: no-repeat; background-position: center; background-size: cover; z-index: -1000;" />-->
 
     <p id="error_message" class="pass_button" align="center" style="visibility:hidden; font-size: larger;">message</p>
 </div>
 <div align="center" id="bodyPage">
-    <div id="fullPage" align="center" style="background-image: url(assets/images/1.jpg)">
+    <div id="fullPage" align="center" style="background-image: url(static/frontend/assets/images/1.jpg)">
         <div id="pageHeader">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tr>
@@ -261,7 +265,7 @@
                             <tr>
                                 <td width="30"></td>
                                 <td width="190" valign="middle" style="padding-top:0px;padding-bottom:0px;"><a
-                                        href="bhipglobal.com" target="_blank"> <img src="promotion/logo.png" alt=""/>
+                                        href="bhipglobal.com" target="_blank"> <img src="static/frontend/promotion/logo.png" alt=""/>
                                 </a></td>
                                 <td width="204"></td>
                                 <td width="80"></td>
@@ -363,13 +367,13 @@
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_create_acc', true, 'xsl')" id='jumbo/jumbo_create_acc'><em
                                         class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_ACC_CREATE_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> </div>
                                 </li>
                                 <li id="liJumboAccInfoNew">
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_acc_info', true, 'xsl')" id='jumbo/jumbo_acc_info'><em
                                         class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_ACC_INFO_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> </div>
                                 </li>
                               </div>
                             </div>
@@ -499,7 +503,7 @@
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_check_auto_saving', true, 'xsl')" id='esaving/esaving_check_auto_saving'><em
                                             class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_AUTO_SAVINGS_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px"/> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px"/> </div>
                                 </li>
                               </div>
                             </div>
@@ -556,7 +560,7 @@
                                   <div onClick="updateAccountListInfo(); navController.initWithRootView('cardservicexsl/card-advance-register', true, 'html')" id='cardservicexsl/card-advance-register'><em
                                 class="icon-arrowright"></em>
                                     <div class="langNoStyle">MENU_CARD_ADVANCE</div>
-                                    <span></span><img src="assets/images/new_logo.png" width="30px" height="25px" /></div>
+                                    <span></span><img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /></div>
                                 </li>
                                 <li>
                                   <div onClick="navController.initWithRootView('cardservicexsl/card-setup-payment', true, 'xsl');" id='cardservicexsl/card-setup-payment'> <em class="icon-arrowright"></em>
@@ -613,7 +617,7 @@
                         <li id="jumboAcc">
                           <div onClick="checkJumboAccExist(this.parentNode);"><em class="icon-jumbo-acc"></em>
                             <div class="langNoStyle" style="font-weight:bold">JUMBO_ACC_TITLE</div>
-                            <span>5</span><img src="assets/images/new_logo.png" width="30px" height="25px" /></div>
+                            <span>5</span><img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /></div>
                           <ul class="menu-layout-contents-sub">
                             <div id="wrapper_jumboAcc" class="wrapper">
                               <div id='divJumboMenuItems'>
@@ -621,19 +625,19 @@
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_create_acc', true, 'xsl')" id='jumbo/jumbo_create_acc'><em
                                         class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_ACC_CREATE_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> </div>
                                 </li>
                                 <li id="liJumboAccInfo">
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_acc_info', true, 'xsl')" id='jumbo/jumbo_acc_info'><em
                                         class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_ACC_INFO_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> </div>
                                 </li>
                                 <li id="liJumboCreateAutoSaving">
                                   <div onClick="navController.initWithRootView('jumbo/jumbo_check_auto_saving', true, 'xsl')" id='jumbo/jumbo_check_auto_saving'><em
                                             class="icon-arrowright"></em>
                                     <div class="langNoStyle">JUMBO_AUTO_SAVINGS_TITLE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> </div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> </div>
                                 </li>
                                 <li id="liJumboSavingApplyLimit">
                                   <div onClick="navController.initWithRootView('loan/loan-info-sb-od', true);" id='jumbo/loan-info-sb-od'><em class="icon-arrowright"></em>
@@ -644,7 +648,7 @@
                                   <div onClick="updateAccountListInfo(); navController.initWithRootView('cardservicexsl/card-advance-register', true, 'html')" id='jumbo/card-advance-register'><em
                                         class="icon-arrowright"></em>
                                     <div class="langNoStyle">MENU_CARD_ADVANCE</div>
-                                    <img src="assets/images/new_logo.png" width="30px" height="25px" /> <span></span></div>
+                                    <img src="static/frontend/assets/images/new_logo.png" width="30px" height="25px" /> <span></span></div>
                                 </li>
                               </div>
                             </div>
@@ -890,12 +894,12 @@
                 <div id="nav.btn.showslidemenu" class="icon-menulist handle" onClick="showSlideMenu();"
                      style="display:none;"></div>
                 <div class="navigationlogo" style="width:50%;left:22%;" align="center" onClick="gotoHomePage();"
-                     id="homepagexsl/homepage-scr"><img src="assets/images/bhip-logo-white.png" height="25px"/></div>
+                     id="homepagexsl/homepage-scr"><img src="static/frontend/assets/images/bhip-logo-white.png" height="25px"/></div>
                 <div class="help" id="id.home.btn" style="left:40px;  display:none;" onClick="gotoHomePage();">
                     <div class='icon-home'></div>
                 </div>
                 <div class="help divImgFeedback" id="btnFeedback" style="display:none"><img
-                        src="assets/images/TPBank-feedback-logo-vie.png" height="22px" class="html5logo"
+                        src="static/frontend/assets/images/TPBank-feedback-logo-vie.png" height="22px" class="html5logo"
                         onclick="Html2Canvas(this);"></div>
 
                 <div class="grid"></div>
@@ -931,7 +935,7 @@
                   -->
 
                 <div class="changelanguage" id="btnChangLanguage" style="display: none"><img class="languageEnglishFlag"
-                                                                                             src='assets/images/English_flag_round_30.png'
+                                                                                             src='static/frontend/assets/images/English_flag_round_30.png'
                                                                                              onClick="changeLanguageOnIB()">
                 </div>
                 <div class="divcopyright">
@@ -943,7 +947,7 @@
         <!-- desktop footer -->
         <div id="pageFooter" style="background-color: rgba(33, 231, 222, 0.17); float: left;height: 34px;width:100%;">
             <div class="changelanguage" id="btnChangLanguageIB" style="display: none"><img class="languageEnglishFlag"
-                                                                                           src='assets/images/English_flag_round_30.png'
+                                                                                           src='static/frontend/assets/images/English_flag_round_30.png'
                                                                                            onClick="changeLanguageOnIB()">
             </div>
             <div class="divcopyright">

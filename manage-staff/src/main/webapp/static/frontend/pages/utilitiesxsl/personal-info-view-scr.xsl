@@ -16,7 +16,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                     	<td class="td-prop-info" style="border:none; width:30%;">
                         	<div id="cus-profile-img-avatar" align="center" onclick="rotateImageIntroCus(90);">
                                 <!--<canvas id="accPictureInfo" width="200" height="150" style="border:none;"> </canvas>-->
-                                <!--<img width="300" src="../../assets/images/acc-info-img.png" />-->
+                                <!--<img width="300" src="../../static/frontend/assets/images/acc-info-img.png" />-->
                             </div>
                             <div align="center" style="display:inline; position:absolute; top:0px;">
                             	<input type="file" onchange="fnChange(this)" class="form-control form-control-rightbutton input-file" 

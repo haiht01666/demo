@@ -101,14 +101,14 @@ function replacejscssfile(oldfilename, newfilename, filetype)
 }
 
 function changeJSandCSStoMB() {
-	replacejscssfile('css/style.css', 'cssmb/style.css', 'css');
-	replacejscssfile('css/ebankstyle.css', 'cssmb/ebankstyle.css', 'css');
+	replacejscssfile('static/frontend/css/style.css', 'static/frontend/cssmb/style.css', 'css');
+	replacejscssfile('static/frontend/css/ebankstyle.css', 'static/frontend/cssmb/ebankstyle.css', 'css');
 	//replacejscssfile('css/fonts.css', 'cssmb/fonts.css', 'css');
 }
 
 function changeJSandCSStoIB() {
-	replacejscssfile('cssmb/style.css', 'css/style.css', 'css');
-	replacejscssfile('cssmb/ebankstyle.css', 'css/ebankstyle.css', 'css');
+	replacejscssfile('static/frontend/cssmb/style.css', 'static/frontend/css/style.css', 'css');
+	replacejscssfile('static/frontend/cssmb/ebankstyle.css', 'static/frontend/css/ebankstyle.css', 'css');
 	//replacejscssfile('cssmb/fonts.css', 'css/fonts.css', 'css');
 }
 
@@ -133,10 +133,6 @@ function clickNS(e)
 			return false;
 		}
 	}
-}
-
-function loadLibJSandCSS() {
-	loadjscssfile(CONST_WEB_URL_LINK + 'assets/sysdata/banners.js', 'js');
 }
 
 var browserName=get_browser();
@@ -192,7 +188,6 @@ else {*/
 	//}
 //}
 
-loadLibJSandCSS();
 if(getURLParam('ver')=='app') {
 	CONST_BROWSER_MODE = false;
 }

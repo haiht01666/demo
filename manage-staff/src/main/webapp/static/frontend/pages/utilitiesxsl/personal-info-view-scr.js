@@ -38,7 +38,7 @@ function viewDidLoadSuccess() {
 		document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="300" src="' + gUserInfo.userAvatar + '" />';
 	}
 	else {
-		document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="300" src="./assets/images/acc-info-img.png" />';
+		document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="300" src="./static/frontend/assets/images/acc-info-img.png" />';
 	}
 	var data = {};
 	var arrayArgs = new Array();
@@ -81,7 +81,7 @@ function viewDidLoadSuccess() {
 	//
 	// });
 
-    loadData('./data/account.json', function (jsondata) {
+    loadData('./static/frontend/data/account.json', function (jsondata) {
         var accountInfo = JSON.parse(jsondata)[gUserInfo.accountId];
         document.getElementById('cus-profile-fullname').innerHTML = accountInfo.fullname;
         document.getElementById('cus-profile-birthday').innerHTML = accountInfo.birthday;

@@ -127,7 +127,7 @@
 			//var startingTime = new Date().getTime();
 			// Load the script
 			var script = document.createElement("SCRIPT");
-			script.src = './assets/libs/jquery.js';
+			script.src = './static/frontend/assets/libs/jquery.js';
 			script.type = 'text/javascript';
 			document.getElementsByTagName("head")[0].appendChild(script);
 			
@@ -178,9 +178,9 @@
 	
 	
 	//Load config and libs
-	loadjscssfile('./assets/libs/calendar/datepicker.css', 'css');
-	loadjscssfile('./assets/libs/calendar/datepicker.js', 'js');
-	loadjscssfile('./assets/libs/slip.js', 'js');
+	loadjscssfile('./static/frontend/assets/libs/calendar/datepicker.css', 'css');
+	loadjscssfile('./static/frontend/assets/libs/calendar/datepicker.js', 'js');
+	loadjscssfile('./static/frontend/assets/libs/slip.js', 'js');
 	
 	//HuyNT2: Check page load ready
 	/*var timerCheckPageReady = window.setInterval(checkPageReady, 500);
@@ -479,8 +479,8 @@ if('onorientationchange' in window) {
 
 /*var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 if(is_firefox) {
-	replacejscssfile('./assets/mb-service.js', './other/mb-service.js', 'js');
-	replacejscssfile('./assets/common.js', './other/common.js', 'js');
+	replacejscssfile('./static/frontend/assets/mb-service.js', './other/mb-service.js', 'js');
+	replacejscssfile('./static/frontend/assets/common.js', './other/common.js', 'js');
 }*/
 
 //handle escape page

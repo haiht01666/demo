@@ -137,7 +137,7 @@ function sendJSONRequest() {
     if(statusAccMode){
         loginUser = localStorage.getItem('BhipUserNumber');
     }
-    loadData('./data/login.json', function (jsondata) {
+    loadData('./static/frontend/data/login.json', function (jsondata) {
         var loginInfo = JSON.parse(jsondata);
         for(var i = 0; i < loginInfo.account.length; i++){
             if(loginUser === loginInfo.account[i].accountName && loginPass === loginInfo.account[i].accountPassword){
