@@ -24,7 +24,7 @@ var pConstants_VN = {
 	'TPBANK_TITLE'								: 'Ngân hàng Tiên Phong',
 	'LANG_VIE'									: 'TIẾNG VIỆT',
 	'LANG_ENG'									: 'ENGLISH',
-	'LOGIN_TITLE'								: 'NGÂN HÀNG ĐIỆN TỬ',
+	'LOGIN_TITLE'								: '',
 	'LOGIN_BOX'									: 'Đăng nhập',
 	'LOGIN_ABOUT'								: 'DỊCH VỤ NGÂN HÀNG ĐIỆN TỬ',
 	'LOGIN_TERMS'								: 'Điều khoản, điều kiện sử dụng',
