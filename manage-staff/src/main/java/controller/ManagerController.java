@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.AjaxResult;
@@ -31,7 +32,7 @@ public class ManagerController {
 	@Autowired
 	ManageService service;
 
-	@RequestMapping(value = {""}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
 	public String index(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
@@ -55,6 +56,39 @@ public class ManagerController {
 			return result;
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
+	public String detail(ModelMap model,@RequestParam("id") String id) throws SQLException {
+		int userID = Integer.parseInt(id);
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/detail";
+	}
+	
+	@RequestMapping(value = {"/accounts"}, method = RequestMethod.GET)
+	public String account(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/account";
+	}
+
+	@RequestMapping(value = {"/orders"}, method = RequestMethod.GET)
+	public String order(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/order";
+	}
+	
+	@RequestMapping(value = {"/feedbacks"}, method = RequestMethod.GET)
+	public String feedback(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/feedback";
 	}
 
 }

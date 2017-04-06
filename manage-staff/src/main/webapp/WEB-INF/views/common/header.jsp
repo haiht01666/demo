@@ -11,10 +11,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" id="nav">
-				<li class="active"><a href="menu.html">Home</a></li>
-				<li><a href="accounts.html">Accounts</a></li>
-				<li><a href="orders.html">Orders</a></li>
-				<li><a href="feedbacks.html">Feedbacks</a></li>
+				<li id="li-home"><a href="/manage/home">Home</a></li>
+				<li id="li-account"><a href="/manage/accounts">Accounts</a></li>
+				<li id="li-order"><a href="/manage/orders">Orders</a></li>
+				<li id="li-feedback"><a href="/manage/feedbacks">Feedbacks</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>

@@ -44,7 +44,7 @@
 					<c:forEach items="${lstMember }" var="member">
 						<tr data-id=${member.id }>
 							<td>${member.id }</td>
-							<td><a href="details.html">${member.dispName }</a></td>
+							<td><a href="/manage/detail?id=${member.id }">${member.dispName }</a></td>
 							<td>${member.signUpDate }</td>
 							<td><c:if test="${member.enable }">
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>

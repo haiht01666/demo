@@ -57,14 +57,5 @@ public class AccountController {
 		model.addAttribute("userForm", userFrom);
 		return "account/create";
 	}
-	
-	public static void main(String [] arg){
-		try {
-			System.err.println((new HexBinaryAdapter()).marshal(MessageDigest.getInstance("MD5").digest("admin".getBytes())));
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }

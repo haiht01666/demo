@@ -1,5 +1,6 @@
 $(document).ready(
 		function() {
+			$('#li-home').addClass('active');
 			// initial table
 			var table = $('#tbl-staff').DataTable({
 				responsive : false,
@@ -52,7 +53,7 @@ $(document).ready(
 									$('#msg-error').empty();
 									$.ajax({
 										type: "GET",
-										url:"manage/addMember",
+										url:"/manage/addMember",
 										contentType: "application/json; charset=utf-8",
 										success:function(response){
 											if(response.result){
