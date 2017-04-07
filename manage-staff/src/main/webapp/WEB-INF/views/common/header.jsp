@@ -14,7 +14,6 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" id="nav">
 				<li id="li-home"><a href="/manage/home">Trang chủ</a></li>
-				<li id="li-account"><a href="/manage/accounts">Tài khoản</a></li>
 				<li id="li-order"><a href="/manage/orders">Đơn hàng</a></li>
 				<li id="li-feedback"><a href="/manage/feedbacks">Phản hồi</a></li>
 			</ul>

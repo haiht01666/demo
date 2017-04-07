@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="error-area">
 			<h2>System Busy</h2>
-			<p class="alert">The system is busy please visit later!</p>
+			<p class="alert" id="msg-error">The system is busy please visit later!</p>
 		</div>
 	</div>
 </body>

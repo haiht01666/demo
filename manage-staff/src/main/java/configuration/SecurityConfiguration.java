@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
         .antMatchers("/", "/home", "/member").access("hasRole('ADMIN') or hasRole('STAFF') or hasRole('SPADMIN')")
-        .antMatchers("/manage").access("hasRole('SPADMIN')")
+        .antMatchers("/manage/*").access("hasRole('SPADMIN')")
         .antMatchers("/manage/home").access("hasRole('ADMIN')")
         .antMatchers("/manage/addMember").access("hasRole('ADMIN')")
         .antMatchers("/manage/detail").access("hasRole('ADMIN')")
@@ -58,5 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/admin/access-denied");
+      //disable token
+      	http.csrf().disable();
     }
+   
 }

@@ -8,66 +8,72 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.AjaxResult;
+import model.EditRoleForm;
 import model.User;
+import model.UserForm;
 import service.ManageService;
 
 @Controller
 @RequestMapping("manage")
 public class ManagerController {
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private MessageSource messageSource;
-	
+
 	@Autowired
 	ManageService service;
 
-	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String index(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
+		String userRole = user.getRoles().get(0);
 		model.addAttribute("user", user);
-		List<User> lstMember = service.lstUser(user.getRoles().get(0));
+		List<User> lstMember = service.lstUser(userRole);
 		model.addAttribute("lstMember", lstMember);
-		return "manage-staff/index";
+		model.addAttribute("role", userRole);
+		return "account/index";
 	}
 
-	@RequestMapping(value = { "/addMember" }, method = RequestMethod.GET,produces="application/json; charset=UTF-8")
+	@RequestMapping(value = { "/addMember" }, method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	public @ResponseBody AjaxResult createMember() {
 		User user = (User) session.getAttribute("ss-user");
 		AjaxResult result = new AjaxResult();
 		try {
-			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode()),user.getChildId()));
+			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode()), user.getChildId()));
 			result.setResult(true);
-			result.setMessage(messageSource.getMessage("S001", null,Locale.US));
+			result.setMessage(messageSource.getMessage("S001", null, Locale.US));
 		} catch (Exception e) {
 			result.setResult(false);
-			result.setMessage(messageSource.getMessage("E001", null,Locale.US));
+			result.setMessage(messageSource.getMessage("E001", null, Locale.US));
 			return result;
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
-	public String detail(ModelMap model,@RequestParam("id") String id) throws SQLException {
+
+	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
+	public String detail(ModelMap model, @RequestParam("id") String id) throws SQLException {
 		int userID = Integer.parseInt(id);
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
 		return "account/detail";
 	}
-	
-	@RequestMapping(value = {"/accounts"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/accounts" }, method = RequestMethod.GET)
 	public String account(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
@@ -75,20 +81,40 @@ public class ManagerController {
 		return "account/account";
 	}
 
-	@RequestMapping(value = {"/orders"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/orders" }, method = RequestMethod.GET)
 	public String order(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
 		return "account/order";
 	}
-	
-	@RequestMapping(value = {"/feedbacks"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/feedbacks" }, method = RequestMethod.GET)
 	public String feedback(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
 		return "account/feedback";
+	}
+
+	@RequestMapping(value = { "/editRole" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult editRole(@RequestBody EditRoleForm form) {
+		AjaxResult result = new AjaxResult();
+		try {
+			if (service.editRole(form) > 0) {
+				result.setResult(true);
+				result.setMessage(messageSource.getMessage("S003", null, Locale.US));
+			} else {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E005", null, Locale.US));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E005", null, Locale.US));
+			return result;
+		}
+		return result;
 	}
 
 }
