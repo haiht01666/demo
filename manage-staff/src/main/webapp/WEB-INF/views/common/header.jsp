@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -11,14 +13,19 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" id="nav">
-				<li id="li-home"><a href="/manage/home">Home</a></li>
-				<li id="li-account"><a href="/manage/accounts">Accounts</a></li>
-				<li id="li-order"><a href="/manage/orders">Orders</a></li>
-				<li id="li-feedback"><a href="/manage/feedbacks">Feedbacks</a></li>
+				<li id="li-home"><a href="/manage/home">Trang chủ</a></li>
+				<li id="li-account"><a href="/manage/accounts">Tài khoản</a></li>
+				<li id="li-order"><a href="/manage/orders">Đơn hàng</a></li>
+				<li id="li-feedback"><a href="/manage/feedbacks">Phản hồi</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						${user.dispName }</a></li>
+
+				<li class="dropdown"><a href="#" class="dropbtn"><span
+						class="glyphicon glyphicon-user"></span> ${user.dispName }</a>
+
+					<div class="dropdown-content">
+						<a href="/admin/logout">Đăng xuất</a> 
+					</div></li>
 			</ul>
 		</div>
 	</div>
