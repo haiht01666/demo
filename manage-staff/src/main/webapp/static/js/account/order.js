@@ -33,6 +33,14 @@ $(document).ready(function() {
 			table.$('tr.selected').removeClass('selected');
 			$(this).addClass('selected');
 		}
+		//disable button 
+		if ($('#tbody-staff tr.selected').length === 0){
+			$('#edit-data').attr('disabled',true);
+			$('#remove-data').attr('disabled',true);
+		}else{
+			$('#edit-data').attr('disabled',false);
+			$('#remove-data').attr('disabled',false);
+		}
 	});
 	
 	//edit row

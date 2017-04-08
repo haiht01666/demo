@@ -51,8 +51,8 @@
 						<tr data-id=${member.id }>
 							<td>${member.id }</td>
 							<td><a href="/manage/detail?id=${member.id }">${member.dispName }</a></td>
-							<td>${member.signUpDate }</td>
-							<td>${member.roles[0] }</td>
+							<td>${member.cdate }</td>
+							<td>${member.role}</td>
 							<td><c:if test="${member.enable }">
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>
 								</c:if></td>

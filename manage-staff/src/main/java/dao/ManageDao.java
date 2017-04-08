@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.EditRoleForm;
+import model.Order;
 import model.User;
 
 public interface ManageDao {
@@ -20,6 +21,11 @@ public interface ManageDao {
 	 * @return list user
 	 */
 	public List<User> getMembers() throws SQLException;
-	
+
 	public int editRole(EditRoleForm formdata) throws SQLException;
+
+	public User getUserById(int id) throws SQLException;
+
+	public List<Order> getAllOrder() throws SQLException;
+
 }

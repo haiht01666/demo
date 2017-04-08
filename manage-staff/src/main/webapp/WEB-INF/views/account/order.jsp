@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,11 +24,11 @@
 				<button type="button" class="btn btn-default btn-sm" id="addRow">
 					<span class="glyphicon glyphicon-plus"></span> Add
 				</button>
-				<button type="button" class="btn btn-default btn-sm" id="edit-data">
+				<button type="button" class="btn btn-default btn-sm" id="edit-data" disabled="disabled">
 					<span class="glyphicon glyphicon-edit"></span> Edit
 				</button>
 				<button type="button" class="btn btn-default btn-sm"
-					id="remove-data">
+					id="remove-data" disabled="disabled">
 					<span class="glyphicon glyphicon-remove"></span> Remove
 				</button>
 			</div>
@@ -36,51 +37,29 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Member Id</th>
-						<th>Member Name</th>
-						<th>Order Name</th>
-						<th>Order Date</th>
-						<th>Amount</th>
+						<th>Id thành viên</th>
+						<th>Tên Thành viên</th>
+						<th>Tên sản phẩm</th>
+						<th>Ngày mua</th>
+						<th>Giá</th>
+						<th>Số lương</th>
+						<th>Loại</th>
+						<th>Tổng giá</th>
 					</tr>
 				</thead>
-
-				<tbody>
+				<tbody class="tbody-staff">
+				<c:forEach items="${orders }" var="order">
 					<tr data-id=1>
-						<td>000001</td>
-						<td><a href="details.html">Tiger Nixon</a></td>
-						<td>Order 1</td>
-						<td>2011/04/25</td>
-						<td>1.000.000</td>
+						<td>${order.userId }</td>
+						<td><a href="/manage/detail?id=${order.userId }">${order.userName }</a></td>
+						<td>${order.orderName }</td>
+						<td>${order.orderDate }</td>
+						<td><fmt:formatNumber value="${order.price }" type="number" maxFractionDigits="3"/></td>
+						<td>${order.quantity }</td>
+						<td>${order.type }</td>
+						<td><fmt:formatNumber value="${order.price }" type="number" maxFractionDigits="3"/></td>
 					</tr>
-					<tr>
-						<td>000002</td>
-						<td><a href="details.html">Garrett Winters</a></td>
-						<td>Order 2</td>
-						<td>2011/04/25</td>
-						<td>1.000.000</td>
-					</tr>
-					<tr>
-						<td>000003</td>
-						<td><a href="details.html">Ashton Cox</a></td>
-						<td>Order 3</td>
-						<td>2011/04/25</td>
-						<td>1.000.000</td>
-					</tr>
-					<tr>
-						<td>000004</td>
-						<td><a href="details.html">Cedric Kelly</a></td>
-						<td>Order 4</td>
-						<td>2011/04/25</td>
-						<td>1.000.000</td>
-					</tr>
-					<tr>
-						<td>000005</td>
-						<td><a href="details.html">Airi Satou</a></td>
-						<td>Order 5</td>
-						<td>2011/04/25</td>
-						<td>1.000.000</td>
-					</tr>
-
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

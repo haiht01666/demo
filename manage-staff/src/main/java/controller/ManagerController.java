@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.NoSuchMessageException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.AjaxResult;
 import model.EditRoleForm;
 import model.User;
-import model.UserForm;
 import service.ManageService;
 
 @Controller
@@ -36,7 +34,7 @@ public class ManagerController {
 	@Autowired
 	ManageService service;
 
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"","/home" }, method = RequestMethod.GET)
 	public String index(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
@@ -70,15 +68,8 @@ public class ManagerController {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
+		model.addAttribute("userDetail", service.getUserById(userID));
 		return "account/detail";
-	}
-
-	@RequestMapping(value = { "/accounts" }, method = RequestMethod.GET)
-	public String account(ModelMap model) throws SQLException {
-		// get current user from session
-		User user = (User) session.getAttribute("ss-user");
-		model.addAttribute("user", user);
-		return "account/account";
 	}
 
 	@RequestMapping(value = { "/orders" }, method = RequestMethod.GET)
@@ -86,6 +77,7 @@ public class ManagerController {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
+		model.addAttribute("orders", service.getAllOrder());
 		return "account/order";
 	}
 

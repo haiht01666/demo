@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import constant.Roles;
 import dao.ManageDao;
 import model.EditRoleForm;
+import model.Order;
 import model.User;
 
 @Service
@@ -36,6 +37,16 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public int editRole(EditRoleForm formdata) throws SQLException{
 		return dao.editRole(formdata);
+	}
+
+	@Override
+	public User getUserById(int id) throws SQLException {
+		return dao.getUserById(id);
+	}
+
+	@Override
+	public List<Order> getAllOrder() throws SQLException {
+		return dao.getAllOrder();
 	}
 
 }

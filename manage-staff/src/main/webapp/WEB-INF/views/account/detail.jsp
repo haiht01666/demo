@@ -22,27 +22,27 @@
 				<fieldset>
 					<legend>Personal details</legend>
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Name</label>
+						<label class="col-md-3 col-xs-4">Tên</label>
 						<div class="col-md-9 col-xs-8">
-							<span>Hoang Tien Hai</span>
+							<span>${userDetail.dispName }</span>
 						</div>
 					</div>
 
 					<div class="col-xs-12">
 						<label class="col-md-3 col-xs-4">Email</label>
 						<div class="col-md-9 col-xs-8">
-							<span>haifpt2013@gmail.com</span>
+							<span>${userDetail.email }</span>
 						</div>
 					</div>
 
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Sign up</label> <span
-							class="col-md-9 col-xs-8">22/10/2013</span>
+						<label class="col-md-3 col-xs-4">Ngày tạo</label> <span
+							class="col-md-9 col-xs-8">${userDetail.cdate }</span>
 					</div>
 
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Phone</label> <span
-							class="col-md-9 col-xs-8">0965046393</span>
+						<label class="col-md-3 col-xs-4">Số ĐT</label> <span
+							class="col-md-9 col-xs-8">${userDetail.phone }</span>
 					</div>
 
 					<div class="col-xs-12">
@@ -50,18 +50,18 @@
 					</div>
 
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Bank</label> <span
-							class="col-md-9 col-xs-8">TP Bank</span>
+						<label class="col-md-3 col-xs-4">Ngân hàng</label> <span
+							class="col-md-9 col-xs-8">${userDetail.bankName }</span>
 					</div>
 
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Account</label> <span
-							class="col-md-9 col-xs-8">00258630001</span>
+						<label class="col-md-3 col-xs-4">Số tk</label> <span
+							class="col-md-9 col-xs-8">${userDetail.bankAccount }</span>
 					</div>
 
 					<div class="col-xs-12">
-						<label class="col-md-3 col-xs-4">Address</label> <span
-							class="col-md-9 col-xs-8">Thanh xuan - Ha Noi</span>
+						<label class="col-md-3 col-xs-4">Chi nhánh</label> <span
+							class="col-md-9 col-xs-8">${userDetail.bankAddress }</span>
 					</div>
 
 				</fieldset>

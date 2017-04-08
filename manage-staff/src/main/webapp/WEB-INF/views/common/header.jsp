@@ -19,7 +19,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
-				<li class="dropdown"><a href="#" class="dropbtn"><span
+				<li class="dropdown"><a href="javascript:void(0)" class="dropbtn"><span
 						class="glyphicon glyphicon-user"></span> ${user.dispName }</a>
 
 					<div class="dropdown-content">

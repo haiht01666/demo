@@ -48,13 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
         .antMatchers("/", "/home", "/member").access("hasRole('ADMIN') or hasRole('STAFF') or hasRole('SPADMIN')")
-        .antMatchers("/manage/*").access("hasRole('SPADMIN')")
-        .antMatchers("/manage/home").access("hasRole('ADMIN')")
-        .antMatchers("/manage/addMember").access("hasRole('ADMIN')")
-        .antMatchers("/manage/detail").access("hasRole('ADMIN')")
-        .antMatchers("/manage/order").access("hasRole('ADMIN')")
-        .antMatchers("/manage/feedback").access("hasRole('ADMIN')")
+        .antMatchers("/manage/**").access("hasRole('SPADMIN') or hasRole('ADMIN')")
         .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
+        .failureUrl("/admin/login?error")
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/admin/access-denied");

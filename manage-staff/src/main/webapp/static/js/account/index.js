@@ -44,6 +44,7 @@ $(document).ready(
 
 			$('#btn-edit-role').on('click', function() {
 				if ($('#tbody-staff tr.selected').length > 0){
+					$('#msg-error').empty();
 					var role =  $('form input[type=radio]:checked').val() === '0' ? 'ADMIN' : 'STAFF';
 					var formData = {};
 					var lstId = [];
