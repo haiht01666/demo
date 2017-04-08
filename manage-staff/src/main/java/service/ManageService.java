@@ -17,4 +17,8 @@ public interface ManageService {
 	public User getUserById(int id) throws SQLException;
 	
 	public List<Order> getAllOrder() throws SQLException;
+	
+	public int createOrder(Order order) throws SQLException;
+	
+	public void calcuRevenue(int userId) throws SQLException;
 }

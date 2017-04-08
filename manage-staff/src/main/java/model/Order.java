@@ -17,7 +17,27 @@ public class Order {
 	
 	private int quantity;
 	
-	private String type;
+	private int type;
+	
+	private String typeValue;
+	
+	private int parentId;
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getTypeValue() {
+		return typeValue;
+	}
+
+	public void setTypeValue(String typeValue) {
+		this.typeValue = typeValue;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -75,13 +95,12 @@ public class Order {
 		this.quantity = quantity;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
-
 
 }

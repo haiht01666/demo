@@ -27,5 +27,16 @@ public interface ManageDao {
 	public User getUserById(int id) throws SQLException;
 
 	public List<Order> getAllOrder() throws SQLException;
+	
+	public int createOrder(Order order) throws SQLException;
+	
+	/**
+	 * 
+	 * @param user user information
+	 * @param numberDay period time from sign update
+	 * @return total price
+	 * @throws SQLException
+	 */
+	public Double totalOrderPrice(User user,int numberDay) throws SQLException;
 
 }

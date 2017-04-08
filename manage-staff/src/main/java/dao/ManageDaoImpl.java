@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import constant.OrderType;
 import model.EditRoleForm;
 import model.Order;
 import model.User;
@@ -137,7 +138,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public User getUserById(int id) throws SQLException {
 		User user = new User();
-		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_address FROM users where id = ?";
+		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_address,parent_id,package FROM users where id = ?";
 		try{
 		conn = getConnection();
 		stmt= conn.prepareStatement(sql);
@@ -151,6 +152,8 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			user.setBankName(rs.getString(5));
 			user.setBankAccount(rs.getString(6));
 			user.setBankAddress(rs.getString(7));
+			user.setParentId(rs.getInt(8));
+			user.setPackageValue(rs.getInt(9));
 			break;
 		}
 		}catch(Exception e){
@@ -180,7 +183,15 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				order.setOrderDate(rs.getDate(4));
 				order.setPrice(rs.getDouble(5));
 				order.setQuantity(rs.getInt(6));
-				order.setType(rs.getString(7));
+				int type = rs.getInt(7);
+				if(type == OrderType.ORDER_PROACTIVE.getCode())
+					order.setTypeValue(OrderType.ORDER_PROACTIVE.getValue());
+				else if(type == OrderType.ORDER_PACKAGE.getCode())
+					order.setTypeValue(OrderType.ORDER_PACKAGE.getValue());
+				else if(type == OrderType.ORDER_PRODUCT.getCode())
+					order.setTypeValue(OrderType.ORDER_PRODUCT.getValue());
+				else 
+					order.setTypeValue(OrderType.ORDER_PRODUCT.DefaultValue());
 				order.setTotal(rs.getDouble(8));
 				lstOrder.add(order);
 			}
@@ -193,6 +204,54 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			rs.close();
 		}
 		return lstOrder;
+	}
+
+	@Override
+	public int createOrder(Order order) throws SQLException {
+		int result = 0;
+		String sql ="insert into orders(name,cdate,user_name,user_id,price,quantity,type,total) values(?,now(),?,?,?,?,?,?)";
+		try{
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, order.getOrderName());
+			stmt.setString(2, order.getUserName());
+			stmt.setInt(3, order.getUserId());
+			stmt.setDouble(4, order.getPrice());
+			stmt.setInt(5, order.getQuantity());
+			stmt.setInt(6, order.getType());
+			stmt.setDouble(7, order.getPrice()*order.getQuantity());
+			result = stmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new SQLException();
+		}finally{
+			conn.close();
+			stmt.close();
+		}
+		return result;
+	}
+
+	@Override
+	public Double totalOrderPrice(User user, int numberDay) throws SQLException {
+		Double result = 0d;
+		String sql = "SELECT sum(total) as total FROM db_manage_staff.orders where user_id=? and cdate between cdate and (cdate + INTERVAL ? DAY) group by user_id  ";
+		try{
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, user.getId());
+			stmt.setInt(2, numberDay);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				result = rs.getDouble(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new SQLException();
+		}finally{
+			conn.close();
+			stmt.close();
+		}
+		return result;
 	}
 
 }

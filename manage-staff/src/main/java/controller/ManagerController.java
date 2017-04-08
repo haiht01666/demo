@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.AjaxResult;
 import model.EditRoleForm;
+import model.Order;
 import model.User;
 import service.ManageService;
 
@@ -34,7 +36,7 @@ public class ManagerController {
 	@Autowired
 	ManageService service;
 
-	@RequestMapping(value = {"","/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "", "/home" }, method = RequestMethod.GET)
 	public String index(ModelMap model) throws SQLException {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
@@ -53,10 +55,10 @@ public class ManagerController {
 		try {
 			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode()), user.getChildId()));
 			result.setResult(true);
-			result.setMessage(messageSource.getMessage("S001", null, Locale.US));
+			result.setMessage(messageSource.getMessage("S001", null, Locale.getDefault()));
 		} catch (Exception e) {
 			result.setResult(false);
-			result.setMessage(messageSource.getMessage("E001", null, Locale.US));
+			result.setMessage(messageSource.getMessage("E001", null, Locale.getDefault()));
 			return result;
 		}
 		return result;
@@ -95,15 +97,65 @@ public class ManagerController {
 		try {
 			if (service.editRole(form) > 0) {
 				result.setResult(true);
-				result.setMessage(messageSource.getMessage("S003", null, Locale.US));
+				result.setMessage(messageSource.getMessage("S003", null, Locale.getDefault()));
 			} else {
 				result.setResult(false);
-				result.setMessage(messageSource.getMessage("E005", null, Locale.US));
+				result.setMessage(messageSource.getMessage("E005", null, Locale.getDefault()));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result.setResult(false);
-			result.setMessage(messageSource.getMessage("E005", null, Locale.US));
+			result.setMessage(messageSource.getMessage("E005", null, Locale.getDefault()));
+			return result;
+		}
+		return result;
+	}
+
+	@RequestMapping(value = { "/checkUser" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult checkUserExist(@RequestParam("id") int id) {
+		AjaxResult result = new AjaxResult();
+		try {
+			User user = service.getUserById(id);
+			if (user.getDispName() == null) {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E006", null, Locale.getDefault()));
+			} else {
+				result.setResult(true);
+				result.setResultData(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E006", null, Locale.getDefault()));
+			return result;
+		}
+		return result;
+	}
+
+	@RequestMapping(value = { "/createOrder" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult createOrder(@RequestBody Order form) {
+		AjaxResult result = new AjaxResult();
+		if(form.getType() == 0){
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E008", null, Locale.getDefault()));
+		}
+		form.setOrderDate(new Date());
+		try {
+			if (service.createOrder(form) == 0) {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E007", null, Locale.getDefault()));
+			} else {
+				result.setResult(true);
+				result.setMessage(messageSource.getMessage("S004", null, Locale.getDefault()));
+				result.setResultData(form);
+				// calculator revenue
+				service.calcuRevenue(form.getUserId());
+				service.calcuRevenue(form.getParentId());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E005", null, Locale.getDefault()));
 			return result;
 		}
 		return result;

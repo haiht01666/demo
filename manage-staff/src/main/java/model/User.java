@@ -58,6 +58,26 @@ public class User implements Serializable {
 	
 	private String role;
 	
+	private int parentId;
+	
+	private int packageValue;
+	
+	public int getPackageValue() {
+		return packageValue;
+	}
+
+	public void setPackageValue(int packageValue) {
+		this.packageValue = packageValue;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
 	public String getRole() {
 		return role;
 	}

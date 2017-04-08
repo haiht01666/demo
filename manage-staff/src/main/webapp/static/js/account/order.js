@@ -65,21 +65,68 @@ $(document).ready(function() {
 	});
 	//add row 
 	 $('#addRow').on( 'click', function () {
+		 innitModal();
 	 //set title modal
-		$('#modal-header').text('Add new order');
+		$('#modal-header').text('Thêm mới order');
 		$('#add-order').modal('show');
-		$('#btn-add-order').on('click',function(){
-			table.row.add( [
-            $('#txt-member-id').val(),
-            $('#txt-member-name').val(),
-			$('#txt-order-name').val(),
-			new Date(),
-            $('#txt-order-amount').val()
-        ] ).draw( false );
-		$('#add-order').modal('hide');
-		});
-       
     } );
+	$('#txt-member-id').on('change',function(){
+		emptyMessageError();
+		$.ajax({
+			type: "GET",
+			url:"/manage/checkUser",
+			data: "id="+$('#txt-member-id').val(),
+			success:function(response){
+				if(response.result){
+					//enable button add
+					$('#btn-add-order').attr('disabled',false);
+					$('#txt-member-name').val(response.resultData.dispName);
+					$('#txt-parent-id').val(response.resultData.parentId);
+				} else {
+					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Mã id không tồn tại hoặc đã được đăng ký!'));
+				}
+			},
+			error:function(response){
+				$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
+			}
+		});
+	}) ;
+	$('#btn-add-order').on('click',function(){
+		emptyMessageError();
+		var formData = {};
+		formData.userId =  $('#txt-member-id').val();
+		formData.userName =  $('#txt-member-name').val();
+		formData.orderName =  $('#txt-order-name').val();
+		formData.price =  $('#txt-order-price').val();
+		formData.quantity =  $('#txt-order-quantity').val();
+		formData.type =  $('#txt-order-quantity').val();
+		formData.parentId = $('#txt-parent-id').val();
+		$.ajax({
+			type: "POST",
+			url:"/manage/createOrder",
+			data: JSON.stringify(formData),
+			contentType: "application/json; charset=utf-8",
+			success:function(response){
+				if(response.result){
+					$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+					table.row.add( [
+				        $('#txt-member-id').val(),
+				        $('#txt-member-name').val(),
+						$('#txt-order-name').val(),
+						new Date(),
+				        $('#txt-order-amount').val()
+				    ] ).draw( false );
+					$('#add-order').modal('hide');
+				} else {
+					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+				}
+			},
+			error:function(response){
+				$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
+			}
+		});
+	
+	});
 	//remove row
 	$('#remove-data').on('click',function(){
 		 $.confirm({
@@ -96,3 +143,19 @@ $(document).ready(function() {
 	});
 
 });
+
+function innitModal(){
+	 $('#msg-error-modal').empty();
+	 $('#btn-add-order').attr('disabled',true);
+	 $('#txt-member-id').val('')
+	 $('#txt-member-name').val('')
+	 $('#txt-order-name').val('')
+	 $('#txt-order-price').val('')
+	 $('#txt-order-quantity').val('')
+	 $('#order-type').val('')
+}
+
+function emptyMessageError(){
+	$('#msg-error-modal').empty();
+	$('#msg-error').empty();
+}
