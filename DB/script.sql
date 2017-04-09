@@ -19,6 +19,7 @@ CREATE TABLE DB_MANAGE_STAFF.users(
     bank_address varchar(50),
     city varchar(50),
 	child_id  varchar(1000),
+	lever integer,  
     primary key(id)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
@@ -38,6 +39,11 @@ CREATE TABLE DB_MANAGE_STAFF.orders(
     cdate datetime,
     user_name varchar(50),
     user_id integer not null,
+	price double,
+	quantity integer,
+	type integer,
+	total double,
+	proactive tinyint(1),
     primary key(id),
     foreign key(user_id) references users(id)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
@@ -58,5 +64,5 @@ CREATE TABLE DB_MANAGE_STAFF.feedbacks(
 ALTER TABLE users AUTO_INCREMENT = 100000;
 
 -- Insert user 
-Insert into users(id,password,enable,name,child_id) values (100000,'$2a$10$DWjgKn32UUkM/ryxmnvCTOLvf.5EVLPuhOTVabdp3uMq49nOvhy7G',true,'ADMIN','100000');
-Insert into roles(id,role,user_id) values (1,'ADMIN',100000);
+Insert into users(id,password,enable,name,child_id,cdate) values (100000,'$2a$10$DWjgKn32UUkM/ryxmnvCTOLvf.5EVLPuhOTVabdp3uMq49nOvhy7G',true,'SPADMIN','100000',now());
+Insert into roles(id,role,user_id) values (1,'SPADMIN',100000);
