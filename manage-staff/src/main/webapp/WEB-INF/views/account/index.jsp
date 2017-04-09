@@ -40,7 +40,7 @@
 						<th>Mã Id</th>
 						<th>Tên Thành viên</th>
 						<th>Mã người bảo trợ</th>
-						<th>Ngày kích hoạt</th>
+						<th>Ngày tạo</th>
 						<th>Quyền</th>
 						<th>Kích hoạt</th>
 						<th>Cấp bậc</th>

@@ -7,11 +7,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Manage feedbacks</title>
+<title>Revenue  Group</title>
 <%@ include file="../common/library.jsp"%>
 
 <script type="text/javascript"
-	src="<c:url value='/static/js/account/feedback.js' />"></script>
+	src="<c:url value='/static/js/account/revenueGroup.js' />"></script>
 </head>
 
 <body>
@@ -67,7 +67,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-
+		</div>
 </body>
 </html>
