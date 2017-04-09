@@ -108,17 +108,11 @@ $(document).ready(function() {
 			contentType: "application/json; charset=utf-8",
 			success:function(response){
 				if(response.result){
-					$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
-					table.row.add( [
-				        $('#txt-member-id').val(),
-				        $('#txt-member-name').val(),
-						$('#txt-order-name').val(),
-						new Date(),
-				        $('#txt-order-amount').val()
-				    ] ).draw( false );
+					//reload page
+					 location.reload();
 					$('#add-order').modal('hide');
 				} else {
-					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Xin hãy nhập đúng định dạng giá tiền!'));
 				}
 			},
 			error:function(response){
@@ -141,8 +135,14 @@ $(document).ready(function() {
 		});
 		 
 	});
-
+	//display format currency
+	$('#txt-order-price').keyup(function(){
+		$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en"));
+				
+	});
 });
+
+
 
 function innitModal(){
 	 $('#msg-error-modal').empty();
@@ -152,10 +152,5 @@ function innitModal(){
 	 $('#txt-order-name').val('')
 	 $('#txt-order-price').val('')
 	 $('#txt-order-quantity').val('')
-	 $('#order-type').val('')
-}
-
-function emptyMessageError(){
-	$('#msg-error-modal').empty();
-	$('#msg-error').empty();
+	 $('#lbl-price').text('');
 }

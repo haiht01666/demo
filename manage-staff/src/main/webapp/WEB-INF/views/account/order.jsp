@@ -100,6 +100,7 @@
 								</div>
 
 								<div class="form-group">
+									<label id="lbl-price"></label>
 									<input type="text" id="txt-order-price" class="form-control"
 										placeholder="nhập giá sản phẩm">
 								</div>
@@ -109,7 +110,7 @@
 								</div>
 								<div class="form-group">
 									<select id="order-type" class="form-control">
-										<option value="0" disabled selected>Chọn loại order</option>
+										<option value="0" disabled selected="selected">Chọn loại order</option>
 										<option value="1">Mua sản phẩm</option>
 										<option value="2">Mua năng động</option>
 										<option value="3">Đăng ký gói</option>

@@ -48,12 +48,17 @@ public class ManagerController {
 		return "account/index";
 	}
 
-	@RequestMapping(value = { "/addMember" }, method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-	public @ResponseBody AjaxResult createMember() {
-		User user = (User) session.getAttribute("ss-user");
+	@RequestMapping(value = { "/addMember" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult createMember(@RequestBody User form) {
 		AjaxResult result = new AjaxResult();
 		try {
-			result.setResultData(service.createMember(Integer.parseInt(user.getUserCode()), user.getChildId()));
+			User parent = service.getUserById(form.getParentId());
+			if(parent.getCdate() == null){
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E009", null, Locale.getDefault()));
+				return result;
+			}
+			result.setResultData(service.createMember(parent,form.getLever()));
 			result.setResult(true);
 			result.setMessage(messageSource.getMessage("S001", null, Locale.getDefault()));
 		} catch (Exception e) {
@@ -116,10 +121,12 @@ public class ManagerController {
 		AjaxResult result = new AjaxResult();
 		try {
 			User user = service.getUserById(id);
-			if (user.getDispName() == null) {
+			if (user.getCdate() == null) {
 				result.setResult(false);
 				result.setMessage(messageSource.getMessage("E006", null, Locale.getDefault()));
 			} else {
+				if(user.getDispName() == null)
+					user.setDispName(messageSource.getMessage("I001", null, Locale.getDefault()));
 				result.setResult(true);
 				result.setResultData(user);
 			}

@@ -16,7 +16,6 @@ import model.UserForm;
 import service.UserService;
 
 @Controller
-@RequestMapping("account")
 public class AccountController {
 
 	@Autowired
@@ -25,7 +24,7 @@ public class AccountController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { "/create" }, method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = { "/register" }, method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
 	public String create(@Valid UserForm userForm, BindingResult result, ModelMap model) {
 		model.addAttribute("isError", true);
 		if (result.hasErrors())
@@ -48,7 +47,7 @@ public class AccountController {
 		return "account/create";
 	}
 
-	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
 	public String create(ModelMap model) {
 		UserForm userFrom = new UserForm();
 		model.addAttribute("userForm", userFrom);

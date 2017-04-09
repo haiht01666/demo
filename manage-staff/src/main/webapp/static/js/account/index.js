@@ -49,7 +49,7 @@ $(document).ready(
 					var formData = {};
 					var lstId = [];
 					formData.role = role;
-					//push user id
+					// push user id
 					$('#tbody-staff tr.selected').each(function(){
 						lstId.push($(this).data('id'));
 					});
@@ -81,36 +81,31 @@ $(document).ready(
 			});
 			
 			// add row
-			$('#addRow').on(
-					'click',
-					function() {
-						$.confirm({
-							title : 'Confirm!',
-							buttons : {
-								Ok : function() {
-									$('#msg-error').empty();
-									$.ajax({
-										type: "GET",
-										url:"/manage/addMember",
-										contentType: "application/json; charset=utf-8",
-										success:function(response){
-											if(response.result){
-												table.row.add(
-														[ response.resultData, '', '', '',
-																'Inactive' ]).draw(false);
-												$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
-											} else {
-												$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
-											}
-										},
-										error:function(response){
-											$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra khi thêm mới thành viên!"));
-										}
-									});
-								},
-								Cancel : function() {
-								}
-							}
-						});
-					});
+			$('#addRow').on('click',function() {
+				$('#create-member-modal').modal('show');
+			});
+			$('#btn-create-member').on('click',function(){
+				emptyMessageError();
+				var formData = {};
+				formData.parentId =  $('#txt-parent-id').val();
+				formData.lever =  $('#lever-type').val();
+				$.ajax({
+					type: "POST",
+					url:"/manage/addMember",
+					data: JSON.stringify(formData),
+					contentType: "application/json; charset=utf-8",
+					success:function(response){
+						if(response.result){
+							//reload page
+							 location.reload();
+						} else {
+							$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+						}
+					},
+					error:function(response){
+						$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
+					}
+				});
+				
+			})
 		});

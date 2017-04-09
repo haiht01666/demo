@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/constant/OrderType.java=UTF-8
 encoding//src/main/java/controller/AccountController.java=UTF-8
 encoding//src/main/java/controller/LoginController.java=UTF-8
+encoding//src/main/java/service/ManageServiceImpl.java=UTF-8

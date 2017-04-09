@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import constant.PackageType;
+import constant.LeverType;
 import constant.Roles;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
@@ -21,9 +21,9 @@ public class ManageServiceImpl implements ManageService {
 	ManageDao dao;
 
 	@Override
-	public int createMember(int parentId,String childId) throws SQLException {
+	public int createMember(User parent,int lever) throws SQLException {
 
-		return dao.createMember(parentId,childId);
+		return dao.createMember(parent,lever);
 	}
 
 	@Override
@@ -59,52 +59,56 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public void calcuRevenue(int userId) throws SQLException {
 		User user = dao.getUserById(userId);
-		String packageValue = checkPackage(userId);
-		String packageValueParent = checkPackage(user.getParentId());
-		if(packageValue.equals(PackageType.PRO_DISTRIBUTE.name())){
+		String packageValue = getLever(userId);
+		//String packageValueParent = checkPackage(user.getParentId());
+		if(packageValue.equals(LeverType.PRO_DISTRIBUTE.name())){
 			//cá nhân được 30% 
 		}
-		if(packageValue.equals(PackageType.SALE_MEMBER.name())){
+		if(packageValue.equals(LeverType.SALE_MEMBER.name())){
 			//cá nhân được 10% 
+			//cha được hưởng 10%
 		}
-		if(packageValue.equals(PackageType.SALE_PRO.name())){
-			//cá nhân được 10% 
-			if(packageValueParent.equals(PackageType.PRO_DISTRIBUTE.name())){
-				//cha được hưởng 20%
-			}
-			if(packageValueParent.equals(PackageType.SALE_PRO.name())){
-				//cha được hưởng 10%
-			}
+		if(packageValue.equals(LeverType.SALE_PRO.name())){
+			//cá nhân được 15% 
+			//cha được hương 10%
 		}
 		// TODO Auto-generated method stub
 		
 	}
 	
+	@Override
+	public String getLeverUser(int userId) throws SQLException {
+		return getLever(userId);
+	}
+
 	/**
 	 * check package of user
 	 * @param userId user id
 	 * @return package value
 	 */
-	private String checkPackage(int userId)throws SQLException{
+	private String getLever(int userId)throws SQLException{
 		User user = dao.getUserById(userId);
 		String result = "";	
-		if(user.getPackageValue() == PackageType.New.getValue()){
+		if(user.getLever() == LeverType.New.getValue()){
 			Double totalPrice = dao.totalOrderPrice(user, TimePeriodCheck.TIME_ORDER_PERIOD_45);
-			if(totalPrice >= PackageType.SALE_PRO.getAmount())
-				return PackageType.PRO_DISTRIBUTE.name();
-			if(totalPrice >= PackageType.SALE_MEMBER.getAmount())
-				return PackageType.SALE_PRO.name();
-			if(totalPrice > PackageType.New.getAmount())
-				return PackageType.SALE_MEMBER.name();
+			if(totalPrice >= LeverType.PRO_DISTRIBUTE.getAmount())
+				return LeverType.PRO_DISTRIBUTE.name();
+			if(totalPrice >= LeverType.SALE_PRO.getAmount())
+				return LeverType.SALE_PRO.name();
+			if(totalPrice > LeverType.SALE_MEMBER.getAmount())
+				return LeverType.SALE_MEMBER.name();
+			else
+				return LeverType.New.name();
 		}else{
-			if(user.getPackageValue() == PackageType.SALE_MEMBER.getValue())
-				return PackageType.SALE_MEMBER.name();
-			if(user.getPackageValue() == PackageType.SALE_PRO.getValue())
-				return PackageType.SALE_PRO.name();
-			if(user.getPackageValue() == PackageType.PRO_DISTRIBUTE.getValue())
-				return PackageType.PRO_DISTRIBUTE.name();
+			if(user.getLever() == LeverType.SALE_MEMBER.getValue())
+				return LeverType.SALE_MEMBER.name();
+			if(user.getLever() == LeverType.SALE_PRO.getValue())
+				return LeverType.SALE_PRO.name();
+			if(user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
+				return LeverType.PRO_DISTRIBUTE.name();
 		}
 		return result;
 	}
 
+	
 }

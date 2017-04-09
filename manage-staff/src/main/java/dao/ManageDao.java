@@ -8,7 +8,7 @@ import model.Order;
 import model.User;
 
 public interface ManageDao {
-	public int createMember(int parentId, String childId) throws SQLException;
+	public int createMember(User user,int lever) throws SQLException;
 
 	/*
 	 * Get staff only

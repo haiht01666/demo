@@ -8,7 +8,7 @@ import model.Order;
 import model.User;
 
 public interface ManageService {
-	public int createMember(int parentId, String childId) throws SQLException;
+	public int createMember(User parent,int lever) throws SQLException;
 	
 	public List<User> lstUser(String role) throws SQLException;
 	
@@ -21,4 +21,6 @@ public interface ManageService {
 	public int createOrder(Order order) throws SQLException;
 	
 	public void calcuRevenue(int userId) throws SQLException;
+	
+	public String getLeverUser(int userId)throws SQLException;
 }

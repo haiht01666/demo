@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import constant.LeverType;
 import constant.OrderType;
 import model.EditRoleForm;
 import model.Order;
@@ -15,9 +16,9 @@ import model.User;
 public class ManageDaoImpl extends DBManager implements ManageDao {
 
 	@Override
-	public int createMember(int parentId,String childId) throws SQLException {
+	public int createMember(User parent,int lever) throws SQLException {
 		int memberId = 0;
-		String sql1 = "Insert into users(enable,parent_id,child_id,cdate) values(0,?,?,now())";
+		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever) values(0,?,?,now(),?)";
 		String sql2 = "Insert into roles(role,user_id) values(?,?)";
 		try {
 			conn = getConnection();
@@ -29,8 +30,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				memberId = rs.getInt(1) + 1;
 			}
 			stmt = conn.prepareStatement(sql1);
-			stmt.setInt(1, parentId);
-			stmt.setString(2, childId + "-" + memberId);
+			stmt.setInt(1, parent.getId());
+			stmt.setString(2, parent.getChildId() + "-" + memberId);
+			stmt.setInt(3, lever);
 			stmt.executeUpdate();
 			
 			stmt = conn.prepareStatement(sql2);
@@ -54,7 +56,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public List<User> getStaffs() throws SQLException {
 		List<User> result = new ArrayList<>();
-		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF'";
+		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF'";
 		try{
 			conn = getConnection();
 			st = conn.createStatement();
@@ -67,7 +69,18 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setEnable(rs.getBoolean(4));
 				user.setLastOrderDate(rs.getDate(5));
 				user.setRole(rs.getString(6));
+				user.setParentId(rs.getInt(7));
+				int lever = rs.getInt(8);
+				if(lever == LeverType.SALE_MEMBER.getValue())
+					user.setLeverValue(LeverType.SALE_MEMBER.name());
+				else if(lever == LeverType.SALE_PRO.getValue())
+					user.setLeverValue(LeverType.SALE_PRO.name());
+				else if(lever == LeverType.PRO_DISTRIBUTE.getValue())
+					user.setLeverValue(LeverType.PRO_DISTRIBUTE.name());
+				else
+					user.setLeverValue(LeverType.New.name());
 				result.add(user);
+				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -84,7 +97,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	public List<User> getMembers() throws SQLException{
 		List<User> result = new ArrayList<>();
 		
-		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
+		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
 		try{
 			conn = getConnection();
 			st = conn.createStatement();
@@ -97,6 +110,16 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setEnable(rs.getBoolean(4));
 				user.setLastOrderDate(rs.getDate(5));
 				user.setRole(rs.getString(6));
+				user.setParentId(rs.getInt(7));
+				int lever = rs.getInt(8);
+				if(lever == LeverType.SALE_MEMBER.getValue())
+					user.setLeverValue(LeverType.SALE_MEMBER.name());
+				else if(lever == LeverType.SALE_PRO.getValue())
+					user.setLeverValue(LeverType.SALE_PRO.name());
+				else if(lever == LeverType.PRO_DISTRIBUTE.getValue())
+					user.setLeverValue(LeverType.PRO_DISTRIBUTE.name());
+				else
+					user.setLeverValue(LeverType.New.name());
 				result.add(user);
 			}
 		}catch (Exception e) {
@@ -138,7 +161,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public User getUserById(int id) throws SQLException {
 		User user = new User();
-		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_address,parent_id,package FROM users where id = ?";
+		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_address,parent_id,lever,child_id FROM users where id = ?";
 		try{
 		conn = getConnection();
 		stmt= conn.prepareStatement(sql);
@@ -153,7 +176,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			user.setBankAccount(rs.getString(6));
 			user.setBankAddress(rs.getString(7));
 			user.setParentId(rs.getInt(8));
-			user.setPackageValue(rs.getInt(9));
+			user.setLever(rs.getInt(9));
+			user.setId(id);
+			user.setChildId(rs.getString(10));
 			break;
 		}
 		}catch(Exception e){

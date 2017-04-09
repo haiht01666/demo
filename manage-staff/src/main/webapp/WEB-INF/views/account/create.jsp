@@ -45,7 +45,7 @@
 					</c:if>
 					<form:form method="POST" modelAttribute="userForm" id="signupform"
 						class="form-horizontal" role="form" acceptCharset="UTF-8"
-						action="/account/create">
+						action="/register">
 						<div class="form-group">
 							<div class="col-md-12">
 								<label><form:errors path="id"

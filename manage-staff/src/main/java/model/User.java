@@ -60,14 +60,24 @@ public class User implements Serializable {
 	
 	private int parentId;
 	
-	private int packageValue;
+	private int lever;
 	
-	public int getPackageValue() {
-		return packageValue;
+	private String leverValue;
+	
+	public String getLeverValue() {
+		return leverValue;
 	}
 
-	public void setPackageValue(int packageValue) {
-		this.packageValue = packageValue;
+	public void setLeverValue(String leverValue) {
+		this.leverValue = leverValue;
+	}
+
+	public int getLever() {
+		return lever;
+	}
+
+	public void setLever(int lever) {
+		this.lever = lever;
 	}
 
 	public int getParentId() {

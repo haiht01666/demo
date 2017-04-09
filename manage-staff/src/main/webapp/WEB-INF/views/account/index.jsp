@@ -37,11 +37,13 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>Tên</th>
+						<th>Mã Id</th>
+						<th>Tên Thành viên</th>
+						<th>Mã người bảo trợ</th>
 						<th>Ngày kích hoạt</th>
 						<th>Quyền</th>
 						<th>Kích hoạt</th>
+						<th>Cấp bậc</th>
 						<th>Trạng thái</th>
 					</tr>
 				</thead>
@@ -51,11 +53,13 @@
 						<tr data-id=${member.id }>
 							<td>${member.id }</td>
 							<td><a href="/manage/detail?id=${member.id }">${member.dispName }</a></td>
+							<td>${member.parentId }</td>
 							<td>${member.cdate }</td>
 							<td>${member.role}</td>
 							<td><c:if test="${member.enable }">
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>
 								</c:if></td>
+							<td>${member.leverValue }</td>
 							<td>${member.active }</td>
 
 						</tr>
@@ -95,5 +99,48 @@
 
 		</div>
 	</div>
+
+	<!-- Modal reate member -->
+	<div class="modal fade" id="create-member-modal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Tạo mới thành viên</h4>
+				</div>
+				<div class="modal-body">
+				<div id="msg-error-modal"></div>
+					<div class="row">
+						<div class="col-xs-12">
+							<form>
+								<div class="form-group">
+									<input type="number" id="txt-parent-id" class="form-control"
+										placeholder="nhập mã người bảo trợ" maxlength="6" min="100000"
+										max="999999">
+								</div>
+								<div class="form-group">
+									<select id="lever-type" class="form-control">
+										<option value="0" disabled selected>Chọn gói đăng ký</option>
+										<option value="0">New</option>
+										<option value="1">SALE MEMBER</option>
+										<option value="2">SALE PRO</option>
+										<option value="3">PRO DISTRIBUTE</option>
+									</select>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						id="btn-create-member">Create</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 </body>
 </html>
