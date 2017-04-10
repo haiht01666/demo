@@ -33,7 +33,7 @@
 											<div class="input-group-addon" style="width:35%;"><h5 class="input-file-account-title"><b><span>ATTACK_TITLE_BGN</span></b></h5></div>
 
 											<input type="file" onchange="fnChange(this)" class="form-control form-control-rightbutton input-file"
-												   value="COM_TXT_INPUT_PLACEHOLDER" id="id.fileUpload01" accept="image/png;image/jpg"/>
+												   value="COM_TXT_INPUT_PLACEHOLDER" id="id.fileUpload01" accept="image/*"/>
 											<input id="btnFile" type="button" class="form-control form-control-rightbutton" onclick="document.getElementById('id.fileUpload01').click()"/>
 											<span id="take-picture-icon" class="input-group-addon input-group-symbol btn-take-picture mobilemode" onclick="document.getElementById('id.fileUpload01').click()"></span>
 										</div>
@@ -134,8 +134,6 @@
 										<!-- <td align="left" width="50%"> <input id="btnCancel" type="button" class="btnshadow btn-second" onclick="cancel()" value="UTILITIES_CHNG_PER_INFO_CANCEL_BTN" /> </td>-->
 									</tr>
 								</table>
-
-
 							</table>
 						</div>
 					</div>

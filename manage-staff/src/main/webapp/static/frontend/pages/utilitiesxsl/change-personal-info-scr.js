@@ -7,8 +7,6 @@
 /*** VIEW LOAD SUCCESS ***/
 
 var cusInfoObj;
-var newCusInfoObj;
-
 //take picture
 var imgSelected;
 var currentFile;
@@ -23,19 +21,21 @@ var canvasImg = document.createElement("canvas");
 var ctxImg = canvasImg.getContext("2d");
 var scaledImage = null;
 var angleRotate = 0;
-var flag_check = false; //ngocdt3 bo sung check trang thai la back hya cancel
+var flag_check = false;
 
 function viewBackFromOther() {
     logInfo('Back from other view');
     flag_check = true;
-    setDefaultInfo(newCusInfoObj);
+    setDefaultInfo();
 }
 
 
 function viewDidLoadSuccess() {
+    document.getElementById("confirmBtn").disabled = true;
     if (flag_check == false) {
-        sendJSONRequest();
+        setDefaultInfo();
     }
+    setDefaultInfo();
 
     //take picture
     document.getElementById("btnFile").value = CONST_STR.get('TRANSFER_LIST_CHOICE_FILE');
@@ -88,41 +88,22 @@ function viewDidLoadSuccess() {
     setInputOnlyASCII('bankAccountName');
 }
 
-//Send request
-var gprsResp = new GprsRespObj("", "", "", "");
-
-function sendJSONRequest() {
-    loadData('./static/frontend/data/account.json', requestMBServiceSuccess);
-}
-
-//event listener: http request success
-function requestMBServiceSuccess(jsondata) {
-    var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
-    setDefaultInfo(accountDetail);
-    cusInfoObj = accountDetail;
-};
-
-//event listener: http request fail
-function requestMBServiceFail() {
-};
-
-function setDefaultInfo(cusInfo) {
-    document.getElementById("name").innerHTML = cusInfo.fullname;
-    document.getElementById("birthday").innerHTML = cusInfo.birthday;
-    document.getElementById("userid").innerHTML = cusInfo.userid;
-    document.getElementById("mobile").value = cusInfo.mobile;
-    document.getElementById("address").value = cusInfo.address;
-    document.getElementById("email").value = cusInfo.email;
-    document.getElementById("bankName").value = cusInfo.bankName;
-    document.getElementById("bankDivice").value = cusInfo.bankDivice;
-    document.getElementById("bankAccount").value = cusInfo.bankAccount;
-    document.getElementById("bankAccountName").value = cusInfo.bankAccountName;
+function setDefaultInfo() {
+    document.getElementById("name").innerHTML = gUserInfo.dispName;
+    document.getElementById("birthday").innerHTML = gUserInfo.birthday;
+    document.getElementById("userid").innerHTML = gUserInfo.identifier;
+    document.getElementById("mobile").value = gUserInfo.phone;
+    document.getElementById("address").value = gUserInfo.address;
+    document.getElementById("email").value = gUserInfo.email;
+    document.getElementById("bankName").value = gUserInfo.bankName;
+    document.getElementById("bankDivice").value = gUserInfo.bankAddress;
+    document.getElementById("bankAccount").value = gUserInfo.bankAccount;
+    document.getElementById("bankAccountName").value = gUserInfo.bankUser;
 }
 
 function cancel() {
-    setDefaultInfo(cusInfoObj);
+    setDefaultInfo();
     logInfo("cancel");
-
 }
 /*function goBack(){
  navController.popView(true);
@@ -137,9 +118,8 @@ function confirmChange() {
     var bankAccountName = document.getElementById("bankAccountName").value;
     var fileUpload01 = document.getElementById("id.fileUpload01");
 
-    var mobile = document.getElementById("mobile").value;
-
-    if (mobile != cusInfoObj.mobile && !RE.test(mobile)) {
+    var RE = /^[\d\.\-\s]+$/;
+    if (mobile != gUserInfo.phone && !RE.test(mobile)) {
         showAlertText(CONST_STR.get('UTILITIES_CHNG_PER_INFO_MOBILE_ERROR_MSG'));
         return;
     }
@@ -148,97 +128,80 @@ function confirmChange() {
 
     var MAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if (email != cusInfoObj.email && !MAIL.test(email)) {
+    if (email != gUserInfo.email && !MAIL.test(email)) {
         showAlertText(CONST_STR.get('UTILITIES_CHNG_PER_INFO_EMAIL_ERROR_MSG'));
         return;
     }
-    // check image
-    // var stringInfo = ""; var arrayArgs = new Array();
+
     tmpStr = fileUpload01.value;
     var checkImage = tmpStr.split('.');
     var checkTypeImage = checkImage[checkImage.length - 1];
     if (checkTypeImage != "" && checkTypeImage.toLowerCase() != "jpg" && checkTypeImage.toLowerCase() != "png" && checkTypeImage.toLowerCase() != "gif") {
-        status = 1;
         document.getElementById("id.checkFile").style.display = '';
-        //document.getElementById("id.lbCheckFile").innerHTML = CONST_STR.get('ERR_INPUT_VALUE');
         showAlertText(CONST_STR.get('ERR_INPUT_FILE_VALUE'));
         return;
     }
 
-    // // collect the form data while iterating over the inputs
-    // var data = {};
-    // var arrayArgs = new Array();
-    //
-    // //fill data
-    // arrayArgs.push(occupation);
-    // arrayArgs.push(workPlace);
-    // arrayArgs.push(workAddress1);
-    // arrayArgs.push(workAddress2);
-    // arrayArgs.push(workAddress3);
-    // arrayArgs.push(workTel);
-    // arrayArgs.push(address);
-    // arrayArgs.push(currAddress2);
-    // arrayArgs.push(currAddress3);
-    // arrayArgs.push(currAddress4);
-    // arrayArgs.push(mobile);
-    // arrayArgs.push(email);
-    //
-    // newCusInfoObj = cusInfoObj;
-    // newCusInfoObj.occupation = occupation;
-    // newCusInfoObj.workPlace = workPlace;
-    // newCusInfoObj.workAddress1 = workAddress1;
-    // newCusInfoObj.workAddress2 = workAddress2;
-    // newCusInfoObj.workAddress3 = workAddress3;
-    // newCusInfoObj.workTel = workTel;
-    // newCusInfoObj.address = address;
-    // newCusInfoObj.currAddress2 = currAddress2;
-    // newCusInfoObj.currAddress3 = currAddress3;
-    // newCusInfoObj.currAddress4 = currAddress4;
-    // newCusInfoObj.mobile = mobile;
-    // newCusInfoObj.email = email;
-    //
-    // //HuyNT2: upload image
-    // var tmpResult = document.getElementById('cropperContainer2');
-    // var tmpCanvas = tmpResult.getElementsByTagName('canvas')[0];
-    // var base64string = '';
-    // if (tmpCanvas) {
-    //     base64string = tmpCanvas.toDataURL('image/jpeg');
-    // }
-    // var gprsCmd = new GprsCmdObj(CONSTANTS.get("CMD_TYPE_CHNG_CUS_INFO_CONFIRM"), "", "", gUserInfo.lang, gUserInfo.sessionID, arrayArgs, encodeURIComponent(base64string));
-    //
-    // data = getDataFromGprsCmd(gprsCmd);
-    //
-    // //requestMBService(data, true, 0, confirmChangeSuccess, confirmChangeFail);
-    //
-    showAlertText(CONST_STR.get('MENU_CHANGE_INFO_SUCCESS_MESSAGE'));
+     var newCusInfoObj = new UserInfoObj();
+     newCusInfoObj.userCode = gUserInfo.userCode;
+     newCusInfoObj.email = email;
+     newCusInfoObj.address = address;
+     newCusInfoObj.phone = mobile;
+     newCusInfoObj.bankName = bankName;
+     newCusInfoObj.bankAccount = bankAccount;
+     newCusInfoObj.bankAddress = bankDivice;
+     newCusInfoObj.bankUser = bankAccountName;
+
+
+     //HuyNT2: upload image
+     var tmpResult = document.getElementById('cropperContainer2');
+     var tmpCanvas = tmpResult.getElementsByTagName('canvas')[0];
+     var base64string = '';
+     if (tmpCanvas) {
+         base64string = tmpCanvas.toDataURL('image/jpeg');
+     }
+    newCusInfoObj.userAvatar = encodeURIComponent(base64string);
+
+    $.ajax({
+        type: "POST",
+        url:"/api/updatePersonalInfo",
+        data: JSON.stringify(newCusInfoObj),
+        contentType: "application/json; charset=utf-8",
+        success:function(response){
+            if(response.result){
+                debugger
+                //re set info to global object
+                //gUserInfo.birthday = newCusInfoObj.userCode;
+                //gUserInfo.identifier;
+                gUserInfo.phone = newCusInfoObj.phone;
+                gUserInfo.address = newCusInfoObj.address;
+                gUserInfo.email = newCusInfoObj.email;
+                gUserInfo.bankName = newCusInfoObj.bankName;
+                gUserInfo.bankAddress = newCusInfoObj.bankAddress;
+                gUserInfo.bankAccount = newCusInfoObj.bankAccount;
+                gUserInfo.bankUser = newCusInfoObj.bankUser;
+                gUserInfo.userAvatar = newCusInfoObj.userAvatar;
+                showAlertText(CONST_STR.get('MENU_CHANGE_INFO_SUCCESS_MESSAGE'));
+            } else {
+                showAlertText(CONST_STR.get('MENU_CHANGE_INFO_FAIL_MESSAGE'));
+            }
+        },
+        error: function () {
+            showAlertText(CONST_STR.get('MENU_CHANGE_INFO_FAIL_MESSAGE'));
+        }
+    });
+
     document.addEventListener('closeAlertView', handleAlertChangeInfo, false);
     logInfo("confirmChange");
 }
 
 function handleAlertChangeInfo() {
     document.removeEventListener('closeAlertView', handleAlertChangeInfo, false);
-    //navController.initWithRootView('accountxsl/account-scr', true, 'xsl');
-    var tmpPageName = navController.getDefaultPage();
-    var tmpPageType = navController.getDefaultPageType();
-    navController.initWithRootView(tmpPageName, true, tmpPageType);
+    navController.initWithRootView('utilitiesxsl/change-personal-info-scr', true, 'xsl');
 }
 
 
-//event listener: http request success
-function confirmChangeSuccess(e) {
-
-};
-
-//event listener: http request fail
-function confirmChangeFail() {
-    /*if ((e.type == "evtHttpFail") && (currentPage == "utilitiesxsl/change-personal-info-scr")) {
-     document.removeEventListener("evtHttpFail", requestMBServiceFail, false);
-     //alert("Http request fail!");
-     }*/
-};
-
 function checkChange(tbx, limit) {
-    debugger;
 
     //limit text length on field
     if (tbx.value.length > Number(limit)) {
@@ -248,49 +211,49 @@ function checkChange(tbx, limit) {
     //disable confirm button
     document.getElementById("confirmBtn").disabled = true;
 
-    if (document.getElementById("address").value != cusInfoObj.address) {
+    if (document.getElementById("address").value != gUserInfo.address) {
         logInfo("edit address");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("mobile").value != cusInfoObj.mobile) {
+    if (document.getElementById("mobile").value != gUserInfo.phone) {
         logInfo("edit mobile");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("email").value != cusInfoObj.email) {
+    if (document.getElementById("email").value != gUserInfo.email) {
         logInfo("edit email");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("bankName").value != cusInfoObj.bankName) {
+    if (document.getElementById("bankName").value != gUserInfo.bankName) {
         logInfo("edit bankName");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("bankDivice").value != cusInfoObj.bankDivice) {
+    if (document.getElementById("bankDivice").value != gUserInfo.bankAddress) {
         logInfo("edit bankDivice");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("bankAccount").value != cusInfoObj.bankAccount) {
+    if (document.getElementById("bankAccount").value != gUserInfo.bankAccount) {
         logInfo("edit bankAccount");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;
     }
 
-    if (document.getElementById("bankAccountName").value != cusInfoObj.bankAccountName) {
+    if (document.getElementById("bankAccountName").value != gUserInfo.bankUser) {
         logInfo("edit bankAccountName");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
@@ -358,29 +321,7 @@ function replaceResults(img) {
             }
         );
 
-        /*if(img.height < img.width) {
-         resultUserImg.setAttribute('width', tmpMaxWidth);
-         resultUserImg.setAttribute('height', tmpMaxWidth);
-         }
-         else {
-         resultUserImg.setAttribute('width', tmpMaxWidth);//tmpRatio * tmpMaxWidth);
-         resultUserImg.setAttribute('height', tmpMaxWidth); //tmpRatio * tmpMaxWidth);
-         tmpMaxSize = tmpMaxWidth;//tmpRatio * tmpMaxWidth;
-         }*/
-        //resultUserImg.setAttribute('width', tmpMaxWidth);
-        //resultUserImg.setAttribute('height', tmpRatio * tmpMaxWidth);
-        //resultUserImg.setAttribute('width', tmpMaxWidth);
-        //resultUserImg.setAttribute('height', tmpRatio * tmpMaxWidth);
-        //resultUserImg.innerHTML = ''; //clear result loaded-file
-        //resultUserImg.appendChild(scaledImage); //show loaded-file
-
-        //dataURL = scaledImage.toDataURL();
-        //if(!isSmallScrMode) {
-        //setUpCropImage(dataURL);
-        //}
-        //else {
         resultUserImg.innerHTML = ''; //clear result loaded-file
-        //resultUserImg.appendChild(scaledImage);
 
         //Canvas
         //var canvasImg = document.createElement("canvas");
@@ -392,14 +333,6 @@ function replaceResults(img) {
         resultUserImg.appendChild(canvasImg);
         //}
     }
-    /*if (img.getContext) { //check image ready
-     var ctx = img.getContext();
-     if(ctx) {
-     ctx.clearRect(0, 0, img.width, img.height);
-     ctx.drawImage(dataURL, 0, 0, img.width, img.height);
-     logInfo('show image replaced');
-     }
-     }*/
 }
 
 function setUpCropImage(inBlob) {

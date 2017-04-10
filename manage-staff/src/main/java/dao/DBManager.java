@@ -41,6 +41,8 @@ public class DBManager {
 		}
 		return conn;
 	}
+
+
 	
 	public String encryptMd5(String item){
 		try {

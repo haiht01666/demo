@@ -6,226 +6,293 @@ import java.util.List;
 
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * id
-	 */
-	private int id;
+    /**
+     * id
+     */
+    private int id;
 
-	/**
-	 * password
-	 */
-	private String passWord;
+    /**
+     * password
+     */
+    private String passWord;
 
-	/**
-	 * user roles
-	 */
-	private List<String> roles;
-	/**
-	 * Display name
-	 */
-	private String dispName;
+    /**
+     * user roles
+     */
+    private List<String> roles;
 
-	/**
-	 * enable
-	 */
-	private boolean enable;
+    /**
+     * Display name
+     */
+    private String dispName;
 
-	/**
-	 * User code
-	 */
-	private String userCode;
-	
-	private String childId;
-	
-	private Date signUpDate;
-	
-	private Date cdate;
-	
-	private String email;
-	
-	private String phone;
-	
-	private String bankName;
-	
-	private String bankAccount;
-	
-	private String bankAddress;
-	
-	private String role;
-	
-	private int parentId;
-	
-	private int lever;
-	
-	private String leverValue;
-	
-	public String getLeverValue() {
-		return leverValue;
-	}
+    /**
+     * enable
+     */
+    private boolean enable;
 
-	public void setLeverValue(String leverValue) {
-		this.leverValue = leverValue;
-	}
+    /**
+     * User code
+     */
+    private String userCode;
 
-	public int getLever() {
-		return lever;
-	}
+    private String childId;
 
-	public void setLever(int lever) {
-		this.lever = lever;
-	}
+    private Date signUpDate;
 
-	public int getParentId() {
-		return parentId;
-	}
+    private Date cdate;
 
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
-	}
+    private String email;
 
-	public String getRole() {
-		return role;
-	}
+    private String phone;
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    private String bankName;
 
-	public String getBankName() {
-		return bankName;
-	}
+    private String bankAccount;
 
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
+    private String bankAddress;
 
-	public String getBankAccount() {
-		return bankAccount;
-	}
+    private String bankUser;
 
-	public void setBankAccount(String bankAccount) {
-		this.bankAccount = bankAccount;
-	}
+    private String role;
 
-	public String getBankAddress() {
-		return bankAddress;
-	}
+    private int parentId;
 
-	public void setBankAddress(String bankAddress) {
-		this.bankAddress = bankAddress;
-	}
+    private int lever;
 
-	public String getPhone() {
-		return phone;
-	}
+    private String leverValue;
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    private Date birthday;
 
-	public String getEmail() {
-		return email;
-	}
+    private String address;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    private String identifier;
 
-	public Date getCdate() {
-		return cdate;
-	}
+    private String userAvatar;
 
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
-	}
 
-	private Date lastOrderDate;
-	
-	private boolean active; 
+    public String getLeverValue() {
+        return leverValue;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setLeverValue(String leverValue) {
+        this.leverValue = leverValue;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getLever() {
+        return lever;
+    }
 
-	public String getPassWord() {
-		return passWord;
-	}
+    public void setLever(int lever) {
+        this.lever = lever;
+    }
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
-	}
+    public int getParentId() {
+        return parentId;
+    }
 
-	public List<String> getRoles() {
-		return roles;
-	}
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public String getDispName() {
-		return dispName;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public void setDispName(String dispName) {
-		this.dispName = dispName;
-	}
+    public String getBankName() {
+        return bankName;
+    }
 
-	public Boolean getEnable() {
-		return enable;
-	}
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
-	public void setEnable(Boolean enable) {
-		this.enable = enable;
-	}
+    public String getBankAccount() {
+        return bankAccount;
+    }
 
-	public String getUserCode() {
-		return userCode;
-	}
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
-	}
+    public String getBankAddress() {
+        return bankAddress;
+    }
 
-	public String getChildId() {
-		return childId;
-	}
+    public void setBankAddress(String bankAddress) {
+        this.bankAddress = bankAddress;
+    }
 
-	public void setChildId(String childId) {
-		this.childId = childId;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public Date getSignUpDate() {
-		return signUpDate;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Date getLastOrderDate() {
-		return lastOrderDate;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setLastOrderDate(Date lastOrderDate) {
-		this.lastOrderDate = lastOrderDate;
-	}
+    public Date getCdate() {
+        return cdate;
+    }
 
-	public Boolean getActive() {
-		return active;
-	}
+    public void setCdate(Date cdate) {
+        this.cdate = cdate;
+    }
 
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+    private Date lastOrderDate;
 
+    private boolean active;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public String getDispName() {
+        return dispName;
+    }
+
+    public void setDispName(String dispName) {
+        this.dispName = dispName;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getChildId() {
+        return childId;
+    }
+
+    public void setChildId(String childId) {
+        this.childId = childId;
+    }
+
+    public Date getSignUpDate() {
+        return signUpDate;
+    }
+
+    public void setSignUpDate(Date signUpDate) {
+        this.signUpDate = signUpDate;
+    }
+
+    public Date getLastOrderDate() {
+        return lastOrderDate;
+    }
+
+    public void setLastOrderDate(Date lastOrderDate) {
+        this.lastOrderDate = lastOrderDate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getBankUser() {
+        return bankUser;
+    }
+
+    public void setBankUser(String bankUser) {
+        this.bankUser = bankUser;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 }

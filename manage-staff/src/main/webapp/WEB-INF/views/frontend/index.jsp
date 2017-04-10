@@ -70,6 +70,7 @@ pageEncoding="UTF-8"%>
     <script type="text/javascript" src="static/frontend/assets/libs/crypto.js"></script>
 
     <script type="text/javascript" src="static/frontend/assets/cache-control.js"></script>
+    <script type="text/javascript" src="static/js/common/moment.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
@@ -318,7 +319,7 @@ pageEncoding="UTF-8"%>
                 <!--<span id="menu-profile-name" class="menu-profile-name" onClick="navController.initWithRootView('utilitiesxsl/change-personal-info-scr', true, 'xsl');">TPBank eBank</span>-->
                 <span id="menu-profile-name" class="menu-profile-name"
                       onClick="navController.initWithRootView('utilitiesxsl/personal-info-view-scr', true, 'xsl');">Bhip Việt Nam</span>
-                <div id="menu-profile-avatar" class="menu-profile-container"
+                <div id="menu-profile-userAvatar" class="menu-profile-container"
                      onClick="navController.initWithRootView('utilitiesxsl/personal-info-view-scr', true, 'xsl');"><span
                         class="icon-user2 menu-profile-icon"> </span>
                     <!--<img width="25" height="25" style="margin-top:1px; margin-left:4px" src="http://10.1.20.240:4567/download/113/cus_avatar/20150211_1514205286.jpg" />-->

@@ -1593,7 +1593,7 @@ var pConstants_VN = {
 	 
 	 'ERR_INPUT_EMAIL_VALUE' 		                : 'Sai định dạng email. Quý khách vui lòng nhập lại.',
 	 'ERR_INPUT_VALUE' 		                        : 'Sai định dạng. Quý khách vui lòng nhập lại.',
-	 'ERR_INPUT_FILE_VALUE' 		                : 'Sai định dạng file đính kèm. Quý khách vui lòng nhập lại.',
+	 'ERR_INPUT_FILE_VALUE' 		                : 'Sai định dạng file ảnh. Quý khách vui lòng nhập lại.',
 	 'DATEOFBIRTH_TITLE_BGN_CTV'					: 'Ngày sinh (*)',
 	 'NATIONALITY_TITLE_BGN_CTV'					: 'Quốc tịch (*)',
 	 'PASSPORT_TITLE_BGN_CTV'					    : 'Số CMND/Hộ Chiếu (*)',
@@ -3194,6 +3194,7 @@ var pConstants_VN = {
 	'MENU_CHANGE_INFO_BANK_NAME' : 'Tên Ngân Hàng',
 	'MENU_CHANGE_INFO_BANK_DIVICE' : 'Chi nhánh Tỉnh/TP',
     'MENU_CHANGE_INFO_SUCCESS_MESSAGE'						: 'Thay đổi thông tin thành công!',
+    'MENU_CHANGE_INFO_FAIL_MESSAGE'						: 'Thay đổi thông tin thất bại!',
 
     'CHANGE_PASS_SUBMIT' : 'Xác Nhận',
     'NO_DATA' : 'Không có dữ liệu',
@@ -3316,5 +3317,5 @@ var pConstants_VN = {
     'WRONG_PASSWORD' : 'Quý Khách đã nhập sai mật khẩu. Vui lòng nhập lại',
 	// INDEX PAGE
 	//'INDEX_PAGE' : 'indexxsl/index-scr',
-	'INDEX_PAGE' : 'groupxsl/group-graphical',
+	'INDEX_PAGE' : 'utilitiesxsl/change-personal-info-scr',
 };

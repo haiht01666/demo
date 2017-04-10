@@ -14,7 +14,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             	<table width="100%" class="table-account">
                 	<tr class="nohover">
                     	<td class="td-prop-info" style="border:none; width:30%;">
-                        	<div id="cus-profile-img-avatar" align="center" onclick="rotateImageIntroCus(90);">
+                        	<div id="cus-profile-img-userAvatar" align="center" onclick="rotateImageIntroCus(90);">
                                 <!--<canvas id="accPictureInfo" width="200" height="150" style="border:none;"> </canvas>-->
                                 <!--<img width="300" src="../../static/frontend/assets/images/acc-info-img.png" />-->
                             </div>
@@ -25,8 +25,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                               <span id="take-picture-icon" class="input-group-addon input-group-symbol btn-take-picture mobilemode" style="margin-top: -50px; margin-right: 0px; background-color:transparent;" onclick="document.getElementById('id.fileUpload01').click()"></span>
                             </div>
                             <div>
-                            	<input id="avatar-btn-rotate" type="button" class="btnshadow btn-primary mobilemode" style="margin-top: 15px;" onclick="rotateImageIntroCus(90);" value="CHANGE_AVATAR_ROTATE"/>
-                            	<input id="avatar-btn-upload" type="button" class="btnshadow btn-second" style="margin-top: 15px;" onclick="requestChangeAvatar();" value="CUS_PROFILE_UPLOAD_AVATAR"/>
+                            	<input id="userAvatar-btn-rotate" type="button" class="btnshadow btn-primary mobilemode" style="margin-top: 15px;" onclick="rotateImageIntroCus(90);" value="CHANGE_AVATAR_ROTATE"/>
+                            	<input id="userAvatar-btn-upload" type="button" class="btnshadow btn-second" style="margin-top: 15px;" onclick="requestChangeAvatar();" value="CUS_PROFILE_UPLOAD_AVATAR"/>
                             </div>
                         </td>
                         <td class="td-prop-info" style="border:none;">
