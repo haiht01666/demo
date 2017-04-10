@@ -2,10 +2,7 @@ $(document).ready(function() {
 	$('#li-revenue-personal').addClass('active');
 	// initial table
 	initTable(moment().format('YYYY-MM-DD'));
-	$('#date-filter').attr('value',moment().format('YYYY-MM'));
-	$('#date-filter').on('change',function(){
-		initTable($('#date-filter').val()+'-01');
-	})
+	
 });
 
 function initTable(filterDate){
@@ -13,19 +10,19 @@ function initTable(filterDate){
 	formData.cdate = moment(filterDate).format('YYYY-MM-DD');
 	$('#tbl-staff').DataTable( {
 		responsive : false,
-		"paging" : true,
+		paging : true,
 		destroy: true,
-		"ordering" : true,
-		"info" : false,
-		"searching" : true,
-		"pagingType" : "full_numbers",
-		"scrollX" : true,
-		"language" : {
+		ordering : true,
+		info : false,
+		searching : true,
+		pagingType : "full_numbers",
+		scrollX : true,
+		language : {
 			// "lengthMenu": "Display _MENU_ records per page",
-			"zeroRecords" : "No records available",
-			"info" : "Showing page _PAGE_ of _PAGES_",
-			"infoEmpty" : "No records available",
-			"infoFiltered" : "(filtered from _MAX_ total records)"
+			zeroRecords : "No records available",
+			info : "Showing page _PAGE_ of _PAGES_",
+			infoEmpty : "No records available",
+			infoFiltered : "(filtered from _MAX_ total records)"
 		},
         ajax: {
             url: "/manage/revenuePersonalAPI",
@@ -42,6 +39,23 @@ function initTable(filterDate){
             { data: "orderPrice" },
             { data: "revenuePecent" },
             { data: "revenueValue" }
+        ],
+        dom: 'lBfrtip',
+        buttons: [
+            'excelHtml5'
         ]
     } );
+	
+	var x = document.createElement("INPUT");
+    x.setAttribute("type", "month");
+    x.setAttribute("id", 'date-filter');
+    x.setAttribute("value", moment(filterDate).format('YYYY-MM'));
+    x.setAttribute("style", "margin-right:5px");
+    //$('#tbl-staff_length').prepend($('<label>').text('Chọn Tháng :'));
+    
+    $('#tbl-staff_length').prepend(x);
+    //event change date filter
+    $('#date-filter').on('change',function(){
+		initTable($('#date-filter').val()+'-01');
+	})
 }
