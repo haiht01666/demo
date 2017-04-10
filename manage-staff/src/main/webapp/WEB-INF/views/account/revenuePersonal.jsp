@@ -18,12 +18,12 @@
 	<%@ include file="../common/header.jsp"%>
 	<div class="col-xs-12">
 		<div class="table-responsive">
-		
-			<div class="btn-action col-xs-12">
+	<!-- 	Month and year: <input type="month" id="myMonth" value="1997-11"> -->
+			<!-- <div class="btn-action col-xs-12">
 				<div class="col-md-3 col-xs-12 row ">
 					<input type="month" class="form-control" id="date-filter"  value="2014-12">
 				</div>
-			</div>
+			</div> -->
 
 			<table id="tbl-staff"
 				class="display table table-hover table-striped table-bordered"
