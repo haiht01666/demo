@@ -46,88 +46,146 @@
 					<form:form method="POST" modelAttribute="userForm" id="signupform"
 						class="form-horizontal" role="form" acceptCharset="UTF-8"
 						action="/register">
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="id"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="id"
-									placeholder="id" required="required" maxlength="6"/>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="id"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="id"
+										placeholder="Mã id" required="required" maxlength="6" />
+								</div>
 							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="birdDay"
+											class="help-inline color-red" /></label>
+									<form:input type="date" class="form-control" path="birdDay"
+										placeholder="Ngày sinh" required="required" maxlength="50" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="identityCardNumber"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control"
+										path="identityCardNumber" placeholder="Số CMND" maxlength="50" required="required"/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="password"
+											class="help-inline color-red" /></label>
+									<form:input type="password" class="form-control"
+										path="password" placeholder="Mật khẩu" required="required"
+										maxlength="50" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="bankName"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="bankName"
+										placeholder="Tên ngân hàng" maxlength="50" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="bankAdd"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="bankAdd"
+										placeholder="Chi nhánh" maxlength="50" required="required"/>
+								</div>
+							</div>
+
 						</div>
 
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="name"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="name"
-									placeholder="Name" required="required" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="email"
-										class="help-inline color-red" /></label>
-								<form:input type="email" class="form-control" path="email"
-									placeholder="Email" required="required" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="phone"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="phone"
-									placeholder="Phone" required="required" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="bankName"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="bankName"
-									placeholder="Bank name" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="bankAccount"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="bankAccount"
-									placeholder="Bank account number" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="bankAdd"
-										class="help-inline color-red" /></label>
-								<form:input type="text" class="form-control" path="bankAdd"
-									placeholder="Bank address" maxlength="50"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="password"
-										class="help-inline color-red" /></label>
-								<form:input type="password" class="form-control" path="password"
-									placeholder="Password" required="required" maxlength="50"/>
-							</div>
-						</div>
+						<div class="col-md-6">
 
-						<div class="form-group">
-							<div class="col-md-12">
-								<label><form:errors path="rePassword"
-										class="help-inline color-red" /></label>
-								<form:input type="password" class="form-control"
-									path="rePassword" placeholder="Repassword" required="required" maxlength="50"/>
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="name"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="name"
+										placeholder="Tên đầy đủ" required="required" maxlength="50" />
+								</div>
 							</div>
-						</div>
 
-						<div class="form-group">
-							<!-- Button -->
-							<div class="col-md-12">
-								<input id="btn-signup" type="submit" class="btn btn-info"
-									value="Sign Up">
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="email"
+											class="help-inline color-red" /></label>
+									<form:input type="email" class="form-control" path="email"
+										placeholder="Email" required="required" maxlength="50" />
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="identityCardPlace"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control"
+										path="identityCardPlace" placeholder="Nơi cấp" maxlength="50" required="required"/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="rePassword"
+											class="help-inline color-red" /></label>
+									<form:input type="password" class="form-control"
+										path="rePassword" placeholder="Nhập lại mật khẩu" required="required"
+										maxlength="50" />
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="bankAccount"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="bankAccount"
+										placeholder="Số tài khoản" maxlength="50" required="required"/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="phone"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="phone"
+										placeholder="Số điện thoại" required="required" maxlength="50" />
+								</div>
+							</div>
+
+						</div>
+						
+						<div class="col-md-12">
+						
+							<div class="form-group">
+								<div class="col-md-12">
+									<label><form:errors path="address"
+											class="help-inline color-red" /></label>
+									<form:input type="text" class="form-control" path="address"
+										placeholder="Địa chỉ thường trú" maxlength="50" required="required"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<!-- Button -->
+								<div class="col-md-12">
+									<input id="btn-signup" type="submit" class="btn btn-info"
+										value="Sign Up">
+								</div>
 							</div>
 						</div>
+						
 					</form:form>
 				</div>
 			</div>

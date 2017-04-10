@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class UserForm {
 	@NotBlank
@@ -25,12 +26,15 @@ public class UserForm {
 	@Size(max = 50)
 	private String phone;
 
+	@NotBlank
 	@Size(max = 50)
 	private String bankName;
 
+	@NotBlank
 	@Size(max = 50)
 	private String bankAccount;
 
+	@NotBlank
 	@Size(max = 50)
 	private String bankAdd;
 
@@ -41,6 +45,54 @@ public class UserForm {
 	@NotBlank
 	@Size(max = 50)
 	private String rePassword;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String address;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String identityCardNumber;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String identityCardPlace;
+	
+	@NotBlank
+	@DateTimeFormat
+	private String birdDay;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getIdentityCardNumber() {
+		return identityCardNumber;
+	}
+
+	public void setIdentityCardNumber(String identityCardNumber) {
+		this.identityCardNumber = identityCardNumber;
+	}
+
+	public String getIdentityCardPlace() {
+		return identityCardPlace;
+	}
+
+	public void setIdentityCardPlace(String identityCardPlace) {
+		this.identityCardPlace = identityCardPlace;
+	}
+
+	public String getBirdDay() {
+		return birdDay;
+	}
+
+	public void setBirdDay(String birdDay) {
+		this.birdDay = birdDay;
+	}
 
 	public String getId() {
 		return id;
