@@ -1,30 +1,250 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59acd127-1f9e-4597-8eb2-3664d02dae38" name="Default" comment="update tile default">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ApiController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ApiController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/ApiDao.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ApiDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/ApiDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ApiDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/ManageDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ManageDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ApiService.java" afterPath="$PROJECT_DIR$/src/main/java/service/ApiService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ApiServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/service/ApiServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/account/detail.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/account/detail.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/assets/LangVN.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/assets/LangVN.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/assets/mb-service.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/assets/mb-service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/css/ebankstyle.css" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/css/ebankstyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/accountxsl/account-change-password-scr.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/accountxsl/account-change-password-scr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/accountxsl/account-change-password-scr.xsl" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/accountxsl/account-change-password-scr.xsl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/login-scr.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/login-scr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.xsl" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.xsl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.xsl" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.xsl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.xsl" afterPath="$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.xsl" />
+    <list default="true" id="59acd127-1f9e-4597-8eb2-3664d02dae38" name="Default" comment="delete tả">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/constant/LeverType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/constant/OrderType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/constant/Roles.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/constant/TimePeriodCheck.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/messages.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/constant/LeverType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/constant/OrderType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/constant/Roles.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/constant/TimePeriodCheck.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/classes/messages.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/aopalliance-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/classmate-1.0.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/commons-logging-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/hibernate-validator-5.1.2.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/jackson-annotations-2.8.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/jackson-core-2.8.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/jackson-databind-2.8.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/javax.servlet-api-3.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/javax.servlet.jsp-api-2.2.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/jboss-logging-3.1.3.GA.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/jstl-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/mysql-connector-java-5.1.36.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-aop-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-beans-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-context-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-core-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-expression-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-jdbc-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-orm-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-security-config-4.0.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-security-core-4.0.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-security-web-4.0.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-tx-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-web-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/spring-webmvc-4.1.6.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/create.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/detail.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/feedback.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/order.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/revenue.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/revenueGroup.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/account/revenuePersonal.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/common/access-deni.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/common/error.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/common/header.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/common/library.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/frontend/index.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/WEB-INF/views/login/login.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/common/buttons.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/common/common.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/common/dataTables.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/common/jquery-confirm.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/css/login/login.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/LangEN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/LangVN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/cache-control.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/common.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/constants.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/fonts/eBankPro74f5-2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/fonts/eBankPro74f5-3.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/fonts/eBankPro74f5.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/fonts/eBankPro74f5.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/fonts/iconfonts.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/English_flag_round_30.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/Login_Center.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/Login_Left.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/Login_Right.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/TPBank-feedback-logo-vie.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/acc-info-img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/bg_bottom_truycapnhanh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/bg_center_truycapnhanh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/bg_top_truycapnhanh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/bhip-logo-white.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/camera.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/cancel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/country-select-bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/diamond.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/exportfile.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/facebook-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/google-plus-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/hdivider.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ic_linkedin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/ico/arrow.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/line-getstart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/new_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/print.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/tongdunoquydoi.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/images/tongtaisancoquydoibtn.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/calendar/datepicker.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/calendar/datepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/canvas-to-blob.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image-exif-map.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image-exif.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image-ios.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image-meta.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image-orientation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/carmera/load-image.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/crypto.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/es5-shim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/html2canvas.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/iscroll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/pinpad/jquery-ui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/pinpad/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/pinpad/style_lockscreen.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideinmenu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideshow/bullet.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideshow/js-image-slider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideshow/js-image-slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideshow/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slideshow/video.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/slip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/tabs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/libs/virtualkeyboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/mb-service.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/assets/preload.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/ebankstyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/arrow4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/closebox.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/down.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/keyboard.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_301.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_302.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_303.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_401.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_402.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_403.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/sequence_form_404.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_center.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_center_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_left.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_left1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_left_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_right.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_right1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/toptable_right_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/img/up.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/css/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/ebankstyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/arrow4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/closebox.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/down.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_center.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_center_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_left.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_left1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_left_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_right.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/toptable_right_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/img/up.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/cssmb/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/account.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/listNppDirects.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/listNpps.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/listOrders.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/listVolumnesWeekly.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/login.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/data/treeNpp.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/download/purchase_online/muahang_tructuyen1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/download/purchase_online/muahang_tructuyen2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/download/purchase_online/muahang_tructuyen3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/download/purchase_online/muahang_tructuyen_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/accountxsl/account-change-password-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/accountxsl/account-change-password-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/accountxsl/history-table.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/commissionxsl/comission-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/commissionxsl/comission-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-graphical.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-graphical.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp-direct-table.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp-direct.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp-direct.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp-table.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-npp.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-order-table.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-order.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/groupxsl/group-list-order.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/indexxsl/index-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/indexxsl/index-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/indexxsl/index-volume-history-table.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/login-scr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/login-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/newsxsl/list_news_cat_menu_scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/newsxsl/list_news_cat_menu_scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/change-personal-info-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/change-personal-info-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/personal-info-view-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/personal-info-view-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/request-support-scr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/pages/utilitiesxsl/request-support-scr.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/frontend/promotion/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/account.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/feedback.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/order.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/revenue.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/revenueGroup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/account/revenuePersonal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/buttons.html5.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/common.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/dataTables.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/dataTables.buttons.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/jquery-confirm.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/jquery.dataTables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/jszip.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/common/moment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/demo/static/js/login/login.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/.gitignore" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +262,8 @@
           <file leaf-file-name="login-scr.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/login-scr.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="151">
-                  <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+                <state relative-caret-position="-1366">
+                  <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
                   <folding>
                     <marker date="1491907461586" expanded="true" signature="3376:3407" ph="..." />
                   </folding>
@@ -65,7 +285,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/controller/ApiController.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="388">
-                  <caret line="58" column="32" lean-forward="true" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="67" />
+                  <caret line="58" column="32" lean-forward="false" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="67" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#1046#1047#0" expanded="true" />
@@ -81,7 +301,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiService.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="323">
-                  <caret line="20" column="88" lean-forward="true" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+                  <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
                   <folding />
                 </state>
               </provider>
@@ -91,7 +311,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="94">
-                  <caret line="36" column="71" lean-forward="true" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+                  <caret line="36" column="71" lean-forward="false" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
                   <folding />
                 </state>
               </provider>
@@ -119,7 +339,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="-1382">
-                  <caret line="32" column="66" lean-forward="true" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+                  <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -131,7 +351,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiServiceImpl.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="109">
-                  <caret line="74" column="13" lean-forward="true" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+                  <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
@@ -151,7 +371,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="433">
-                  <caret line="75" column="28" lean-forward="true" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+                  <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -221,7 +441,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/assets/mb-service.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="213">
-                  <caret line="353" column="25" lean-forward="true" selection-start-line="353" selection-start-column="25" selection-end-line="353" selection-end-column="25" />
+                  <caret line="353" column="25" lean-forward="false" selection-start-line="353" selection-start-column="25" selection-end-line="353" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -233,6 +453,7 @@
                 <state relative-caret-position="223">
                   <caret line="3315" column="33" lean-forward="false" selection-start-line="3315" selection-start-column="5" selection-end-line="3315" selection-end-column="33" />
                   <folding>
+                    <marker date="1491898171369" expanded="true" signature="34:213477" ph="{&quot;OL_TB_CODE_BILL&quot;: 'Mã hóa đơn'...}" />
                     <marker date="1491898171369" expanded="true" signature="49650:49692" ph="..." />
                     <marker date="1491898171369" expanded="true" signature="110076:110096" ph="..." />
                     <marker date="1491898171369" expanded="true" signature="139943:139963" ph="..." />
@@ -261,7 +482,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/dao/ApiDao.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="323">
-                  <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+                  <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -755,396 +976,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utilitiesxsl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="accountxsl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage-staff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1711,7 +1542,7 @@
       <workItem from="1491533876763" duration="5206000" />
       <workItem from="1491541186196" duration="1295000" />
       <workItem from="1491790257693" duration="30923000" />
-      <workItem from="1491875005700" duration="21591000" />
+      <workItem from="1491875005700" duration="21999000" />
     </task>
     <task id="LOCAL-00001" summary="đẩy frontend">
       <created>1491376689491</created>
@@ -1752,11 +1583,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74498000" />
+    <option name="totallyTimeSpent" value="74906000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1781,7 +1611,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20522387" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20522387" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.48294243" order="1" side_tool="false" content_ui="tabs" />
@@ -2209,7 +2039,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/request-support-scr.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
-          <caret line="75" column="28" lean-forward="true" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -2219,7 +2049,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/personal-info-view-scr.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1382">
-          <caret line="32" column="66" lean-forward="true" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+          <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -2229,7 +2059,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/ApiController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
-          <caret line="58" column="32" lean-forward="true" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="67" />
+          <caret line="58" column="32" lean-forward="false" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1046#1047#0" expanded="true" />
@@ -2251,7 +2081,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/ApiDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2261,7 +2091,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="20" column="88" lean-forward="true" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+          <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -2269,7 +2099,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
-          <caret line="74" column="13" lean-forward="true" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+          <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -2314,7 +2144,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/assets/mb-service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
-          <caret line="353" column="25" lean-forward="true" selection-start-line="353" selection-start-column="25" selection-end-line="353" selection-end-column="25" />
+          <caret line="353" column="25" lean-forward="false" selection-start-line="353" selection-start-column="25" selection-end-line="353" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -2324,6 +2154,7 @@
         <state relative-caret-position="223">
           <caret line="3315" column="33" lean-forward="false" selection-start-line="3315" selection-start-column="5" selection-end-line="3315" selection-end-column="33" />
           <folding>
+            <marker date="1491898171369" expanded="true" signature="34:213477" ph="{&quot;OL_TB_CODE_BILL&quot;: 'Mã hóa đơn'...}" />
             <marker date="1491898171369" expanded="true" signature="49650:49692" ph="..." />
             <marker date="1491898171369" expanded="true" signature="110076:110096" ph="..." />
             <marker date="1491898171369" expanded="true" signature="139943:139963" ph="..." />
@@ -2340,7 +2171,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/utilitiesxsl/change-personal-info-scr.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="94">
-          <caret line="36" column="71" lean-forward="true" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+          <caret line="36" column="71" lean-forward="false" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
           <folding />
         </state>
       </provider>
@@ -2366,8 +2197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/frontend/pages/login-scr.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+        <state relative-caret-position="-1366">
+          <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
           <folding>
             <marker date="1491907461586" expanded="true" signature="3376:3407" ph="..." />
           </folding>
