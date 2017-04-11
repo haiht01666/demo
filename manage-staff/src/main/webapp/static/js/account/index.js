@@ -59,23 +59,24 @@ $(document).ready(
 						url:"/manage/editRole",
 						data: JSON.stringify(formData),
 						contentType: "application/json; charset=utf-8",
+						beforeSend: function(){
+							$.LoadingOverlay("show");
+		                   },
 						success:function(response){
 							if(response.result){
-								$('tr.selected td:nth-child(4)').html(role);
+								$('tr.selected td:nth-child(5)').html(role);
 								$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
 							} else {
 								$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
 							}
+							$.LoadingOverlay("hide");
 						},
 						error:function(response){
 							$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra khi thay đổi quyền!"));
+							$.LoadingOverlay("hide");
 						}
 					});
-					if ($('form input[type=radio]:checked').val() === '0') {
-						$('tr.selected td:nth-child(4)').html("Admin");
-					} else {
-						$('tr.selected td:nth-child(4)').html("STAFF");
-					}
+
 					$('#edit-role').modal('hide');
 				}
 			});

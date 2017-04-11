@@ -52,8 +52,8 @@
 				<tbody class="tbody-staff">
 					<c:forEach items="${orders }" var="order">
 						<tr data-id=1>
-							<td>${order.identifier }</td>
-							<td><a href="/manage/detail?id=${order.identifier }">${order.userName }</a></td>
+							<td>${order.userId }</td>
+							<td><a href="/manage/detail?id=${order.userId }">${order.userName }</a></td>
 							<td>${order.orderName }</td>
 							<td>${order.orderDate }</td>
 							<td><fmt:formatNumber value="${order.price }" type="number"

@@ -34,3 +34,8 @@
 	src="<c:url value='/static/js/common/buttons.html5.min.js' />"></script>
 	<script type="text/javascript"
 	src="<c:url value='/static/js/common/dataTables.buttons.min.js' />"></script>
+<!-- loader -->	
+	<script type="text/javascript"
+	src="<c:url value='/static/js/common/loadingoverlay_progress.min.js' />"></script>
+	<script type="text/javascript"
+	src="<c:url value='/static/js/common/loadingoverlay.min.js' />"></script>

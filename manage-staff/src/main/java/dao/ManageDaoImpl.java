@@ -161,7 +161,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public User getUserById(int id) throws SQLException {
 		User user = new User();
-		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_address,parent_id,lever,child_id FROM users where id = ?";
+		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_branch,parent_id,lever,child_id FROM users where id = ?";
 		try{
 		conn = getConnection();
 		stmt= conn.prepareStatement(sql);
@@ -259,7 +259,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public Double totalOrderPrice(User user, int numberDay) throws SQLException {
 		Double result = 0d;
-		String sql = "SELECT sum(total) as total FROM db_manage_staff.orders where user_id=? and cdate between cdate and (cdate + INTERVAL ? DAY) group by user_id  ";
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and cdate between cdate and (cdate + INTERVAL ? DAY) group by user_id  ";
 		try{
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);

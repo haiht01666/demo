@@ -76,6 +76,9 @@ $(document).ready(function() {
 			type: "GET",
 			url:"/manage/checkUser",
 			data: "id="+$('#txt-member-id').val(),
+			beforeSend: function(){
+				$.LoadingOverlay("show");
+               },
 			success:function(response){
 				if(response.result){
 					//enable button add
@@ -85,8 +88,10 @@ $(document).ready(function() {
 				} else {
 					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Mã id không tồn tại hoặc đã được đăng ký!'));
 				}
+				$.LoadingOverlay("hide");
 			},
 			error:function(response){
+				$.LoadingOverlay("hide");
 				$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
 			}
 		});
@@ -106,6 +111,9 @@ $(document).ready(function() {
 			url:"/manage/createOrder",
 			data: JSON.stringify(formData),
 			contentType: "application/json; charset=utf-8",
+			beforeSend: function(){
+				$.LoadingOverlay("show");
+               },
 			success:function(response){
 				if(response.result){
 					//reload page
@@ -114,8 +122,10 @@ $(document).ready(function() {
 				} else {
 					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Xin hãy nhập đúng định dạng giá tiền!'));
 				}
+				$.LoadingOverlay("hide");
 			},
 			error:function(response){
+				$.LoadingOverlay("hide");
 				$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
 			}
 		});
