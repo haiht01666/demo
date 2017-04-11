@@ -5,22 +5,27 @@ USE DB_MANAGE_STAFF;
 
 -- create table users
 CREATE TABLE DB_MANAGE_STAFF.users(
-	id integer auto_increment not null,
-	email varchar(50),
-	password varchar(100),
-	name varchar(50),
-	phone varchar(50),
-	enable tinyint(1),
-    cdate datetime,
-	signup_date datetime,
-    parent_id integer,
-    bank_name varchar(50),
-    bank_account varchar(50),
-    bank_address varchar(50),
-    city varchar(50),
-	child_id  varchar(1000),
-	lever integer,  
-    primary key(id)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `enable` tinyint(1) DEFAULT NULL,
+  `cdate` datetime DEFAULT NULL,
+  `signup_date` datetime DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `bank_name` varchar(50) DEFAULT NULL,
+  `bank_account` varchar(50) DEFAULT NULL,
+  `bank_branch` varchar(50) DEFAULT NULL,
+  `bank_user` varchar(255) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `child_id` varchar(1000) NOT NULL,
+  `lever` int(11) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `identifier` varchar(20) DEFAULT NULL COMMENT 'chung minh thu / ho chieu',
+  `address` varchar(100) DEFAULT NULL,
+  `avatar` blob,
+  PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 -- create table roles

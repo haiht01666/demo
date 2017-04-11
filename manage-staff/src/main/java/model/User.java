@@ -55,7 +55,7 @@ public class User implements Serializable {
 
     private String bankAccount;
 
-    private String bankAddress;
+    private String bankBranch;
 
     private String bankUser;
 
@@ -74,6 +74,8 @@ public class User implements Serializable {
     private String identifier;
 
     private String userAvatar;
+
+    private String city;
 
 
     public String getLeverValue() {
@@ -124,12 +126,12 @@ public class User implements Serializable {
         this.bankAccount = bankAccount;
     }
 
-    public String getBankAddress() {
-        return bankAddress;
+    public String getBankBranch() {
+        return bankBranch;
     }
 
-    public void setBankAddress(String bankAddress) {
-        this.bankAddress = bankAddress;
+    public void setBankBranch(String bankBranch) {
+        this.bankBranch = bankBranch;
     }
 
     public String getPhone() {
@@ -294,5 +296,13 @@ public class User implements Serializable {
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -1,0 +1,171 @@
+@font-face {
+	font-family: 'eBankPro';
+	src:url('eBankPro74f5.html?c66wh0');
+	src:url('eBankPro74f5.html?c66wh0#iefix') format('embedded-opentype'),
+		url('eBankPro74f5.ttf?c66wh0') format('truetype'),
+		url('eBankPro74f5-2.html?c66wh0') format('woff'),
+		url('eBankPro74f5-3.html?c66wh0#eBankPro') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'eBankPro' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-circle-down:before {
+    content: "\2193";
+}
+.icon-circle-right:before {
+    content: "\2192";
+}
+.icon-circle-up:before {
+    content: "\2191";
+}
+.icon-spthongdung:before {
+    content: "\2000";
+}
+.icon-uudai:before {
+    content: "\2001";
+}
+.icon-tygialaisuat:before {
+    content: "\2002";
+}
+.icon-hotro:before {
+    content: "\2003";
+}
+.icon-congcutinhtoan:before {
+    content: "\2004";
+}
+.icon-chinhanhATM:before {
+    content: "\2005";
+}
+.icon-help:before {
+    content: "\1d3c";
+}
+.icon-arrowleft:before {
+    content: "\1d11";
+}
+.icon-checkbox-unchecked:before {
+    content: "\2007";
+}
+.icon-checked:before {
+    content: "\2008";
+}
+.icon-spinner:before {
+    content: "\2006";
+}
+.icon-qrcode:before {
+    content: "\2591";
+}
+.icon-bell:before {
+    content: "\2592";
+}
+.icon-barcode:before {
+    content: "\2593";
+}
+.icon-exit:before {
+    content: "\25a0";
+}
+.icon-chat18:before {
+    content: "\25a1";
+}
+.icon-chat:before {
+    content: "\25aa";
+}
+.icon-call:before {
+    content: "\25ab";
+}
+.icon-book:before {
+    content: "\25ac";
+}
+.icon-gift:before {
+    content: "\25b2";
+}
+.icon-user:before {
+    content: "\25ba";
+}
+.icon-eGold:before {
+    content: "\25bc";
+}
+.icon-headset:before {
+    content: "\25c4";
+}
+.icon-headphone:before {
+    content: "\25ca";
+}
+.icon-padlock:before {
+    content: "\25cb";
+}
+.icon-menulist:before {
+    content: "\25cc";
+}
+.icon-arrowright:before {
+    content: "\25cf";
+}
+.icon-movenext:before {
+    content: "\25d8";
+}
+.icon-home:before {
+    content: "\25d9";
+}
+.icon-account:before {
+    content: "\25e6";
+}
+.icon-transfer:before {
+    content: "\263a";
+}
+.icon-payment:before {
+    content: "\263b";
+}
+.icon-eSaving:before {
+    content: "\2660";
+}
+.icon-loan:before {
+    content: "\2663";
+}
+.icon-cardservice:before {
+    content: "\2665";
+}
+.icon-jumbo-acc:before {
+    content: "\2666";
+}
+.icon-loyalty:before {
+    content: "\266a";
+}
+.icon-introcus:before {
+    content: "\266b";
+}
+.icon-utility:before {
+    content: "\266c";
+}
+.icon-setting:before {
+    content: "\266f";
+}
+.icon-bankinfo:before {
+    content: "\253c";
+}
+.icon-user2:before {
+    content: "\2022";
+}
+.icon-calendar:before {
+    content: "\a9";
+}
+.icon-emailunread:before {
+    content: "\ae";
+}
+.icon-emailopened:before {
+    content: "\b1";
+}
+
+

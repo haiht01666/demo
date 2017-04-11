@@ -61,7 +61,7 @@
 
 					<div class="col-xs-12">
 						<label class="col-md-3 col-xs-4">Chi nhánh</label> <span
-							class="col-md-9 col-xs-8">${userDetail.bankAddress }</span>
+							class="col-md-9 col-xs-8">${userDetail.bankBranch }</span>
 					</div>
 
 				</fieldset>

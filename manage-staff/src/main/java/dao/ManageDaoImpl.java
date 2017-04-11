@@ -174,7 +174,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			user.setPhone(rs.getString(4));
 			user.setBankName(rs.getString(5));
 			user.setBankAccount(rs.getString(6));
-			user.setBankAddress(rs.getString(7));
+			user.setBankBranch(rs.getString(7));
 			user.setParentId(rs.getInt(8));
 			user.setLever(rs.getInt(9));
 			user.setId(id);

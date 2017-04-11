@@ -14,4 +14,9 @@ public interface ApiService {
 	AjaxResult checkLogin(String user, String pass);
 
 	AjaxResult updatePersonalInfo(User user);
+
+	AjaxResult saveAvatar(User user);
+	AjaxResult changePassword(String userCode, String oldPass, String newPass);
+	AjaxResult requestSupport(String userCode, String userName, String title, String content);
+	AjaxResult getAllNpp(String userCode, String childId, String litmit, String offset);
 }

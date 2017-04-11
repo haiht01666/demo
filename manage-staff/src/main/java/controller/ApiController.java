@@ -28,4 +28,34 @@ public class ApiController {
 	public @ResponseBody AjaxResult updatePersonalInfo(@RequestBody User user) {
 		return service.updatePersonalInfo(user);
 	}
+
+	@RequestMapping(value = { "/saveAvatar" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult saveAvatar(@RequestBody User user) {
+		return service.saveAvatar(user);
+	}
+	@RequestMapping(value = { "/changePassword" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult changePassword(@RequestBody Map changePassMap) {
+		String userCode = (String)changePassMap.get("userCode");
+		String oldPass = (String)changePassMap.get("passOld");
+		String newPass = (String)changePassMap.get("passNew");
+		return service.changePassword(userCode, oldPass, newPass);
+	}
+
+	@RequestMapping(value = { "/requestSupport" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult requestSupport(@RequestBody Map changePassMap) {
+		String userCode = (String)changePassMap.get("userCode");
+		String userName = (String)changePassMap.get("userName");
+		String title = (String)changePassMap.get("title");
+		String content = (String)changePassMap.get("content");
+		return service.requestSupport(userCode, userName, title, content);
+	}
+
+	@RequestMapping(value = { "/getAllNpp" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getAllNpp(@RequestBody Map changePassMap) {
+		String userCode = (String)changePassMap.get("userCode");
+		String childId = (String)changePassMap.get("childId");
+		String litmit = (String)changePassMap.get("litmit");
+		String offset = (String)changePassMap.get("offset");
+		return service.getAllNpp(userCode, childId, litmit, offset);
+	}
 }
