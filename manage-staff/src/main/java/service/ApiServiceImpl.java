@@ -84,8 +84,10 @@ import java.util.List;
     @Override public AjaxResult getAllNpp(String userCode, String childId, String litmit, String offset) {
         AjaxResult result = new AjaxResult();
         try {
-            List<User> listAllNpp = dao.getAllNpp(userCode, childId, litmit, offset);
+            long totalAllNpp = dao.getTotalAllNpp(userCode, childId);
+            List<User> listAllNpp = dao.getAllNpp(userCode, childId, Integer.parseInt(litmit), Integer.parseInt(offset));
             result.setResult(true);
+            result.setNumberRecord(totalAllNpp);
             result.setResultData(listAllNpp);
         } catch (Exception e) {
             result.setResult(false);

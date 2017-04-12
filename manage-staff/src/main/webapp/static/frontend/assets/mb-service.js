@@ -353,6 +353,7 @@ function UserInfoObj() {
     this.bankUser = "";
     this.userAvatar = "";
     this.childId = "";
+    this.city = "";
 
     // need config
     this.flag_check = "";

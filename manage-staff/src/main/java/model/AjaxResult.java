@@ -1,37 +1,46 @@
 package model;
 
 public class AjaxResult {
-	/**
-	 * Result data
-	 */
-	private Object resultData;
+    /**
+     * Result data
+     */
+    private Object resultData;
 
-	private String message;
+    private String message;
 
-	private boolean result;
+    private boolean result;
 
-	public String getMessage() {
-		return message;
-	}
+    private long numberRecord;
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public Object getResultData() {
-		return resultData;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setResultData(Object resultData) {
-		this.resultData = resultData;
-	}
+    public Object getResultData() {
+        return resultData;
+    }
 
-	public boolean isResult() {
-		return result;
-	}
+    public void setResultData(Object resultData) {
+        this.resultData = resultData;
+    }
 
-	public void setResult(boolean result) {
-		this.result = result;
-	}
+    public boolean isResult() {
+        return result;
+    }
 
+    public void setResult(boolean result) {
+        this.result = result;
+    }
+
+    public long getNumberRecord() {
+        return numberRecord;
+    }
+
+    public void setNumberRecord(long numberRecord) {
+        this.numberRecord = numberRecord;
+    }
 }

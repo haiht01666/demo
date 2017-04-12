@@ -70,6 +70,7 @@ function goToBankInfoMainScr() {
 }
 
 function sendJSONRequest(loginUser, loginPass) {
+    showLoadingMask();
     $.ajax({
         type: "POST",
         url:"/api/getLoginInfo",
@@ -90,6 +91,7 @@ function sendJSONRequest(loginUser, loginPass) {
 }
 
 function requestMBServiceSuccess(loginInfo) {
+    hideLoadingMask();
     removeBackGround();
     hideLoadingMask();
     gIsLogin = true;
@@ -107,6 +109,7 @@ function requestMBServiceSuccess(loginInfo) {
     gUserInfo.bankBranch = loginInfo.bankBranch;
     gUserInfo.bankUser = loginInfo.bankUser;
     gUserInfo.childId = loginInfo.childId;
+    gUserInfo.city = loginInfo.city;
 
     //avatar
     gUserInfo.userAvatar = loginInfo.userAvatar;
@@ -128,6 +131,7 @@ function requestMBServiceSuccess(loginInfo) {
 
 //event listener: http request success
 function requestMBServiceFail() {
+    hideLoadingMask();
     animationError();
 };
 

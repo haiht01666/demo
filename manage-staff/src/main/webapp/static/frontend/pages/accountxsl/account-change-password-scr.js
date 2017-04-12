@@ -29,6 +29,8 @@ function viewBackFromOther() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
+    showLoadingMask();
+    setTimeout(hideLoadingMask, 200);
     if (gUserInfo.flag_check == "") {
         showAlertAppText(CONST_STR.get('LOGIN_REQUEST_CONDITION'), CONST_STR.get('LOGIN_REQUEST_CONDITION_OK'), CONST_STR.get('LOGIN_REQUEST_CONDITION_REJECT'));
         document.addEventListener('alertAppConfirmOK', showChoiceConfirmPre, false);

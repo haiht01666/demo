@@ -18,7 +18,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             <td><table width="92%" align="center">
               <tr>
                 <td colspan="2" align="left" valign="middle">
-                        <span style="width:30%;font-size:15px">REQUEST_SUPPORT_TYPE</span>
+                        <span style="width:30%;font-size:14px">REQUEST_SUPPORT_TYPE</span>
                 </td>
               </tr>
               <tr>
@@ -30,7 +30,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 </tr>
                 <tr>
                     <td colspan="2" align="left" valign="middle">
-                        <span style="width:30%;font-size:15px">REQUEST_SUPPORT_INFO</span>
+                        <span style="width:30%;font-size:14px">REQUEST_SUPPORT_INFO</span>
                     </td>
                 </tr>
                 <tr>

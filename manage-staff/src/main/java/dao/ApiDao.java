@@ -19,5 +19,6 @@ public interface ApiDao {
 	int saveAvatar(User user);
 	int changePassword(String userCode, String newPass);
 	int requestSupport(String userCode, String userName, String title, String content);
-	List<User> getAllNpp(String userCode, String childId, String litmit, String offset);
+	long getTotalAllNpp(String userCode, String childId);
+	List<User> getAllNpp(String userCode, String childId, int litmit, int offset);
 }

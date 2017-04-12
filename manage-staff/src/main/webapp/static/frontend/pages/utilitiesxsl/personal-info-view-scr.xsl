@@ -31,6 +31,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                         </td>
                         <td class="td-prop-info" style="border:none;">
                         	<table width='100%'>
+                                <tr class="nohover">
+                                    <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
+                                        <span>CUS_PROFILE_CIF</span>
+                                    </td>
+                                    <td style="border:none; width:60%; display:table-cell;">
+                                        <span id="cus-profile-cif"></span>
+                                    </td>
+                                </tr>
                               <tr class="nohover">
                               	<td style="border:none; width:150px; display:table-cell; font-weight:bold;">
                                 	<span>CUS_PROFILE_FULLNAME</span>
@@ -55,6 +63,22 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                                     <span id="cus-profile-userid" style="white-space:pre-wrap;"></span>
                                 </td>
                               </tr>
+                                <tr class="nohover">
+                                    <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
+                                        <span>CUS_PROFILE_MOBILE</span>
+                                    </td>
+                                    <td style="border:none; width:60%; display:table-cell;">
+                                        <span id="cus-profile-mobile"></span>
+                                    </td>
+                                </tr>
+                                <tr class="nohover">
+                                    <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
+                                        <span>CUS_PROFILE_EMAIL</span>
+                                    </td>
+                                    <td style="border:none; width:60%; display:table-cell;">
+                                        <span id="cus-profile-email" style="white-space:pre-wrap;"></span>
+                                    </td>
+                                </tr>
                               <tr class="nohover">
                                 <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
                                 	<span>CUS_PROFILE_ADDRESS</span>
@@ -63,30 +87,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                                     <span id="cus-profile-address" style="white-space:pre-wrap;"></span>
                                 </td>
                               </tr>
-                              <tr class="nohover">
-                              	<td style="border:none; width:150px; display:table-cell; font-weight:bold;">
-                                	<span>CUS_PROFILE_MOBILE</span>
-                                </td>
-                                <td style="border:none; width:60%; display:table-cell;">
-                                    <span id="cus-profile-mobile"></span>
-                                </td>
-                              </tr>
-                              <tr class="nohover">
-                                <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
-                                	<span>CUS_PROFILE_EMAIL</span>
-                                </td>
-                                <td style="border:none; width:60%; display:table-cell;">
-                                    <span id="cus-profile-email" style="white-space:pre-wrap;"></span>
-                                </td>
-                              </tr>
-                              <tr class="nohover">
-                                <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
-                                	<span>CUS_PROFILE_CIF</span>
-                                </td>
-                                <td style="border:none; width:60%; display:table-cell;">
-                                    <span id="cus-profile-cif"></span>
-                                </td>
-                              </tr>
+                                <tr class="nohover">
+                                    <td style="border:none; width:150px; display:table-cell; font-weight:bold;">
+                                        <span>CUS_PROFILE_CITY</span>
+                                    </td>
+                                    <td style="border:none; width:60%; display:table-cell;">
+                                        <span id="cus-profile-city" style="white-space:pre-wrap;"></span>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
@@ -96,7 +104,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                         </td>
                     </tr>
                 </table>
-            </div> 
+            </div>
         </div>
       </div>
     </div>

@@ -63,6 +63,8 @@ public class User implements Serializable {
 
     private int parentId;
 
+    private int parentName;
+
     private int lever;
 
     private String leverValue;
@@ -304,5 +306,13 @@ public class User implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(int parentName) {
+        this.parentName = parentName;
     }
 }

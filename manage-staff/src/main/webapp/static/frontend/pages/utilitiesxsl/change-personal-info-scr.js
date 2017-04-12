@@ -21,6 +21,8 @@ function viewDidLoadSuccess() {
         setDefaultInfo();
     }
     setDefaultInfo();
+    showLoadingMask();
+    setTimeout(hideLoadingMask, 200);
 
     setInputOnlyNumberInfo('mobile');
     setInputOnlyASCIIinfo('email');
@@ -42,6 +44,7 @@ function setDefaultInfo() {
     document.getElementById("bankDivice").value = gUserInfo.bankBranch;
     document.getElementById("bankAccount").value = gUserInfo.bankAccount;
     document.getElementById("bankAccountName").value = gUserInfo.bankUser;
+    document.getElementById("city").value = gUserInfo.city;
 }
 
 function cancel() {
@@ -56,6 +59,7 @@ function confirmChange() {
     var bankDivice = document.getElementById("bankDivice").value;
     var bankAccount = document.getElementById("bankAccount").value;
     var bankAccountName = document.getElementById("bankAccountName").value;
+    var city = document.getElementById("city").value;
     var fileUpload01 = document.getElementById("id.fileUpload01");
 
     var RE = /^[\d\.\-\s]+$/;
@@ -82,13 +86,15 @@ function confirmChange() {
     newCusInfoObj.bankAccount = bankAccount;
     newCusInfoObj.bankBranch = bankDivice;
     newCusInfoObj.bankUser = bankAccountName;
-
+    newCusInfoObj.city = city;
+    showLoadingMask();
     $.ajax({
         type: "POST",
         url: "/api/updatePersonalInfo",
         data: JSON.stringify(newCusInfoObj),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            hideLoadingMask();
             if (response.result) {
                 //re set info to global object
                 //gUserInfo.birthday = newCusInfoObj.userCode;
@@ -100,6 +106,7 @@ function confirmChange() {
                 gUserInfo.bankBranch = newCusInfoObj.bankBranch;
                 gUserInfo.bankAccount = newCusInfoObj.bankAccount;
                 gUserInfo.bankUser = newCusInfoObj.bankUser;
+                gUserInfo.city = newCusInfoObj.city;
                 showAlertText(CONST_STR.get('MENU_CHANGE_INFO_SUCCESS_MESSAGE'));
                 document.addEventListener('closeAlertView', handleAlertChangeInfo, false);
             } else {
@@ -107,6 +114,7 @@ function confirmChange() {
             }
         },
         error: function () {
+            hideLoadingMask();
             showAlertText(CONST_STR.get('MENU_CHANGE_INFO_FAIL_MESSAGE'));
         }
     });
@@ -171,6 +179,13 @@ function checkChange(tbx, limit) {
 
     if (document.getElementById("bankAccountName").value != gUserInfo.bankUser) {
         logInfo("edit bankAccountName");
+        //enable confirm button
+        document.getElementById("confirmBtn").disabled = "";
+        return;
+    }
+
+    if (document.getElementById("city").value != gUserInfo.city) {
+        logInfo("edit city");
         //enable confirm button
         document.getElementById("confirmBtn").disabled = "";
         return;

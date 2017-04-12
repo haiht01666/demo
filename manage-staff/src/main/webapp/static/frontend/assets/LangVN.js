@@ -2073,6 +2073,7 @@ var pConstants_VN = {
 	 'CUS_PROFILE_BIRTHDAY'							: 'Ngày sinh',
 	 'CUS_PROFILE_USERID'							: 'Số CMND/Hộ chiếu',
 	 'CUS_PROFILE_ADDRESS'							: 'Địa chỉ hiện tại',
+     'CUS_PROFILE_CITY'							    : 'Thành phố',
 	 'CUS_PROFILE_MOBILE'							: 'Điện thoại',
 	 'CUS_PROFILE_EMAIL'							: 'Email',
 	 'CUS_PROFILE_CIF'								: 'Mã khách hàng',

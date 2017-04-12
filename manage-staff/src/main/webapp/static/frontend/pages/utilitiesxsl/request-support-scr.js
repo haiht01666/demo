@@ -23,8 +23,8 @@ function viewBackFromOther() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
-    //setInputOnlyASCII('requestsupport.title', CONST_STR.get("ERR_INPUT_ONLY_ASCII_CHAR"));
-    //setInputOnlyASCII('requestsupport.content', CONST_STR.get("ERR_INPUT_ONLY_ASCII_CHAR"));
+    showLoadingMask();
+    setTimeout(hideLoadingMask, 200);
 
     if (!gIsLogin) {
         var tmpNodeAccChangePass = document.getElementById('requestsupport.requestSupporttitle');
@@ -54,7 +54,7 @@ function requestSuport() {
         return;
     }
 
-
+    showLoadingMask();
     $.ajax({
         type: "POST",
         url: "/api/requestSupport",
@@ -66,6 +66,7 @@ function requestSuport() {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            hideLoadingMask();
             if (response.result) {
                 showAlertText(CONST_STR.get('MESSAGE_REQUEST_SUPPORT_SUBMIT'));
                 document.addEventListener('closeAlertView', handleAlertRequestSupport, false);
@@ -74,6 +75,7 @@ function requestSuport() {
             }
         },
         error: function () {
+            hideLoadingMask();
             showAlertText(CONST_STR.get('MESSAGE_REQUEST_SUPPORT_FAIL'));
         }
     });

@@ -47,6 +47,11 @@
 										<input id="address" type="text" class="form-control form-control-righttext" placeholder="COM_TXT_INPUT_PLACEHOLDER" onchange="checkChange(this, 50);" style="width:100%;"/><div style="height:1px"></div>
 									</div></td>
 								</tr>
+								<tr rowspan="3">
+									<td colspan="2" align="left" valign="middle" class="td-text"><div class="input-group"> <span class="input-group-addon" style="width:35%; vertical-align: top;padding-top:10px">CUS_PROFILE_CITY</span>
+										<input id="city" type="text" class="form-control form-control-righttext" placeholder="COM_TXT_INPUT_PLACEHOLDER" onchange="checkChange(this, 50);" style="width:100%;"/><div style="height:1px"></div>
+									</div></td>
+								</tr>
 								<tr>
 									<td colspan="2"><h5 class="Header"><span>MENU_CHANGE_INFO_BANK</span></h5></td>
 								</tr>

@@ -29,7 +29,8 @@ function loadInitXML() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
-
+    showLoadingMask();
+    setTimeout(hideLoadingMask, 200);
     if (gUserInfo.userAvatar && gUserInfo.userAvatar.length > 0) {
         document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="250px" height="250px" src="' + atob(gUserInfo.userAvatar) + '" />';
     }
@@ -44,7 +45,8 @@ function viewDidLoadSuccess() {
    document.getElementById('cus-profile-mobile').innerHTML = gUserInfo.phone;
    document.getElementById('cus-profile-email').innerHTML = gUserInfo.email;
    document.getElementById('cus-profile-cif').innerHTML = gUserInfo.userCode;
-	
+   document.getElementById('cus-profile-city').innerHTML = gUserInfo.city;
+
 	//take picture
 	document.getElementById("btnFile").value = '';
 	document.getElementById("avatar-btn-upload").style.display = 'none';

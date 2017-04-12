@@ -14,7 +14,7 @@ import java.util.List;
 
     @Override public User getLoginInfo(String userId) {
         User user = new User();
-        String sql = "SELECT u.id ,name,email, address, phone, birthday ,identifier, bank_name, bank_account, bank_branch, bank_user, avatar, child_id FROM users u where u.id=?";
+        String sql = "SELECT u.id ,name,email, address, phone, birthday ,identifier, bank_name, bank_account, bank_branch, bank_user, avatar, child_id,city FROM users u where u.id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -37,6 +37,7 @@ import java.util.List;
                 String blobStr = encoder.encode(blob.getBytes(1, (int) blob.length()));
                 user.setUserAvatar(blobStr);
                 user.setChildId(rs.getString(13));
+                user.setCity(rs.getString(14));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -83,7 +84,7 @@ import java.util.List;
 
     @Override public int updatePersonalInfo(User user) {
         int record = 0;
-        String sql = "UPDATE users SET address = ?, phone = ?, email = ?, bank_name = ?, bank_account = ?, bank_branch = ?, bank_user = ? where id=?";
+        String sql = "UPDATE users SET address = ?, phone = ?, email = ?, bank_name = ?, bank_account = ?, bank_branch = ?, bank_user = ?, city = ? where id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -95,6 +96,7 @@ import java.util.List;
             stmt.setString(6, user.getBankBranch());
             stmt.setString(7, user.getBankUser());
             stmt.setString(8, user.getUserCode());
+            stmt.setString(9, user.getCity());
             record = stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -194,31 +196,55 @@ import java.util.List;
         return record;
     }
 
-    @Override public List<User> getAllNpp(String userCode, String childId, String litmit, String offset) {
-        List<User> listAllNpp = new ArrayList<>();
-        String sql = "SELECT u.id ,name,email, address, phone, birthday ,identifier, bank_name, bank_account, bank_branch, bank_user, avatar FROM users u where u.id=?";
+    @Override public long getTotalAllNpp(String userCode, String childId) {
+        long totalRecord = 0;
+        String sql = "SELECT count(*) FROM users u1 where u1.child_id LIKE CONCAT('%', ? , '-%')";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
-            //stmt.setString(1, userId);
+            stmt.setString(1, userCode);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                totalRecord =  rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                    stmt.close();
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return totalRecord;
+    }
+
+    @Override public List<User> getAllNpp(String userCode, String childId, int litmit, int offset) {
+        List<User> listAllNpp = new ArrayList<>();
+        String sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.child_id LIKE CONCAT('%', ? , '-%') ORDER BY u1.id LIMIT ?,?";
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
+            stmt.setInt(2, offset);
+            stmt.setInt(3, litmit);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 User user = new User();
                 user.setUserCode(rs.getString(1));
                 user.setDispName(rs.getString(2));
-                user.setEmail(rs.getString(3));
-                user.setAddress(rs.getString(4));
-                user.setPhone(rs.getString(5));
-                user.setBirthday(rs.getDate(6));
-                user.setIdentifier(rs.getString(7));
-                user.setBankName(rs.getString(8));
-                user.setBankAccount(rs.getString(9));
-                user.setBankBranch(rs.getString(10));
-                user.setBankUser(rs.getString(11));
-                Blob blob = rs.getBlob(12);
-                BASE64Encoder encoder = new BASE64Encoder();
-                String blobStr = encoder.encode(blob.getBytes(1, (int) blob.length()));
-                user.setUserAvatar(blobStr);
+                user.setChildId(rs.getString(3));
+                user.setParentId(rs.getInt(4));
+                user.setParentName(rs.getInt(5));
+                user.setSignUpDate(rs.getDate(6));
+                user.setPhone(rs.getString(7));
+                user.setCity(rs.getString(8));
+                user.setEnable(rs.getBoolean(9));
+                listAllNpp.add(user);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
