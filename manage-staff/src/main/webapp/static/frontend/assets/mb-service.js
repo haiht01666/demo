@@ -13,65 +13,26 @@ var gRequestMethod = "POST";
 /*** SERVICE LINK END ***/
 
 /*** VARIABLE GLOBAL ***/
-var gSysData;
-var gDeviceLocalStatus;
-var gUserLocalStatus;
 var gDeviceToken = "";
 /**SANGNT1**/
 var gDeviceTokenPush;
-var gDeviceRestartFlag = false;
 var countUnreadNotification;
-var gIsRegisterNotify = "0";
 
 var gDeviceWWWFolder = "";
 
 var gUserInfo = new UserInfoObj();
-var gVisaCardObjs = new Array();
-var gVisaCardHistoryObjs = new Array();
-var gVisaCardIndexSelected;
 var gIsLogin = false; //using check login
 var gUsingAccountNo; //store source account no
 var gUsingServiceCode; //store source account no
 var gCustomerNo; //CIF
 var gCustomerNanme; //customer full name
-/**TuanNM5 UPDATE**/
-var gJumboAccExistedStat;
-var gliItemJumbo; //Jumbo menu li items
-var gJumboAccInfo; //Jumbo Acc Info for create and view
-var gAutoSavingAccInfo; //Autos Saving Info for create and change
-var gJumboMenuElements;
-var gisSavingApplyLitmitExist = false;
-var gisCreditApplyLitmitExist = false;
-var gRegisterdAutoSavingAccs = [];
-var gAutoSavingAccs = [];
-var gConnectedAccs = [];
-
-/*TUANNM5 FOR FUND TRANSFER*/
-var gTransMode;
-var gTransFromDate;
-var gTransToDate;
-var gSuccessReceiverCount;
-
-/*TUANNM5 FINGERPRINT PIN*/
-var gUsingPinpadMode = 'login';
-var gPincode = '';
-var gTokenKey = '';
-var gUsingFingerprint = '0';
-var gRotated = false;
-var gIsAddedEvent = false;
-//END FINGERPRINT PIN
-
-var gDestinationInput = "";
 
 var gMenuRawData;
 
 var gOldDeviceHeight = 0; //using save old height
 // Title Com-input-Account
 
-var gUtilitiesModeDefault = 1; // chuyen che do man hinh utitlity
-
 var storeComImputAccounTitle = {}; //do not use directly
-var withdraw_account = "";
 function setCominputAccountHtmlTitle(inTitleHtml) {
     storeComImputAccounTitle[navArrayScr[0]] = inTitleHtml;
 }
@@ -169,37 +130,6 @@ var file_name_list = "";
 var flag_file = "";
 //================OVERDRAFT=========================================
 var gLoanSaving;
-var lstAccID;
-var gOverdraft;
-var isIncrease = 2;
-var esaving_tenor_open = 1;
-//==================================================================
-//THUANTM GOLD NEW
-var objSJC;
-var objDOJI;
-var lstResultJSC = new Array();
-var lstResultDOJI = new Array();
-var subDOJI = new Array();//=0 LỘC, 1 PHÚC, 2 PHÁT, 3 TÀI
-var strProvinceCode = "";
-var strBrnCode = "";
-var duration_date;
-var currentDate;
-//==================================================================
-//EVN-HCM
-var globalEvnObj = new EvnObj();
-
-//History code
-var gHistoryCode = "";
-
-//transfer inter banks
-var gBankInfoSelected = '';
-var gCityInfoSelected = '';
-var gBranchInfoSelected = '';
-
-//bank info
-var gBankInfoCitySelected = '';
-var gBankInfoAreaSelected = '';
-var gBankInfoBranchSelected = '';
 
 //atm
 var gBankInfoATMSelected = '';
@@ -354,6 +284,7 @@ function UserInfoObj() {
     this.userAvatar = "";
     this.childId = "";
     this.city = "";
+    this.parentName = "";
 
     // need config
     this.flag_check = "";
@@ -1740,17 +1671,8 @@ function requestMBServiceQuerySuccess(e) {
             }
         }
 
-        //gUserInfo.accountList[i].description = gprsResp.arguments[1];
-        //gUserInfo.accountList[i].balance = gprsResp.arguments[2];
-        //gUserInfo.accountList[i].balanceAvailable = gprsResp.arguments[3];
-        //gUserInfo.accountList[i].transactionHistory = gprsResp.arguments[4]; // if use service code 114
         gUsingAccountNo = ""; // reset for later
     }
-    //logInfo('query info of account no success');
-    /*if (e.type == "evtBackgroundHttpSuccess") {
-     //document.removeEventListener("evtBackgroundHttpSuccess", requestMBServiceQuerySuccess, false);
-     //alert("Http request success!");
-     }*/
 };
 
 /*** QUERY ACCOUNT NO INFO ***/
@@ -1843,17 +1765,6 @@ function FutureSaving() {
     this.gFurSaving = "";
     this.gFurSavAcc = "";
 }
-//var rateObj;
-var AmountPrdObj;
-var AomuntFlxObj;
-/*var purpose;
- var RateLangObj;
- var tempKeyLang;
- var tempLangVN;
- var tempLangEN;
- var gFurSaving;
- var gFurSavAcc;*/
-
 function HisTopObj() {
     this.date = "";
     this.amount = "";
@@ -1864,30 +1775,8 @@ function HisRateObj() {
     this.startdate = "";
     this.rate = "";
 }
-var arraySetCardObj;
-var AutoSavAcc;
-//ngocdt3 them cho sendmail
-var mailservice;
-var mailtransid;
-//ngocdt3 them cho cai tien chuyen tien
-var bank_code;
-var arrOldListTrans;
-var sourcebatch;
-//ngocdt3 bo sung cho in thong tin stk
-var gSavingAcc;
-var gArraySav;
 var gAccInfoMenuElements;
-var gliItemJumboNew;
-var AddressChoose;
-var AuthenTypeNew;
-var MobileChoose;
-var NoteChoose;
-//ngocdt3 bo sugn cho autosaving
-var AutoSavAcc;
-var gJumboAcc;
 var gListBank = [];
-var gListBankAcceptFastTrans = new Array();
-var gListBankOnlyAcceptNormalTrans = new Array();
 var gAuthenFinger;
 //ngocdt3 bo sung chinh sua capcha
 var gHashCode;

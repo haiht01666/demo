@@ -2,17 +2,16 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:template match="/">
-    <table width='98%' align='center' class='table-account'>
+    <table width='98%' id ="commission-volume" align='center' class='table-account'>
       <xsl:for-each select="resptable/tabletitle">
         <tr class="trow-title">
           <th width="10%" align='center'><xsl:value-of select="coltitle1"/></th>
-          <th width="6%"><xsl:value-of select="coltitle2"/></th>
-          <th width="10%"><xsl:value-of select="coltitle3"/></th>
+          <th width="30%"><xsl:value-of select="coltitle2"/></th>
           <th width="10%"><xsl:value-of select="coltitle4"/></th>
-          <th width="25%"><xsl:value-of select="coltitle5"/></th>
+          <th width="10%"><xsl:value-of select="coltitle5"/></th>
           <th width="10%"><xsl:value-of select="coltitle6"/></th>
-          <th width="12%"><xsl:value-of select="coltitle7"/></th>
-          <th width="7%"><xsl:value-of select="coltitle8"/></th>
+          <th width="10%"><xsl:value-of select="coltitle7"/></th>
+          <th width="10%"><xsl:value-of select="coltitle8"/></th>
           <th width="10%"><xsl:value-of select="coltitle9"/></th>
         </tr>
       </xsl:for-each>
@@ -22,8 +21,6 @@
             <div class="content-detail"><xsl:value-of select="colcontent1"/></div></td>
           <td><div class="td-date-gold"><xsl:value-of select="colcontent2"/></div>
             <div class="mobile-mode-gold"><xsl:value-of select="coltitle2"/></div></td>
-          <td><div class="mobile-mode"><xsl:value-of select="coltitle3"/></div>
-            <div class="content-detail"><xsl:value-of select="colcontent3"/></div></td>
           <td><div class="mobile-mode"><xsl:value-of select="coltitle4"/></div>
             <div class="content-detail"><xsl:value-of select="colcontent4"/></div></td>
           <td><div class="mobile-mode"><xsl:value-of select="coltitle5"/></div>

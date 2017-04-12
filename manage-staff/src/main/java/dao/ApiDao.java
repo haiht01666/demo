@@ -1,5 +1,6 @@
 package dao;
 
+import model.Order;
 import model.User;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface ApiDao {
 	int saveAvatar(User user);
 	int changePassword(String userCode, String newPass);
 	int requestSupport(String userCode, String userName, String title, String content);
-	long getTotalAllNpp(String userCode, String childId);
-	List<User> getAllNpp(String userCode, String childId, int litmit, int offset);
+	long getTotalNpp(boolean directNpp, String userCode);
+	List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset, String orderby);
+	long getTotalOrder(List<String> listChildId);
+	List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby);
 }

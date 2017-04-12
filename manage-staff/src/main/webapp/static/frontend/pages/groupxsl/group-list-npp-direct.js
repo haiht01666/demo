@@ -6,7 +6,6 @@
 
 /*** HEADER ***/
 
-var listOrders = new Array();
 var totalPage = 0;
 var itemsPerPage = 10;
 var pageIndex = 1;
@@ -30,8 +29,7 @@ function viewBackFromOther() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
-    logInfo('account history load success');
-    document.getElementById('accountId').innerHTML = gUserInfo.accountDispName + ': ' + gUserInfo.accountId;
+    document.getElementById('accountId').innerHTML = gUserInfo.dispName + ': ' + gUserInfo.userCode;
     sendJSONRequest();
 }
 
@@ -45,40 +43,57 @@ function viewWillUnload() {
 /*** SEND REQUEST ***/
 
 function sendJSONRequest() {
-    loadData('./static/frontend/data/listNppDirects.json', function (jsondata) {
-        listOrders = JSON.parse(jsondata)[gUserInfo.accountId];
-        parserAccHistory(listOrders);
+    showLoadingMask();
+    var offset = (pageIndex - 1) * itemsPerPage;
+    var orderby = 'id';
+    $.ajax({
+        type: "POST",
+        url: "/api/getNpp",
+        data: JSON.stringify({
+            directNpp: true,
+            userCode: gUserInfo.userCode,
+            childId : gUserInfo.childId,
+            limit: itemsPerPage,
+            offset: offset,
+            orderby: orderby
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            debugger;
+            hideLoadingMask();
+            if (response.result) {
+                parserNppData(response.numberRecord ,response.resultData);
+            } else {
+                showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+        }
     });
 }
 
 
-function parserAccHistory(listOrders) {
-    if ((listOrders == undefined) || (listOrders.length < 1)) {
-        var tmpNode = document.getElementById('id.historyInfo');
+function parserNppData(totalRecord, listAllNpp) {
+    if ((listAllNpp == undefined) || (listAllNpp.length < 1)) {
+        var tmpNode = document.getElementById('id.allNpp');
         tmpNode.innerHTML = CONST_STR.get('NO_DATA');
         return;
     }
     totalPage = 0;
-    if (listOrders.length > 0) {
+    if (listAllNpp.length > 0) {
         //total page
-        totalPage = calTotalPage(listOrders);
-
-        //gen page indicator
-        pageIndex = 1;
+        totalPage = calTotalPage(totalRecord);
         genPagging(totalPage, pageIndex);
-
-        //get object per page
-        var arrMedial = new Array();
-        arrMedial = getItemsPerPage(listOrders, pageIndex);
-
         //gen xml
-        var tmpXmlDoc = genXMLHistoryDoc(arrMedial);
+        var tmpXmlDoc = genXMLHistoryDoc(listAllNpp);
         //gen xsl
         xslAccHisTable = getCachePageXsl("groupxsl/group-list-npp-direct-table");
         var tmpXslDoc = xslAccHisTable;
         //gen html from xml and xsl
         genHTMLStringWithXMLScrollto(tmpXmlDoc, tmpXslDoc, function (oStr) {
-            var tmpNode = document.getElementById('id.historyInfo');
+            var tmpNode = document.getElementById('id.allNpp');
             tmpNode.innerHTML = oStr;
         }, null, null, document.getElementById('parse_transaction'));
     }
@@ -87,93 +102,64 @@ function parserAccHistory(listOrders) {
 
 
 //EVENT SELECTED PAGE
-function pageIndicatorSelected(selectedIdx, selectedPage) {
+function pageIndicatorSelected(selectedIdx) {
     pageIndex = selectedIdx;
-
-    var arrMedial = new Array();
-    arrMedial = getItemsPerPage(listOrders, selectedIdx);
-    //gen xml
-    var tmpXmlDoc = genXMLHistoryDoc(arrMedial);
-    //gen xsl
-    var tmpXslDoc = xslAccHisTable;
-
-    genHTMLStringWithXML(tmpXmlDoc, tmpXslDoc, function (oStr) {
-        var tmpNode = document.getElementById('id.historyInfo');
-        tmpNode.innerHTML = oStr;
-    });
-
+    sendJSONRequest();
 }
 
 //GEN PAGGING
-function genPagging(arr, pageIndex) {
+function genPagging(totalPage, pageIndex) {
 
     //var nodePager = document.getElementById('pageIndicatorNums');
-    var nodepage = document.getElementById('acc.pagination');
+    var nodepage = document.getElementById('allNpp.pagination');
     var tmpStr = genPageIndicatorHtml(totalPage, Number(pageIndex));
     nodepage.innerHTML = tmpStr;
 }
 
-function calTotalPage(arrObj) {
-    if (arrObj != null && arrObj.length > 0) {
-        return Math.ceil(arrObj.length / itemsPerPage);
+function calTotalPage(totalRecord) {
+    if (totalRecord > 0) {
+        return Math.ceil(totalRecord / itemsPerPage);
     }
     return 0;
 }
 
-//get items per page
-function getItemsPerPage(arrObj, pageIndex) {
-    var arrTmp = new Array();
-    var from = 0;
-    var to = 0;
-    for (var i = 0; i < arrObj.length; i++) {
-        from = (pageIndex - 1) * itemsPerPage;
-        to = from + itemsPerPage;
-        if (i >= from && i < to) {
-            arrTmp.push(arrObj[i]);
-        }
-    }
-    return arrTmp;
-}
 
-
-function genXMLHistoryDoc(inHisArray) {
+function genXMLHistoryDoc(listAllNpp) {
     var docXml = createXMLDoc();
-    var tmpXmlRootNode;
-
     var tmpXmlRootNode = createXMLNode('resptable', '', docXml);
     var tmpXmlNodeTitle = createXMLNode('tabletitle', '', docXml, tmpXmlRootNode);
     var tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_NPP_ID'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_SPONSOR_ID'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_NPP_CITY'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_NPP_DIRECT_NAME'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_NPP_LAST_DATE_SIGN_IN'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_NPP_DT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP_NAME'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_NPP_SPONSOR_ID'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_NPP_LAST_DATE_SIGN_IN'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_NPP_DT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_NPP_CITY'), docXml, tmpXmlNodeTitle);
     tmpChildNode = createXMLNode('coltitle8', CONST_STR.get('GROUP_MANAGER_NPP_STATUS'), docXml, tmpXmlNodeTitle);
     tmpChildNode = createXMLNode('coltitle9', CONST_STR.get('GROUP_MANAGER_NPP_RANK'), docXml, tmpXmlNodeTitle);
 
-    for (var i = 0; i < inHisArray.length; i++) {
-        var tmpHisObj = inHisArray[i];
+    for (var i = 0; i < listAllNpp.length; i++) {
+        var tmpHisObj = listAllNpp[i];
         var tmpXmlNodeInfo = createXMLNode('tabletdetail', '', docXml, tmpXmlRootNode);
 
         tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_NPP_ID'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent1', tmpHisObj.nppId, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent2', tmpHisObj.country, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_SPONSOR_ID'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent3', tmpHisObj.nppSponsorId, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_NPP_CITY'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent4', tmpHisObj.city, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_NPP_DIRECT_NAME'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent5', tmpHisObj.nppName, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_NPP_LAST_DATE_SIGN_IN'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent6', tmpHisObj.loginDate, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_NPP_DT'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent7', tmpHisObj.mobile, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent1', tmpHisObj.userCode, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP_NAME'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent2', tmpHisObj.dispName, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent3', tmpHisObj.agentLevel, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_NPP_SPONSOR_ID'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent4', tmpHisObj.parentId, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_NPP_LAST_DATE_SIGN_IN'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent5', moment(tmpHisObj.signUpDate, "YYYY-MM-DD").format('DD/MM/YYYY'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_NPP_DT'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent6', tmpHisObj.phone, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_NPP_CITY'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent7', tmpHisObj.city, docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('coltitle8', CONST_STR.get('GROUP_MANAGER_NPP_STATUS'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent8', tmpHisObj.status === '0' ? 'Active' : 'Inactive', docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent8', tmpHisObj.enable ? 'Active' : 'Inactive', docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('coltitle9', CONST_STR.get('GROUP_MANAGER_NPP_RANK'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent9', tmpHisObj.rank == '0' ? 'Distributor' : tmpHisObj.rank === '1' ? 'Member' : 'Professional' , docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent9', tmpHisObj.leverValue, docXml, tmpXmlNodeInfo);
     }
     return docXml;
 }

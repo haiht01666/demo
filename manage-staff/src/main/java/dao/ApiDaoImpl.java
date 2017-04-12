@@ -1,12 +1,14 @@
 package dao;
 
+import constant.OrderType;
+import model.Order;
 import model.User;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 
     @Override public User getLoginInfo(String userId) {
         User user = new User();
-        String sql = "SELECT u.id ,name,email, address, phone, birthday ,identifier, bank_name, bank_account, bank_branch, bank_user, avatar, child_id,city FROM users u where u.id=?";
+        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -38,19 +40,12 @@ import java.util.List;
                 user.setUserAvatar(blobStr);
                 user.setChildId(rs.getString(13));
                 user.setCity(rs.getString(14));
+                user.setParentName(rs.getString(15));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return user;
     }
@@ -69,15 +64,7 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return password;
     }
@@ -101,15 +88,7 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return record;
     }
@@ -131,15 +110,7 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return record;
     }
@@ -156,15 +127,7 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return record;
     }
@@ -183,55 +146,57 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return record;
     }
 
-    @Override public long getTotalAllNpp(String userCode, String childId) {
+    @Override public long getTotalNpp(boolean directNpp, String userCode) {
         long totalRecord = 0;
-        String sql = "SELECT count(*) FROM users u1 where u1.child_id LIKE CONCAT('%', ? , '-%')";
+        String sql;
+        if (directNpp) {
+            sql = "SELECT count(*) FROM users u1 where u1.parent_id = ?";
+        } else {
+            sql = "SELECT count(*) FROM users u1 where u1.child_id LIKE CONCAT('%', ? , '-%')";
+        }
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userCode);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                totalRecord =  rs.getInt(1);
+                totalRecord = rs.getInt(1);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return totalRecord;
     }
 
-    @Override public List<User> getAllNpp(String userCode, String childId, int litmit, int offset) {
+    @Override public List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset,
+            String orderby) {
         List<User> listAllNpp = new ArrayList<>();
-        String sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.child_id LIKE CONCAT('%', ? , '-%') ORDER BY u1.id LIMIT ?,?";
+        String sql;
+        if (directNpp) {
+            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.parent_id = ? ORDER BY u1."
+                    + orderby;
+        } else {
+            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.child_id LIKE CONCAT('%', ? , '-%') ORDER BY u1."
+                    + orderby;
+        }
+        if (limit != -1) {
+            sql += " LIMIT ?,?";
+        }
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userCode);
-            stmt.setInt(2, offset);
-            stmt.setInt(3, litmit);
+            if (limit != -1) {
+                stmt.setInt(2, offset);
+                stmt.setInt(3, limit);
+            }
             rs = stmt.executeQuery();
             while (rs.next()) {
                 User user = new User();
@@ -239,7 +204,7 @@ import java.util.List;
                 user.setDispName(rs.getString(2));
                 user.setChildId(rs.getString(3));
                 user.setParentId(rs.getInt(4));
-                user.setParentName(rs.getInt(5));
+                user.setParentName(rs.getString(5));
                 user.setSignUpDate(rs.getDate(6));
                 user.setPhone(rs.getString(7));
                 user.setCity(rs.getString(8));
@@ -249,16 +214,71 @@ import java.util.List;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return listAllNpp;
+    }
+
+    @Override public long getTotalOrder(List<String> listChildId) {
+        long totalRecord = 0;
+        String sql;
+            sql = "SELECT count(*) FROM orders where user_id IN( "+ StringUtils.join(listChildId, ",")  +")";
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                totalRecord = rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(conn, stmt, rs);
+        }
+        return totalRecord;
+    }
+
+    @Override
+    public List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby) {
+        List<Order> lstOrder = new ArrayList<>();
+        String sql ="SELECT o.user_id,o.user_name,o.name,o.cdate,o.price,o.quantity,o.type,o.total, u.child_id FROM orders o LEFT JOIN users u on o.user_id = u.id where o.user_id IN( "+ StringUtils.join(listChildId, ",")  +") order by o." + orderby;
+        if (limit != -1) {
+            sql += " LIMIT ?,?";
+        }
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            if (limit != -1) {
+                stmt.setInt(1, offset);
+                stmt.setInt(2, limit);
+            }
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Order order = new Order();
+                order.setUserId(rs.getInt(1));
+                order.setUserName(rs.getString(2));
+                order.setOrderName(rs.getString(3));
+                order.setOrderDate(rs.getDate(4));
+                order.setPrice(rs.getDouble(5));
+                order.setQuantity(rs.getInt(6));
+                int type = rs.getInt(7);
+                if(type == OrderType.ORDER_PROACTIVE.getCode())
+                    order.setTypeValue(OrderType.ORDER_PROACTIVE.getValue());
+                else if(type == OrderType.ORDER_PACKAGE.getCode())
+                    order.setTypeValue(OrderType.ORDER_PACKAGE.getValue());
+                else if(type == OrderType.ORDER_PRODUCT.getCode())
+                    order.setTypeValue(OrderType.ORDER_PRODUCT.getValue());
+                else
+                    order.setTypeValue(OrderType.ORDER_PRODUCT.DefaultValue());
+                order.setTotal(rs.getDouble(8));
+                order.setChildId(rs.getString(9));
+                lstOrder.add(order);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return lstOrder;
     }
 }

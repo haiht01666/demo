@@ -6,7 +6,6 @@
 
 /*** HEADER ***/
 
-var listOrders = new Array();
 var totalPage = 0;
 var itemsPerPage = 10;
 var pageIndex = 1;
@@ -30,8 +29,7 @@ function viewBackFromOther() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
-    logInfo('account history load success');
-    document.getElementById('accountId').innerHTML = gUserInfo.accountDispName + ': ' + gUserInfo.accountId;
+    document.getElementById('accountId').innerHTML = gUserInfo.dispName + ': ' + gUserInfo.userCode;
     sendJSONRequest();
 }
 
@@ -45,119 +43,124 @@ function viewWillUnload() {
 /*** SEND REQUEST ***/
 
 function sendJSONRequest() {
-    loadData('./static/frontend/data/listOrders.json', function (jsondata) {
-        listOrders = JSON.parse(jsondata)[gUserInfo.accountId];
-        parserAccHistory(listOrders);
+    showLoadingMask();
+    var offset = (pageIndex - 1) * itemsPerPage;
+    var orderby = 'user_id';
+    $.ajax({
+        type: "POST",
+        url: "/api/getOrder",
+        data: JSON.stringify({
+            userCode: gUserInfo.userCode,
+            childId : gUserInfo.childId,
+            limit: itemsPerPage,
+            offset: offset,
+            orderby: orderby
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            hideLoadingMask();
+            if (response.result) {
+                parserOrderData(response.numberRecord ,response.resultData);
+            } else {
+                showAlertText(CONST_STR.get('GET_ORDER_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_ORDER_FAIL'));
+        }
     });
 }
 
 
-function parserAccHistory(listOrders) {
-    if ((listOrders == undefined) || (listOrders.length < 1)) {
-        var tmpNode = document.getElementById('id.historyInfo');
+function parserOrderData(totalRecord, listAllOrder) {
+    if ((listAllOrder == undefined) || (listAllOrder.length < 1)) {
+        var tmpNode = document.getElementById('id.listOrder');
         tmpNode.innerHTML = CONST_STR.get('NO_DATA');
         return;
     }
     totalPage = 0;
-    if (listOrders.length > 0) {
+    if (listAllOrder.length > 0) {
         //total page
-        totalPage = calTotalPage(listOrders);
-
-        //gen page indicator
-        pageIndex = 1;
+        totalPage = calTotalPage(totalRecord);
         genPagging(totalPage, pageIndex);
-
-        //get object per page
-        var arrMedial = new Array();
-        arrMedial = getItemsPerPage(listOrders, pageIndex);
-
         //gen xml
-        var tmpXmlDoc = genXMLHistoryDoc(arrMedial);
+        var tmpXmlDoc = genXMLHistoryDoc(listAllOrder);
         //gen xsl
         xslAccHisTable = getCachePageXsl("groupxsl/group-list-order-table");
         var tmpXslDoc = xslAccHisTable;
         //gen html from xml and xsl
         genHTMLStringWithXMLScrollto(tmpXmlDoc, tmpXslDoc, function (oStr) {
-            var tmpNode = document.getElementById('id.historyInfo');
+            var tmpNode = document.getElementById('id.listOrder');
             tmpNode.innerHTML = oStr;
         }, null, null, document.getElementById('parse_transaction'));
     }
 
 }
 
-
 //EVENT SELECTED PAGE
-function pageIndicatorSelected(selectedIdx, selectedPage) {
+function pageIndicatorSelected(selectedIdx) {
     pageIndex = selectedIdx;
-
-    var arrMedial = new Array();
-    arrMedial = getItemsPerPage(listOrders, selectedIdx);
-    //gen xml
-    var tmpXmlDoc = genXMLHistoryDoc(arrMedial);
-    //gen xsl
-    var tmpXslDoc = xslAccHisTable;
-
-    genHTMLStringWithXML(tmpXmlDoc, tmpXslDoc, function (oStr) {
-        var tmpNode = document.getElementById('id.historyInfo');
-        tmpNode.innerHTML = oStr;
-    });
-
+    sendJSONRequest();
 }
 
 //GEN PAGGING
-function genPagging(arr, pageIndex) {
-
-    //var nodePager = document.getElementById('pageIndicatorNums');
-    var nodepage = document.getElementById('acc.pagination');
+function genPagging(totalPage, pageIndex) {
+    var nodepage = document.getElementById('order.pagination');
     var tmpStr = genPageIndicatorHtml(totalPage, Number(pageIndex));
     nodepage.innerHTML = tmpStr;
 }
 
-function calTotalPage(arrObj) {
-    if (arrObj != null && arrObj.length > 0) {
-        return Math.ceil(arrObj.length / itemsPerPage);
+function calTotalPage(totalRecord) {
+    if (totalRecord > 0) {
+        return Math.ceil(totalRecord / itemsPerPage);
     }
     return 0;
 }
 
-//get items per page
-function getItemsPerPage(arrObj, pageIndex) {
-    var arrTmp = new Array();
-    var from = 0;
-    var to = 0;
-    for (var i = 0; i < arrObj.length; i++) {
-        from = (pageIndex - 1) * itemsPerPage;
-        to = from + itemsPerPage;
-        if (i >= from && i < to) {
-            arrTmp.push(arrObj[i]);
-        }
-    }
-    return arrTmp;
-}
 
-
-function genXMLHistoryDoc(inHisArray) {
+function genXMLHistoryDoc(listAllOrder) {
     var docXml = createXMLDoc();
     var tmpXmlRootNode;
 
     var tmpXmlRootNode = createXMLNode('resptable', '', docXml);
     var tmpXmlNodeTitle = createXMLNode('tabletitle', '', docXml, tmpXmlRootNode);
-    var tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_NPP_NAME'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_ORDER_TIME'), docXml, tmpXmlNodeTitle);
-    tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_TOTAL_VOLUME'), docXml, tmpXmlNodeTitle);
+    var tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_ORDER_ID'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP__DIRECT_NAME'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_ORDER_NAME_PRODUCT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_ORDER_TIME'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_ORDER_PRICE_PRODUCT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_ORDER_QUALITY_PRODUCT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle8', CONST_STR.get('GROUP_MANAGER_ORDER_TYPE_PRODUCT'), docXml, tmpXmlNodeTitle);
+    tmpChildNode = createXMLNode('coltitle9', CONST_STR.get('GROUP_MANAGER_TOTAL_VOLUME'), docXml, tmpXmlNodeTitle);
 
-    for (var i = 0; i < inHisArray.length; i++) {
-        var tmpHisObj = inHisArray[i];
+    for (var i = 0; i < listAllOrder.length; i++) {
+        var tmpHisObj = listAllOrder[i];
         var tmpXmlNodeInfo = createXMLNode('tabletdetail', '', docXml, tmpXmlRootNode);
 
-        tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_NPP_NAME'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent1', tmpHisObj.nppName, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_ORDER_TIME'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent2', tmpHisObj.orderDate, docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_TOTAL_VOLUME'), docXml, tmpXmlNodeInfo);
-        var tmpTotalVolume = formatNumberToCurrency(tmpHisObj.totalVolume);
-        if (tmpTotalVolume == '0' || tmpTotalVolume == 0 || !tmpTotalVolume) tmpTotalVolume = '';
-        tmpChildNode = createXMLNode('colcontent3', tmpTotalVolume, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle1', CONST_STR.get('GROUP_MANAGER_ORDER_ID'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent1', tmpHisObj.userId, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle2', CONST_STR.get('GROUP_MANAGER_NPP__DIRECT_NAME'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent2', tmpHisObj.userName, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle3', CONST_STR.get('GROUP_MANAGER_NPP_COUNTRY'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent3', tmpHisObj.agentLevel, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle4', CONST_STR.get('GROUP_MANAGER_ORDER_NAME_PRODUCT'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent4', tmpHisObj.orderName, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle5', CONST_STR.get('GROUP_MANAGER_ORDER_TIME'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent5', moment(tmpHisObj.orderDate, "YYYY-MM-DD").format('DD/MM/YYYY'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle6', CONST_STR.get('GROUP_MANAGER_ORDER_PRICE_PRODUCT'), docXml, tmpXmlNodeInfo);
+        var tmpPrice = formatNumberToCurrency(tmpHisObj.price);
+        if (tmpPrice == '0' || tmpPrice == 0 || !tmpPrice) tmpPrice = '0';
+        tmpChildNode = createXMLNode('colcontent6', tmpPrice, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_ORDER_QUALITY_PRODUCT'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent7', tmpHisObj.quantity, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle8', CONST_STR.get('GROUP_MANAGER_ORDER_TYPE_PRODUCT'), docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent8', tmpHisObj.typeValue, docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('coltitle9', CONST_STR.get('GROUP_MANAGER_TOTAL_VOLUME'), docXml, tmpXmlNodeInfo);
+        var tmpTotal = formatNumberToCurrency(tmpHisObj.total);
+        if (tmpTotal == '0' || tmpTotal == 0 || !tmpTotal) tmpTotal = '0';
+        tmpChildNode = createXMLNode('colcontent9', tmpTotal, docXml, tmpXmlNodeInfo);
     }
     return docXml;
 }

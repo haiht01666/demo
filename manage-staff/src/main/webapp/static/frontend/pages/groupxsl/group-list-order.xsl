@@ -21,10 +21,10 @@
                 </tr>
               </table>
             </div>
-            <div id="id.historyInfo" style="padding:5px;">
+            <div id="id.listOrder" style="padding:5px;">
 
             </div>
-            <div align='right' id="acc.pagination" style="margin-right: 15px;">
+            <div align='right' id="order.pagination" style="margin-right: 15px;">
 
             </div>
 

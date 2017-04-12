@@ -3,104 +3,124 @@ package model;
 import java.util.Date;
 
 public class Order {
-	private int userId;
-	
-	private String userName;
-	
-	private String orderName;
-	
-	private Date orderDate;
-	
-	private Double price;
-	
-	private Double total;
-	
-	private int quantity;
-	
-	private int type;
-	
-	private String typeValue;
-	
-	private int parentId;
+    private int userId;
 
-	public int getParentId() {
-		return parentId;
-	}
+    private String userName;
 
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
-	}
+    private String orderName;
 
-	public String getTypeValue() {
-		return typeValue;
-	}
+    private Date orderDate;
 
-	public void setTypeValue(String typeValue) {
-		this.typeValue = typeValue;
-	}
+    private Double price;
 
-	public int getUserId() {
-		return userId;
-	}
+    private Double total;
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    private int quantity;
 
-	public String getUserName() {
-		return userName;
-	}
+    private int type;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    private String typeValue;
 
-	public String getOrderName() {
-		return orderName;
-	}
+    private int parentId;
 
-	public void setOrderName(String orderName) {
-		this.orderName = orderName;
-	}
+    // cấp đại lý
+    private String agentLevel;
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
+    private String childId;
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
+    public int getParentId() {
+        return parentId;
+    }
 
-	public Double getPrice() {
-		return price;
-	}
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+    public String getTypeValue() {
+        return typeValue;
+    }
 
-	public Double getTotal() {
-		return total;
-	}
+    public void setTypeValue(String typeValue) {
+        this.typeValue = typeValue;
+    }
 
-	public void setTotal(Double total) {
-		this.total = total;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public int getType() {
-		return type;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setType(int type) {
-		this.type = type;
-	}
+    public String getOrderName() {
+        return orderName;
+    }
 
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getAgentLevel() {
+        return agentLevel;
+    }
+
+    public void setAgentLevel(String agentLevel) {
+        this.agentLevel = agentLevel;
+    }
+
+    public String getChildId() {
+        return childId;
+    }
+
+    public void setChildId(String childId) {
+        this.childId = childId;
+    }
 }

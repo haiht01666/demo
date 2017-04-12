@@ -1,7 +1,10 @@
 package service;
 
 import model.AjaxResult;
+import model.Order;
 import model.User;
+
+import java.util.List;
 
 public interface ApiService {
 	/**
@@ -18,5 +21,6 @@ public interface ApiService {
 	AjaxResult saveAvatar(User user);
 	AjaxResult changePassword(String userCode, String oldPass, String newPass);
 	AjaxResult requestSupport(String userCode, String userName, String title, String content);
-	AjaxResult getAllNpp(String userCode, String childId, String litmit, String offset);
+	AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit, Integer offset, String orderby);
+	AjaxResult getListOrder(String listUserId, String childId, Integer limit, Integer offset, String orderby);
 }

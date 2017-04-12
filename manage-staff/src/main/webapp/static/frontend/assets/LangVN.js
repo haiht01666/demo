@@ -3223,8 +3223,8 @@ var pConstants_VN = {
 	// GROUP NPP LIST
 	'GROUP_MANAGER_NPP_LIST' : 'Danh sách nhà phân phối',
 	'GROUP_MANAGER_NPP_ID' : 'ID',
-	'GROUP_MANAGER_NPP_COUNTRY' : 'Quốc gia',
-    'GROUP_MANAGER_NPP_SPONSOR_ID' : 'Quản lý',
+	'GROUP_MANAGER_NPP_COUNTRY' : 'Đại lý',
+    'GROUP_MANAGER_NPP_SPONSOR_ID' : 'ID Quản lý',
 	'GROUP_MANAGER_NPP_CITY' : 'Tỉnh/Thành phố',
 	'GROUP_MANAGER_NPP_NAME' : 'Tên nhà phân phối',
 	'GROUP_MANAGER_NPP_LAST_DATE_SIGN_IN' : 'Ngày cấp ID',
@@ -3237,8 +3237,13 @@ var pConstants_VN = {
 
 	'GROUP_MANAGER_NPP_DIRECT_LIST' : 'Danh sách nhà phân phối trực tiêp',
 	'GROUP_MANAGER_NPP__DIRECT_NAME' : 'Tên nhà phân phối',
+    'GROUP_MANAGER_ORDER_ID' : 'ID NPP',
+    'GROUP_MANAGER_ORDER_NAME_PRODUCT' : 'Tên sản phẩm',
 	'GROUP_MANAGER_ORDER_TIME' : 'Thời gian đặt hàng',
-	'GROUP_MANAGER_TOTAL_VOLUME' : 'Doanh số',
+    'GROUP_MANAGER_ORDER_PRICE_PRODUCT' : 'Giá sản phẩm',
+    'GROUP_MANAGER_ORDER_QUALITY_PRODUCT' : 'Số lượng',
+    'GROUP_MANAGER_ORDER_TYPE_PRODUCT' : 'Loại',
+    'GROUP_MANAGER_TOTAL_VOLUME' : 'Tổng tiền',
 
 
 	//INDEX PAGE
@@ -3315,6 +3320,8 @@ var pConstants_VN = {
     'ERR_INPUT_WRONG_OLD_PASS'						: 'Bạn đã nhập sai mật khẩu hiện tại.',
     'ERR_INPUT_WRONG_NUMBER_DIGIT'						: 'Mật khẩu cần chứa 7 ký tự và tối đa 16 ký tự',
     'MESSAGE_REQUEST_SUPPORT_FAIL' : 'Gửi yêu cầu/phản ánh thất bại!',
+    'GET_ALL_NPP_FAIL' : 'Lấy danh sách nhà phân phối thất bại!',
+    'GET_ORDER_FAIL' : 'Lấy danh sách đơn hàng thất bại!',
 
 
 
@@ -3324,5 +3331,5 @@ var pConstants_VN = {
     'WRONG_PASSWORD' : 'Quý Khách đã nhập sai mật khẩu. Vui lòng nhập lại',
 	// INDEX PAGE
 	//'INDEX_PAGE' : 'indexxsl/index-scr',
-	'INDEX_PAGE' : 'utilitiesxsl/personal-info-view-scr',
+	'INDEX_PAGE' : 'groupxsl/group-list-npp',
 };

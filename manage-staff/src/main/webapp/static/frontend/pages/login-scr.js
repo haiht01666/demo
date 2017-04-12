@@ -110,6 +110,7 @@ function requestMBServiceSuccess(loginInfo) {
     gUserInfo.bankUser = loginInfo.bankUser;
     gUserInfo.childId = loginInfo.childId;
     gUserInfo.city = loginInfo.city;
+    gUserInfo.parentName = loginInfo.parentName;
 
     //avatar
     gUserInfo.userAvatar = loginInfo.userAvatar;

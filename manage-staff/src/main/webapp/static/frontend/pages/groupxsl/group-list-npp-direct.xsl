@@ -21,10 +21,10 @@
                 </tr>
               </table>
             </div>
-            <div id="id.historyInfo" style="padding:5px;">
+            <div id="id.allNpp" style="padding:5px;">
 
             </div>
-            <div align='right' id="acc.pagination" style="margin-right: 15px;">
+            <div align='right' id="allNpp.pagination" style="margin-right: 15px;">
 
             </div>
 

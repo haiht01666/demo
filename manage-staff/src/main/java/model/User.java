@@ -63,7 +63,7 @@ public class User implements Serializable {
 
     private int parentId;
 
-    private int parentName;
+    private String parentName;
 
     private int lever;
 
@@ -78,6 +78,9 @@ public class User implements Serializable {
     private String userAvatar;
 
     private String city;
+
+    // cấp đại lý
+    private String agentLevel;
 
 
     public String getLeverValue() {
@@ -308,11 +311,19 @@ public class User implements Serializable {
         this.city = city;
     }
 
-    public int getParentName() {
+    public String getParentName() {
         return parentName;
     }
 
-    public void setParentName(int parentName) {
+    public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public String getAgentLevel() {
+        return agentLevel;
+    }
+
+    public void setAgentLevel(String agentLevel) {
+        this.agentLevel = agentLevel;
     }
 }

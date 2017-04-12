@@ -2,11 +2,7 @@ package dao;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Locale;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
@@ -50,6 +46,18 @@ public class DBManager {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs){
+		if (conn != null) {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

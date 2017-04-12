@@ -50,12 +50,24 @@ public class ApiController {
 		return service.requestSupport(userCode, userName, title, content);
 	}
 
-	@RequestMapping(value = { "/getAllNpp" }, method = RequestMethod.POST)
-	public @ResponseBody AjaxResult getAllNpp(@RequestBody Map changePassMap) {
-		String userCode = (String)changePassMap.get("userCode");
-		String childId = (String)changePassMap.get("childId");
-		String litmit = (String)changePassMap.get("litmit");
-		String offset = (String)changePassMap.get("offset");
-		return service.getAllNpp(userCode, childId, litmit, offset);
+	@RequestMapping(value = { "/getNpp" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getAllNpp(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		String childId = (String)mapGetAllNpp.get("childId");
+		Integer limit = (Integer)mapGetAllNpp.get("limit");
+		Integer offset = (Integer)mapGetAllNpp.get("offset");
+		String orderby = (String) mapGetAllNpp.get("orderby");
+		boolean directNpp = (Boolean) mapGetAllNpp.get("directNpp");
+		return service.getNpp(directNpp, userCode, childId, limit, offset, orderby);
+	}
+
+	@RequestMapping(value = { "/getOrder" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getOrder(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		String childId = (String)mapGetAllNpp.get("childId");
+		Integer limit = (Integer)mapGetAllNpp.get("limit");
+		Integer offset = (Integer)mapGetAllNpp.get("offset");
+		String orderby = (String) mapGetAllNpp.get("orderby");
+		return service.getListOrder(userCode, childId, limit, offset, orderby);
 	}
 }

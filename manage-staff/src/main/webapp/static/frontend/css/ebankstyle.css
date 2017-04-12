@@ -2957,6 +2957,7 @@ p.pcopyrighttext {
 .table-account tr td:nth-of-type(3), .table-account tr td:nth-of-type(4), .table-account tr td:nth-of-type(5) {
 	text-align:right;
 }
+
 /* weekly volume*/
 #weely-volume.table-account{
 	width:80%;
