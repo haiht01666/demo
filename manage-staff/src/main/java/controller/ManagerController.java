@@ -168,7 +168,7 @@ public class ManagerController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result.setResult(false);
-			result.setMessage(messageSource.getMessage("E005", null, Locale.getDefault()));
+			result.setMessage(messageSource.getMessage("E007", null, Locale.getDefault()));
 			return result;
 		}
 		return result;
