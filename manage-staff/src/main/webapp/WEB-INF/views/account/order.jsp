@@ -18,7 +18,7 @@
 <body>
 	<%@ include file="../common/header.jsp"%>
 	<div class="col-xs-12">
-	<div id="msg-error"></div>
+		<div id="msg-error"></div>
 		<div class="table-responsive">
 
 			<div class="btn-action">
@@ -29,7 +29,7 @@
 					disabled="disabled">
 					<span class="glyphicon glyphicon-edit"></span> Edit
 				</button>
-<!-- 				<button type="button" class="btn btn-default btn-sm"
+				<!-- 				<button type="button" class="btn btn-default btn-sm"
 					id="remove-data" disabled="disabled">
 					<span class="glyphicon glyphicon-remove"></span> Remove
 				</button> -->
@@ -56,8 +56,8 @@
 							<td><a href="/manage/detail?id=${order.userId }">${order.userName }</a></td>
 							<td>${order.orderName }</td>
 							<td>${order.orderDate }</td>
-							<td><fmt:formatNumber value="${order.price }" type="number"
-									maxFractionDigits="3" /></td>
+							<td data-price=${order.price }><fmt:formatNumber
+									value="${order.price }" type="number" maxFractionDigits="3" /></td>
 							<td>${order.quantity }</td>
 							<td data-id=${order.type }>${order.typeValue }</td>
 							<td><fmt:formatNumber value="${order.total }" type="number"
@@ -85,8 +85,9 @@
 							<form>
 								<div class="form-group">
 									<input type="number" id="txt-member-id" class="form-control"
-										placeholder="nhập mã thành viên" maxlength="6" min="100000" max="999999">
-										<input type="hidden" id="txt-parent-id" value=""/>
+										placeholder="nhập mã thành viên" maxlength="6" min="100000"
+										max="999999"> <input type="hidden" id="txt-parent-id"
+										value="" />
 								</div>
 
 								<div class="form-group">
@@ -100,8 +101,8 @@
 								</div>
 
 								<div class="form-group">
-									<label id="lbl-price"></label>
-									<input type="text" id="txt-order-price" class="form-control"
+									<label id="lbl-price"></label> <input type="text"
+										id="txt-order-price" class="form-control"
 										placeholder="nhập giá sản phẩm">
 								</div>
 								<div class="form-group">
@@ -110,7 +111,8 @@
 								</div>
 								<div class="form-group">
 									<select id="order-type" class="form-control">
-										<option value="0" disabled selected="selected">Chọn loại order</option>
+										<option value="0" disabled selected="selected">Chọn
+											loại order</option>
 										<option value="1">Mua sản phẩm</option>
 										<option value="2">Mua năng động</option>
 										<option value="3">Đăng ký gói</option>
@@ -122,8 +124,10 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="btn-add-order"
-						disabled="disabled">Add</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						disabled="disabled" style="display: none">Thêm mới</button>
+					<button type="button" class="btn btn-default" id="btn-edit-order"
+						style="display: none">Cập nhập</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>
 

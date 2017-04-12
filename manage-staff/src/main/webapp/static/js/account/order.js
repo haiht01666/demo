@@ -41,18 +41,22 @@ $(document).ready(function() {
 	
 	// edit row
 	$('#edit-data').on( 'click', function () {
+		emptyMessageError();
+		$('#btn-edit-order').show();
+		$('#btn-add-order').hide();
 		// set title modal
 		$('#modal-header').text('Edit order');
 		$('#btn-add-order').text('Edit');
 		$('#txt-member-id').val($('tr.selected td:nth-child(1)').text());
 		$('#txt-member-name').val($('tr.selected td:nth-child(2)').text());
 		$('#txt-order-name').val($('tr.selected td:nth-child(3)').text());
-		$('#txt-order-price').val($('tr.selected td:nth-child(5)').text());
+		$('#txt-order-price').val($('tr.selected td:nth-child(5)').data('price'));
 		$('#txt-order-quantity').val($('tr.selected td:nth-child(6)').text());
 		$('#order-type').val($('tr.selected td:nth-child(7)').data('id'));
 		$('#add-order').modal('show');
-		$('#btn-add-order').on('click',function(){
-			emptyMessageError();
+	
+		$('#btn-edit-order').on('click',function(){
+			
 			$.ajax({
 				type: "POST",
 				url:"/manage/updateOrder",
@@ -61,23 +65,12 @@ $(document).ready(function() {
 				beforeSend: function(){
 					$.LoadingOverlay("show");
 	               },
-	            afterSend: function(){
-	            	   $('#add-order').modal('hide');
-		        },
 				success:function(response){
-					if(response.result){
-						$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
-					} else {
-						$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Xin hãy nhập đúng định dạng giá tiền!'));
-					}
+					 $('#add-order').modal('hide');
+					 location.reload();
 					$.LoadingOverlay("hide");
 				}
 			});
-			// edit value
-			$('tr.selected td:nth-child(1)').text($('#txt-member-id').val());
-			$('tr.selected td:nth-child(2)').text($('#txt-member-name').val());
-			$('tr.selected td:nth-child(3)').text($('#txt-order-name').val());
-			$('tr.selected td:nth-child(5)').text($('#txt-order-price').val());
 
 		});
 	});
@@ -87,6 +80,8 @@ $(document).ready(function() {
 	 // set title modal
 		$('#modal-header').text('Thêm mới order');
 		$('#add-order').modal('show');
+		$('#btn-add-order').show();
+		$('#btn-edit-order').hide();
     } );
 	$('#txt-member-id').on('change',function(){
 		emptyMessageError();
@@ -183,7 +178,12 @@ function getFormData(){
 	formData.orderName =  $('#txt-order-name').val();
 	formData.price =  $('#txt-order-price').val();
 	formData.quantity =  $('#txt-order-quantity').val();
-	formData.type =  $('#txt-order-quantity').val();
+	formData.type =  $('#order-type').val();
 	formData.parentId = $('#txt-parent-id').val();
 	return formData;
+}
+
+function emptyMessageError(){
+	$('#msg-error-modal').empty();
+	$('#msg-error').empty();
 }
