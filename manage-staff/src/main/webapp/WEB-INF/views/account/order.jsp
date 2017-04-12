@@ -29,10 +29,10 @@
 					disabled="disabled">
 					<span class="glyphicon glyphicon-edit"></span> Edit
 				</button>
-				<button type="button" class="btn btn-default btn-sm"
+<!-- 				<button type="button" class="btn btn-default btn-sm"
 					id="remove-data" disabled="disabled">
 					<span class="glyphicon glyphicon-remove"></span> Remove
-				</button>
+				</button> -->
 			</div>
 			<table id="tbl-staff"
 				class="display table table-hover table-striped table-bordered"
@@ -51,7 +51,7 @@
 				</thead>
 				<tbody class="tbody-staff">
 					<c:forEach items="${orders }" var="order">
-						<tr data-id=1>
+						<tr data-id=${order.id }>
 							<td>${order.userId }</td>
 							<td><a href="/manage/detail?id=${order.userId }">${order.userName }</a></td>
 							<td>${order.orderName }</td>
@@ -59,7 +59,7 @@
 							<td><fmt:formatNumber value="${order.price }" type="number"
 									maxFractionDigits="3" /></td>
 							<td>${order.quantity }</td>
-							<td>${order.typeValue }</td>
+							<td data-id=${order.type }>${order.typeValue }</td>
 							<td><fmt:formatNumber value="${order.total }" type="number"
 									maxFractionDigits="3" /></td>
 						</tr>

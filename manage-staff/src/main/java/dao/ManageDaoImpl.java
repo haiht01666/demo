@@ -195,7 +195,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public List<Order> getAllOrder() throws SQLException {
 		List<Order> lstOrder = new ArrayList<>();
-		String sql ="SELECT user_id,user_name,name,cdate,price,quantity,type,total FROM orders";
+		String sql ="SELECT user_id,user_name,name,cdate,price,quantity,type,total,id FROM orders";
 		try{
 			conn = getConnection();
 			st = conn.createStatement();
@@ -208,7 +208,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				order.setOrderDate(rs.getDate(4));
 				order.setPrice(rs.getDouble(5));
 				order.setQuantity(rs.getInt(6));
+				order.setId(rs.getInt(9));
 				int type = rs.getInt(7);
+				order.setType(type);
 				if(type == OrderType.ORDER_PROACTIVE.getCode())
 					order.setTypeValue(OrderType.ORDER_PROACTIVE.getValue());
 				else if(type == OrderType.ORDER_PACKAGE.getCode())
@@ -275,6 +277,33 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}finally{
 			conn.close();
 			stmt.close();
+		}
+		return result;
+	}
+	
+	@Override
+	public int updateOrder(Order order) throws SQLException {
+		int result = 0;
+		String sql ="update orders set user_id=? ,user_name=? ,name=?,price=?,quantity=?,type=?,total=? where id=?";
+		try{
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1,order.getUserId());
+			stmt.setString(2, order.getUserName());
+			stmt.setString(3, order.getOrderName());
+			stmt.setDouble(4, order.getPrice());
+			stmt.setInt(5, order.getQuantity());
+			stmt.setInt(6, order.getType());
+			stmt.setDouble(7, order.getPrice()*order.getQuantity());
+			stmt.setInt(8, order.getId());
+			result = stmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new SQLException();
+		}finally{
+			conn.close();
+			st.close();
+			rs.close();
 		}
 		return result;
 	}
