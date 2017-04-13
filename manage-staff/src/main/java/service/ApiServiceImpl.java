@@ -1,8 +1,10 @@
 package service;
 
 import common.CommonUtils;
+import constant.LeverType;
 import dao.ApiDao;
 import model.AjaxResult;
+import model.NppGraphicModel;
 import model.Order;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +96,7 @@ import java.util.List;
             List<User> listNpp = dao.getNpp(directNpp, userCode, limit, offset, orderby);
             for (User user : listNpp) {
                 user.setAgentLevel(CommonUtils.getLevelChild(childId, user.getChildId()));
-                user.setLeverValue(manageService.getLeverUser(user.getId()));
+                user.setLeverValue(manageService.getLeverUser(Integer.parseInt(user.getUserCode())));
             }
             result.setResult(true);
             result.setNumberRecord(totalNpp);
@@ -123,6 +125,45 @@ import java.util.List;
             result.setResult(true);
             result.setNumberRecord(totalOrder);
             result.setResultData(listOrder);
+        } catch (Exception e) {
+            result.setResult(false);
+        }
+        return result;
+    }
+
+    @Override public AjaxResult getNppGraphical(String userCode) {
+        AjaxResult result = new AjaxResult();
+        try {
+            List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
+            User userInfo = dao.getLoginInfo(userCode);
+            userInfo.setLeverValue(manageService.getLeverUser(Integer.parseInt(userCode)));
+            NppGraphicModel nppGraphicModel = new NppGraphicModel();
+            nppGraphicModel.setUserInfo(userInfo);
+            nppGraphicModel.setListNpp(listNpp);
+            for (User npp : listNpp) {
+                String levelUser = manageService.getLeverUser(Integer.parseInt(npp.getUserCode()));
+                if (levelUser.equals(LeverType.New.name())) {
+                    nppGraphicModel.setNumberNM(nppGraphicModel.getNumberNM() + 1);
+                }else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
+                    nppGraphicModel.setNumberSM(nppGraphicModel.getNumberSM() + 1);
+                }else if (levelUser.equals(LeverType.SALE_PRO.name())) {
+                    nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
+                }else if (levelUser.equals(LeverType.PRO_DISTRIBUTE.name())) {
+                    nppGraphicModel.setNumberPD(nppGraphicModel.getNumberPD() + 1);
+                }else if (levelUser.equals(LeverType.TL.name())) {
+                    nppGraphicModel.setNumberTL(nppGraphicModel.getNumberTL() + 1);
+                }else if (levelUser.equals(LeverType.MSD.name())) {
+                    nppGraphicModel.setNumberMSD(nppGraphicModel.getNumberMSD() + 1);
+                }else if (levelUser.equals(LeverType.DSD.name())) {
+                    nppGraphicModel.setNumberDSD(nppGraphicModel.getNumberDSD() + 1);
+                }else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
+                    nppGraphicModel.setNumberGDSD(nppGraphicModel.getNumberGDSD() + 1);
+                }
+                npp.setAgentLevel(CommonUtils.getLevelChild(userInfo.getChildId(), npp.getChildId()));
+                npp.setLeverValue(levelUser);
+            }
+            result.setResult(true);
+            result.setResultData(nppGraphicModel);
         } catch (Exception e) {
             result.setResult(false);
         }

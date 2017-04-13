@@ -204,6 +204,7 @@ import java.util.List;
                 user.setDispName(rs.getString(2));
                 user.setChildId(rs.getString(3));
                 user.setParentId(rs.getInt(4));
+                user.setParentIdStr(rs.getString(4));
                 user.setParentName(rs.getString(5));
                 user.setSignUpDate(rs.getDate(6));
                 user.setPhone(rs.getString(7));
@@ -241,7 +242,7 @@ import java.util.List;
     @Override
     public List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby) {
         List<Order> lstOrder = new ArrayList<>();
-        String sql ="SELECT o.user_id,o.user_name,o.name,o.cdate,o.price,o.quantity,o.type,o.total, u.child_id FROM orders o LEFT JOIN users u on o.user_id = u.id where o.user_id IN( "+ StringUtils.join(listChildId, ",")  +") order by o." + orderby;
+        String sql ="SELECT o.user_id,u.name user_name,o.name,o.cdate,o.price,o.quantity,o.type,o.total, u.child_id FROM orders o LEFT JOIN users u on o.user_id = u.id where o.user_id IN( "+ StringUtils.join(listChildId, ",")  +") order by o." + orderby;
         if (limit != -1) {
             sql += " LIMIT ?,?";
         }

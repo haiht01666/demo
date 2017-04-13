@@ -6,16 +6,41 @@
 
 /*** VIEW LOAD SUCCESS ***/
 
-var cusInfoObj;
-var newCusInfoObj;
-
-var flag_check = false; //ngocdt3 bo sung check trang thai la back hya cancel
-var treeNpp = new Array();
+var listNpp = new Array();
+var detailInfo;
 
 function viewBackFromOther() {
-    logInfo('Back from other view');
-    flag_check = true;
-    setDefaultInfo(newCusInfoObj);
+}
+
+function viewDidLoadSuccess() {
+    showLoadingMask();
+    //send Request
+    $.ajax({
+        type: "POST",
+        url: "/api/getNppGraphical",
+        data: JSON.stringify({
+            userCode: gUserInfo.userCode
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            hideLoadingMask();
+            if (response.result) {
+                detailInfo = response.resultData.userInfo;
+                setDetailInfo(response.resultData);
+                // draw chart
+                listNpp = response.resultData.listNpp;
+                google.charts.load('current', {packages: ["orgchart"]});
+                google.charts.setOnLoadCallback(drawChart);
+            } else {
+                showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+        }
+    });
+
 }
 
 function drawChart() {
@@ -23,14 +48,19 @@ function drawChart() {
     data.addColumn('string', 'Name');
     data.addColumn('string', 'Manager');
     // For each orgchart box, provide the name, manager, and tooltip to show.
-    var oldParentId = '';
-    var j = 0;
-    for (var i = 0; i < treeNpp.length; i++) {
+    debugger
+    data.addRows([
+        [{
+            v: detailInfo.userCode,
+            f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + detailInfo.userCode + '</div><div><img src="./static/frontend/assets/images/ico/' + detailInfo.leverValue + '.png"/></div>'
+        }, '']
+    ]);
+    for (var i = 0; i < listNpp.length; i++) {
         data.addRows([
             [{
-                v: treeNpp[i].nppId,
-                f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + treeNpp[i].nppId + '</div>' + ((treeNpp[i].nppId === 'open') ? '' : '<div><img src="./static/frontend/assets/images/ico/' + treeNpp[i].rank + '.png"/></div>')
-            }, treeNpp[i].parentId]
+                v: listNpp[i].userCode,
+                f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + listNpp[i].userCode + '</div>' + ((listNpp[i].userCode === 'open') ? '' : '<div><img src="./static/frontend/assets/images/ico/' + listNpp[i].leverValue + '.png"/></div>')
+            }, listNpp[i].parentIdStr]
         ]);
     }
 
@@ -40,96 +70,23 @@ function drawChart() {
     chart.draw(data, {allowHtml: true});
 }
 
-function viewDidLoadSuccess() {
-    google.charts.load('current', {packages: ["orgchart"]});
-    google.charts.setOnLoadCallback(drawChart);
-
-    if (flag_check == false) {
-        //sendJSONRequest();
-    }
-    sendJSONRequest();
-}
-
-function sendJSONRequest() {
-    loadData('./static/frontend/data/treeNpp.json', drawGraphical);
-    loadData('./static/frontend/data/account.json', requestMBServiceSuccess);
-}
-
-function drawGraphical(jsondata) {
-    treeNpp = JSON.parse(jsondata)[gUserInfo.accountId];
+function drawGraphical(listNpp) {
     google.charts.load('current', {packages: ["orgchart"]});
     google.charts.setOnLoadCallback(drawChart);
 }
 
-//event listener: http request success
-function requestMBServiceSuccess(jsondata) {
-    var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
-    setDefaultInfo(accountDetail);
-    cusInfoObj = accountDetail;
-};
-
-//event listener: http request fail
-function requestMBServiceFail() {
-};
-
-function setDefaultInfo(cusInfo) {
-    document.getElementById("name").innerHTML = cusInfo.fullname;
-    document.getElementById("mobile").innerHTML = cusInfo.mobile;
-    document.getElementById("sponsorName").innerHTML = cusInfo.sponsorName;
-    document.getElementById("rank").innerHTML = cusInfo.rank === '0' ? 'Distributor' : cusInfo.rank === '1' ? 'Member' : 'Professional';
-    document.getElementById("numberTL").innerHTML = cusInfo.numberTL;
-    document.getElementById("numberMSD").innerHTML = cusInfo.numberMSD;
-    document.getElementById("numberDSD").innerHTML = cusInfo.numberDSD;
-    document.getElementById("numberGDSD").innerHTML = cusInfo.numberGDSD;
-}
-
-function cancel() {
-    setDefaultInfo(cusInfoObj);
-    logInfo("cancel");
-
-}
-/*function goBack(){
- navController.popView(true);
- }*/
-function confirmChange() {
-    var mobile = document.getElementById("mobile").value;
-    var address = document.getElementById("address").value;
-    var email = document.getElementById("email").value;
-    var bankName = document.getElementById("bankName").value;
-    var bankDivice = document.getElementById("bankDivice").value;
-    var bankAccount = document.getElementById("bankAccount").value;
-    var bankAccountName = document.getElementById("bankAccountName").value;
-    var fileUpload01 = document.getElementById("id.fileUpload01");
-
-    var mobile = document.getElementById("mobile").value;
-
-    if (mobile != cusInfoObj.mobile && !RE.test(mobile)) {
-        showAlertText(CONST_STR.get('UTILITIES_CHNG_PER_INFO_MOBILE_ERROR_MSG'));
-        return;
-    }
-
-    var email = document.getElementById("email").value;
-
-    var MAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    if (email != cusInfoObj.email && !MAIL.test(email)) {
-        showAlertText(CONST_STR.get('UTILITIES_CHNG_PER_INFO_EMAIL_ERROR_MSG'));
-        return;
-    }
-    // check image
-    // var stringInfo = ""; var arrayArgs = new Array();
-    tmpStr = fileUpload01.value;
-    var checkImage = tmpStr.split('.');
-    var checkTypeImage = checkImage[checkImage.length - 1];
-    if (checkTypeImage != "" && checkTypeImage.toLowerCase() != "jpg" && checkTypeImage.toLowerCase() != "png" && checkTypeImage.toLowerCase() != "gif") {
-        status = 1;
-        document.getElementById("id.checkFile").style.display = '';
-        //document.getElementById("id.lbCheckFile").innerHTML = CONST_STR.get('ERR_INPUT_VALUE');
-        showAlertText(CONST_STR.get('ERR_INPUT_FILE_VALUE'));
-        return;
-    }
-    showAlertText(CONST_STR.get('MENU_CHANGE_INFO_SUCCESS_MESSAGE'));
-    document.addEventListener('closeAlertView', handleAlertChangeInfo, false);
-    logInfo("confirmChange");
+function setDetailInfo(detailInfo) {
+    document.getElementById("name").innerHTML = detailInfo.userInfo.dispName;
+    document.getElementById("mobile").innerHTML = detailInfo.userInfo.phone;
+    document.getElementById("sponsorName").innerHTML = detailInfo.userInfo.parentName;
+    document.getElementById("rank").innerHTML = detailInfo.userInfo.leverValue;
+    document.getElementById("numberNM").innerHTML = detailInfo.numberNM;
+    document.getElementById("numberSM").innerHTML = detailInfo.numberSM;
+    document.getElementById("numberPS").innerHTML = detailInfo.numberPS;
+    document.getElementById("numberPD").innerHTML = detailInfo.numberPD;
+    document.getElementById("numberTL").innerHTML = detailInfo.numberTL;
+    document.getElementById("numberMSD").innerHTML = detailInfo.numberMSD;
+    document.getElementById("numberDSD").innerHTML = detailInfo.numberDSD;
+    document.getElementById("numberGDSD").innerHTML = detailInfo.numberGDSD;
 }
 

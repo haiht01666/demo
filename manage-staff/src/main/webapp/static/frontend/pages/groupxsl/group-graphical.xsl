@@ -32,6 +32,22 @@
                   <td colspan="2"><h5 class="Header"><span>GROUP_GRAPHICAL_MANAGER_GROUP</span></h5></td>
                 </tr>
                 <tr>
+                  <td width="35%" style="padding-left:15px"><h5><span class="input-group">GROUP_GRAPHICAL_NEW</span></h5></td>
+                  <td width="65%"><h5><span id="numberNM"></span></h5></td>
+                </tr>
+                <tr>
+                  <td width="35%" style="padding-left:15px"><h5><span class="input-group">GROUP_GRAPHICAL_SM</span></h5></td>
+                  <td width="65%"><h5><span id="numberSM"></span></h5></td>
+                </tr>
+                <tr>
+                  <td width="35%" style="padding-left:15px"><h5><span class="input-group">GROUP_GRAPHICAL_PS</span></h5></td>
+                  <td width="65%"><h5><span id="numberPS"></span></h5></td>
+                </tr>
+                <tr>
+                  <td width="35%" style="padding-left:15px"><h5><span class="input-group">GROUP_GRAPHICAL_PD</span></h5></td>
+                  <td width="65%"><h5><span id="numberPD"></span></h5></td>
+                </tr>
+                <tr>
                   <td width="35%" style="padding-left:15px"><h5><span class="input-group">GROUP_GRAPHICAL_TL</span></h5></td>
                   <td width="65%"><h5><span id="numberTL"></span></h5></td>
                 </tr>

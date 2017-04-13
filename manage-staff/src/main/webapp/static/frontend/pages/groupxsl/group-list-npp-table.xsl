@@ -5,9 +5,9 @@
     <table width='98%' id ="commission-volume" align='center' class='table-account'>
       <xsl:for-each select="resptable/tabletitle">
         <tr class="trow-title">
-          <th width="10%" align='center'><xsl:value-of select="coltitle1"/></th>
+          <th width="10%" align='center'><xsl:value-of select="coltitle3"/></th>
           <th width="25%"><xsl:value-of select="coltitle2"/></th>
-          <th width="10%"><xsl:value-of select="coltitle3"/></th>
+          <th width="10%"><xsl:value-of select="coltitle1"/></th>
           <th width="10%"><xsl:value-of select="coltitle4"/></th>
           <th width="10%"><xsl:value-of select="coltitle5"/></th>
           <th width="10%"><xsl:value-of select="coltitle6"/></th>
@@ -18,12 +18,12 @@
       </xsl:for-each>
       <xsl:for-each select="resptable/tabletdetail">
         <tr>
-          <td class="tdselct td-head-color"><div class="mobile-mode"><xsl:value-of select="coltitle1"/></div>
-            <div class="content-detail"><xsl:value-of select="colcontent1"/></div></td>
+          <td class="tdselct td-head-color"><div class="mobile-mode"><xsl:value-of select="coltitle3"/></div>
+            <div class="content-detail"><xsl:value-of select="colcontent3"/></div></td>
           <td><div class="td-date-gold"><xsl:value-of select="colcontent2"/></div>
             <div class="mobile-mode-gold"><xsl:value-of select="coltitle2"/></div></td>
-          <td><div class="mobile-mode"><xsl:value-of select="coltitle3"/></div>
-            <div class="content-detail"><xsl:value-of select="colcontent3"/></div></td>
+          <td><div class="mobile-mode"><xsl:value-of select="coltitle1"/></div>
+            <div class="content-detail"><xsl:value-of select="colcontent1"/></div></td>
           <td><div class="mobile-mode"><xsl:value-of select="coltitle4"/></div>
             <div class="content-detail"><xsl:value-of select="colcontent4"/></div></td>
           <td><div class="mobile-mode"><xsl:value-of select="coltitle5"/></div>

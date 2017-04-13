@@ -23,4 +23,5 @@ public interface ApiService {
 	AjaxResult requestSupport(String userCode, String userName, String title, String content);
 	AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit, Integer offset, String orderby);
 	AjaxResult getListOrder(String listUserId, String childId, Integer limit, Integer offset, String orderby);
+    AjaxResult getNppGraphical(String userCode);
 }

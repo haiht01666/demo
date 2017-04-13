@@ -70,4 +70,10 @@ public class ApiController {
 		String orderby = (String) mapGetAllNpp.get("orderby");
 		return service.getListOrder(userCode, childId, limit, offset, orderby);
 	}
+
+	@RequestMapping(value = { "/getNppGraphical" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getNppGraphical(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		return service.getNppGraphical(userCode);
+	}
 }
