@@ -23,4 +23,6 @@ public interface ManageService {
 	public void calcuRevenue(int userId) throws SQLException;
 	
 	public String getLeverUser(int userId)throws SQLException;
+	
+	public int updateOrder(Order order) throws SQLException;
 }

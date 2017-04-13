@@ -110,5 +110,11 @@ public class ManageServiceImpl implements ManageService {
 		return result;
 	}
 
+	@Override
+	public int updateOrder(Order order) throws SQLException {
+		
+		return dao.updateOrder(order);
+	}
+
 	
 }

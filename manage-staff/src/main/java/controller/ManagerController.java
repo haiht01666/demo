@@ -227,4 +227,26 @@ public class ManagerController {
 		return lstRevenue;
 	}
 	
+	@RequestMapping(value = { "/updateOrder" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult updateOrder(@RequestBody Order form) {
+		AjaxResult result = new AjaxResult();
+		if(form.getType() == 0){
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E010", null, Locale.getDefault()));
+			return result;
+		}
+		try {
+			if(service.updateOrder(form) > 0){
+				result.setResult(true);
+				result.setMessage(messageSource.getMessage("S005", null, Locale.getDefault()));
+				return result;
+			}
+		} catch (SQLException e) {
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E010", null, Locale.getDefault()));
+			return result;
+		}
+		return result;
+	}
+	
 }

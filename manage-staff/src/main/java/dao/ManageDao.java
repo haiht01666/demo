@@ -38,5 +38,6 @@ public interface ManageDao {
 	 * @throws SQLException
 	 */
 	public Double totalOrderPrice(User user,int numberDay) throws SQLException;
-
+	
+	public int updateOrder(Order order) throws SQLException;
 }
