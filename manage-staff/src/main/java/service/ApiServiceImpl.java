@@ -194,7 +194,7 @@ public class ApiServiceImpl implements ApiService {
             for (User user : listNpp) {
                 listGroupId.add(user.getUserCode());
             }
-            List<Order> listOrderByTime = dao.getListOrder(false, userCode, -1, null, "id");
+            //List<Order> listOrderByTime = dao.getListOrder(false, userCode, -1, null, "id");
 
 
 
