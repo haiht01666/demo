@@ -17,6 +17,7 @@ function viewBackFromOther() {
 
 
 function viewDidLoadSuccess() {
+    showLoadingMask();
     $.ajax({
         type: "POST",
         url: "/api/getSummaryInfo",
@@ -27,42 +28,46 @@ function viewDidLoadSuccess() {
         success: function (response) {
             hideLoadingMask();
             if (response.result) {
-                detailInfo = response.resultData.userInfo;
-                setDetailInfo(response.resultData);
-                // draw chart
-                listNpp = response.resultData.listNpp;
-                google.charts.load('current', {packages: ["orgchart"]});
-                google.charts.setOnLoadCallback(drawChart);
+
+                setDataInfo(response.resultData);
+
+                //setDetailInfo(response.resultData);
             } else {
-                showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+                showAlertText(CONST_STR.get('GET_INFO_FAIL'));
             }
         },
         error: function () {
             hideLoadingMask();
-            showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+            showAlertText(CONST_STR.get('GET_INFO_FAIL'));
         }
     });
 }
 
-function sendJSONRequest() {
-    // loadData('./static/frontend/data/account.json', function (jsondata) {
-    //     var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
-    //     setVolumeHistory(accountDetail);
-    // });
-    // loadData('./static/frontend/data/listVolumnesWeekly.json', function (jsondata) {
-    //     volumeHistoryList = JSON.parse(jsondata)[gUserInfo.accountId];
-    //     parserVolumeHistory(volumeHistoryList);
-    // });
-}
-function setVolumeHistory(accountDetail) {
-    document.getElementById("dispName").value = accountDetail.fullname;
-    document.getElementById("accountId").value = accountDetail.userid;
-    document.getElementById("status").value = accountDetail.status === '0' ? 'Active' : 'InActive';
-    document.getElementById("rank").value = accountDetail.rank === '0' ? 'Distributor' : accountDetail.rank === '1' ? 'Member' : 'Professional';
-    document.getElementById("standard").value = accountDetail.standard;
-    var tmpTotalVolume = formatNumberToCurrency(accountDetail.totalVolume);
-    if (tmpTotalVolume === '0' || tmpTotalVolume === 0 || !tmpTotalVolume) tmpTotalVolume = '';
-    document.getElementById("totalVolume").value = tmpTotalVolume;
+function setDataInfo(dataInfo) {
+    document.getElementById("dispName").value = dataInfo.userInfo.dispName;
+    document.getElementById("accountId").value = dataInfo.userInfo.userCode;
+    document.getElementById("status").value = dataInfo.userInfo.enable === '0' ? 'Active' : 'InActive';
+    document.getElementById("rank").value = dataInfo.userInfo.leverValue;
+    document.getElementById("groupMonthVolumeTitle").innerHTML = dataInfo.monthTime;
+    document.getElementById("week0Time").innerHTML = dataInfo.week0Time;
+    document.getElementById("week1Time").innerHTML = dataInfo.week1Time;
+    document.getElementById("week2Time").innerHTML = dataInfo.week2Time;
+    document.getElementById("week3Time").innerHTML = dataInfo.week3Time;
+    var monthPersonalVolume = formatNumberToCurrency(dataInfo.monthPersonalVolume);
+    if (monthPersonalVolume === '0' || monthPersonalVolume === 0 || !monthPersonalVolume) monthPersonalVolume = '0';
+    document.getElementById("monthPersonalVolume").value = monthPersonalVolume;
+    var volumeWeek0 = formatNumberToCurrency(dataInfo.groupVolumeWeek0);
+    if (volumeWeek0 === '0' || volumeWeek0 === 0 || !volumeWeek0) volumeWeek0 = '0';
+    document.getElementById("volumeWeek0").value = volumeWeek0;
+    var volumeWeek1 = formatNumberToCurrency(dataInfo.groupVolumeWeek1);
+    if (volumeWeek1 === '0' || volumeWeek1 === 0 || !volumeWeek1) volumeWeek1 = '0';
+    document.getElementById("volumeWeek1").value = volumeWeek1;
+    var volumeWeek2 = formatNumberToCurrency(dataInfo.groupVolumeWeek2);
+    if (volumeWeek2 === '0' || volumeWeek2 === 0 || !volumeWeek2) volumeWeek2 = '0';
+    document.getElementById("volumeWeek2").value = volumeWeek2;
+    var volumeWeek3 = formatNumberToCurrency(dataInfo.groupVolumeWeek3);
+    if (volumeWeek3 === '0' || volumeWeek3 === 0 || !volumeWeek3) volumeWeek3 = '0';
+    document.getElementById("volumeWeek3").value = volumeWeek3;
 }
 
 

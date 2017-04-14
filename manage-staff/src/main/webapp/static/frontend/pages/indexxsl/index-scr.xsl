@@ -41,88 +41,115 @@
                                         </h5>
                                     </td>
                                 </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 10px;">
-                                            <span style="width:35%;padding-left: 7px;">INDEX_PAGE_STATUS_TITLE</span>
-                                        </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="status" style="white-space:pre-wrap;"></span>
-                                    </td>
-                                </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 10px;">
-                                            <span style="width:35%;padding-left: 7px;">INDEX_PAGE_RANK_TITLE</span>
-                                        </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="rank" style="white-space:pre-wrap;"></span>
-                                    </td>
-                                </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 10px;">
-                                            <span style="width:35%;padding-left: 7px;">INDEX_PAGE_TOTAL_VOLUME_TITLE</span>
-                                        </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="totalVolume" style="white-space:pre-wrap;"></span>
-                                    </td>
-                                </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 7px;">
-                                            <span style="width:35%;padding-left: 7px;">TOTAL_VOLUME_WEEK</span>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;">INDEX_PAGE_STATUS_TITLE</span>
+                                            <input id="status" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 7px;padding-left: 15px;">
-                                            <span>&#9830;</span>
-                                            <span style="width:35%;padding-left: 7px;">LIST_VOLUME_WEEK1</span>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;">INDEX_PAGE_RANK_TITLE</span>
+                                            <input id="rank" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
                                         </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="volumeWeek1" style="white-space:pre-wrap;"></span>
                                     </td>
                                 </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 7px;padding-left: 15px;">
-                                            <span>&#9830;</span>
-                                            <span style="width:35%;padding-left: 7px;">LIST_VOLUME_WEEK2</span>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;"><span>INDEX_PAGE_TOTAL_VOLUME_TITLE</span>
+                                                (<span id="groupMonthVolumeTitle"></span>)
+                                            </span>
+
+                                            <input id="monthPersonalVolume" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
                                         </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="volumeWeek2" style="white-space:pre-wrap;"></span>
-                                    </td>
-                                </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 7px;padding-left: 15px;">
-                                            <span>&#9830;</span>
-                                            <span style="width:35%;padding-left: 7px;">LIST_VOLUME_WEEK3</span>
-                                        </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="volumeWeek3" style="white-space:pre-wrap;"></span>
-                                    </td>
-                                </tr>
-                                <tr class="nohover">
-                                    <td style="border:none; width:150px; display:table-cell; font-weight:normal;">
-                                        <div class="input-group" style="margin-bottom: 7px;padding-left: 15px;">
-                                            <span>&#9830;</span>
-                                            <span style="width:35%;padding-left: 7px;">LIST_VOLUME_WEEK4</span>
-                                        </div>
-                                    </td>
-                                    <td style="border:none; width:60%; display:table-cell;">
-                                        <span id="volumeWeek4" style="white-space:pre-wrap;"></span>
                                     </td>
                                 </tr>
 
+                                <tr>
+                                    <td colspan="2">
+                                        <h5 class="Header">
+                                            <span>TOTAL_VOLUME_WEEK</span>
+                                        </h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;"><span>LIST_VOLUME_WEEK</span>
+                                                <span>&#160;</span>
+                                                <span id="week0Time"></span>
+                                            </span>
+
+                                            <input id="volumeWeek0" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;"><span>LIST_VOLUME_WEEK</span>
+                                                <span>&#160;</span>
+                                                <span id="week1Time"></span>
+                                            </span>
+                                            <input id="volumeWeek1" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;"><span>LIST_VOLUME_WEEK</span>
+                                                <span>&#160;</span>
+                                                <span id="week2Time"></span>
+                                            </span>
+                                            <input id="volumeWeek2" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;">
+                                                <span>LIST_VOLUME_WEEK</span>
+                                                <span>&#160;</span>
+                                                <span id="week3Time"></span>
+                                            </span>
+                                            <input id="volumeWeek3" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                             <table width="100%" align="center">
                                 <tr>

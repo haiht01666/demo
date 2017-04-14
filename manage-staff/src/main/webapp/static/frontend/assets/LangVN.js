@@ -3252,11 +3252,11 @@ var pConstants_VN = {
     'INDEX_PAGE_STATUS_TITLE' : 'Trạng thái hiện tại',
     'INDEX_PAGE_RANK_TITLE' : 'Cấp bậc hiện tại',
     'INDEX_PAGE_STANDARD_TITLE' : 'Tiêu chuẩn hiện tại',
-    'INDEX_PAGE_TOTAL_VOLUME_TITLE' : 'Doanh số cá nhân(theo tháng)',
+    'INDEX_PAGE_TOTAL_VOLUME_TITLE' : 'Doanh số cá nhân',
     'INDEX_PAGE_TOTAL_SCORE_TITLE' : 'Tổng điểm đã trả/chưa trả',
     'INDEX_PAGE_DESTINATION_SCORE_TITLE' : 'Điểm được tính để đạt vị trí',
 
-	'INDEX_PAGE_DESTINATION_VOLUME_HISTORY' : 'Danh sách các điểm',
+	'INDEX_PAGE_DESTINATION_VOLUME_HISTORY' : 'Quản lý doanh số',
 
 	//LIST VOLUME HISTORY
     'LIST_VOLUME_HISTORY_TIME' : 'Period Start/Period End',
@@ -3270,6 +3270,7 @@ var pConstants_VN = {
 
 	//
     'TOTAL_VOLUME_WEEK' : 'Doanh số nhóm (Theo tuần)',
+    'LIST_VOLUME_WEEK' : 'Tuần',
     'LIST_VOLUME_WEEK1' : 'Tuần 1',
     'LIST_VOLUME_WEEK2' : 'Tuần 2',
     'LIST_VOLUME_WEEK3' : 'Tuần 3',
@@ -3326,6 +3327,7 @@ var pConstants_VN = {
     'ERR_INPUT_WRONG_NUMBER_DIGIT'						: 'Mật khẩu cần chứa 7 ký tự và tối đa 16 ký tự',
     'MESSAGE_REQUEST_SUPPORT_FAIL' : 'Gửi yêu cầu/phản ánh thất bại!',
     'GET_ALL_NPP_FAIL' : 'Lấy danh sách nhà phân phối thất bại!',
+    'GET_INFO_FAIL' : 'Lấy thông tin thất bại!',
     'GET_ORDER_FAIL' : 'Lấy danh sách đơn hàng thất bại!',
 
 

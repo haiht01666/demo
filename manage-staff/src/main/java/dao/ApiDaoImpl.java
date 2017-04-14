@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
@@ -283,5 +284,44 @@ import java.util.List;
             closeConnection(conn, stmt, rs);
         }
         return lstOrder;
+    }
+
+    @Override public BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String endDate) {
+        BigDecimal weekGroupVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T');";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, startDate);
+            stmt.setString(2, endDate);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                weekGroupVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return weekGroupVolume;
+    }
+    @Override public BigDecimal getMonthPersonalVolume(String userCode, String monthYear) {
+        BigDecimal monthPersonalVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id = ? and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1    , userCode);
+            stmt.setString(2, monthYear);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                monthPersonalVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return monthPersonalVolume;
     }
 }

@@ -3,6 +3,7 @@ package dao;
 import model.Order;
 import model.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ApiDao {
@@ -24,4 +25,7 @@ public interface ApiDao {
 	List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset, String orderby);
 	long getTotalOrder(List<String> listChildId);
 	List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby);
+	BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String monthYear);
+
+	BigDecimal getMonthPersonalVolume(String userCode, String dateTime);
 }

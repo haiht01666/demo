@@ -82,7 +82,6 @@ public class User implements Serializable {
     // cấp đại lý
     private String agentLevel;
 
-
     public String getLeverValue() {
         return leverValue;
     }
@@ -165,8 +164,6 @@ public class User implements Serializable {
 
     private Date lastOrderDate;
 
-    private boolean active;
-
     public int getId() {
         return id;
     }
@@ -239,14 +236,6 @@ public class User implements Serializable {
         this.lastOrderDate = lastOrderDate;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public boolean isEnable() {
         return enable;
     }
@@ -285,14 +274,6 @@ public class User implements Serializable {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public String getUserAvatar() {
