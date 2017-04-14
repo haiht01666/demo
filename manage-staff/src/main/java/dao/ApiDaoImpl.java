@@ -34,10 +34,13 @@ import java.util.List;
                 user.setBankAccount(rs.getString(9));
                 user.setBankBranch(rs.getString(10));
                 user.setBankUser(rs.getString(11));
+
                 Blob blob = rs.getBlob(12);
-                BASE64Encoder encoder = new BASE64Encoder();
-                String blobStr = encoder.encode(blob.getBytes(1, (int) blob.length()));
-                user.setUserAvatar(blobStr);
+                if(blob != null) {
+                    BASE64Encoder encoder = new BASE64Encoder();
+                    String blobStr = encoder.encode(blob.getBytes(1, (int) blob.length()));
+                    user.setUserAvatar(blobStr);
+                }
                 user.setChildId(rs.getString(13));
                 user.setCity(rs.getString(14));
                 user.setParentName(rs.getString(15));
@@ -204,7 +207,6 @@ import java.util.List;
                 user.setDispName(rs.getString(2));
                 user.setChildId(rs.getString(3));
                 user.setParentId(rs.getInt(4));
-                user.setParentIdStr(rs.getString(4));
                 user.setParentName(rs.getString(5));
                 user.setSignUpDate(rs.getDate(6));
                 user.setPhone(rs.getString(7));

@@ -63,8 +63,6 @@ public class User implements Serializable {
 
     private int parentId;
 
-    private String parentIdStr;
-
     private String parentName;
 
     private int lever;
@@ -327,13 +325,5 @@ public class User implements Serializable {
 
     public void setAgentLevel(String agentLevel) {
         this.agentLevel = agentLevel;
-    }
-
-    public String getParentIdStr() {
-        return parentIdStr;
-    }
-
-    public void setParentIdStr(String parentIdStr) {
-        this.parentIdStr = parentIdStr;
     }
 }

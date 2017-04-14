@@ -59,7 +59,6 @@ function sendJSONRequest() {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            debugger;
             hideLoadingMask();
             if (response.result) {
                 parserNppData(response.numberRecord ,response.resultData);

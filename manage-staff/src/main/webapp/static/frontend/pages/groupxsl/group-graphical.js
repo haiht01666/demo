@@ -48,7 +48,6 @@ function drawChart() {
     data.addColumn('string', 'Name');
     data.addColumn('string', 'Manager');
     // For each orgchart box, provide the name, manager, and tooltip to show.
-    debugger
     data.addRows([
         [{
             v: detailInfo.userCode,
@@ -60,7 +59,7 @@ function drawChart() {
             [{
                 v: listNpp[i].userCode,
                 f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + listNpp[i].userCode + '</div>' + ((listNpp[i].userCode === 'open') ? '' : '<div><img src="./static/frontend/assets/images/ico/' + listNpp[i].leverValue + '.png"/></div>')
-            }, listNpp[i].parentIdStr]
+            }, listNpp[i].parentId.toString()]
         ]);
     }
 

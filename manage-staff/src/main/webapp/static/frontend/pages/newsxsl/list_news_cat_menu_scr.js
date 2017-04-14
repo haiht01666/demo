@@ -11,7 +11,6 @@ var pageIndex = 1;
 var isFirefox = navigator.userAgent.match(/firefox/i);
 
 function viewDidLoadSuccess(){
-	debugger;
 	loadLocation();	
     if(isFirefox){
 		var cat = document.getElementsByName("nm.category");

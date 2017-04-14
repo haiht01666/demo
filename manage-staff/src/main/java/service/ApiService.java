@@ -24,4 +24,6 @@ public interface ApiService {
 	AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit, Integer offset, String orderby);
 	AjaxResult getListOrder(String listUserId, String childId, Integer limit, Integer offset, String orderby);
     AjaxResult getNppGraphical(String userCode);
+
+    AjaxResult getSummaryInfo(String userCode);
 }

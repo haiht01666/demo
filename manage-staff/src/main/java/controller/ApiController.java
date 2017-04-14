@@ -76,4 +76,9 @@ public class ApiController {
 		String userCode = (String)mapGetAllNpp.get("userCode");
 		return service.getNppGraphical(userCode);
 	}
+	@RequestMapping(value = { "/getSummaryInfo" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getSummaryInfo(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		return service.getSummaryInfo(userCode);
+	}
 }

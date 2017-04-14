@@ -3248,7 +3248,7 @@ var pConstants_VN = {
 
 	//INDEX PAGE
     'INDEX_PAGE_TITLE' : 'Trang chủ',
-    'INDEX_PAGE_BONUS_TITLE' : 'Thông tin tiền thưởng',
+    'INDEX_PAGE_BONUS_TITLE' : 'Thông tin tổng quan',
     'INDEX_PAGE_STATUS_TITLE' : 'Trạng thái hiện tại',
     'INDEX_PAGE_RANK_TITLE' : 'Cấp bậc hiện tại',
     'INDEX_PAGE_STANDARD_TITLE' : 'Tiêu chuẩn hiện tại',
@@ -3269,6 +3269,7 @@ var pConstants_VN = {
     'LIST_VOLUME_HISTORY_RIGHT_TOTAL' : 'Right Total',
 
 	//
+    'TOTAL_VOLUME_WEEK' : 'Doanh số nhóm (Theo tuần)',
     'LIST_VOLUME_WEEK1' : 'Tuần 1',
     'LIST_VOLUME_WEEK2' : 'Tuần 2',
     'LIST_VOLUME_WEEK3' : 'Tuần 3',
@@ -3335,5 +3336,5 @@ var pConstants_VN = {
     'WRONG_PASSWORD' : 'Quý Khách đã nhập sai mật khẩu. Vui lòng nhập lại',
 	// INDEX PAGE
 	//'INDEX_PAGE' : 'indexxsl/index-scr',
-	'INDEX_PAGE' : 'groupxsl/group-list-npp',
+	'INDEX_PAGE' : 'indexxsl/index-scr',
 };

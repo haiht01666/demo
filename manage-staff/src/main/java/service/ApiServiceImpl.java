@@ -14,15 +14,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service public class ApiServiceImpl implements ApiService {
+@Service
+public class ApiServiceImpl implements ApiService {
 
-    @Autowired ManageService manageService;
+    @Autowired
+    ManageService manageService;
 
-    @Autowired ApiDao dao;
+    @Autowired
+    ApiDao dao;
 
-    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @Override public AjaxResult checkLogin(String userId, String password) {
+    @Override
+    public AjaxResult checkLogin(String userId, String password) {
         AjaxResult result = new AjaxResult();
         try {
             String passwordEncrypt = dao.getPasswordEncrypt(userId);
@@ -39,7 +44,8 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult updatePersonalInfo(User user) {
+    @Override
+    public AjaxResult updatePersonalInfo(User user) {
         AjaxResult result = new AjaxResult();
         try {
             dao.updatePersonalInfo(user);
@@ -50,7 +56,8 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult saveAvatar(User user) {
+    @Override
+    public AjaxResult saveAvatar(User user) {
         AjaxResult result = new AjaxResult();
         try {
             dao.saveAvatar(user);
@@ -61,7 +68,8 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult changePassword(String userCode, String oldPass, String newPass) {
+    @Override
+    public AjaxResult changePassword(String userCode, String oldPass, String newPass) {
         AjaxResult result = new AjaxResult();
         try {
             result.setResult(true);
@@ -77,7 +85,8 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult requestSupport(String userCode, String userName, String title, String content) {
+    @Override
+    public AjaxResult requestSupport(String userCode, String userName, String title, String content) {
         AjaxResult result = new AjaxResult();
         try {
             dao.requestSupport(userCode, userName, title, content);
@@ -88,8 +97,9 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit,
-            Integer offset, String orderby) {
+    @Override
+    public AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit,
+                             Integer offset, String orderby) {
         AjaxResult result = new AjaxResult();
         try {
             long totalNpp = dao.getTotalNpp(directNpp, userCode);
@@ -107,8 +117,9 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult getListOrder(String userCode, String childId, Integer limit, Integer offset,
-            String orderby) {
+    @Override
+    public AjaxResult getListOrder(String userCode, String childId, Integer limit, Integer offset,
+                                   String orderby) {
         AjaxResult result = new AjaxResult();
         try {
             List<User> listNpp = dao.getNpp(false, userCode, -1, offset, "id");
@@ -131,7 +142,8 @@ import java.util.List;
         return result;
     }
 
-    @Override public AjaxResult getNppGraphical(String userCode) {
+    @Override
+    public AjaxResult getNppGraphical(String userCode) {
         AjaxResult result = new AjaxResult();
         try {
             List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
@@ -144,19 +156,19 @@ import java.util.List;
                 String levelUser = manageService.getLeverUser(Integer.parseInt(npp.getUserCode()));
                 if (levelUser.equals(LeverType.New.name())) {
                     nppGraphicModel.setNumberNM(nppGraphicModel.getNumberNM() + 1);
-                }else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
+                } else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
                     nppGraphicModel.setNumberSM(nppGraphicModel.getNumberSM() + 1);
-                }else if (levelUser.equals(LeverType.SALE_PRO.name())) {
+                } else if (levelUser.equals(LeverType.SALE_PRO.name())) {
                     nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
-                }else if (levelUser.equals(LeverType.PRO_DISTRIBUTE.name())) {
+                } else if (levelUser.equals(LeverType.PRO_DISTRIBUTE.name())) {
                     nppGraphicModel.setNumberPD(nppGraphicModel.getNumberPD() + 1);
-                }else if (levelUser.equals(LeverType.TL.name())) {
+                } else if (levelUser.equals(LeverType.TL.name())) {
                     nppGraphicModel.setNumberTL(nppGraphicModel.getNumberTL() + 1);
-                }else if (levelUser.equals(LeverType.MSD.name())) {
+                } else if (levelUser.equals(LeverType.MSD.name())) {
                     nppGraphicModel.setNumberMSD(nppGraphicModel.getNumberMSD() + 1);
-                }else if (levelUser.equals(LeverType.DSD.name())) {
+                } else if (levelUser.equals(LeverType.DSD.name())) {
                     nppGraphicModel.setNumberDSD(nppGraphicModel.getNumberDSD() + 1);
-                }else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
+                } else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
                     nppGraphicModel.setNumberGDSD(nppGraphicModel.getNumberGDSD() + 1);
                 }
                 npp.setAgentLevel(CommonUtils.getLevelChild(userInfo.getChildId(), npp.getChildId()));
@@ -164,6 +176,28 @@ import java.util.List;
             }
             result.setResult(true);
             result.setResultData(nppGraphicModel);
+        } catch (Exception e) {
+            result.setResult(false);
+        }
+        return result;
+    }
+
+    @Override
+    public AjaxResult getSummaryInfo(String userCode) {
+        AjaxResult result = new AjaxResult();
+        try {
+            User userInfo = dao.getLoginInfo(userCode);
+            userInfo.setLeverValue(manageService.getLeverUser(Integer.parseInt(userCode)));
+            List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
+            List<String> listGroupId = new ArrayList<>();
+            listGroupId.add(userCode);
+            for (User user : listNpp) {
+                listGroupId.add(user.getUserCode());
+            }
+            List<Order> listOrderByTime = dao.getListOrder(false, userCode, -1, null, "id");
+
+
+
         } catch (Exception e) {
             result.setResult(false);
         }

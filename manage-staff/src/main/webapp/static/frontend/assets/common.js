@@ -4789,75 +4789,17 @@ var CONST_TIMER_TO_LOGOUT = 300;//timeout 15'
 var gLastUsingTime;
 
 function logout() {
-    if (!interlockStatus) {
-        //save logut status
-		showLoadingMask();
-		var arrayArgs = new Array();
-		arrayArgs.push("LOGOUT");
-		requestBacgroundMBService("CMD_TYPE_LOGOUT", arrayArgs, function(e){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		}, function(){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		});
-		setTimeout(function(){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		}, 5000);
-    }
+    window.onbeforeunload = '';
+    var url = location.protocol + '//' + location.host + location.pathname;
+    window.top.location.href = url;
     setInterlockEnable();
 }
 
 function logoutExit() {
-    if (!interlockStatus) {
-        //save logut status
-		showLoadingMask();
-		var arrayArgs = new Array();
-		arrayArgs.push("LOGOUT");
-		requestBacgroundMBService("CMD_TYPE_LOGOUT", arrayArgs, function(e){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		}, function(){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		});
-		setTimeout(function(){
-			window.onbeforeunload = '';
-			var url = location.protocol + '//' + location.host + location.pathname;
-			if (getURLParam('ver')) {
-				url += '?ver=' + getURLParam('ver');
-			}
-			window.top.location.href = url;
-		}, 5000);
-    }
+    window.onbeforeunload = '';
+    var url = location.protocol + '//' + location.host + location.pathname;
+    window.top.location.href = url;
     setInterlockEnable();
-
-	THEBTouchID.quitApplication('abc', function() {
-
-	}, function() {
-
-	});
 }
 
 function setTimerCheckLogout() {

@@ -1,9 +1,3 @@
-/**
- * Created by TuanNQ1.FSoft
- * User:
- * Date: 14/7/14
- */
-
 /*** VIEW LOAD SUCCESS ***/
 
 var volumeHistoryObj;
@@ -16,28 +10,49 @@ var pageIndex = 1;
 var volumeHistoryList = new Array();
 
 function viewBackFromOther() {
-    logInfo('Back from other view');
-    flag_check = true;
-    setVolumeHistory(volumeHistoryObj);
+    //logInfo('Back from other view');
+    //flag_check = true;
+    //setVolumeHistory(volumeHistoryObj);
 }
 
 
 function viewDidLoadSuccess() {
-    if (flag_check == false) {
-        sendJSONRequest();
-    }
-    sendJSONRequest();
+    $.ajax({
+        type: "POST",
+        url: "/api/getSummaryInfo",
+        data: JSON.stringify({
+            userCode: gUserInfo.userCode
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            hideLoadingMask();
+            if (response.result) {
+                detailInfo = response.resultData.userInfo;
+                setDetailInfo(response.resultData);
+                // draw chart
+                listNpp = response.resultData.listNpp;
+                google.charts.load('current', {packages: ["orgchart"]});
+                google.charts.setOnLoadCallback(drawChart);
+            } else {
+                showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
+        }
+    });
 }
 
 function sendJSONRequest() {
-    loadData('./static/frontend/data/account.json', function (jsondata) {
-        var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
-        setVolumeHistory(accountDetail);
-    });
-    loadData('./static/frontend/data/listVolumnesWeekly.json', function (jsondata) {
-        volumeHistoryList = JSON.parse(jsondata)[gUserInfo.accountId];
-        parserVolumeHistory(volumeHistoryList);
-    });
+    // loadData('./static/frontend/data/account.json', function (jsondata) {
+    //     var accountDetail = JSON.parse(jsondata)[gUserInfo.accountId];
+    //     setVolumeHistory(accountDetail);
+    // });
+    // loadData('./static/frontend/data/listVolumnesWeekly.json', function (jsondata) {
+    //     volumeHistoryList = JSON.parse(jsondata)[gUserInfo.accountId];
+    //     parserVolumeHistory(volumeHistoryList);
+    // });
 }
 function setVolumeHistory(accountDetail) {
     document.getElementById("dispName").value = accountDetail.fullname;
