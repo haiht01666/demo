@@ -73,10 +73,16 @@ CREATE TABLE DB_MANAGE_STAFF.revenues(
 	order_price double,
 	order_percent varchar(50),
     order_id integer not null,
+	byer_name varchar(50),
+	byer_id integer ,
+	receiver_name varchar(50),
+	receiver_id integer,
 	value double,
     type integer ,
     primary key(id),
-    foreign key(order_id) references orders(id)
+    foreign key(order_id) references orders(id),
+	foreign key(byer_id) references users(id),
+	foreign key(receiver_id) references users(id)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 -- set first value increment
