@@ -8,6 +8,7 @@ $(document).ready(function() {
 function initTable(filterDate){
 	var formData = {};
 	formData.cdate = moment(filterDate).format('YYYY-MM-DD');
+	formData.type = 0;
 	$('#tbl-staff').DataTable( {
 		responsive : false,
 		paging : true,
@@ -25,7 +26,7 @@ function initTable(filterDate){
 			infoFiltered : "(filtered from _MAX_ total records)"
 		},
         ajax: {
-            url: "/manage/revenuePersonalAPI",
+            url: "/manage/revenue",
             type: 'POST',
             contentType: "application/json",
             data: function ( d ) {
@@ -33,9 +34,9 @@ function initTable(filterDate){
             }
         },
         columns: [
-            { data: "userName" },
+            { data: "receiverId" },
             { data: "orderName" },
-            { data: "cdateString" },
+            { data: "cdate" },
             { data: "orderPrice" },
             { data: "revenuePecent" },
             { data: "revenueValue" }

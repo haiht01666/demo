@@ -1,9 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -161,9 +158,6 @@ public class ManagerController {
 				result.setResult(true);
 				result.setMessage(messageSource.getMessage("S004", null, Locale.getDefault()));
 				result.setResultData(form);
-				// calculator revenue
-				service.calcuRevenue(form.getUserId());
-				service.calcuRevenue(form.getParentId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -198,31 +192,10 @@ public class ManagerController {
 		return "account/revenuePersonal";
 	}
 
-	@RequestMapping(value = { "/revenuePersonalAPI" }, method = RequestMethod.POST)
-	public @ResponseBody RevenueResult revenuePersonal(@RequestBody RevenueForm form) {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	@RequestMapping(value = { "/revenue" }, method = RequestMethod.POST)
+	public @ResponseBody RevenueResult revenuePersonal(@RequestBody RevenueForm form) throws SQLException {
 		RevenueResult lstRevenue = new RevenueResult();
-		Revenue  revenue = new Revenue();
-		revenue.setCdate(form.getCdate());
-		revenue.setOrderName("Mỹ phẩm");
-		revenue.setOrderPrice(100D);
-		revenue.setRevenuePecent("10%");
-		revenue.setRevenueValue(10D);
-		revenue.setUserName("Hải");
-		revenue.setCdateString(df.format(form.getCdate()));
-		List<Revenue> lst = new ArrayList<>();
-		
-		Revenue  revenue1 = new Revenue();
-		revenue1.setCdate(form.getCdate());
-		revenue1.setOrderName("Mỹ phẩm");
-		revenue1.setOrderPrice(100D);
-		revenue1.setRevenuePecent("10%");
-		revenue1.setRevenueValue(10D);
-		revenue1.setUserName("Hải");
-		revenue1.setCdateString(df.format(form.getCdate()));
-
-		lst.add(revenue);
-		lst.add(revenue1);
+		List<Revenue> lst = service.getAllRevenue(form);
 		lstRevenue.setData(lst);
 		return lstRevenue;
 	}

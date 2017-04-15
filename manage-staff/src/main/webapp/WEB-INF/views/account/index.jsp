@@ -60,7 +60,7 @@
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>
 								</c:if></td>
 							<td>${member.leverValue }</td>
-							<td>${member.active }</td>
+							<td>Active</td>
 
 						</tr>
 					</c:forEach>

@@ -48,11 +48,11 @@ $(document).ready(function() {
 		$('#modal-header').text('Edit order');
 		$('#btn-add-order').text('Edit');
 		$('#txt-member-id').val($('tr.selected td:nth-child(1)').text());
-		$('#txt-member-name').val($('tr.selected td:nth-child(2)').text());
-		$('#txt-order-name').val($('tr.selected td:nth-child(3)').text());
-		$('#txt-order-price').val($('tr.selected td:nth-child(5)').data('price'));
-		$('#txt-order-quantity').val($('tr.selected td:nth-child(6)').text());
-		$('#order-type').val($('tr.selected td:nth-child(7)').data('id'));
+		$('#txt-order-name').val($('tr.selected td:nth-child(2)').text());
+		$('#txt-order-date').val($('tr.selected td:nth-child(3)').text());
+		$('#txt-order-price').val($('tr.selected td:nth-child(4)').data('price'));
+		$('#txt-order-quantity').val($('tr.selected td:nth-child(5)').text());
+		$('#order-type').val($('tr.selected td:nth-child(6)').data('id'));
 		$('#add-order').modal('show');
 	
 		$('#btn-edit-order').on('click',function(){
@@ -163,7 +163,6 @@ function innitModal(){
 	 $('#msg-error-modal').empty();
 	 $('#btn-add-order').attr('disabled',true);
 	 $('#txt-member-id').val('')
-	 $('#txt-member-name').val('')
 	 $('#txt-order-name').val('')
 	 $('#txt-order-price').val('')
 	 $('#txt-order-quantity').val('')
@@ -172,14 +171,13 @@ function innitModal(){
 
 function getFormData(){
 	var formData = {};
+	formData.orderDate = $('#txt-order-date').val();
 	formData.id = $('tr.selected').data('id');
 	formData.userId =  $('#txt-member-id').val();
-	formData.userName =  $('#txt-member-name').val();
 	formData.orderName =  $('#txt-order-name').val();
 	formData.price =  $('#txt-order-price').val();
 	formData.quantity =  $('#txt-order-quantity').val();
 	formData.type =  $('#order-type').val();
-	formData.parentId = $('#txt-parent-id').val();
 	return formData;
 }
 

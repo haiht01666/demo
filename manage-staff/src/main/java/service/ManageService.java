@@ -5,6 +5,8 @@ import java.util.List;
 
 import model.EditRoleForm;
 import model.Order;
+import model.Revenue;
+import model.RevenueForm;
 import model.User;
 
 public interface ManageService {
@@ -20,9 +22,10 @@ public interface ManageService {
 	
 	public int createOrder(Order order) throws SQLException;
 	
-	public void calcuRevenue(int userId) throws SQLException;
-	
 	public String getLeverUser(int userId)throws SQLException;
 	
 	public int updateOrder(Order order) throws SQLException;
+	
+	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException; 
+	
 }

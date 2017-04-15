@@ -30,24 +30,17 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Tên thành viên</th>
+						<th>Mã người hưởng</th>
 						<th>Tên sản phẩm</th>
-						<th>Ngày mua sản phẩm</th>
-						<th>Giá trị sản phẩm</th>
+						<th>Ngày mua</th>
+						<th>Giá trị đơn hàng</th>
 						<th>Tỷ lệ chiết khấu</th>
 						<th>Giá trị chiết khấu</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr data-id=1>
-						<td>Hoàng Tiến Hải</td>
-						<td>Mỹ phẩm</td>
-						<td>2011/04/25</td>
-						<td>100.000</td>
-						<td>10%</td>
-						<td>10.000</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>

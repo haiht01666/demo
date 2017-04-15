@@ -39,8 +39,7 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Id thành viên</th>
-						<th>Tên Thành viên</th>
+						<th>Mã người mua</th>
 						<th>Tên sản phẩm</th>
 						<th>Ngày mua</th>
 						<th>Giá</th>
@@ -52,8 +51,7 @@
 				<tbody class="tbody-staff">
 					<c:forEach items="${orders }" var="order">
 						<tr data-id=${order.id }>
-							<td>${order.userId }</td>
-							<td><a href="/manage/detail?id=${order.userId }">${order.userName }</a></td>
+							<td><a href="/manage/detail?id=${order.userId }">${order.userId }</a></td>
 							<td>${order.orderName }</td>
 							<td>${order.orderDate }</td>
 							<td data-price=${order.price }><fmt:formatNumber
@@ -85,7 +83,7 @@
 							<form>
 								<div class="form-group">
 									<input type="number" id="txt-member-id" class="form-control"
-										placeholder="nhập mã thành viên" maxlength="6" min="100000"
+										placeholder="mã thành viên" maxlength="6" min="100000"
 										max="999999"> <input type="hidden" id="txt-parent-id"
 										value="" />
 								</div>
@@ -97,17 +95,22 @@
 
 								<div class="form-group">
 									<input type="text" id="txt-order-name" class="form-control"
-										placeholder="nhập tên sản phẩm">
+										placeholder="tên sản phẩm">
+								</div>
+								
+								<div class="form-group">
+									<input type="date" id="txt-order-date" class="form-control"
+										placeholder="ngày mua">
 								</div>
 
 								<div class="form-group">
 									<label id="lbl-price"></label> <input type="text"
 										id="txt-order-price" class="form-control"
-										placeholder="nhập giá sản phẩm">
+										placeholder="giá sản phẩm">
 								</div>
 								<div class="form-group">
 									<input type="number" id="txt-order-quantity"
-										class="form-control" placeholder="nhập số lượng" min="1">
+										class="form-control" placeholder="số lượng" min="1">
 								</div>
 								<div class="form-group">
 									<select id="order-type" class="form-control">

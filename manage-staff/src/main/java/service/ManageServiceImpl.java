@@ -1,17 +1,25 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import constant.LeverType;
+import constant.OrderType;
+import constant.RevenuePercent;
+import constant.RevenueType;
 import constant.Roles;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import model.EditRoleForm;
 import model.Order;
+import model.Revenue;
+import model.RevenueForm;
 import model.User;
 
 @Service
@@ -21,23 +29,23 @@ public class ManageServiceImpl implements ManageService {
 	ManageDao dao;
 
 	@Override
-	public int createMember(User parent,int lever) throws SQLException {
+	public int createMember(User parent, int lever) throws SQLException {
 
-		return dao.createMember(parent,lever);
+		return dao.createMember(parent, lever);
 	}
 
 	@Override
-	public List<User> lstUser(String role) throws SQLException{
-		if(role.equals(Roles.ROLE_ADMIN.toString()))
+	public List<User> lstUser(String role) throws SQLException {
+		if (role.equals(Roles.ROLE_ADMIN.toString()))
 			return dao.getStaffs();
-		else if(role.equals(Roles.ROLE_SPADMIN.toString()))
+		else if (role.equals(Roles.ROLE_SPADMIN.toString()))
 			return dao.getMembers();
 		else
 			return null;
 	}
 
 	@Override
-	public int editRole(EditRoleForm formdata) throws SQLException{
+	public int editRole(EditRoleForm formdata) throws SQLException {
 		return dao.editRole(formdata);
 	}
 
@@ -56,26 +64,77 @@ public class ManageServiceImpl implements ManageService {
 		return dao.createOrder(order);
 	}
 
-	@Override
-	public void calcuRevenue(int userId) throws SQLException {
-		User user = dao.getUserById(userId);
-		String packageValue = getLever(userId);
-		//String packageValueParent = checkPackage(user.getParentId());
-		if(packageValue.equals(LeverType.PRO_DISTRIBUTE.name())){
-			//cá nhân được 30% 
+	private Revenue calcuRevenuePersonal(Order order) throws SQLException {
+		// String packageValueParent = checkPackage(user.getParentId());
+		Revenue revenue = new Revenue();
+		// only calcu revenue for order product or by package
+		if (order.getType() == OrderType.ORDER_PRODUCT.getCode()) {
+			revenue.setByerId(order.getUserId());
+			revenue.setOrderId(order.getId());
+			revenue.setOrderName(order.getOrderName());
+			revenue.setByerName(order.getUserName());
+			revenue.setOrderPrice(order.getPrice() * order.getQuantity());
+			revenue.setCdate(order.getOrderDate());
+			User user = dao.getUserById(order.getUserId());
+			if (user.getLever() != LeverType.New.getValue()) {
+
+				Calendar dateCompare = Calendar.getInstance();
+				dateCompare.setTime(user.getCdate());
+				dateCompare.add(Calendar.MONTH, 2);
+				dateCompare.set(Calendar.DAY_OF_MONTH, 1);
+				if (order.getOrderDate().after(dateCompare.getTime()))
+					return revenue;
+			}
+			String packageValue = getLever(order.getUserId());
+			if (packageValue.equals(LeverType.PRO_DISTRIBUTE.name())) {
+				// cá nhân được 30%
+			}
+			if (packageValue.equals(LeverType.SALE_MEMBER.name())) {
+				// cá nhân được 10%
+				revenue.setReceiverId(order.getUserId());
+				revenue.setReceiverName(order.getUserName());
+				revenue.setRevenuePecent(RevenuePercent.TEN.toString());
+				revenue.setType(RevenueType.PERSONAL.getValue());
+				revenue.setRevenueValue(RevenuePercent.TEN.getValue() * order.getTotal());
+			}
+			if (packageValue.equals(LeverType.SALE_PRO.name())) {
+				// cá nhân được 15%
+				revenue.setReceiverId(order.getUserId());
+				revenue.setReceiverName(order.getUserName());
+				revenue.setRevenuePecent(RevenuePercent.FEFTEEN.toString());
+				revenue.setType(RevenueType.PERSONAL.getValue());
+				revenue.setRevenueValue(RevenuePercent.FEFTEEN.getValue() * order.getTotal());
+			}
+
 		}
-		if(packageValue.equals(LeverType.SALE_MEMBER.name())){
-			//cá nhân được 10% 
-			//cha được hưởng 10%
-		}
-		if(packageValue.equals(LeverType.SALE_PRO.name())){
-			//cá nhân được 15% 
-			//cha được hương 10%
-		}
-		// TODO Auto-generated method stub
-		
+		return revenue;
+
 	}
-	
+
+	private Revenue calcuRevenueGroup(Order order) throws SQLException {
+		User user = dao.getUserById(order.getUserId());
+		User parent = dao.getUserById(user.getParentId());
+		// String packageValueParent = checkPackage(user.getParentId());
+		Revenue revenue = new Revenue();
+		if (order.getType() == OrderType.ORDER_PACKAGE.getCode()
+				|| order.getType() == OrderType.ORDER_PRODUCT.getCode()) {
+			revenue.setByerId(order.getUserId());
+			revenue.setOrderId(order.getId());
+			revenue.setOrderName(order.getOrderName());
+			revenue.setByerName(order.getUserName());
+			revenue.setOrderPrice(order.getTotal());
+			revenue.setCdate(order.getOrderDate());
+
+			revenue.setReceiverId(parent.getId());
+			revenue.setReceiverName(parent.getDispName());
+			revenue.setRevenuePecent(RevenuePercent.TEN.toString());
+			revenue.setType(RevenueType.GROUP.getValue());
+			revenue.setRevenueValue(RevenuePercent.TEN.getValue() * order.getTotal());
+		}
+
+		return revenue;
+	}
+
 	@Override
 	public String getLeverUser(int userId) throws SQLException {
 		return getLever(userId);
@@ -83,28 +142,30 @@ public class ManageServiceImpl implements ManageService {
 
 	/**
 	 * check package of user
-	 * @param userId user id
+	 * 
+	 * @param userId
+	 *            user id
 	 * @return package value
 	 */
-	private String getLever(int userId)throws SQLException{
+	private String getLever(int userId) throws SQLException {
 		User user = dao.getUserById(userId);
-		String result = "";	
-		if(user.getLever() == LeverType.New.getValue()){
+		String result = "";
+		if (user.getLever() == LeverType.New.getValue()) {
 			Double totalPrice = dao.totalOrderPrice(user, TimePeriodCheck.TIME_ORDER_PERIOD_45);
-			if(totalPrice >= LeverType.PRO_DISTRIBUTE.getAmount())
+			if (totalPrice >= LeverType.PRO_DISTRIBUTE.getAmount())
 				return LeverType.PRO_DISTRIBUTE.name();
-			if(totalPrice >= LeverType.SALE_PRO.getAmount())
+			if (totalPrice >= LeverType.SALE_PRO.getAmount())
 				return LeverType.SALE_PRO.name();
-			if(totalPrice > LeverType.SALE_MEMBER.getAmount())
+			if (totalPrice >= LeverType.SALE_MEMBER.getAmount())
 				return LeverType.SALE_MEMBER.name();
 			else
 				return LeverType.New.name();
-		}else{
-			if(user.getLever() == LeverType.SALE_MEMBER.getValue())
+		} else {
+			if (user.getLever() == LeverType.SALE_MEMBER.getValue())
 				return LeverType.SALE_MEMBER.name();
-			if(user.getLever() == LeverType.SALE_PRO.getValue())
+			if (user.getLever() == LeverType.SALE_PRO.getValue())
 				return LeverType.SALE_PRO.name();
-			if(user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
+			if (user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
 				return LeverType.PRO_DISTRIBUTE.name();
 		}
 		return result;
@@ -112,9 +173,37 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public int updateOrder(Order order) throws SQLException {
-		
 		return dao.updateOrder(order);
 	}
 
-	
+	@Override
+	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(form.getCdate());
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date dateFrom = cal.getTime();
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date dateTo = cal.getTime();
+		List<Order> lstOrder = dao.getAllOrder(dateFrom, dateTo);
+
+		List<Revenue> lstRevenue = new ArrayList<>();
+		if (form.getType() == RevenueType.PERSONAL.getValue()) {
+			for (Order order : lstOrder) {
+				Revenue revenue = calcuRevenuePersonal(order);
+				if (revenue.getRevenueValue() != null) {
+					lstRevenue.add(revenue);
+				}
+			}
+		}
+		if (form.getType() == RevenueType.GROUP.getValue()) {
+			for (Order order : lstOrder) {
+				Revenue revenue = calcuRevenueGroup(order);
+				if (revenue.getRevenueValue() != null) {
+					lstRevenue.add(revenue);
+				}
+			}
+		}
+		return lstRevenue;
+	}
+
 }

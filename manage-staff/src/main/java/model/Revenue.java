@@ -16,6 +16,66 @@ public class Revenue {
 	private Double revenueValue;
 	
 	private String cdateString;
+	
+	private String byerName;
+	
+	private int byerId;
+	
+	private String receiverName;
+	
+	private int receiverId;
+	
+	private int orderId;
+
+	private int type;
+	
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String getByerName() {
+		return byerName;
+	}
+
+	public void setByerName(String byerName) {
+		this.byerName = byerName;
+	}
+
+	public int getByerId() {
+		return byerId;
+	}
+
+	public void setByerId(int byerId) {
+		this.byerId = byerId;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public int getReceiverId() {
+		return receiverId;
+	}
+
+	public void setReceiverId(int receiverId) {
+		this.receiverId = receiverId;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
 	public String getCdateString() {
 		return cdateString;

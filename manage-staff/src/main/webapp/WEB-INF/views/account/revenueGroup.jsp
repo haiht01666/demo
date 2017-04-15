@@ -25,44 +25,17 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Tite</th>
-						<th>Date</th>
-						<th>Content</th>
-						<th>Member</th>
+						<th>Mã người hưởng</th>
+						<th>Mã người mua</th>
+						<th>Tên sản phẩm</th>
+						<th>Ngày mua</th>
+						<th>Giá trị đơn hàng</th>
+						<th>Tỷ lệ chiết khấu</th>
+						<th>Giá trị chiết khấu</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr data-id=1>
-						<td>feedback 1</td>
-						<td>2011/04/25</td>
-						<td>Content 1</td>
-						<td><a href="details.html">Tiger Nixon</a></td>
-					</tr>
-					<tr>
-						<td>feedback 2</td>
-						<td>2011/04/25</td>
-						<td>Content 2</td>
-						<td><a href="details.html">Member 2</a></td>
-					</tr>
-					<tr>
-						<td>feedback 3</td>
-						<td>2011/04/25</td>
-						<td>Content 3</td>
-						<td><a href="details.html">Member 3</a></td>
-					</tr>
-					<tr>
-						<td>feedback 4</td>
-						<td>2011/04/25</td>
-						<td>Content 4</td>
-						<td><a href="details.html">Member 4</a></td>
-					</tr>
-					<tr>
-						<td>feedback 5</td>
-						<td>2011/04/25</td>
-						<td>Content 5</td>
-						<td><a href="details.html">Member 5</a></td>
-					</tr>
 
 				</tbody>
 			</table>
