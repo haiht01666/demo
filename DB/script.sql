@@ -42,13 +42,11 @@ CREATE TABLE DB_MANAGE_STAFF.orders(
 	id integer not null auto_increment,
     name varchar(50),
     cdate datetime,
-    user_name varchar(50),
     user_id integer not null,
 	price double,
 	quantity integer,
 	type integer,
 	total double,
-	proactive tinyint(1),
     primary key(id),
     foreign key(user_id) references users(id)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
@@ -59,30 +57,9 @@ CREATE TABLE DB_MANAGE_STAFF.feedbacks(
     title varchar(50),
     cdate datetime,
     content varchar(200),
-    user_name varchar(50),
     user_id integer not null,
     primary key(id),
     foreign key(user_id) references users(id)
-)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
-
--- create table feedback
-CREATE TABLE DB_MANAGE_STAFF.revenues(
-	id integer not null auto_increment,
-    cdate datetime,
-    order_name varchar(50),
-	order_price double,
-	order_percent varchar(50),
-    order_id integer not null,
-	byer_name varchar(50),
-	byer_id integer ,
-	receiver_name varchar(50),
-	receiver_id integer,
-	value double,
-    type integer ,
-    primary key(id),
-    foreign key(order_id) references orders(id),
-	foreign key(byer_id) references users(id),
-	foreign key(receiver_id) references users(id)
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 -- set first value increment
