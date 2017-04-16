@@ -72,37 +72,37 @@ public class ManageServiceImpl implements ManageService {
 			revenue.setByerId(order.getUserId());
 			revenue.setOrderId(order.getId());
 			revenue.setOrderName(order.getOrderName());
-			revenue.setByerName(order.getUserName());
 			revenue.setOrderPrice(order.getPrice() * order.getQuantity());
 			revenue.setCdate(order.getOrderDate());
 			User user = dao.getUserById(order.getUserId());
-			if (user.getLever() != LeverType.New.getValue()) {
-
-				Calendar dateCompare = Calendar.getInstance();
-				dateCompare.setTime(user.getCdate());
-				dateCompare.add(Calendar.MONTH, 2);
-				dateCompare.set(Calendar.DAY_OF_MONTH, 1);
-				if (order.getOrderDate().after(dateCompare.getTime()))
-					return revenue;
+			String packageValue = LeverType.New.name();
+			if (user.getLever() == LeverType.New.getValue()) {
+				// if type is new then calculate lever follow by total value of
+				// order interval 45 day
+			
+				packageValue = dao.getLever(user.getCdate(),order.getOrderDate(), order.getUserId());
+			} else {
+				if (user.getLever() == LeverType.SALE_MEMBER.getValue())
+					packageValue = LeverType.SALE_MEMBER.name();
+				if (user.getLever() == LeverType.SALE_PRO.getValue())
+					packageValue = LeverType.SALE_PRO.name();
+				if (user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
+					packageValue = LeverType.PRO_DISTRIBUTE.name();
 			}
-			String packageValue = getLever(order.getUserId());
+			revenue.setReceiverId(order.getUserId());
 			if (packageValue.equals(LeverType.PRO_DISTRIBUTE.name())) {
-				// cá nhân được 30%
+				// cá nhân được 20%
+				revenue.setRevenuePecent(RevenuePercent.TWENTY.toString());
+				revenue.setRevenueValue(RevenuePercent.TWENTY.getValue() * order.getTotal());
 			}
 			if (packageValue.equals(LeverType.SALE_MEMBER.name())) {
 				// cá nhân được 10%
-				revenue.setReceiverId(order.getUserId());
-				revenue.setReceiverName(order.getUserName());
 				revenue.setRevenuePecent(RevenuePercent.TEN.toString());
-				revenue.setType(RevenueType.PERSONAL.getValue());
 				revenue.setRevenueValue(RevenuePercent.TEN.getValue() * order.getTotal());
 			}
 			if (packageValue.equals(LeverType.SALE_PRO.name())) {
 				// cá nhân được 15%
-				revenue.setReceiverId(order.getUserId());
-				revenue.setReceiverName(order.getUserName());
 				revenue.setRevenuePecent(RevenuePercent.FEFTEEN.toString());
-				revenue.setType(RevenueType.PERSONAL.getValue());
 				revenue.setRevenueValue(RevenuePercent.FEFTEEN.getValue() * order.getTotal());
 			}
 
@@ -149,26 +149,15 @@ public class ManageServiceImpl implements ManageService {
 	 */
 	private String getLever(int userId) throws SQLException {
 		User user = dao.getUserById(userId);
-		String result = "";
-		if (user.getLever() == LeverType.New.getValue()) {
-			Double totalPrice = dao.totalOrderPrice(user, TimePeriodCheck.TIME_ORDER_PERIOD_45);
-			if (totalPrice >= LeverType.PRO_DISTRIBUTE.getAmount())
-				return LeverType.PRO_DISTRIBUTE.name();
-			if (totalPrice >= LeverType.SALE_PRO.getAmount())
-				return LeverType.SALE_PRO.name();
-			if (totalPrice >= LeverType.SALE_MEMBER.getAmount())
-				return LeverType.SALE_MEMBER.name();
-			else
-				return LeverType.New.name();
-		} else {
-			if (user.getLever() == LeverType.SALE_MEMBER.getValue())
-				return LeverType.SALE_MEMBER.name();
-			if (user.getLever() == LeverType.SALE_PRO.getValue())
-				return LeverType.SALE_PRO.name();
-			if (user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
-				return LeverType.PRO_DISTRIBUTE.name();
-		}
-		return result;
+		Double totalPrice = dao.totalOrderPrice(user, TimePeriodCheck.TIME_ORDER_PERIOD_45);
+		if (totalPrice >= LeverType.PRO_DISTRIBUTE.getAmount())
+			return LeverType.PRO_DISTRIBUTE.name();
+		if (totalPrice >= LeverType.SALE_PRO.getAmount())
+			return LeverType.SALE_PRO.name();
+		if (totalPrice >= LeverType.SALE_MEMBER.getAmount())
+			return LeverType.SALE_MEMBER.name();
+		else
+			return LeverType.New.name();
 	}
 
 	@Override
@@ -206,4 +195,13 @@ public class ManageServiceImpl implements ManageService {
 		return lstRevenue;
 	}
 
+	public static void main(String[] arg) {
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		// cal.add(cal.DATE, 1);
+		System.err.println(date);
+		System.err.println(cal.getTime());
+		System.err.println(date.after(cal.getTime()));
+	}
 }

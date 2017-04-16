@@ -42,6 +42,7 @@ $(document).ready(function() {
 	// edit row
 	$('#edit-data').on( 'click', function () {
 		emptyMessageError();
+		$('#lbl-price').empty();
 		$('#btn-edit-order').show();
 		$('#btn-add-order').hide();
 		// set title modal
@@ -50,7 +51,7 @@ $(document).ready(function() {
 		$('#txt-member-id').val($('tr.selected td:nth-child(1)').text());
 		$('#txt-order-name').val($('tr.selected td:nth-child(2)').text());
 		$('#txt-order-date').val($('tr.selected td:nth-child(3)').text());
-		$('#txt-order-price').val($('tr.selected td:nth-child(4)').data('price'));
+		$('#txt-order-price').val(parseFloat($('tr.selected td:nth-child(4)').data('price')));
 		$('#txt-order-quantity').val($('tr.selected td:nth-child(5)').text());
 		$('#order-type').val($('tr.selected td:nth-child(6)').data('id'));
 		$('#add-order').modal('show');

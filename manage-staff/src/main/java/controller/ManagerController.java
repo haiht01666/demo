@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -149,7 +148,6 @@ public class ManagerController {
 			result.setResult(false);
 			result.setMessage(messageSource.getMessage("E008", null, Locale.getDefault()));
 		}
-		form.setOrderDate(new Date());
 		try {
 			if (service.createOrder(form) == 0) {
 				result.setResult(false);

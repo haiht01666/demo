@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import constant.LeverType;
 import constant.OrderType;
+import constant.TimePeriodCheck;
 import model.EditRoleForm;
 import model.Order;
 import model.User;
@@ -364,6 +366,67 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			rs.close();
 		}
 		return lstOrder;
+	}
+
+	@Override
+	public String getLever(Date dateFrom, Date dateTo ,int userId) throws SQLException {
+		String result = LeverType.New.name();
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and cdate between ? and ? group by user_id  ";
+		boolean check = false;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userId);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(dateFrom);
+			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_45);
+			Calendar cal2 = Calendar.getInstance();
+			cal2.setTime(dateTo);
+			cal2.add(Calendar.DATE, -1);
+			if(dateTo.after(cal.getTime())){
+				stmt.setDate(2, new java.sql.Date(dateFrom.getTime()));
+				stmt.setDate(3, new java.sql.Date(cal.getTime().getTime()));
+				check = true;
+			}else{
+				stmt.setDate(2, new java.sql.Date(dateFrom.getTime()));
+				stmt.setDate(3, new java.sql.Date(cal2.getTime().getTime()));
+			}
+			rs = stmt.executeQuery();
+			Double total = 0.0 ;
+			while (rs.next()) {
+				total = rs.getDouble(1);
+			}
+			if(check && total < LeverType.SALE_MEMBER.getAmount()){
+				Calendar cal1 = Calendar.getInstance();
+				cal1.setTime(cal.getTime());
+				cal1.set(Calendar.DAY_OF_MONTH,cal1.getActualMaximum(Calendar.DAY_OF_MONTH));
+				if(dateTo.after(cal1.getTime())){
+					stmt.setDate(2, new java.sql.Date(cal.getTime().getTime()));
+					stmt.setDate(3, new java.sql.Date(cal1.getTime().getTime()));
+				}else{
+					stmt.setDate(2, new java.sql.Date(cal.getTime().getTime()));
+					stmt.setDate(3, new java.sql.Date(cal2.getTime().getTime()));
+				}
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					total = rs.getDouble(1);
+				}
+			}
+			if(total >= LeverType.PRO_DISTRIBUTE.getAmount())
+				return LeverType.PRO_DISTRIBUTE.name();
+			else if(total >= LeverType.SALE_PRO.getAmount())
+				return LeverType.SALE_PRO.name();
+			else if(total >= LeverType.SALE_MEMBER.getAmount())
+				return LeverType.SALE_MEMBER.name();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
 	}
 
 }
