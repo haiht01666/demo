@@ -17,7 +17,7 @@ import java.util.List;
 
     @Override public User getLoginInfo(String userId) {
         User user = new User();
-        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
+        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.signup_date FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -45,6 +45,7 @@ import java.util.List;
                 user.setChildId(rs.getString(13));
                 user.setCity(rs.getString(14));
                 user.setParentName(rs.getString(15));
+                user.setSignUpDate(rs.getDate(16));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -288,12 +289,32 @@ import java.util.List;
 
     @Override public BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String endDate) {
         BigDecimal weekGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T');";
+        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, startDate);
             stmt.setString(2, endDate);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                weekGroupVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return weekGroupVolume;
+    }
+    @Override public BigDecimal getWeekPersionalVolume(String userCode, String startDate, String endDate) {
+        BigDecimal weekGroupVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id = ? AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
+            stmt.setString(2, startDate);
+            stmt.setString(3, endDate);
             rs = stmt.executeQuery();
             while(rs.next()){
                 weekGroupVolume = rs.getBigDecimal(1);
@@ -323,5 +344,63 @@ import java.util.List;
             closeConnection(conn, stmt, rs);
         }
         return monthPersonalVolume;
+    }
+
+    @Override public BigDecimal getMonthGroupVolume(List<String> listGroupId, String monthYear) {
+        BigDecimal monthGroupVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, monthYear);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                monthGroupVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return monthGroupVolume;
+    }
+
+    @Override public BigDecimal getYearPersonalVolume(String userCode, String year) {
+        BigDecimal monthPersonalVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id = ? and  DATE_FORMAT(cdate,'%Y') = ?";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1    , userCode);
+            stmt.setString(2, year);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                monthPersonalVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return monthPersonalVolume;
+    }
+
+    @Override public BigDecimal getYearGroupVolume(List<String> listGroupId, String year) {
+        BigDecimal monthGroupVolume = new BigDecimal(0);
+        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") and  DATE_FORMAT(cdate,'%Y') = ?";
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, year);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                monthGroupVolume = rs.getBigDecimal(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            closeConnection(conn, stmt, rs);
+        }
+        return monthGroupVolume;
     }
 }

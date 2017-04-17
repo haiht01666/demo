@@ -19,7 +19,7 @@
                                 <tr>
                                     <td width="100%">
                                         <h5>
-                                            <b>Wellcome:</b>
+                                            <b>Wellcome:    </b>
                                             <span id="dispName"></span>
                                         </h5>
                                     </td>
@@ -27,7 +27,7 @@
                                 <tr>
                                     <td width="100%">
                                         <h5>
-                                            <b>ID:</b>
+                                            <b>ID:    </b>
                                             <span id="accountId"></span>
                                         </h5>
                                     </td>
@@ -162,11 +162,11 @@
                                 <tr>
                                     <td colspan="2" align="left" valign="middle" class="td-text">
                                         <div class="input-group" style="width:50%">
-                                            <input value="weekly" checked="true" name="token" type="radio"/>
+                                            <input value="weekly" checked="true" name="time" type="radio"/>
                                             <span class="input-group-addon">Theo Tuần</span>
-                                            <input value="monthly" name="token" type="radio" style="margin-left:10px"/>
+                                            <input value="monthly" name="time" type="radio" style="margin-left:10px"/>
                                             <span class="input-group-addon">Theo Tháng</span>
-                                            <input value="yearly" name="token" type="radio" style="margin-left:10px"/>
+                                            <input value="yearly" name="time" type="radio" style="margin-left:10px"/>
                                             <span class="input-group-addon">Theo Năm</span>
                                         </div>
                                     </td>

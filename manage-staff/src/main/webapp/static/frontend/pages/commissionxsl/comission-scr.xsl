@@ -32,19 +32,24 @@
                                         <th width="25%" align='center'><span>COMMISSION_WEEK_VOLUME</span></th>
                                         <th width="25%" align='center'><span>COMMISSION_MONTH_VOLUME</span></th>
                                         <th width="25%" align='center'><span>COMMISSION_YEAR_VOLUME</span></th>
+                                        <th width="25%" align='center'><span>COMMISSION_TOTAL_VOLUME</span></th>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="mobile-mode"><span>COMMISSION_WEEK_VOLUME</span></div>
-                                            <div class="content-detail">1</div>
+                                            <div class="content-detail" id="weekVolume"></div>
                                         </td>
                                         <td>
-                                            <div class="td-date-gold">2</div>
+                                            <div class="td-date-gold" id="monthVolume"></div>
                                             <div class="mobile-mode-gold"><span>COMMISSION_MONTH_VOLUME</span></div>
                                         </td>
                                         <td>
                                             <div class="mobile-mode"><span>COMMISSION_YEAR_VOLUME</span></div>
-                                            <div class="content-detail">3</div>
+                                            <div class="content-detail" id="yearVolume"></div>
+                                        </td>
+                                        <td>
+                                            <div class="mobile-mode"><span>COMMISSION_TOTAL_VOLUME</span></div>
+                                            <div class="content-detail" id="totalVolume"></div>
                                         </td>
                                     </tr>
                                 </table>
@@ -84,7 +89,6 @@
                                         <th width="20%" align='center'><span>COMMISSION_GROUP</span></th>
                                         <th width="20%" align='center'><span>COMMISSION_LEADER</span></th>
                                         <th width="20%" align='center'><span>COMMISSION_PRESIDENT</span></th>
-                                        <th width="20%" align='center'><span>COMMISSION_TOTAL_VOLUME</span></th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -101,10 +105,6 @@
                                         </td>
                                         <td>
                                             <div class="mobile-mode"><span>COMMISSION_PRESIDENT</span></div>
-                                            <div class="content-detail">0</div>
-                                        </td>
-                                        <td>
-                                            <div class="mobile-mode"><span>COMMISSION_TOTAL_VOLUME</span></div>
                                             <div class="content-detail">0</div>
                                         </td>
                                     </tr>

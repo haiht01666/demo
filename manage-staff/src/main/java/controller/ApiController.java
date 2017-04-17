@@ -79,6 +79,15 @@ public class ApiController {
 	@RequestMapping(value = { "/getSummaryInfo" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult getSummaryInfo(@RequestBody Map mapGetAllNpp) {
 		String userCode = (String)mapGetAllNpp.get("userCode");
-		return service.getSummaryInfo(userCode);
+		String time = (String)mapGetAllNpp.get("time");
+		Integer limit = (Integer)mapGetAllNpp.get("limit");
+		Integer offset = (Integer)mapGetAllNpp.get("offset");
+		return service.getSummaryInfo(userCode, time, limit, offset);
+	}
+	@RequestMapping(value = { "/getCommissionInfo" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getCommissionInfo(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		String time = (String)mapGetAllNpp.get("time");
+		return service.getCommissionInfo(userCode, time);
 	}
 }

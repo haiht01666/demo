@@ -3269,7 +3269,7 @@ var pConstants_VN = {
     'LIST_VOLUME_HISTORY_RIGHT_TOTAL' : 'Right Total',
 
 	//
-    'TOTAL_VOLUME_WEEK' : 'Doanh số nhóm (Theo tuần)',
+    'TOTAL_VOLUME_WEEK' : 'Doanh số nhóm (4 tuần gần nhất)',
     'LIST_VOLUME_WEEK' : 'Tuần',
     'LIST_VOLUME_WEEK1' : 'Tuần 1',
     'LIST_VOLUME_WEEK2' : 'Tuần 2',
@@ -3278,6 +3278,11 @@ var pConstants_VN = {
     'LIST_VOLUME_LEFT' : 'Trái',
     'LIST_VOLUME_RIGHT' : 'Phải',
     'LIST_VOLUME_TOTAL' : 'Tổng cộng',
+    'LIST_VOLUME_WEEK_TABLE' : 'Tuần',
+    'LIST_VOLUME_MONTH_TABLE' : 'Tháng',
+    'LIST_VOLUME_YEAR_TABLE' : 'Năm',
+    'LIST_VOLUME_PERSONAL_TABLE' : 'Doanh số cá nhân',
+    'LIST_VOLUME_GROUP_TABLE' : 'Doanh số nhóm',
 	// WEEK TABLE
     'WEEK_VOLUME_BONUS_TITLE' : 'Bonus Volume:',
     'WEEK_VOLUME_NPP_TITLE' : 'Total New Distributors:',
@@ -3338,5 +3343,5 @@ var pConstants_VN = {
     'WRONG_PASSWORD' : 'Quý Khách đã nhập sai mật khẩu. Vui lòng nhập lại',
 	// INDEX PAGE
 	//'INDEX_PAGE' : 'indexxsl/index-scr',
-	'INDEX_PAGE' : 'indexxsl/index-scr',
+	'INDEX_PAGE' : 'commissionxsl/comission-scr',
 };
