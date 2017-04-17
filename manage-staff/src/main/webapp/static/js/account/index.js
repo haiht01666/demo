@@ -32,8 +32,10 @@ $(document).ready(
 				// disable button edit role
 				if ($('#tbody-staff tr.selected').length === 0){
 					$('#edit-data').attr('disabled',true);
+					$('#reset-password').attr('disabled',true);
 				}else{
 					$('#edit-data').attr('disabled',false);
+					$('#reset-password').attr('disabled',false);
 				}
 				
 			});
@@ -109,6 +111,43 @@ $(document).ready(
 				});
 				
 			})
+			
+			$('#reset-password').on('click',function(){
+				 $.confirm({
+						title: 'Confirm!',
+						buttons: {
+							Ok: function(){
+								emptyMessageError();
+								var formData = {};
+								var lstId = [];
+								// push user id
+								$('#tbody-staff tr.selected').each(function(){
+									lstId.push($(this).data('id'));
+								});
+								formData.lstUserId = lstId;
+								$.ajax({
+									type: "POST",
+									url:"/manage/resetPassword",
+									data: JSON.stringify(formData),
+									contentType: "application/json; charset=utf-8",
+									success:function(response){
+										if(response.result){
+											$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
+										} else {
+											$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+										}
+									},
+									error:function(response){
+										$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra!"));
+									}
+								});
+							},
+							Cancel : function(){
+							}
+						}
+					});
+			});
+			
 		});
 
 function emptyMessageError(){

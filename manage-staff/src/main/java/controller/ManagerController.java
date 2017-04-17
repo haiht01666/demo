@@ -220,4 +220,24 @@ public class ManagerController {
 		return result;
 	}
 	
+	@RequestMapping(value = { "/resetPassword" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult resetPassword(@RequestBody EditRoleForm form) {
+		AjaxResult result = new AjaxResult();
+		try {
+			String passord = service.resetPassword(form.getLstUserId());
+			if (passord.equals("")) {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E012", null, Locale.getDefault()));
+			} else {
+				result.setResult(true);
+				result.setMessage(messageSource.getMessage("S006", new Object[]{passord}, Locale.getDefault()));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E011", null, Locale.getDefault()));
+			return result;
+		}
+		return result;
+	}
 }

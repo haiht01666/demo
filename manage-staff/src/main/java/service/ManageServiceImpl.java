@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -194,14 +195,21 @@ public class ManageServiceImpl implements ManageService {
 		}
 		return lstRevenue;
 	}
-
-	public static void main(String[] arg) {
-		Date date = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		// cal.add(cal.DATE, 1);
-		System.err.println(date);
-		System.err.println(cal.getTime());
-		System.err.println(date.after(cal.getTime()));
+	@Override
+	public String resetPassword(List<String> lstUserId) throws SQLException {
+		String result = "";
+		String password = makePassword();
+		if(dao.resetPassword(lstUserId, password) > 0)
+			result = password;
+		return result;
 	}
+	
+	private String makePassword(){
+		 String randomStr = UUID.randomUUID().toString();
+		   while(randomStr.length() < 8) {
+		       randomStr += UUID.randomUUID().toString();
+		   }
+		   return randomStr.substring(0, 8);
+	}
+	
 }

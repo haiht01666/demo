@@ -45,4 +45,6 @@ public interface ManageDao {
 	public List<Order> getAllOrder(Date dateFrom , Date dateTo) throws SQLException; 
 	
 	public String getLever(Date dateFrom , Date dateTo ,int userId) throws SQLException; 
+	
+	public int resetPassword(List<String> lstUserId,String password) throws SQLException; 
 }

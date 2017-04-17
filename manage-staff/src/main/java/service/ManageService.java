@@ -28,4 +28,6 @@ public interface ManageService {
 	
 	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException; 
 	
+	public String resetPassword(List<String> lstUserId) throws SQLException;
+	
 }

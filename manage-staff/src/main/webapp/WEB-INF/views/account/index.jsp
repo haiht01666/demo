@@ -30,6 +30,11 @@
 						disabled="disabled">
 						<span class="glyphicon glyphicon-edit"></span> Chỉnh sửa
 					</button>
+					
+					<button type="button" class="btn btn-default btn-sm" id="reset-password"
+						disabled="disabled">
+						<span class="glyphicon glyphicon-edit"></span> Reset mật khẩu
+					</button>
 				</c:if>
 			</div>
 			<table id="tbl-staff"
@@ -99,7 +104,7 @@
 
 		</div>
 	</div>
-
+	
 	<!-- Modal reate member -->
 	<div class="modal fade" id="create-member-modal" role="dialog">
 		<div class="modal-dialog">
