@@ -2980,6 +2980,16 @@ p.pcopyrighttext {
 #commission-volume.table-account tr td,#commission-volume.table-account tr td .td-date-gold{
 	text-align:center;
 }
+#monthYearCommission tr td{
+	text-align:left;
+}
+#monthYearCommission tr td:last-child{
+	text-align:right;
+}
+#monthYearCommission tr td .td-date-gold{
+	text-align:right;
+	padding-right: 3px;
+}
 /* volume history*/
 #volume-history.table-account tr td,#volume-history.table-account tr td .td-date-gold{
 	text-align:right;
@@ -3368,6 +3378,7 @@ p.pcopyrighttext {
 [class^="mobilemode"], [class*=" mobilemode"] {
 	display:none;
 }
+
 @media only screen and (max-width: 960px) {
 	[class^="fullscrmode"], [class*=" fullscrmode"] {
 		display:none;
@@ -5272,3 +5283,7 @@ ul#pagination-clean span{
 	float:right;
 }
 /* END REGISTER MK SOFT */
+
+#commission-volume.monthYearCommission{
+	border: 1px solid rgb(59, 49, 138);
+}

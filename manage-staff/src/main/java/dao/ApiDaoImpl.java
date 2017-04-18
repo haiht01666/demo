@@ -306,7 +306,7 @@ import java.util.List;
         }
         return weekGroupVolume;
     }
-    @Override public BigDecimal getWeekPersionalVolume(String userCode, String startDate, String endDate) {
+    @Override public BigDecimal getWeekPersonalVolume(String userCode, String startDate, String endDate) {
         BigDecimal weekGroupVolume = new BigDecimal(0);
         String sql ="SELECT sum(total) as total FROM orders where user_id = ? AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try{

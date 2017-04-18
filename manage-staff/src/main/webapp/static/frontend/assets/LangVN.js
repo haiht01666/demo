@@ -3307,8 +3307,9 @@ var pConstants_VN = {
 	'COMMISSION_DIRECT':'Hoa hồng trực tiếp',
 	'COMMISSION_GROUP':'Hoa hồng nhóm',
 	'COMMISSION_LEADER':'Thưởng cấp bậc lãnh đạo quý',
-	'COMMISSION_PRESIDENT':'Chia lợi nhuận CLD chủ tịch',
+	'COMMISSION_PRESIDENT':'Chia lợi nhuận CLB chủ tịch',
 	'COMMISSION_TOTAL_VOLUME':'Tổng thu nhập hiện tại',
+	'COMMISSION_BONUS_DETAIL':'Chi tiết thanh toán hoa hồng  thưởng',
 
 	// group Graphical
     'GROUP_GRAPHICAL_TITLE':'DANH SÁCH NHÓM(TREE GRAPHICAL)',

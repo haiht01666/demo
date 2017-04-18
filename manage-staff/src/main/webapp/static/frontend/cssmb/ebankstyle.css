@@ -2756,6 +2756,20 @@ p.pcopyrighttext {
 	width: 100%;
 }
 
+/* commission-volume */
+#monthYearCommission{
+	width: 100%;
+}
+
+#monthYearCommission tr td:last-child {
+	text-align:right;
+}
+
+#monthYearCommission tr td .td-date-gold{
+	text-align: right;
+	padding-right: 3px;
+}
+
 #commission-volume.table-account tr td,#commission-volume.table-account tr td .td-date-gold{
 	text-align:center;
 }
@@ -2768,7 +2782,7 @@ p.pcopyrighttext {
     text-align:left;
 }
 
-.table-account tr td, .table-account th td, .table-account th { 
+.table-account tr td, .table-account th td, .table-account th {
 	border: 1px solid #A264BB;
 	border-bottom: 1px solid #A264BB;
 	padding:6px;
@@ -3163,6 +3177,9 @@ span.tooltip span
 [class^="desktopmode"], [class*=" desktopmode"] {
 	display:none;
 }
+[class^="desktopmode1"], [class*=" desktopmode1"] {
+	display:table-cell;
+}
 [class^="mobilemode"], [class*=" mobilemode"] {
 	/*display:none;*/
 }
@@ -3176,6 +3193,9 @@ span.tooltip span
 
 /*@media only screen and (max-width: 620px), (min-device-width: 640px) and (max-device-width: 720px)  {*/
 @media only screen and (max-width: 560px), (min-device-width: 560px) and (max-device-width: 570px)  {
+	[class^="desktopmode1"], [class*=" desktopmode1"] {
+		display:none !important;
+	}
 	.Header {
 		background:url("img/arrow4.png") no-repeat scroll left transparent;
 		padding-left:25px;
@@ -3185,9 +3205,16 @@ span.tooltip span
 		padding-top:3px;
 		padding-bottom:0px;
 	}
-    #weely-volume.table-account tr td,#weely-volume.table-account tr td .td-date-gold{
+    #weely-volume.table-account tr td{
         text-align:left;
     }
+	#monthYearCommission tr td .td-date-gold{
+		text-align:left !important;
+		padding-right: 3px;
+	}
+	#monthYearCommission tr td{
+		text-align:left !important;
+	}
 	#commission-volume.table-account tr td,#commission-volume.table-account tr td .td-date-gold{
 		text-align:left;
 	}
@@ -3533,6 +3560,17 @@ span.tooltip span
 		width: 100%;
 		padding-left:60%;
 		word-break:break-word;
+	}
+	#monthYearCommission tr td .content-detail {
+		display: block;
+		width: 100%;
+		padding-left:75%;
+		word-break:break-word;
+	}
+	#monthYearCommission tr td .td-date-gold {
+		display: block;
+		float: right;
+		width: 25%;
 	}
 	#commission-volume.table-account tr td .mobile-mode {
 		display: inline;
@@ -4253,7 +4291,7 @@ span.tooltip span
 		  }
 }
 
-@media only screen and (min-width: 640px),
+@media only screen and (min-width: 640px)
 {
 	.active {
     /*background-color: rgba(41, 103, 182, 0.0);*/
@@ -5109,4 +5147,8 @@ div#menu_switch_fingerprint.custom-switch.custom-switch-on span.custom-switch-la
 
 #parse_transaction{
 	margin-top: 0px;
+}
+
+#commission-volume.monthYearCommission{
+	border: 1px solid rgb(255, 255, 255);
 }

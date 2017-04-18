@@ -4,14 +4,11 @@ import common.CommonUtils;
 import constant.LeverType;
 import dao.ApiDao;
 import model.*;
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.joda.time.Weeks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import scala.Tuple2;
 
 import java.math.BigDecimal;
@@ -230,11 +227,9 @@ import java.util.*;
     @Override public AjaxResult getCommissionInfo(String userCode, String time) {
         AjaxResult result = new AjaxResult();
         try {
-            SumaryInfoModel sumaryInfoModel = new SumaryInfoModel();
-            // set user info
+            CommissionInfoModel commissionInfoModel = new CommissionInfoModel();
+
             User userInfo = dao.getLoginInfo(userCode);
-            userInfo.setLeverValue(manageService.getLeverUser(Integer.parseInt(userCode)));
-            sumaryInfoModel.setUserInfo(userInfo);
             // lay tat ca npp (bao gom ca npp cha)
             List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
             List<String> listGroupId = new ArrayList<>();
@@ -242,35 +237,61 @@ import java.util.*;
             for (User user : listNpp) {
                 listGroupId.add(user.getUserCode());
             }
-            // lay doanh so ca nhan thang
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
-            String monthYear = dateFormat.format(new Date());
-            BigDecimal monthPersonalVolume = dao.getMonthPersonalVolume(userCode, monthYear);
-            sumaryInfoModel.setMonthPersonalVolume(monthPersonalVolume);
-            sumaryInfoModel.setMonthTime(monthYear);
+            // doanh số cá nhân tuần hiện tại
+            TimeModel timeweek = CommonUtils.getTimeWeek(0);
+            BigDecimal weekPersonalVolume = dao
+                    .getWeekPersonalVolume(userCode, timeweek.getStartDate(), timeweek.getEndDate());
+            commissionInfoModel.setWeekPersonalVolume(weekPersonalVolume);
 
-            // lay doanh so tuan
-            List<WeekVolumeInfo> weekVolumeInfoList = new ArrayList<>();
-            // 4 tuần gần nhất
-            for (int i = 0; i < 4; i++) {
-                WeekVolumeInfo weekVolumeInfo = new WeekVolumeInfo();
+            // doanh số cá nhân tháng hiện tại
+            BigDecimal monthPersonalVolume = dao.getMonthPersonalVolume(userCode, CommonUtils.getTimeMonth(0));
+            commissionInfoModel.setMonthPersonalVolume(monthPersonalVolume);
+
+            // doanh số cá nhân năm hiện tại
+            BigDecimal yearPersonalVolume = dao.getYearPersonalVolume(userCode, CommonUtils.getTimeYear(0));
+            commissionInfoModel.setYearPersonalVolume(yearPersonalVolume);
+
+            // combo box list week
+            int numberWeek = CommonUtils.numberWeekFromRegister(userInfo.getSignUpDate(), new Date());
+            List<String> weekTimeDispList = new ArrayList<>();
+            List<String> weekTimeValList = new ArrayList<>();
+            for (int i = 0; i < numberWeek; i++) {
                 TimeModel timeModel = CommonUtils.getTimeWeek(i);
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                 int weekIndex = CommonUtils
                         .numberWeekFromRegister(userInfo.getSignUpDate(), df.parse(timeModel.getEndDate()));
-                BigDecimal weekGroupVolume = dao
-                        .getWeekGroupVolume(listGroupId, timeModel.getStartDate(), timeModel.getEndDate());
-                weekVolumeInfo.setGroupVolume(weekGroupVolume);
-                weekVolumeInfo.setWeekTime(
-                        weekIndex + " (" + timeModel.getStartDate() + " - " + timeModel.getEndDate() + ")");
-                weekVolumeInfoList.add(weekVolumeInfo);
+                weekTimeDispList
+                        .add(timeModel.getStartDate() + " - " + timeModel.getEndDate() + " (" + weekIndex + ")");
+                weekTimeValList.add(Integer.toString(weekIndex));
             }
-            // lấy lịch sử toàn bộ doanh thu
-            //Tuple2<Integer, List<VolumeInfo>> tuple2 = getVolumeInfoList(userInfo, listGroupId, time);
-            //sumaryInfoModel.setTotalRecord(tuple2._1);
-            //sumaryInfoModel.setVolumeInfoList(tuple2._2);
-            sumaryInfoModel.setWeekVolumeInfoList(weekVolumeInfoList);
-            result.setResultData(sumaryInfoModel);
+            commissionInfoModel.setWeekTimeDispList(weekTimeDispList);
+            commissionInfoModel.setWeekTimeValList(weekTimeValList);
+
+            // combo box list month
+            int numberMonth = CommonUtils.numberMonthFromRegister(userInfo.getSignUpDate(), new Date());
+            List<String> monthTimeDispList = new ArrayList<>();
+            List<String> monthTimeValList = new ArrayList<>();
+            for (int i = 0; i < numberMonth; i++) {
+                String timeMonth = CommonUtils.getTimeMonth(i);
+                monthTimeDispList.add(timeMonth);
+                monthTimeValList.add(timeMonth);
+            }
+            commissionInfoModel.setMonthTimeDispList(monthTimeDispList);
+            commissionInfoModel.setMonthTimeValList(monthTimeValList);
+
+            // combo box list year
+            int numberYear = CommonUtils.numberYearFromRegister(userInfo.getSignUpDate(), new Date());
+            List<String> yearTimeDispList = new ArrayList<>();
+            List<String> yearTimeValList = new ArrayList<>();
+            for (int i = 0; i < numberYear; i++) {
+                String timeMonth = CommonUtils.getTimeYear(i);
+                yearTimeDispList.add(timeMonth);
+                yearTimeValList.add(timeMonth);
+            }
+            commissionInfoModel.setYearTimeDispList(yearTimeDispList);
+            commissionInfoModel.setYearTimeValList(yearTimeValList);
+
+            result.setResultData(commissionInfoModel);
             result.setResult(true);
         } catch (Exception e) {
             result.setResult(false);
@@ -286,13 +307,14 @@ import java.util.*;
         int end = 0;
         if (time.equals("weekly")) {
             totalRecord = CommonUtils.numberWeekFromRegister(userInfo.getSignUpDate(), new Date());
-            if(totalRecord <= limit){
+            if (totalRecord <= limit) {
                 start = 0;
                 end = totalRecord;
-            }else {
+            } else {
                 start = offset;
                 end = offset + limit;
-                if(end > totalRecord) end = totalRecord;
+                if (end > totalRecord)
+                    end = totalRecord;
             }
             for (int i = start; i < end; i++) {
                 VolumeInfo volumeInfo = new VolumeInfo();
@@ -304,7 +326,7 @@ import java.util.*;
                         .getWeekGroupVolume(listGroupId, timeModel.getStartDate(), timeModel.getEndDate());
 
                 BigDecimal weekPersonalVolume = dao
-                        .getWeekPersionalVolume(userInfo.getUserCode(), timeModel.getStartDate(),
+                        .getWeekPersonalVolume(userInfo.getUserCode(), timeModel.getStartDate(),
                                 timeModel.getEndDate());
                 // set info
                 volumeInfo.setPersonalVolume(weekPersonalVolume);

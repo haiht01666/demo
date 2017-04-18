@@ -25,8 +25,8 @@ public interface ApiDao {
 	List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset, String orderby);
 	long getTotalOrder(List<String> listChildId);
 	List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby);
-	BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String monthYear);
-	BigDecimal getWeekPersionalVolume(String userCode, String startDate, String monthYear);
+	BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String endDate);
+	BigDecimal getWeekPersonalVolume(String userCode, String startDate, String endDate);
 	BigDecimal getMonthPersonalVolume(String userCode, String dateTime);
 	BigDecimal getMonthGroupVolume(List<String> listGroupId, String monthYear);
 	BigDecimal getYearPersonalVolume(String userCode, String dateTime);
