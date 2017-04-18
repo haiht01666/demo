@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.EditRoleForm;
+import model.Feedback;
 import model.Order;
 import model.User;
 
@@ -47,4 +48,8 @@ public interface ManageDao {
 	public String getLever(Date dateFrom , Date dateTo ,int userId) throws SQLException; 
 	
 	public int resetPassword(List<String> lstUserId,String password) throws SQLException; 
+	
+	public List<Feedback> getAllFeedback() throws SQLException;
+	
+	public boolean isUserActive(int userId) throws SQLException;
 }

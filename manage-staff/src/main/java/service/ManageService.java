@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.EditRoleForm;
+import model.Feedback;
 import model.Order;
 import model.Revenue;
 import model.RevenueForm;
@@ -29,5 +30,9 @@ public interface ManageService {
 	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException; 
 	
 	public String resetPassword(List<String> lstUserId) throws SQLException;
+	
+	public List<Feedback> getAllFeedback() throws SQLException;
+	
+	public User detailUser(int id) throws SQLException;
 	
 }

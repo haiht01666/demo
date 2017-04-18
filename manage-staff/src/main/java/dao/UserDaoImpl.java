@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,8 @@ public class UserDaoImpl extends DBManager implements UserDao {
 
 	@Override
 	public int createUser(UserForm user) {
-		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_address = ? , password = ? , enable = ? , signup_date = now() where id = ? ";
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_branch = ? , password = ? , enable = ? , signup_date = now() , address = ? ,identifier = ? ,birthday = ? where id = ? ";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -98,7 +100,10 @@ public class UserDaoImpl extends DBManager implements UserDao {
 			stmt.setString(6, user.getBankAdd());
 			stmt.setString(7, passwordEncoder.encode(user.getPassword()));
 			stmt.setBoolean(8, true);
-			stmt.setInt(9, Integer.parseInt(user.getId()));
+			stmt.setString(9, user.getAddress());
+			stmt.setString(10, user.getIdentityCardNumber());
+			stmt.setDate(11, new java.sql.Date(formatter.parse(user.getBirdDay()).getTime()));
+			stmt.setInt(12, Integer.parseInt(user.getId()));
 			return stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

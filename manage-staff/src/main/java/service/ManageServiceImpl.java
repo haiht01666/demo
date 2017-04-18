@@ -15,9 +15,11 @@ import constant.OrderType;
 import constant.RevenuePercent;
 import constant.RevenueType;
 import constant.Roles;
+import constant.Status;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import model.EditRoleForm;
+import model.Feedback;
 import model.Order;
 import model.Revenue;
 import model.RevenueForm;
@@ -211,5 +213,33 @@ public class ManageServiceImpl implements ManageService {
 		   }
 		   return randomStr.substring(0, 8);
 	}
+
+	@Override
+	public List<Feedback> getAllFeedback() throws SQLException {
+		return dao.getAllFeedback();
+	}
+
+	@Override
+	public User detailUser(int id) throws SQLException {
+		User user = dao.getUserById(id);
+		user.setLeverValue(getLever(id));
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(user.getCdate());
+		cal.add(Calendar.DATE, 45);
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		String status = "";
+		if(new Date().before(cal.getTime())){
+			if(user.getLeverValue().equals(LeverType.New.name())){
+				status = Status.INACTIVE;
+			}else{
+				status = Status.ACTIVE;
+			}
+		}else{
+			status = dao.isUserActive(id) ? Status.ACTIVE : Status.INACTIVE;
+		}
+		user.setStatus(status);
+		return user;
+	}
 	
+
 }
