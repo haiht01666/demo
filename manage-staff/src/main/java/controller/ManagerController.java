@@ -77,7 +77,7 @@ public class ManagerController {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
-		model.addAttribute("userDetail", service.getUserById(userID));
+		model.addAttribute("userDetail", service.detailUser(userID));
 		return "account/detail";
 	}
 
@@ -95,6 +95,7 @@ public class ManagerController {
 		// get current user from session
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
+		model.addAttribute("feedbacks", service.getAllFeedback());
 		return "account/feedback";
 	}
 

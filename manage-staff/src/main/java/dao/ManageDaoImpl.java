@@ -14,6 +14,7 @@ import constant.LeverType;
 import constant.OrderType;
 import constant.TimePeriodCheck;
 import model.EditRoleForm;
+import model.Feedback;
 import model.Order;
 import model.User;
 
@@ -22,7 +23,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public int createMember(User parent, int lever) throws SQLException {
 		int memberId = 0;
@@ -168,7 +169,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public User getUserById(int id) throws SQLException {
 		User user = new User();
-		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_branch,parent_id,lever,child_id FROM users where id = ?";
+		String sql = "SELECT name , email , cdate ,phone,bank_name,bank_account,bank_branch,parent_id,lever,child_id,address,birthday,identifier FROM users where id = ?";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -186,6 +187,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setLever(rs.getInt(9));
 				user.setId(id);
 				user.setChildId(rs.getString(10));
+				user.setAddress(rs.getString(11));
+				user.setBirthday(rs.getDate(12));
+				user.setIdentifier(rs.getString(13));
 				break;
 			}
 		} catch (Exception e) {
@@ -437,14 +441,17 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public int resetPassword(List<String> lstUserId, String password) throws SQLException {
 		int result = 0;
+		int id;
 		String sql = "update users set password = ? where id = ?";
 		try {
 			conn = getConnection();
 			if (lstUserId != null && lstUserId.size() > 0) {
 				for (String userId : lstUserId) {
-					if(isUserEnable(Integer.parseInt(userId))){
+					id = Integer.parseInt(userId);
+					if (isUserEnable(id)) {
 						stmt = conn.prepareStatement(sql);
-						stmt.setString(1,  passwordEncoder.encode(password));
+						stmt.setString(1, passwordEncoder.encode(password));
+						stmt.setInt(2, id);
 						result = stmt.executeUpdate();
 					}
 				}
@@ -467,10 +474,62 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, userId);
 		rs = stmt.executeQuery();
-		while(rs.next()){
+		while (rs.next()) {
 			result = rs.getBoolean(1);
 		}
 		return result;
+	}
+
+	@Override
+	public List<Feedback> getAllFeedback() throws SQLException {
+		String sql = "select title , cdate , content , user_id from feedbacks";
+		List<Feedback> result = new ArrayList<>();
+		Feedback feedback = null;
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				feedback = new Feedback();
+				feedback.setTitle(rs.getString(1));
+				feedback.setCdate(rs.getDate(2));
+				feedback.setContent(rs.getString(3));
+				feedback.setUserId(rs.getInt(4));
+				result.add(feedback);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			st.close();
+			rs.close();
+		}
+		return result;
+	}
+
+	@Override
+	public boolean isUserActive(int userId) throws SQLException {
+		String sql = "select id from orders where (cdate between ? and now()) and user_id = ? and type =?";
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, -1);
+			cal.set(Calendar.DATE, 1);
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setDate(1, new java.sql.Date(cal.getTime().getTime()));
+			stmt.setInt(2, userId);
+			stmt.setInt(3,OrderType.ORDER_PROACTIVE.getCode());
+			rs = stmt.executeQuery();
+			return rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
 	}
 
 }

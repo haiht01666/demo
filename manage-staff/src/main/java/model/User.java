@@ -81,8 +81,18 @@ public class User implements Serializable {
 
     // cấp đại lý
     private String agentLevel;
+    
+    private String status;
 
-    public String getLeverValue() {
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getLeverValue() {
         return leverValue;
     }
 
