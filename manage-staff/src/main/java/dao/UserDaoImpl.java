@@ -86,7 +86,7 @@ public class UserDaoImpl extends DBManager implements UserDao {
 
 	@Override
 	public int createUser(UserForm user) {
-		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_address = ? , password = ? , enable = ? , signup_date = now() where id = ? ";
+		String sql = "Update users set name = ? , email = ? , phone = ? , bank_name = ? , bank_account =? , bank_branch = ? , password = ? , enable = ? , signup_date = now() where id = ? ";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
