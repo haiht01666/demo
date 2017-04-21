@@ -241,4 +241,12 @@ public class ManagerController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = { "/revenueGroup" }, method = RequestMethod.POST)
+	public @ResponseBody RevenueResult revenueGroup(@RequestBody RevenueForm form) throws SQLException {
+		RevenueResult lstRevenue = new RevenueResult();
+		List<Revenue> lst = service.getRevenueGroup(form);
+		lstRevenue.setData(lst);
+		return lstRevenue;
+	}
 }

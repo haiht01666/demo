@@ -18,7 +18,15 @@
 	<%@ include file="../common/header.jsp"%>
 	<div class="col-xs-12">
 		<div class="table-responsive">
-
+				<label class="radio-inline"> <input type="radio"
+					name="optradio" value="0" checked="checked" id="radio-week">Theo tuần</label>
+				<label class="radio-inline"> <input type="radio"
+					name="optradio" value="1" id="radio-month">Theo tháng
+				</label> <label class="radio-inline"> <input type="radio"
+					name="optradio" value="2" id="radio-quarter">Theo quý
+				</label> <!-- <label class="radio-inline" > <input type="radio"
+					name="optradio" value="3" id="radio-year">Theo năm
+				</label> -->
 
 			<table id="tbl-staff"
 				class="display table table-hover table-striped table-bordered"
@@ -33,40 +41,10 @@
 				</thead>
 
 				<tbody>
-					<tr data-id=1>
-						<td>feedback 1</td>
-						<td>2011/04/25</td>
-						<td>Content 1</td>
-						<td><a href="details.html">Tiger Nixon</a></td>
-					</tr>
-					<tr>
-						<td>feedback 2</td>
-						<td>2011/04/25</td>
-						<td>Content 2</td>
-						<td><a href="details.html">Member 2</a></td>
-					</tr>
-					<tr>
-						<td>feedback 3</td>
-						<td>2011/04/25</td>
-						<td>Content 3</td>
-						<td><a href="details.html">Member 3</a></td>
-					</tr>
-					<tr>
-						<td>feedback 4</td>
-						<td>2011/04/25</td>
-						<td>Content 4</td>
-						<td><a href="details.html">Member 4</a></td>
-					</tr>
-					<tr>
-						<td>feedback 5</td>
-						<td>2011/04/25</td>
-						<td>Content 5</td>
-						<td><a href="details.html">Member 5</a></td>
-					</tr>
-
+					
 				</tbody>
 			</table>
 		</div>
-		</div>
+	</div>
 </body>
 </html>

@@ -52,4 +52,21 @@ public interface ManageDao {
 	public List<Feedback> getAllFeedback() throws SQLException;
 	
 	public boolean isUserActive(int userId) throws SQLException;
+	
+	public boolean isProactive(int userId,Date time) throws SQLException;
+	
+	public List<User> getChild(int userId) throws SQLException;
+	
+	public Double getRevenuePersonal(User user , Date dateFrom , Date dateTo) throws SQLException;
+	
+	public List<User> getAllChild(String childId) throws SQLException;
+	
+	/**
+	 * get all revenue of company on period time
+	 * @param dateFrom 
+	 * @param dateto
+	 * @return total revenue
+	 * @throws SQLException
+	 */
+	public Double getAllRevenue(Date dateFrom , Date dateto) throws SQLException;
 }

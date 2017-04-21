@@ -29,6 +29,16 @@ public class Revenue {
 
 	private int type;
 	
+	private String userLever;
+	
+	public String getUserLever() {
+		return userLever;
+	}
+
+	public void setUserLever(String userLever) {
+		this.userLever = userLever;
+	}
+
 	public int getType() {
 		return type;
 	}

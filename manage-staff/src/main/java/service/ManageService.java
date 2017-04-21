@@ -35,4 +35,6 @@ public interface ManageService {
 	
 	public User detailUser(int id) throws SQLException;
 	
+	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException; 
+	
 }

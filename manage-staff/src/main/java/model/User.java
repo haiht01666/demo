@@ -83,8 +83,18 @@ public class User implements Serializable {
     private String agentLevel;
     
     private String status;
+    
+    private boolean completePackage;
 
-    public String getStatus() {
+    public boolean getCompletePackage() {
+		return completePackage;
+	}
+
+	public void setCompletePackage(boolean isCompletePackage) {
+		this.completePackage = isCompletePackage;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 

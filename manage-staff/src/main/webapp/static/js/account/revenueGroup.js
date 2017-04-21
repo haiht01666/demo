@@ -6,6 +6,7 @@ $(document).ready(function() {
 });
 
 function initTable(filterDate){
+	$.LoadingOverlay("show");
 	var formData = {};
 	formData.cdate = moment(filterDate).format('YYYY-MM-DD');
 	formData.type = 1;
@@ -47,7 +48,7 @@ function initTable(filterDate){
             'excelHtml5'
         ]
     } );
-	
+	$.LoadingOverlay("hide");
 	var x = document.createElement("INPUT");
     x.setAttribute("type", "month");
     x.setAttribute("id", 'date-filter');

@@ -67,8 +67,12 @@ $(document).ready(function() {
 					$.LoadingOverlay("show");
 	               },
 				success:function(response){
+					if(response.result){
 					 $('#add-order').modal('hide');
 					 location.reload();
+					}else{
+						$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Hãy nhập đúng định dạng ngày order hoặc giá tiền!'));
+					}
 					$.LoadingOverlay("hide");
 				}
 			});
@@ -126,7 +130,7 @@ $(document).ready(function() {
 					 location.reload();
 					$('#add-order').modal('hide');
 				} else {
-					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Xin hãy nhập đúng định dạng giá tiền!'));
+					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Xin hãy nhập đúng định dạng ngày order hoặc giá tiền!'));
 				}
 				$.LoadingOverlay("hide");
 			},

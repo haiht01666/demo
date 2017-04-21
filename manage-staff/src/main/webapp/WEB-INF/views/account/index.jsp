@@ -60,8 +60,7 @@
 							<td>${member.id }</td>
 							<td><a href="/manage/detail?id=${member.id }">${member.dispName }</a></td>
 							<td>${member.parentId }</td>
-							<td><fmt:formatDate pattern="dd/MM/yyyy"
-									value="${member.cdate }" /></td>
+							<td>${member.cdate }</td>
 							<td>${member.role}</td>
 							<td><c:if test="${member.enable }">
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>

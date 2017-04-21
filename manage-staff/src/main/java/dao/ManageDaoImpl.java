@@ -271,7 +271,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public Double totalOrderPrice(User user, int numberDay) throws SQLException {
 		Double result = 0d;
-		String sql = "SELECT sum(total) as total FROM orders where user_id=? and cdate between ? and (? + INTERVAL ? DAY) group by user_id  ";
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and (cdate between ? and (? + INTERVAL ? DAY)) and type =?  ";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -279,19 +279,21 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setDate(2, new java.sql.Date(user.getCdate().getTime()));
 			stmt.setDate(3, new java.sql.Date(user.getCdate().getTime()));
 			stmt.setInt(4, numberDay);
+			stmt.setInt(5, OrderType.ORDER_PACKAGE.getCode());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				result = rs.getDouble(1);
 			}
 			// if 45 day not complete package
 			if (result < LeverType.SALE_MEMBER.getAmount()) {
-				String sql1 = "SELECT sum(total) as total FROM orders where user_id=? and cdate between ? + INTERVAL ? DAY and LAST_DAY(? + INTERVAL ? DAY ) group by user_id  ";
+				String sql1 = "SELECT sum(total) as total FROM orders where user_id=? and (cdate between ? + INTERVAL ? DAY and LAST_DAY(? + INTERVAL ? DAY )) and type =?  ";
 				stmt = conn.prepareStatement(sql1);
 				stmt.setInt(1, user.getId());
 				stmt.setDate(2, new java.sql.Date(user.getCdate().getTime()));
 				stmt.setInt(3, numberDay);
 				stmt.setDate(4, new java.sql.Date(user.getCdate().getTime()));
 				stmt.setInt(5, numberDay);
+				stmt.setInt(6, OrderType.ORDER_PACKAGE.getCode());
 				rs = stmt.executeQuery();
 				while (rs.next()) {
 					result = rs.getDouble(1);
@@ -380,12 +382,13 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public String getLever(Date dateFrom, Date dateTo, int userId) throws SQLException {
 		String result = LeverType.New.name();
-		String sql = "SELECT sum(total) as total FROM orders where user_id=? and cdate between ? and ? group by user_id  ";
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and (cdate between ? and ?) and type = ? ";
 		boolean check = false;
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, userId);
+			stmt.setInt(4, OrderType.ORDER_PACKAGE.getCode());
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dateFrom);
 			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_45);
@@ -531,5 +534,152 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			rs.close();
 		}
 	}
+
+	@Override
+	public boolean isProactive(int userId,Date date) throws SQLException {
+		String sql = "Select cdate from orders where (cdate between ? and ?) and type = ? and user_id = ? order by cdate desc";
+		try {
+			Order order = new Order();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.DATE, 1);
+			Date dateFrom = cal.getTime();
+			cal.set(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_15);
+			Date dateTo = cal.getTime();
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setDate(1, new java.sql.Date(dateFrom.getTime()));
+			stmt.setDate(2, new java.sql.Date(dateTo.getTime()));
+			stmt.setInt(3, OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(4, userId);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				order.setOrderDate(rs.getDate(1));
+				break;
+			}
+			if(order.getOrderDate() == null)
+				return false;
+			else{
+				if(date.after(order.getOrderDate()))
+					return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return false;
+	}
+
+	@Override
+	public List<User> getChild(int userId) throws SQLException {
+		String sql = "Select id,child_id,cdate ,lever from users where parent_id = ?";
+		List<User> lstUser = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userId);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setId(rs.getInt(1));
+				user.setChildId(rs.getString(2));
+				user.setCdate(rs.getDate(3));
+				user.setLever(rs.getInt(4));
+				lstUser.add(user);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return lstUser;
+	}
+
+	@Override
+	public Double getRevenuePersonal(User user, Date dateFrom , Date dateTo) throws SQLException {
+		Double result = 0.0;
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and (cdate between ? and ?)  and type = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, user.getId());
+			stmt.setDate(2, new java.sql.Date(dateFrom.getTime()));
+			stmt.setDate(3, new java.sql.Date(dateTo.getTime()));
+			stmt.setInt(4, OrderType.ORDER_PRODUCT.getCode());
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				result = rs.getDouble(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
+	}
+
+	@Override
+	public List<User> getAllChild(String childId) throws SQLException {
+		String sql = "Select id,child_id,cdate ,lever from users where child_id like ?";
+		List<User> lstUser = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, childId+"-%");
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setId(rs.getInt(1));
+				user.setChildId(rs.getString(2));
+				user.setCdate(rs.getDate(3));
+				user.setLever(rs.getInt(4));
+				lstUser.add(user);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return lstUser;
+	}
+
+	@Override
+	public Double getAllRevenue(Date dateFrom, Date dateto) throws SQLException {
+		String sql = "SELECT sum(total) as total FROM orders where cdate between ? and ?  and type = ? ";
+		Double result = 0.0;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setDate(1, new java.sql.Date(dateFrom.getTime()));
+			stmt.setDate(2, new java.sql.Date(dateto.getTime()));
+			stmt.setInt(3, OrderType.ORDER_PRODUCT.getCode());
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				result =  rs.getDouble(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
+	}
+	
 
 }

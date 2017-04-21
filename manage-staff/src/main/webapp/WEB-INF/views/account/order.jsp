@@ -53,8 +53,7 @@
 						<tr data-id=${order.id }>
 							<td><a href="/manage/detail?id=${order.userId }">${order.userId }</a></td>
 							<td>${order.orderName }</td>
-							<td><fmt:formatDate pattern="dd/MM/yyyy"
-									value="${order.orderDate }" /></td>
+							<td>${order.orderDate }</td>
 							<td data-price=${order.price }><fmt:formatNumber
 									value="${order.price }" type="number" maxFractionDigits="3" /></td>
 							<td>${order.quantity }</td>
