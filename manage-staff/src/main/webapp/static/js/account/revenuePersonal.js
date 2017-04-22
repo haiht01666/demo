@@ -43,9 +43,10 @@ function initTable(filterDate){
             { data: "revenueValue" }
         ],
         dom: 'lBfrtip',
-        buttons: [
-            'excelHtml5'
-        ]
+        buttons: [{
+        	extend : 'excelHtml5',
+			title : 'Hoa hồng trực tiêp ('+ moment(filterDate).format('MM-YYYY') +')'
+        }]
     } );
 	$.LoadingOverlay("hide");
 	var x = document.createElement("INPUT");

@@ -24,7 +24,6 @@ import model.Feedback;
 import model.Order;
 import model.Revenue;
 import model.RevenueForm;
-import model.RevenueInfo;
 import model.User;
 
 @Service
@@ -80,7 +79,7 @@ public class ManageServiceImpl implements ManageService {
 			revenue.setOrderPrice(order.getPrice() * order.getQuantity());
 			revenue.setCdate(order.getOrderDate());
 			User user = dao.getUserById(order.getUserId());
-			String packageValue = getLever(user.getCdate(),order.getOrderDate(),user);
+			String packageValue = getLever(user.getCdate(), order.getOrderDate(), user);
 			revenue.setReceiverId(order.getUserId());
 			if (packageValue.equals(LeverType.PRO_DISTRIBUTE.name())) {
 				// cá nhân được 20%
@@ -132,22 +131,23 @@ public class ManageServiceImpl implements ManageService {
 		return getLever(userId);
 	}
 
-	private String getLever(Date dateFrom , Date dateto , User user) throws SQLException {
+	private String getLever(Date dateFrom, Date dateto, User user) throws SQLException {
 		if (user.getLever() == LeverType.New.getValue()) {
 			// if type is new then calculate lever follow by total value of
 			// order interval 45 day
-			return dao.getLever(dateFrom, dateto,user.getId());
+			return dao.getLever(dateFrom, dateto, user.getId());
 		} else {
 			if (user.getLever() == LeverType.SALE_MEMBER.getValue())
-				return  LeverType.SALE_MEMBER.name();
+				return LeverType.SALE_MEMBER.name();
 			if (user.getLever() == LeverType.SALE_PRO.getValue())
 				return LeverType.SALE_PRO.name();
 			if (user.getLever() == LeverType.PRO_DISTRIBUTE.getValue())
 				return LeverType.PRO_DISTRIBUTE.name();
-			else 
+			else
 				return LeverType.New.name();
 		}
 	}
+
 	/**
 	 * check package of user
 	 * 
@@ -239,7 +239,7 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
-		user.setLeverValue(getLever(user.getCdate(),new Date(),user));
+		user.setLeverValue(getLever(user.getId()));
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(user.getCdate());
 		cal.add(Calendar.DATE, 45);
@@ -258,6 +258,16 @@ public class ManageServiceImpl implements ManageService {
 		return user;
 	}
 
+	private int converLeverToInt(String lever){
+		if(lever.equals(LeverType.PRO_DISTRIBUTE.name()))
+			return LeverType.PRO_DISTRIBUTE.getValue();
+		else if(lever.equals(LeverType.SALE_PRO.name()))
+			return LeverType.SALE_PRO.getValue();
+		else if(lever.equals(LeverType.SALE_MEMBER.name()))
+			return LeverType.SALE_MEMBER.getValue();
+		else
+			return LeverType.New.getValue();
+	}
 	@Override
 	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException {
 		List<User> lstUser = dao.getMembers();
@@ -269,21 +279,23 @@ public class ManageServiceImpl implements ManageService {
 					baseLever = dao.getLever(user.getCdate(), form.getDateFrom(), user.getId());
 				else
 					baseLever = getLever(user.getId());
-				if (!baseLever.equals(LeverType.SALE_PRO) && !baseLever.equals(LeverType.PRO_DISTRIBUTE)) {
+				if (baseLever.equals(LeverType.New.name())) {
 					continue;
 				}
 
 				// check mua năng động
 				if (!isProactive(user, form.getDateFrom()))
 					continue;
-				RevenueInfo revenueInfo = totalRevenueOfGroup(user, form.getDateFrom(), form.getDateTo());
-				String finalLever = revenueInfo.getLevel();
-				Double totalRevenue = revenueInfo.getTotalRevenue();
+				int lever = converLeverToInt(baseLever);
+			
+				String finalLever = getFinalLevel(user, form.getDateFrom(), form.getDateTo(), lever);
+				Double totalRevenue = totalRevenueGroup(user, form.getDateFrom(), form.getDateTo());
 				if (!finalLever.equals(LeverType.New.name())) {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
 					revenue.setUserLever(finalLever);
 					revenue.setRevenuePecent("5%");
+					revenue.setOrderPrice(totalRevenue);
 					revenue.setRevenueValue(totalRevenue * 0.05);
 					lstRevenue.add(revenue);
 
@@ -302,28 +314,30 @@ public class ManageServiceImpl implements ManageService {
 					baseLever = dao.getLever(user.getCdate(), form.getDateFrom(), user.getId());
 				else
 					baseLever = getLever(user.getId());
-				if (!baseLever.equals(LeverType.SALE_PRO) && !baseLever.equals(LeverType.PRO_DISTRIBUTE)) {
+				if (!baseLever.equals(LeverType.SALE_PRO.name())
+						&& !baseLever.equals(LeverType.PRO_DISTRIBUTE.name())) {
 					continue;
 				}
 
 				// check mua năng động
 				if (!isProactive(user, form.getDateFrom()))
 					continue;
-				RevenueInfo revenueInfo = totalRevenueOfGroup(user, form.getDateFrom(), form.getDateTo());
-				String finalLever = revenueInfo.getLevel();
-				Double totalRevenue = revenueInfo.getTotalRevenue();
-				if (baseLever.equals(LeverType.PRO_DISTRIBUTE.name()) && finalLever.equals(LeverType.DSD.name())) {
+				
+				int lever = converLeverToInt(baseLever);
+				String finalLever = getFinalLevel(user, form.getDateFrom(), form.getDateTo(),lever);
+				Double totalRevenue = totalRevenueGroup(user, form.getDateFrom(), form.getDateTo());
+				if (baseLever.equals(LeverType.PRO_DISTRIBUTE.name()) || finalLever.equals(LeverType.DSD.name())) {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
 					revenue.setUserLever(finalLever);
-					if (finalLever.equals(LeverType.DSD.name())) {
+					if (finalLever.equals(LeverType.DSD.name()) && baseLever.equals(LeverType.PRO_DISTRIBUTE.name())) {
 						Double total = dao.getAllRevenue(form.getDateFrom(), form.getDateTo());
 						revenue.setRevenuePecent("1%");
 						revenue.setOrderPrice(total);
 						revenue.setRevenueValue(total * 0.01);
 					} else {
-						revenue.setRevenuePecent("5%");
-						revenue.setRevenueValue(totalRevenue * 0.05);
+						revenue.setRevenuePecent("3%");
+						revenue.setRevenueValue(totalRevenue * 0.03);
 						revenue.setOrderPrice(totalRevenue);
 					}
 					lstRevenue.add(revenue);
@@ -333,20 +347,22 @@ public class ManageServiceImpl implements ManageService {
 		}
 		if (form.getType() == RevenueGroupType.QUARTER.getValue()) {
 			Calendar cal1 = Calendar.getInstance();
-			cal1.set(Calendar.MONTH, form.getNum()*3 - 3);
+			cal1.set(Calendar.MONTH, form.getNum() * 3 - 3);
 			cal1.set(Calendar.DAY_OF_MONTH, 1);
 			cal1.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
 			form.setDateFrom(cal1.getTime());
-			cal1.set(Calendar.MONTH, form.getNum()*3 -1);
+			cal1.set(Calendar.MONTH, form.getNum() * 3 - 1);
+			cal1.set(Calendar.DAY_OF_MONTH, cal1.getActualMaximum(Calendar.DAY_OF_MONTH));
 			form.setDateTo(cal1.getTime());
-			
+
 			for (User user : lstUser) {
 				String baseLever;
 				if (user.getLever() == LeverType.New.getAmount())
 					baseLever = dao.getLever(user.getCdate(), form.getDateFrom(), user.getId());
 				else
 					baseLever = getLever(user.getId());
-				if (!baseLever.equals(LeverType.SALE_PRO) && !baseLever.equals(LeverType.PRO_DISTRIBUTE)) {
+				if (!baseLever.equals(LeverType.SALE_PRO.name())
+						&& !baseLever.equals(LeverType.PRO_DISTRIBUTE.name())) {
 					continue;
 				}
 				// check mua năng động
@@ -360,12 +376,10 @@ public class ManageServiceImpl implements ManageService {
 				cal.add(Calendar.MONTH, 1);
 				if (!isProactive(user, cal.getTime()))
 					continue;
-				cal.add(Calendar.MONTH, 1);
-				if (!isProactive(user, cal.getTime()))
-					continue;
-				RevenueInfo revenueInfo = totalRevenueOfGroup(user, form.getDateFrom(), form.getDateTo());
-				String finalLever = revenueInfo.getLevel();
-				Double totalRevenue = revenueInfo.getTotalRevenue();
+				
+				int lever = converLeverToInt(baseLever);
+				String finalLever = getFinalLevel(user, form.getDateFrom(), form.getDateTo(),lever);
+				Double totalRevenue = totalRevenueGroup(user, form.getDateFrom(), form.getDateTo());
 				if (!finalLever.equals(LeverType.New.name()) && !finalLever.equals(LeverType.TL.name())) {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
@@ -398,14 +412,57 @@ public class ManageServiceImpl implements ManageService {
 			return true;
 	}
 
-	private RevenueInfo totalRevenueOfGroup(User user, Date dateFrom, Date dateTo) throws SQLException {
-		RevenueInfo result = new RevenueInfo();
+	private Double totalRevenueGroup(User user, Date dateFrom, Date dateTo) throws SQLException {
+		Double result = 0.0;
+		result += getRevenue(user, dateFrom, dateTo);
+		List<User> lstAllChild = dao.getAllChild(user.getChildId());
+		for (User child : lstAllChild) {
+			result += getRevenue(child, dateFrom, dateTo);
+		}
+		return result;
+	}
+
+	private String getFinalLevel(User user, Date dateFrom, Date dateTo, int lever) throws SQLException {
+		String result = LeverType.New.name();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dateFrom);
+		// - 1 month
+		cal.add(Calendar.MONTH, -1);
+		cal.set(Calendar.DATE, 1);
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(user.getCdate());
+		cal1.add(Calendar.MONTH, -1);
+		int maxlever = 0;
+		while (cal.getTime().after(cal1.getTime())) {
+			//tính lever từ tháng create account đến trước thời điểm tính hoa hồng 1 tháng
+			int baselever = getBaseLever(user, cal.getTime(), lever);
+			cal.add(Calendar.MONTH, -1);
+			if (baselever > maxlever)
+				maxlever = baselever;
+		}
+		if (maxlever == LeverType.GDSD.getValue())
+			return LeverType.GDSD.name();
+		if (maxlever == LeverType.DSD.getValue())
+			return LeverType.DSD.name();
+		if (maxlever == LeverType.MSD.getValue())
+			return LeverType.MSD.name();
+		if (maxlever == LeverType.TL.getValue())
+			return LeverType.TL.name();
+		return result;
+	}
+
+	private int getBaseLever(User user, Date time, int lever) throws SQLException {
+		int result = 0;
 		Double totalRevenue = 0.0;
 		List<User> listChild = dao.getChild(user.getId());
 		List<Double> lstRevenueOfChild = new ArrayList<>();
+		Date dateFrom = time;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(time);
+		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date dateTo = cal.getTime();
 		// calculate revenue personal
 		Double revenuePerson = getRevenue(user, dateFrom, dateTo);
-
 		totalRevenue += revenuePerson;
 		for (User child : listChild) {
 			Double totalRevenueChild = 0.0;
@@ -417,16 +474,14 @@ public class ManageServiceImpl implements ManageService {
 			lstRevenueOfChild.add(totalRevenueChild);
 			totalRevenue += totalRevenueChild;
 		}
-		result.setTotalRevenue(totalRevenue);
-		result.setLevel(LeverType.New.name());
 		if (totalRevenue >= LeverType.GDSD.getAmount()) {
 			int countChildValid = 0;
 			for (Double value : lstRevenueOfChild) {
 				if (value >= LeverType.MSD.getAmount())
 					countChildValid++;
 			}
-			if (countChildValid >= 6)
-				result.setLevel(LeverType.GDSD.name());
+			if (countChildValid >= 6 && lever >= LeverType.SALE_PRO.getValue())
+				return LeverType.GDSD.getValue();
 		}
 		if (totalRevenue >= LeverType.DSD.getAmount()) {
 			int countChildValid = 0;
@@ -434,20 +489,59 @@ public class ManageServiceImpl implements ManageService {
 				if (value >= LeverType.MSD.getAmount())
 					countChildValid++;
 			}
-			if (countChildValid >= 3)
-				result.setLevel(LeverType.DSD.name());
+			if (countChildValid >= 3 && lever >= LeverType.SALE_PRO.getValue())
+				return LeverType.DSD.getValue();
 		}
 		if (totalRevenue >= LeverType.MSD.getAmount()) {
 			int countChildValid = 0;
+			boolean check = false;
+			boolean validTL = true;
 			for (Double value : lstRevenueOfChild) {
 				if (value >= LeverType.TL.getAmount())
 					countChildValid++;
+				if (value >= LeverType.MSD.getAmount())
+					check = true;
 			}
-			if (countChildValid >= 2)
-				result.setLevel(LeverType.MSD.name());
+			if (countChildValid >= 2 && lever >= LeverType.SALE_PRO.getValue()) {
+				if (check) {
+					for (Double value : lstRevenueOfChild) {
+						if (value < LeverType.MSD.getAmount() * 0.2) {
+							validTL = false;
+							break;
+						}
+					}
+					if (validTL)
+						return LeverType.MSD.getValue();
+				} else {
+					return LeverType.MSD.getValue();
+				}
+			}
 		}
 		if (totalRevenue >= LeverType.TL.getAmount()) {
-			result.setLevel(LeverType.TL.name());
+			// int countChildValid = 0;
+			boolean check = false;
+			boolean validTL = true;
+			for (Double value : lstRevenueOfChild) {
+				if (value >= LeverType.TL.getAmount()) {
+					check = true;
+					break;
+				}
+			}
+			if (lever >= LeverType.SALE_MEMBER.getValue()) {
+				if (check) {
+					for (Double value : lstRevenueOfChild) {
+						if (value < LeverType.TL.getAmount() * 0.2) {
+							validTL = false;
+							break;
+						}
+					}
+					if (validTL)
+						return LeverType.TL.getValue();
+				} else {
+					return LeverType.TL.getValue();
+				}
+			}
+
 		}
 		return result;
 	}
@@ -455,5 +549,5 @@ public class ManageServiceImpl implements ManageService {
 	private Double getRevenue(User user, Date dateFrom, Date dateTo) throws SQLException {
 		return dao.getRevenuePersonal(user, dateFrom, dateTo);
 	}
-	
+
 }

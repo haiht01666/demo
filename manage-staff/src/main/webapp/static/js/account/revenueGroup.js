@@ -44,8 +44,10 @@ function initTable(filterDate){
             { data: "revenueValue" }
         ],
         dom: 'lBfrtip',
-        buttons: [
-            'excelHtml5'
+        buttons: [{
+        	extend : 'excelHtml5',
+			title : 'Hoa hồng nhóm ('+ moment(filterDate).format('MM-YYYY') +')'
+        }
         ]
     } );
 	$.LoadingOverlay("hide");

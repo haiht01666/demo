@@ -33,10 +33,11 @@
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Tite</th>
-						<th>Date</th>
-						<th>Content</th>
-						<th>Member</th>
+						<th>Mã id</th>
+						<th>Cấp bậc </th>
+						<th>Tổng doanh thu của nhóm</th>
+						<th>Tỷ lệ hưởng hoa hồng</th>
+						<th>Giá trị hoa hồng</th>
 					</tr>
 				</thead>
 

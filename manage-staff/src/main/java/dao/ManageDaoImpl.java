@@ -106,7 +106,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	public List<User> getMembers() throws SQLException {
 		List<User> result = new ArrayList<>();
 
-		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
+		String sql = "SELECT u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever,u.child_id FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -121,6 +121,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setRole(rs.getString(6));
 				user.setParentId(rs.getInt(7));
 				int lever = rs.getInt(8);
+				user.setChildId(rs.getString(9));
 				if (lever == LeverType.SALE_MEMBER.getValue())
 					user.setLeverValue(LeverType.SALE_MEMBER.name());
 				else if (lever == LeverType.SALE_PRO.getValue())
