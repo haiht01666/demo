@@ -305,10 +305,15 @@ public class ManageServiceImpl implements ManageService {
 		if (form.getType() == RevenueGroupType.MONTH.getValue()) {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(form.getCdate());
+			cal.set(Calendar.DATE, 1);
 			form.setDateFrom(cal.getTime());
 			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 			form.setDateTo(cal.getTime());
 			for (User user : lstUser) {
+				if(user.getCdate().after(form.getDateFrom()) || user.getCdate().equals(form.getDateFrom())){
+					//if datefrom nhỏ hơn hoặc bằng ngày tạo tk thì ko được hưởng hoa hồng trong tháng đó.
+					continue;
+				}
 				String baseLever;
 				if (user.getLever() == LeverType.New.getAmount())
 					baseLever = dao.getLever(user.getCdate(), form.getDateFrom(), user.getId());
@@ -329,13 +334,15 @@ public class ManageServiceImpl implements ManageService {
 				if (baseLever.equals(LeverType.PRO_DISTRIBUTE.name()) || finalLever.equals(LeverType.DSD.name())) {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
-					revenue.setUserLever(finalLever);
+					
 					if (finalLever.equals(LeverType.DSD.name()) && baseLever.equals(LeverType.PRO_DISTRIBUTE.name())) {
+						revenue.setUserLever(finalLever);
 						Double total = dao.getAllRevenue(form.getDateFrom(), form.getDateTo());
 						revenue.setRevenuePecent("1%");
 						revenue.setOrderPrice(total);
 						revenue.setRevenueValue(total * 0.01);
 					} else {
+						revenue.setUserLever(baseLever);
 						revenue.setRevenuePecent("3%");
 						revenue.setRevenueValue(totalRevenue * 0.03);
 						revenue.setOrderPrice(totalRevenue);
