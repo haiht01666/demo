@@ -235,7 +235,7 @@ import java.util.List;
     @Override public long getTotalOrder(String userCode) {
         long totalRecord = 0;
         String sql;
-            sql = "SELECT count(*) FROM orders where user_id IN (" + childQuery + ")";
+            sql = "SELECT count(*) FROM orders o where user_id IN (" + childQuery + ")" + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode();
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -315,7 +315,7 @@ import java.util.List;
 
     @Override public BigDecimal getWeekGroupVolume(String userCode, String startDate, String endDate) {
         BigDecimal weekGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
+        String sql ="SELECT sum(total) as total FROM orders o where (user_id IN ("+ childQuery  +") OR user_id = ?)" + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -336,7 +336,7 @@ import java.util.List;
     }
     @Override public BigDecimal getWeekPersonalVolume(String userCode, String startDate, String endDate) {
         BigDecimal weekGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id = ? AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
+        String sql ="SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -356,7 +356,7 @@ import java.util.List;
     }
     @Override public BigDecimal getMonthPersonalVolume(String userCode, String monthYear) {
         BigDecimal monthPersonalVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id = ? and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -376,7 +376,7 @@ import java.util.List;
 
     @Override public BigDecimal getMonthGroupVolume(String userCode, String monthYear) {
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders o where (user_id IN ("+ childQuery  +") OR user_id = ?) " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -397,7 +397,7 @@ import java.util.List;
 
     @Override public BigDecimal getYearPersonalVolume(String userCode, String year) {
         BigDecimal monthPersonalVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id = ? and  DATE_FORMAT(cdate,'%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -417,7 +417,7 @@ import java.util.List;
 
     @Override public BigDecimal getYearGroupVolume(String userCode, String year) {
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) and  DATE_FORMAT(cdate,'%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders o where (user_id IN ("+ childQuery  +") OR user_id = ?) " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
