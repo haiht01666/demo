@@ -24,7 +24,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <tr>
                   <td colspan="2" align="center" valign="middle" class="td-text">
                     <div class="input-group">
-                      <input type="text" class="form-control form-control-lefttext"  id="requestsupport.title" value="" autocomplete="off"  maxlength="16"/>
+                      <input type="text" class="form-control form-control-lefttext"  id="requestsupport.title" value="" autocomplete="off"  maxlength="50"/>
                     </div>
                   </td>
                 </tr>

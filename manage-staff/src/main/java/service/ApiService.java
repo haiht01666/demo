@@ -16,13 +16,15 @@ public interface ApiService {
      */
     AjaxResult checkLogin(String user, String pass);
 
+    AjaxResult getSummaryPersonalInfo(String userCode);
+
     AjaxResult updatePersonalInfo(User user);
 
     AjaxResult saveAvatar(User user);
 
     AjaxResult changePassword(String userCode, String oldPass, String newPass);
 
-    AjaxResult requestSupport(String userCode, String userName, String title, String content);
+    AjaxResult requestSupport(String userCode, String title, String content);
 
     AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit, Integer offset,
             String orderby);
@@ -34,4 +36,6 @@ public interface ApiService {
     AjaxResult getSummaryInfo(String userCode, String time, int limit, int offset);
 
     AjaxResult getCommissionInfo(String userCode, String time);
+
+
 }

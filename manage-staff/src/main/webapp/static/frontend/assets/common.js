@@ -5103,48 +5103,8 @@ function handleTouchEnd(evt) {
         distY = 0;
     distX = Math.abs(pointEndX - pointStartX);
     distY = Math.abs(pointEndY - pointStartY);
-    //logInfo('End touch: X= ' + pointEndX + ' Y= ' + pointEndY + ' distX= ' + distX + ' distY= ' + distY);
-    /*if ((distX > 10) || (distY > 0)) {
-        //hiddenKeyBoard();
-        //if (Environment.isAndroid() || Environment.isBlackBerry() || Environment.isIOS()) {
-		if((Environment.isIOS() && !Environment.isWindows()) || Environment.isBlackBerry()) {// || Environment.isAndroid())
-         	hiddenKeyBoard();
-         }
-    }*/
-    if ((distX > 80) && (distX > distY + 5) && (pointStartX < pointEndX)) {
-		var stNode = checkIsChildOfClass(evt.target, 'main-layout');
-		var accNode = checkIsChildOfClass(evt.target, 'account-select');
-		var slideViewNode = checkIsChildOfClass(evt.target, 'slide-view-select');
-        if (content != undefined && gIsLogin) {
-            if (!content.isOpen && !contentPromotion.isOpen && stNode && !accNode && !slideViewNode) {
-                openMenuContent();
-            }
-
-        }
-		if ((contentPromotion != undefined) && (contentPromotion.isOpen) && stNode && !accNode && !slideViewNode) {
-			closeMenuPromotion();
-		}
-    }
-    else if ((distX > 80) && (distX > distY + 5) && (pointStartX > pointEndX)) {
+    if ((distX < 5) && (distY < 5)) {
         var stNode = checkIsChildOfClass(evt.target, 'main-layout');
-        var accNode = checkIsChildOfClass(evt.target, 'account-select');
-        var slideViewNode = checkIsChildOfClass(evt.target, 'slide-view-select');
-		if (!contentPromotion.isOpen && !content.isOpen && stNode && !accNode && !slideViewNode) {
-			openMenuPromotion();
-		}
-        if ((content != undefined) && (content.isOpen) && stNode && !accNode && !slideViewNode) {
-            closeMenuContent();
-        }
-
-    }
-    else if ((distX < 5) && (distY < 5)) {
-        var stNode = checkIsChildOfClass(evt.target, 'main-layout');
-        if ((content != undefined) && content.isOpen && stNode) {
-            closeMenuContent();
-        }
-		if ((contentPromotion != undefined) && contentPromotion.isOpen && stNode) {
-			closeMenuPromotion();
-		}
     }
 	else {
 		var stNode = checkIsChildOfClass(evt.target, 'main-layout');
@@ -5169,20 +5129,6 @@ function displayMenuSection(isDisplayOn) {
         //menuSection.style.opacity = 0;
         setTimeout(function () {
             menuSection.style.display = 'none';
-			showMaskSlideMenu(false);
-        }, 300);
-    }
-}
-
-function displayPromotionSection(isDisplayOn) {
-    if (isDisplayOn) {
-        promotionSection.style.display = 'block';
-        promotionSection.style.opacity = 1;
-		showMaskSlideMenu(true);
-    } else {
-        //promotionSection.style.opacity = 0;
-        setTimeout(function () {
-            promotionSection.style.display = 'none';
 			showMaskSlideMenu(false);
         }, 300);
     }
@@ -5811,19 +5757,6 @@ function closeMenuContent() {
 	showMaskSlideMenu(false);
 	content.close();
 	displayMenuSection(content.isOpen);
-	setInterlockEnable();
-}
-
-function openMenuPromotion() {
-	showMaskSlideMenu(true);
-	contentPromotion.open();
-	displayPromotionSection(contentPromotion.isOpen);
-	setInterlockEnable();
-}
-function closeMenuPromotion() {
-	showMaskSlideMenu(false);
-	contentPromotion.close();
-	displayPromotionSection(contentPromotion.isOpen);
 	setInterlockEnable();
 }
 

@@ -42,11 +42,23 @@ import java.util.*;
         return result;
     }
 
+    @Override public AjaxResult getSummaryPersonalInfo(String userCode) {
+        AjaxResult result = new AjaxResult();
+        try {
+            User user = dao.getLoginInfo(userCode);
+            result.setResult(true);
+            result.setResultData(user);
+        } catch (Exception e) {
+            result.setResult(false);
+
+        }
+        return result;
+    }
+
     @Override public AjaxResult updatePersonalInfo(User user) {
         AjaxResult result = new AjaxResult();
         try {
-            dao.updatePersonalInfo(user);
-            result.setResult(true);
+            result.setResult(dao.updatePersonalInfo(user) > 0);
         } catch (Exception e) {
             result.setResult(false);
         }
@@ -56,8 +68,7 @@ import java.util.*;
     @Override public AjaxResult saveAvatar(User user) {
         AjaxResult result = new AjaxResult();
         try {
-            dao.saveAvatar(user);
-            result.setResult(true);
+            result.setResult(dao.saveAvatar(user) > 0);
         } catch (Exception e) {
             result.setResult(false);
         }
@@ -80,11 +91,10 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult requestSupport(String userCode, String userName, String title, String content) {
+    @Override public AjaxResult requestSupport(String userCode, String title, String content) {
         AjaxResult result = new AjaxResult();
         try {
-            dao.requestSupport(userCode, userName, title, content);
-            result.setResult(true);
+            result.setResult(dao.requestSupport(userCode, title, content) > 0);
         } catch (Exception e) {
             result.setResult(false);
         }
@@ -99,7 +109,9 @@ import java.util.*;
             List<User> listNpp = dao.getNpp(directNpp, userCode, limit, offset, orderby);
             for (User user : listNpp) {
                 user.setAgentLevel(CommonUtils.getLevelChild(childId, user.getChildId()));
-                user.setLeverValue(manageService.getLeverUser(Integer.parseInt(user.getUserCode())));
+                User userTmp = manageService.detailUser(Integer.parseInt(user.getUserCode()));
+                user.setLeverValue(userTmp.getLeverValue());
+                user.setStatus(userTmp.getStatus());
             }
             result.setResult(true);
             result.setNumberRecord(totalNpp);
@@ -114,14 +126,9 @@ import java.util.*;
             String orderby) {
         AjaxResult result = new AjaxResult();
         try {
-            List<User> listNpp = dao.getNpp(false, userCode, -1, offset, "id");
-            List<String> listNppId = new ArrayList<>();
-            for (User user : listNpp) {
-                listNppId.add(user.getUserCode());
-            }
             // get child order
-            long totalOrder = dao.getTotalOrder(listNppId);
-            List<Order> listOrder = dao.getListOrder(listNppId, limit, offset, orderby);
+            long totalOrder = dao.getTotalOrder(userCode);
+            List<Order> listOrder = dao.getListOrder(userCode, limit, offset, orderby);
             for (Order order : listOrder) {
                 order.setAgentLevel(CommonUtils.getLevelChild(childId, order.getChildId()));
             }
@@ -179,15 +186,11 @@ import java.util.*;
             SumaryInfoModel sumaryInfoModel = new SumaryInfoModel();
             // set user info
             User userInfo = dao.getLoginInfo(userCode);
-            userInfo.setLeverValue(manageService.getLeverUser(Integer.parseInt(userCode)));
+            User userTmp = manageService.detailUser(Integer.parseInt(userCode));
+            userInfo.setLeverValue(userTmp.getLeverValue());
+            userInfo.setStatus(userTmp.getStatus());
             sumaryInfoModel.setUserInfo(userInfo);
-            // lay tat ca npp (bao gom ca npp cha)
-            List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
-            List<String> listGroupId = new ArrayList<>();
-            listGroupId.add(userCode);
-            for (User user : listNpp) {
-                listGroupId.add(user.getUserCode());
-            }
+
             // lay doanh so ca nhan thang
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
             String monthYear = dateFormat.format(new Date());
@@ -205,14 +208,14 @@ import java.util.*;
                 int weekIndex = CommonUtils
                         .numberWeekFromRegister(userInfo.getSignUpDate(), df.parse(timeModel.getEndDate()));
                 BigDecimal weekGroupVolume = dao
-                        .getWeekGroupVolume(listGroupId, timeModel.getStartDate(), timeModel.getEndDate());
+                        .getWeekGroupVolume(userCode, timeModel.getStartDate(), timeModel.getEndDate());
                 weekVolumeInfo.setGroupVolume(weekGroupVolume);
                 weekVolumeInfo.setWeekTime(
                         weekIndex + " (" + timeModel.getStartDate() + " - " + timeModel.getEndDate() + ")");
                 weekVolumeInfoList.add(weekVolumeInfo);
             }
             // lấy lịch sử toàn bộ doanh thu
-            Tuple2<Integer, List<VolumeInfo>> tuple2 = getVolumeInfoList(userInfo, listGroupId, time, limit, offset);
+            Tuple2<Integer, List<VolumeInfo>> tuple2 = getVolumeInfoList(userInfo, time, limit, offset);
             sumaryInfoModel.setTotalRecord(tuple2._1);
             sumaryInfoModel.setVolumeInfoList(tuple2._2);
             sumaryInfoModel.setWeekVolumeInfoList(weekVolumeInfoList);
@@ -299,7 +302,7 @@ import java.util.*;
         return result;
     }
 
-    private Tuple2<Integer, List<VolumeInfo>> getVolumeInfoList(User userInfo, List<String> listGroupId, String time,
+    private Tuple2<Integer, List<VolumeInfo>> getVolumeInfoList(User userInfo, String time,
             int limit, int offset) throws ParseException {
         List<VolumeInfo> volumeInfoList = new ArrayList<>();
         int totalRecord = 0;
@@ -323,7 +326,7 @@ import java.util.*;
                 int weekIndex = CommonUtils
                         .numberWeekFromRegister(userInfo.getSignUpDate(), df.parse(timeModel.getEndDate()));
                 BigDecimal weekGroupVolume = dao
-                        .getWeekGroupVolume(listGroupId, timeModel.getStartDate(), timeModel.getEndDate());
+                        .getWeekGroupVolume(userInfo.getUserCode(), timeModel.getStartDate(), timeModel.getEndDate());
 
                 BigDecimal weekPersonalVolume = dao
                         .getWeekPersonalVolume(userInfo.getUserCode(), timeModel.getStartDate(),
@@ -341,7 +344,7 @@ import java.util.*;
                 VolumeInfo volumeInfo = new VolumeInfo();
                 String timeMonth = CommonUtils.getTimeMonth(i);
                 BigDecimal monthlyPersonalVolume = dao.getMonthPersonalVolume(userInfo.getUserCode(), timeMonth);
-                BigDecimal monthlyGroupVolume = dao.getMonthGroupVolume(listGroupId, timeMonth);
+                BigDecimal monthlyGroupVolume = dao.getMonthGroupVolume(userInfo.getUserCode(), timeMonth);
 
                 // set info
                 volumeInfo.setPersonalVolume(monthlyPersonalVolume);
@@ -355,7 +358,7 @@ import java.util.*;
                 VolumeInfo volumeInfo = new VolumeInfo();
                 String timeMonth = CommonUtils.getTimeYear(i);
                 BigDecimal monthlyPersonalVolume = dao.getYearPersonalVolume(userInfo.getUserCode(), timeMonth);
-                BigDecimal monthlyGroupVolume = dao.getYearGroupVolume(listGroupId, timeMonth);
+                BigDecimal monthlyGroupVolume = dao.getYearGroupVolume(userInfo.getUserCode(), timeMonth);
 
                 // set info
                 volumeInfo.setPersonalVolume(monthlyPersonalVolume);

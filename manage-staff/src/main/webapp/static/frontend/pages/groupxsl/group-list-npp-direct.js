@@ -156,7 +156,7 @@ function genXMLHistoryDoc(listAllNpp) {
         tmpChildNode = createXMLNode('coltitle7', CONST_STR.get('GROUP_MANAGER_NPP_CITY'), docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('colcontent7', tmpHisObj.city, docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('coltitle8', CONST_STR.get('GROUP_MANAGER_NPP_STATUS'), docXml, tmpXmlNodeInfo);
-        tmpChildNode = createXMLNode('colcontent8', tmpHisObj.enable ? 'Active' : 'Inactive', docXml, tmpXmlNodeInfo);
+        tmpChildNode = createXMLNode('colcontent8', tmpHisObj.status, docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('coltitle9', CONST_STR.get('GROUP_MANAGER_NPP_RANK'), docXml, tmpXmlNodeInfo);
         tmpChildNode = createXMLNode('colcontent9', tmpHisObj.leverValue, docXml, tmpXmlNodeInfo);
     }

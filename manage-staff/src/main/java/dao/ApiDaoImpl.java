@@ -15,6 +15,15 @@ import java.util.List;
 
 @Repository public class ApiDaoImpl extends DBManager implements ApiDao {
 
+    private String childQuery = "SELECT " +
+                        "			u1.id " +
+                        "		FROM " +
+                        "			users u1 " +
+                        "		LEFT JOIN users u2 ON u1.parent_id = u2.id " +
+                        "		WHERE " +
+                        "			u1.child_id LIKE CONCAT('%', ?, '-%') ";
+
+
     @Override public User getLoginInfo(String userId) {
         User user = new User();
         String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.signup_date FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
@@ -87,8 +96,8 @@ import java.util.List;
             stmt.setString(5, user.getBankAccount());
             stmt.setString(6, user.getBankBranch());
             stmt.setString(7, user.getBankUser());
-            stmt.setString(8, user.getUserCode());
-            stmt.setString(9, user.getCity());
+            stmt.setString(8, user.getCity());
+            stmt.setString(9, user.getUserCode());
             record = stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -137,16 +146,15 @@ import java.util.List;
         return record;
     }
 
-    @Override public int requestSupport(String userCode, String userName, String title, String content) {
+    @Override public int requestSupport(String userCode, String title, String content) {
         int record = 0;
-        String sql = "INSERT INTO feedbacks (title, content, user_id, user_name, cdate) VALUES (?,?,?,?, NOW())";
+        String sql = "INSERT INTO feedbacks (title, content, user_id, cdate) VALUES (?,?,?, NOW())";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, title);
             stmt.setString(2, content);
             stmt.setString(3, userCode);
-            stmt.setString(4, userName);
             record = stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -224,13 +232,14 @@ import java.util.List;
         return listAllNpp;
     }
 
-    @Override public long getTotalOrder(List<String> listChildId) {
+    @Override public long getTotalOrder(String userCode) {
         long totalRecord = 0;
         String sql;
-            sql = "SELECT count(*) FROM orders where user_id IN( "+ StringUtils.join(listChildId, ",")  +")";
+            sql = "SELECT count(*) FROM orders where user_id IN (" + childQuery + ")";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 totalRecord = rs.getInt(1);
@@ -244,18 +253,35 @@ import java.util.List;
     }
 
     @Override
-    public List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby) {
+    public List<Order> getListOrder(String userCode, Integer limit, Integer offset, String orderby) {
         List<Order> lstOrder = new ArrayList<>();
-        String sql ="SELECT o.user_id,u.name user_name,o.name,o.cdate,o.price,o.quantity,o.type,o.total, u.child_id FROM orders o LEFT JOIN users u on o.user_id = u.id where o.user_id IN( "+ StringUtils.join(listChildId, ",")  +") order by o." + orderby;
+        String sql = "SELECT " +
+                    "	o.user_id, " +
+                    "	u. NAME user_name, " +
+                    "	o. NAME, " +
+                    "	o.cdate, " +
+                    "	o.price, " +
+                    "	o.quantity, " +
+                    "	o.type, " +
+                    "	o.total, " +
+                    "	u.child_id " +
+                    "FROM " +
+                    "	orders o " +
+                    "LEFT JOIN users u ON o.user_id = u.id " +
+                    "WHERE " +
+                    "	o.user_id IN (" + childQuery + ")" +
+                    "   AND o.type=" + OrderType.ORDER_PRODUCT.getCode() +
+                    " order by o." + orderby;
         if (limit != -1) {
             sql += " LIMIT ?,?";
         }
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
             if (limit != -1) {
-                stmt.setInt(1, offset);
-                stmt.setInt(2, limit);
+                stmt.setInt(2, offset);
+                stmt.setInt(3, limit);
             }
             rs = stmt.executeQuery();
             while(rs.next()){
@@ -287,14 +313,16 @@ import java.util.List;
         return lstOrder;
     }
 
-    @Override public BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String endDate) {
+    @Override public BigDecimal getWeekGroupVolume(String userCode, String startDate, String endDate) {
         BigDecimal weekGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
+        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, startDate);
-            stmt.setString(2, endDate);
+            stmt.setString(1, userCode);
+            stmt.setString(2, userCode);
+            stmt.setString(3, startDate);
+            stmt.setString(4, endDate);
             rs = stmt.executeQuery();
             while(rs.next()){
                 weekGroupVolume = rs.getBigDecimal(1);
@@ -346,13 +374,15 @@ import java.util.List;
         return monthPersonalVolume;
     }
 
-    @Override public BigDecimal getMonthGroupVolume(List<String> listGroupId, String monthYear) {
+    @Override public BigDecimal getMonthGroupVolume(String userCode, String monthYear) {
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, monthYear);
+            stmt.setString(1, userCode);
+            stmt.setString(2, userCode);
+            stmt.setString(3, monthYear);
             rs = stmt.executeQuery();
             while(rs.next()){
                 monthGroupVolume = rs.getBigDecimal(1);
@@ -385,13 +415,15 @@ import java.util.List;
         return monthPersonalVolume;
     }
 
-    @Override public BigDecimal getYearGroupVolume(List<String> listGroupId, String year) {
+    @Override public BigDecimal getYearGroupVolume(String userCode, String year) {
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql ="SELECT sum(total) as total FROM orders where user_id IN ("+ StringUtils.join(listGroupId, ",")  +") and  DATE_FORMAT(cdate,'%Y') = ?";
+        String sql ="SELECT sum(total) as total FROM orders where (user_id IN ("+ childQuery  +") OR user_id = ?) and  DATE_FORMAT(cdate,'%Y') = ?";
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, year);
+            stmt.setString(1, userCode);
+            stmt.setString(2, userCode);
+            stmt.setString(3, year);
             rs = stmt.executeQuery();
             while(rs.next()){
                 monthGroupVolume = rs.getBigDecimal(1);

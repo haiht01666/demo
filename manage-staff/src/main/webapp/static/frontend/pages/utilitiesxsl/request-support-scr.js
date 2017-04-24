@@ -60,7 +60,6 @@ function requestSuport() {
         url: "/api/requestSupport",
         data: JSON.stringify({
             userCode: gUserInfo.userCode,
-            userName: gUserInfo.dispName,
             title: title,
             content: content
         }),

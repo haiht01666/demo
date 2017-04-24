@@ -16,13 +16,8 @@ function viewBackFromOther() {
 
 
 function viewDidLoadSuccess() {
-    document.getElementById("confirmBtn").disabled = true;
-    if (flag_check == false) {
-        setDefaultInfo();
-    }
+    document.getElementById("confirmBtn").disabled = false;
     setDefaultInfo();
-    showLoadingMask();
-    setTimeout(hideLoadingMask, 200);
 
     setInputOnlyNumberInfo('mobile');
     setInputOnlyASCIIinfo('email');
@@ -34,17 +29,35 @@ function viewDidLoadSuccess() {
 }
 
 function setDefaultInfo() {
-    document.getElementById("name").innerHTML = gUserInfo.dispName;
-    document.getElementById("birthday").innerHTML = gUserInfo.birthday;
-    document.getElementById("userid").innerHTML = gUserInfo.identifier;
-    document.getElementById("mobile").value = gUserInfo.phone;
-    document.getElementById("address").value = gUserInfo.address;
-    document.getElementById("email").value = gUserInfo.email;
-    document.getElementById("bankName").value = gUserInfo.bankName;
-    document.getElementById("bankDivice").value = gUserInfo.bankBranch;
-    document.getElementById("bankAccount").value = gUserInfo.bankAccount;
-    document.getElementById("bankAccountName").value = gUserInfo.bankUser;
-    document.getElementById("city").value = gUserInfo.city;
+    showLoadingMask();
+    $.ajax({
+        type: "POST",
+        url: "/api/getSummaryPersonalInfo",
+        data: JSON.stringify({userCode: gUserInfo.userCode}),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            hideLoadingMask();
+            if (response.result) {
+                document.getElementById("name").innerHTML = response.resultData.dispName;
+                document.getElementById("birthday").innerHTML = moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY');
+                document.getElementById("userid").innerHTML = response.resultData.identifier;
+                document.getElementById("mobile").value = response.resultData.phone;
+                document.getElementById("address").value = response.resultData.address;
+                document.getElementById("email").value = response.resultData.email;
+                document.getElementById("bankName").value = response.resultData.bankName;
+                document.getElementById("bankDivice").value = response.resultData.bankBranch;
+                document.getElementById("bankAccount").value = response.resultData.bankAccount;
+                document.getElementById("bankAccountName").value = response.resultData.bankUser;
+                document.getElementById("city").value = response.resultData.city;
+            } else {
+                showAlertText(CONST_STR.get('GET_INFO_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_INFO_FAIL'));
+        }
+    });
 }
 
 function cancel() {
@@ -96,9 +109,6 @@ function confirmChange() {
         success: function (response) {
             hideLoadingMask();
             if (response.result) {
-                //re set info to global object
-                //gUserInfo.birthday = newCusInfoObj.userCode;
-                //gUserInfo.identifier;
                 gUserInfo.phone = newCusInfoObj.phone;
                 gUserInfo.address = newCusInfoObj.address;
                 gUserInfo.email = newCusInfoObj.email;
@@ -127,67 +137,67 @@ function handleAlertChangeInfo() {
 
 
 function checkChange(tbx, limit) {
-    //limit text length on field
-    if (tbx.value.length > Number(limit)) {
-        tbx.value = tbx.value.substring(0, Number(limit));
-    }
-
-    //disable confirm button
-    document.getElementById("confirmBtn").disabled = true;
-
-    if (document.getElementById("address").value != gUserInfo.address) {
-        logInfo("edit address");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("mobile").value != gUserInfo.phone) {
-        logInfo("edit mobile");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("email").value != gUserInfo.email) {
-        logInfo("edit email");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("bankName").value != gUserInfo.bankName) {
-        logInfo("edit bankName");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("bankDivice").value != gUserInfo.bankBranch) {
-        logInfo("edit bankDivice");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("bankAccount").value != gUserInfo.bankAccount) {
-        logInfo("edit bankAccount");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("bankAccountName").value != gUserInfo.bankUser) {
-        logInfo("edit bankAccountName");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
-
-    if (document.getElementById("city").value != gUserInfo.city) {
-        logInfo("edit city");
-        //enable confirm button
-        document.getElementById("confirmBtn").disabled = "";
-        return;
-    }
+    // //limit text length on field
+    // if (tbx.value.length > Number(limit)) {
+    //     tbx.value = tbx.value.substring(0, Number(limit));
+    // }
+    //
+    // //disable confirm button
+    // document.getElementById("confirmBtn").disabled = true;
+    //
+    // if (document.getElementById("address").value != gUserInfo.address) {
+    //     logInfo("edit address");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("mobile").value != gUserInfo.phone) {
+    //     logInfo("edit mobile");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("email").value != gUserInfo.email) {
+    //     logInfo("edit email");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("bankName").value != gUserInfo.bankName) {
+    //     logInfo("edit bankName");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("bankDivice").value != gUserInfo.bankBranch) {
+    //     logInfo("edit bankDivice");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("bankAccount").value != gUserInfo.bankAccount) {
+    //     logInfo("edit bankAccount");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("bankAccountName").value != gUserInfo.bankUser) {
+    //     logInfo("edit bankAccountName");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
+    //
+    // if (document.getElementById("city").value != gUserInfo.city) {
+    //     logInfo("edit city");
+    //     //enable confirm button
+    //     document.getElementById("confirmBtn").disabled = "";
+    //     return;
+    // }
 }

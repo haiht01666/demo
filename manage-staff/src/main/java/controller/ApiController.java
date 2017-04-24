@@ -24,6 +24,12 @@ public class ApiController {
 		return service.checkLogin(loginUser, loginPass);
 	}
 
+	@RequestMapping(value = { "/getSummaryPersonalInfo" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getSummaryPersonalInfo(@RequestBody Map getInfo) {
+		String userCode = (String)getInfo.get("userCode");
+		return service.getSummaryPersonalInfo(userCode);
+	}
+
 	@RequestMapping(value = { "/updatePersonalInfo" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult updatePersonalInfo(@RequestBody User user) {
 		return service.updatePersonalInfo(user);
@@ -44,10 +50,9 @@ public class ApiController {
 	@RequestMapping(value = { "/requestSupport" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult requestSupport(@RequestBody Map changePassMap) {
 		String userCode = (String)changePassMap.get("userCode");
-		String userName = (String)changePassMap.get("userName");
 		String title = (String)changePassMap.get("title");
 		String content = (String)changePassMap.get("content");
-		return service.requestSupport(userCode, userName, title, content);
+		return service.requestSupport(userCode, title, content);
 	}
 
 	@RequestMapping(value = { "/getNpp" }, method = RequestMethod.POST)

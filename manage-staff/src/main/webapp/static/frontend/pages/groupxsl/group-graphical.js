@@ -40,7 +40,6 @@ function viewDidLoadSuccess() {
             showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
         }
     });
-
 }
 
 function drawChart() {

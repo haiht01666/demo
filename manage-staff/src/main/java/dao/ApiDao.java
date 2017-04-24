@@ -20,15 +20,15 @@ public interface ApiDao {
 	int updatePersonalInfo(User user);
 	int saveAvatar(User user);
 	int changePassword(String userCode, String newPass);
-	int requestSupport(String userCode, String userName, String title, String content);
+	int requestSupport(String userCode, String title, String content);
 	long getTotalNpp(boolean directNpp, String userCode);
 	List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset, String orderby);
-	long getTotalOrder(List<String> listChildId);
-	List<Order> getListOrder(List<String> listChildId, Integer limit, Integer offset, String orderby);
-	BigDecimal getWeekGroupVolume(List<String> listGroupId, String startDate, String endDate);
+	long getTotalOrder(String userCode);
+	List<Order> getListOrder(String userCode, Integer limit, Integer offset, String orderby);
+	BigDecimal getWeekGroupVolume(String userCode, String startDate, String endDate);
 	BigDecimal getWeekPersonalVolume(String userCode, String startDate, String endDate);
 	BigDecimal getMonthPersonalVolume(String userCode, String dateTime);
-	BigDecimal getMonthGroupVolume(List<String> listGroupId, String monthYear);
+	BigDecimal getMonthGroupVolume(String userCode, String monthYear);
 	BigDecimal getYearPersonalVolume(String userCode, String dateTime);
-	BigDecimal getYearGroupVolume(List<String> listGroupId, String monthYear);
+	BigDecimal getYearGroupVolume(String userCode, String monthYear);
 }

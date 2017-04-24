@@ -29,65 +29,84 @@ function loadInitXML() {
 /*** VIEW LOAD SUCCESS ***/
 
 function viewDidLoadSuccess() {
-    showLoadingMask();
-    setTimeout(hideLoadingMask, 200);
-    if (gUserInfo.userAvatar && gUserInfo.userAvatar.length > 0) {
-        document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="250px" height="250px" src="' + atob(gUserInfo.userAvatar) + '" />';
+	// init function
+    //take picture
+    document.getElementById("btnFile").value = '';
+    document.getElementById("avatar-btn-upload").style.display = 'none';
+    document.getElementById("avatar-btn-rotate").style.display = 'none';
+
+    imgSelected = document.getElementById("id.fileUpload01");
+    resultUserImg = document.getElementById('cus-profile-img-avatar');
+    //canvasIg = document.getElementById("canvasImg");
+    infoNode1 = document.getElementById('info1');
+    clientCusWidth -= 25;// padding size
+    if(gModeScreenView == CONST_MODE_SCR_SMALL) {
+        isSmallScrMode = true;
     }
     else {
-        document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="250px" height="250px" src="./static/frontend/assets/images/acc-info-img.png"/>';
+        isSmallScrMode = false;
+    }
+    imgSelected.onchange = function(e) {
+
+        e.preventDefault();
+        var target = e.dataTransfer || e.target;
+        var file = target && target.files && target.files[0];
+        var options = {
+            maxWidth: 250,
+            canvas: true
+        };
+        if (!file) {
+            logInfo("Not exist file");
+            return;
+        }
+        loadImage.parseMetaData(file, function (data) {
+            displayImage(file, options);
+        });
+        fnChange(imgSelected);
+    }
+    //only enable camera: ios > 5 & android > 4 & chrome moi
+    if(isAndroidBrowserAbove4 || iOSversion() > 5) {
+        document.getElementById('take-picture-icon').style.display = '';
+    }
+    else {
+        document.getElementById('take-picture-icon').style.display = 'none'
     }
 
-   document.getElementById('cus-profile-fullname').innerHTML = gUserInfo.dispName;
-   document.getElementById('cus-profile-birthday').innerHTML = gUserInfo.birthday;
-   document.getElementById('cus-profile-userid').innerHTML = gUserInfo.identifier;
-   document.getElementById('cus-profile-address').innerHTML = gUserInfo.address;
-   document.getElementById('cus-profile-mobile').innerHTML = gUserInfo.phone;
-   document.getElementById('cus-profile-email').innerHTML = gUserInfo.email;
-   document.getElementById('cus-profile-cif').innerHTML = gUserInfo.userCode;
-   document.getElementById('cus-profile-city').innerHTML = gUserInfo.city;
 
-	//take picture
-	document.getElementById("btnFile").value = '';
-	document.getElementById("avatar-btn-upload").style.display = 'none';
-	document.getElementById("avatar-btn-rotate").style.display = 'none';
-	
-	imgSelected = document.getElementById("id.fileUpload01");
-	resultUserImg = document.getElementById('cus-profile-img-avatar');
-	//canvasIg = document.getElementById("canvasImg");
-	infoNode1 = document.getElementById('info1');
-	clientCusWidth -= 25;// padding size
-	if(gModeScreenView == CONST_MODE_SCR_SMALL) {
-		isSmallScrMode = true;
-	}
-	else {
-		isSmallScrMode = false;
-	}
-	imgSelected.onchange = function(e) {
-		
-		e.preventDefault();
-		var target = e.dataTransfer || e.target;
-		var file = target && target.files && target.files[0];
-		var options = {
-				maxWidth: 250,
-				canvas: true
-			};
-		if (!file) {
-			logInfo("Not exist file");
-			return;
-		}
-		loadImage.parseMetaData(file, function (data) {
-			displayImage(file, options);
-		});
-		fnChange(imgSelected);
-	}
-	//only enable camera: ios > 5 & android > 4 & chrome moi
-	if(isAndroidBrowserAbove4 || iOSversion() > 5) {
-		document.getElementById('take-picture-icon').style.display = '';
-	}
-	else {
-		document.getElementById('take-picture-icon').style.display = 'none'
-	}
+	// send request
+    showLoadingMask();
+    $.ajax({
+        type: "POST",
+        url: "/api/getSummaryPersonalInfo",
+        data: JSON.stringify({userCode: gUserInfo.userCode}),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            hideLoadingMask();
+            if (response.result) {
+                if (response.resultData.userAvatar && response.resultData.userAvatar.length > 0) {
+                    document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="250px" height="250px" src="' + atob(response.resultData.userAvatar) + '" />';
+                }
+                else {
+                    document.getElementById('cus-profile-img-avatar').innerHTML = '<img width="250px" height="250px" src="./static/frontend/assets/images/acc-info-img.png"/>';
+                }
+
+                document.getElementById('cus-profile-fullname').innerHTML = response.resultData.dispName;
+                document.getElementById('cus-profile-birthday').innerHTML =  moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY');
+                document.getElementById('cus-profile-userid').innerHTML = response.resultData.identifier;
+                document.getElementById('cus-profile-address').innerHTML = response.resultData.address;
+                document.getElementById('cus-profile-mobile').innerHTML = response.resultData.phone;
+                document.getElementById('cus-profile-email').innerHTML = response.resultData.email;
+                document.getElementById('cus-profile-cif').innerHTML = response.resultData.userCode;
+                document.getElementById('cus-profile-city').innerHTML = response.resultData.city;
+            } else {
+                showAlertText(CONST_STR.get('GET_INFO_FAIL'));
+            }
+        },
+        error: function () {
+            hideLoadingMask();
+            showAlertText(CONST_STR.get('GET_INFO_FAIL'));
+        }
+    });
 }
 
 /*** VIEW LOAD SUCCESS END viewWillUnload ***/

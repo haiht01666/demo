@@ -69,7 +69,7 @@
                   <td colspan="2"><h5 class="Header"><span>GROUP_GRAPHICAL_TREE</span></h5></td>
                 </tr>
               </table>
-              <div id="chart_div"></div>
+              <div id="chart_div" style="overflow: auto;"></div>
             </div>
           </div>
         </div>
