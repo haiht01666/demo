@@ -2109,6 +2109,7 @@ div.divcopyright {
 	font-size:smaller;
 }
 p.pcopyrighttext {
+	color: white;
 	/*position: fixed; 
 	bottom: 0; 
 	padding-right:10px;

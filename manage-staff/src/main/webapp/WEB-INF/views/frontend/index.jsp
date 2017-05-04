@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
           name="keywords"/>
 
 
-    <title>Bhip Việt Nam</title>
+    <title>DFG Japan Exclusive from ThaiLand</title>
     <link rel="icon" type="image/x-icon" href="static/frontend/assets/images/favicon.ico"/>
     <link rel="SHORTCUT ICON" href="static/frontend/assets/images/favicon.ico"/>
     <!-- eBank Desktop -->
@@ -318,7 +318,7 @@ pageEncoding="UTF-8"%>
             <div class='menu-header'>
                 <!--<span id="menu-profile-name" class="menu-profile-name" onClick="navController.initWithRootView('utilitiesxsl/change-personal-info-scr', true, 'xsl');">TPBank eBank</span>-->
                 <span id="menu-profile-name" class="menu-profile-name"
-                      onClick="navController.initWithRootView('utilitiesxsl/personal-info-view-scr', true, 'xsl');">Bhip Việt Nam</span>
+                      onClick="navController.initWithRootView('utilitiesxsl/personal-info-view-scr', true, 'xsl');">DFG Japan Exclusive from ThaiLand</span>
                 <div id="menu-profile-avatar" class="menu-profile-container"
                      onClick="navController.initWithRootView('utilitiesxsl/personal-info-view-scr', true, 'xsl');"><span
                         class="icon-user2 menu-profile-icon"> </span>
@@ -659,8 +659,8 @@ pageEncoding="UTF-8"%>
                     </span>
 </div>
 <script type="text/javascript">
-    document.getElementById("id_copyright").innerHTML = "&copy;&nbsp;" + new Date().getFullYear() + "&nbsp;Bhip Việt Nam";
-    document.getElementById("id_copyright_mb").innerHTML = "&copy;&nbsp;" + new Date().getFullYear() + "&nbsp;Bhip Việt Nam";
+    document.getElementById("id_copyright").innerHTML = "&copy;&nbsp;" + new Date().getFullYear() + "&nbsp;DFG Japan Exclusive from ThaiLand";
+    document.getElementById("id_copyright_mb").innerHTML = "&copy;&nbsp;" + new Date().getFullYear() + "&nbsp;DFG Japan Exclusive from ThaiLand";
 
 </script>
 </body>
