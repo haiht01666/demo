@@ -35,7 +35,7 @@ public interface ApiService {
 
     AjaxResult getSummaryInfo(String userCode, String time, int limit, int offset);
 
-    AjaxResult getCommissionInfo(String userCode, String time);
+    AjaxResult getCommissionInfo(String userCode, String time, String timeDetail);
 
 
 }

@@ -215,6 +215,30 @@ public class ManageServiceImpl implements ManageService {
 	}
 
 	@Override
+	public Revenue getRevenuePersonal(String userCode, RevenueForm form) throws SQLException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(form.getCdate());
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date dateFrom = cal.getTime();
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date dateTo = cal.getTime();
+		List<Order> lstOrder = dao.getAllOrderPersonal(userCode, dateFrom, dateTo);
+
+		Revenue revenue = null;
+		if (form.getType() == RevenueType.PERSONAL.getValue()) {
+			for (Order order : lstOrder) {
+				revenue = calcuRevenuePersonal(order);
+			}
+		}
+		if (form.getType() == RevenueType.GROUP.getValue()) {
+			for (Order order : lstOrder) {
+				revenue = calcuRevenueGroup(order);
+			}
+		}
+		return revenue;
+	}
+
+	@Override
 	public String resetPassword(List<String> lstUserId) throws SQLException {
 		String result = "";
 		String password = makePassword();

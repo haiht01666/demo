@@ -14,9 +14,11 @@ public class CommissionInfoModel {
 
     private BigDecimal groupCommission;
 
-    private BigDecimal quarterCommission;
+    private BigDecimal leaderQuarterCommission;
 
     private BigDecimal leaderClubCommission;
+
+    private BigDecimal totalCommission;
 
     private List<String> weekTimeDispList;
 
@@ -70,12 +72,12 @@ public class CommissionInfoModel {
         this.groupCommission = groupCommission;
     }
 
-    public BigDecimal getQuarterCommission() {
-        return quarterCommission;
+    public BigDecimal getLeaderQuarterCommission() {
+        return leaderQuarterCommission;
     }
 
-    public void setQuarterCommission(BigDecimal quarterCommission) {
-        this.quarterCommission = quarterCommission;
+    public void setLeaderQuarterCommission(BigDecimal leaderQuarterCommission) {
+        this.leaderQuarterCommission = leaderQuarterCommission;
     }
 
     public BigDecimal getLeaderClubCommission() {
@@ -132,5 +134,13 @@ public class CommissionInfoModel {
 
     public void setYearTimeValList(List<String> yearTimeValList) {
         this.yearTimeValList = yearTimeValList;
+    }
+
+    public BigDecimal getTotalCommission() {
+        return totalCommission;
+    }
+
+    public void setTotalCommission(BigDecimal totalCommission) {
+        this.totalCommission = totalCommission;
     }
 }

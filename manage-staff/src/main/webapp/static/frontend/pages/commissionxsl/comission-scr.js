@@ -40,7 +40,8 @@ function sendJsonRequest() {
         url: "/api/getCommissionInfo",
         data: JSON.stringify({
             userCode: gUserInfo.userCode,
-            time: $('input[name="time"]:checked').val()
+            time: $('input[name="time"]:checked').val(),
+            timeDetail: document.getElementById("commissionTime").value
         }),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
@@ -59,6 +60,11 @@ function sendJsonRequest() {
 }
 
 function setDataInfo(dataInfo) {
+    // set info
+    $('#currentDate').html(moment(new Date()).format('DD/MM/YYYY'));
+    $('#userName').html(gUserInfo.dispName);
+    $('#userCode').html(gUserInfo.userCode);
+
     // week volume
     var weekPersonalVolume = formatNumberToCurrency(dataInfo.weekPersonalVolume);
     if (weekPersonalVolume === '0' || weekPersonalVolume === 0 || !weekPersonalVolume) weekPersonalVolume = '0';
@@ -78,6 +84,31 @@ function setDataInfo(dataInfo) {
     tmpMonthArrayVal = dataInfo.monthTimeValList;
     tmpYearArrayDisp = dataInfo.yearTimeDispList;
     tmpYearArrayVal = dataInfo.yearTimeValList;
+
+    // direct Commission
+    var directCommission = formatNumberToCurrency(dataInfo.directCommission);
+    if (directCommission === '0' || directCommission === 0 || !directCommission) directCommission = '0';
+    $(".directCommission").html(directCommission);
+
+    // groupCommission
+    var groupCommission = formatNumberToCurrency(dataInfo.groupCommission);
+    if (groupCommission === '0' || groupCommission === 0 || !groupCommission) groupCommission = '0';
+    $(".groupCommission").html(groupCommission);
+
+    // leaderQuarterCommission
+    var leaderQuarterCommission = formatNumberToCurrency(dataInfo.leaderQuarterCommission);
+    if (leaderQuarterCommission === '0' || leaderQuarterCommission === 0 || !leaderQuarterCommission) leaderQuarterCommission = '0';
+    $(".leaderQuarterCommission").html(leaderQuarterCommission);
+
+    // leaderClubCommission
+    var leaderClubCommission = formatNumberToCurrency(dataInfo.leaderClubCommission);
+    if (leaderClubCommission === '0' || leaderClubCommission === 0 || !leaderClubCommission) leaderClubCommission = '0';
+    $(".leaderClubCommission").html(leaderClubCommission);
+
+    // totalCommission
+    var totalCommission = formatNumberToCurrency(dataInfo.totalCommission);
+    if (totalCommission === '0' || totalCommission === 0 || !totalCommission) totalCommission = '0';
+    $(".totalCommission").html(totalCommission);
 
 }
 
@@ -107,7 +138,6 @@ function showRequestCommissionTime() {
 function handleSelectionCommissionTime(e) {
     if (currentPage === "commissionxsl/comission-scr") {
         document.removeEventListener("evtSelectionDialog", handleSelectionCommissionTime, false);
-
         if ((e.selectedValue1 !== undefined) && (e.selectedValue1 !== null)) {
             var commissionTime = document.getElementById("commissionTime");
             var commissionTimeDisp = document.getElementById("commissionTimeDisp");
@@ -118,6 +148,7 @@ function handleSelectionCommissionTime(e) {
             else {
                 commissionTime.innerHTML = e.selectedValue1;
             }
+            sendJsonRequest();
         }
     }
 }

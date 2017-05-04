@@ -2,10 +2,15 @@ package service;
 
 import common.CommonUtils;
 import constant.LeverType;
+import constant.RevenueType;
 import dao.ApiDao;
 import model.*;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -227,7 +232,7 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getCommissionInfo(String userCode, String time) {
+    @Override public AjaxResult getCommissionInfo(String userCode, String time, String timeDetail) {
         AjaxResult result = new AjaxResult();
         try {
             CommissionInfoModel commissionInfoModel = new CommissionInfoModel();
@@ -294,6 +299,39 @@ import java.util.*;
             commissionInfoModel.setYearTimeDispList(yearTimeDispList);
             commissionInfoModel.setYearTimeValList(yearTimeValList);
 
+            // set time user
+            RevenueForm form = new RevenueForm();
+            if (StringUtils.isNotEmpty(timeDetail)) {
+                if (time.equals("weekly")) {
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    TimeModel timeModel = CommonUtils.getTimeWeek(Integer.parseInt(timeDetail));
+                    form.setCdate(new Date());
+                    form.setDateFrom(df.parse(timeModel.getStartDate()));
+                    form.setDateTo(df.parse(timeModel.getEndDate()));
+                } else if (time.equals("monthly")) {
+                    form.setCdate(new Date());
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/yyyy");
+                    DateTime dateTime = formatter.parseDateTime(timeDetail);
+                    form.setDateFrom(dateTime.dayOfMonth().withMinimumValue().toDate());
+                    form.setDateTo(dateTime.dayOfMonth().withMaximumValue().toDate());
+                } else if (time.equals("yearly")) {
+                    form.setCdate(new Date());
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy");
+                    DateTime dateTime = formatter.parseDateTime(timeDetail);
+                    form.setDateFrom(dateTime.dayOfYear().withMinimumValue().toDate());
+                    form.setDateTo(dateTime.dayOfYear().withMaximumValue().toDate());
+                }
+                // hoa hồng trực tiếp
+                form.setType(RevenueType.PERSONAL.getValue());
+                Revenue revenuePersonal = manageService.getRevenuePersonal(userCode, form);
+                commissionInfoModel.setDirectCommission(
+                        new BigDecimal(revenuePersonal != null ? revenuePersonal.getRevenueValue() : 0));
+                // hoa hồng nhóm
+                form.setType(RevenueType.GROUP.getValue());
+                Revenue revenueGroup = manageService.getRevenuePersonal(userCode, form);
+                commissionInfoModel.setGroupCommission(
+                        new BigDecimal(revenueGroup != null ? revenueGroup.getRevenueValue() : 0));
+            }
             result.setResultData(commissionInfoModel);
             result.setResult(true);
         } catch (Exception e) {
@@ -302,8 +340,8 @@ import java.util.*;
         return result;
     }
 
-    private Tuple2<Integer, List<VolumeInfo>> getVolumeInfoList(User userInfo, String time,
-            int limit, int offset) throws ParseException {
+    private Tuple2<Integer, List<VolumeInfo>> getVolumeInfoList(User userInfo, String time, int limit, int offset)
+            throws ParseException {
         List<VolumeInfo> volumeInfoList = new ArrayList<>();
         int totalRecord = 0;
         int start = 0;
@@ -371,7 +409,11 @@ import java.util.*;
     }
 
     public static void main(String[] args) {
+        DateTime dateTime = new DateTime().withMonthOfYear(12);
+        System.out.println(dateTime.dayOfYear().withMinimumValue());
+        System.out.println(dateTime.dayOfYear().withMaximumValue());
         LocalDate now = new LocalDate();
+
         System.out.println(now.withDayOfYear(DateTimeConstants.MONDAY));
 
     }

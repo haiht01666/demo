@@ -90,9 +90,10 @@ public class ApiController {
 		return service.getSummaryInfo(userCode, time, limit, offset);
 	}
 	@RequestMapping(value = { "/getCommissionInfo" }, method = RequestMethod.POST)
-	public @ResponseBody AjaxResult getCommissionInfo(@RequestBody Map mapGetAllNpp) {
-		String userCode = (String)mapGetAllNpp.get("userCode");
-		String time = (String)mapGetAllNpp.get("time");
-		return service.getCommissionInfo(userCode, time);
+	public @ResponseBody AjaxResult getCommissionInfo(@RequestBody Map mapGetCommission) {
+		String userCode = (String)mapGetCommission.get("userCode");
+		String time = (String)mapGetCommission.get("time");
+		String timeDetail = (String)mapGetCommission.get("timeDetail");
+		return service.getCommissionInfo(userCode, time, timeDetail);
 	}
 }

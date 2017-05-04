@@ -119,10 +119,10 @@
                                             <div class="mobile-mode">
                                                 <span>COMMISSION_DIRECT</span>
                                             </div>
-                                            <div class="content-detail">0</div>
+                                            <div class="content-detail directCommission">0</div>
                                         </td>
                                         <td>
-                                            <div class="td-date-gold">0</div>
+                                            <div class="td-date-gold groupCommission">0</div>
                                             <div class="mobile-mode-gold">
                                                 <span>COMMISSION_GROUP</span>
                                             </div>
@@ -131,19 +131,19 @@
                                             <div class="mobile-mode">
                                                 <span>COMMISSION_LEADER</span>
                                             </div>
-                                            <div class="content-detail">0</div>
+                                            <div class="content-detail leaderQuarterCommission">0</div>
                                         </td>
                                         <td>
                                             <div class="mobile-mode">
                                                 <span>COMMISSION_PRESIDENT</span>
                                             </div>
-                                            <div class="content-detail">0</div>
+                                            <div class="content-detail leaderClubCommission">0</div>
                                         </td>
                                         <td>
                                             <div class="mobile-mode">
                                                 <span>COMMISSION_TOTAL_VOLUME</span>
                                             </div>
-                                            <div class="content-detail" id="totalVolume"></div>
+                                            <div class="content-detail totalCommission"></div>
                                         </td>
                                     </tr>
                                 </table>
@@ -158,8 +158,8 @@
                                     <tr>
                                         <td colspan="5" align="right">
                                             <h5>
-                                                <span>Date:</span>
-                                                <span>18/04/2017</span>
+                                                <span>Date: </span>
+                                                <span id="currentDate"></span>
                                             </h5>
                                         </td>
                                     </tr>
@@ -167,7 +167,7 @@
                                         <td colspan="5" align="left">
                                             <h5>
                                                 <span>Name:</span>
-                                                <span>NGUYEN DINH HAN</span>
+                                                <span id="userName"></span>
                                             </h5>
                                         </td>
                                     </tr>
@@ -175,7 +175,7 @@
                                         <td colspan="5" align="left">
                                             <h5>
                                                 <span>ID:</span>
-                                                <span>100000</span>
+                                                <span id="userCode"></span>
                                             </h5>
                                         </td>
                                     </tr>
@@ -203,13 +203,13 @@
                                                         <div class="mobile-mode">
                                                             <span>COMMISSION_DIRECT</span>
                                                         </div>
-                                                        <div class="content-detail">0</div>
+                                                        <div class="content-detail directCommission"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="desktopmode1"><span>COMMISSION_GROUP</span></td>
                                                     <td>
-                                                        <div class="td-date-gold">0</div>
+                                                        <div class="td-date-gold groupCommission"></div>
                                                         <div class="mobile-mode-gold">
                                                             <span>COMMISSION_GROUP</span>
                                                         </div>
@@ -221,7 +221,7 @@
                                                         <div class="mobile-mode">
                                                             <span>COMMISSION_LEADER</span>
                                                         </div>
-                                                        <div class="content-detail">0</div>
+                                                        <div class="content-detail leaderQuarterCommission"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -230,7 +230,7 @@
                                                         <div class="mobile-mode">
                                                             <span>COMMISSION_PRESIDENT</span>
                                                         </div>
-                                                        <div class="content-detail">0</div>
+                                                        <div class="content-detail leaderClubCommission"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -239,7 +239,7 @@
                                                         <div class="mobile-mode">
                                                             <span>COMMISSION_TOTAL_VOLUME</span>
                                                         </div>
-                                                        <div class="content-detail">0</div>
+                                                        <div class="content-detail totalCommission"></div>
                                                     </td>
                                                 </tr>
                                             </table>

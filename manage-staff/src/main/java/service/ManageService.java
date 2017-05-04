@@ -27,8 +27,10 @@ public interface ManageService {
 	
 	public int updateOrder(Order order) throws SQLException;
 	
-	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException; 
-	
+	public List<Revenue> getAllRevenue(RevenueForm form) throws SQLException;
+
+	Revenue getRevenuePersonal(String userCode, RevenueForm form) throws SQLException;
+
 	public String resetPassword(List<String> lstUserId) throws SQLException;
 	
 	public List<Feedback> getAllFeedback() throws SQLException;
