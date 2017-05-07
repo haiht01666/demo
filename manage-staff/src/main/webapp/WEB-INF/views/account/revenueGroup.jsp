@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Revenue  Group</title>
+<link rel='shortcut icon' type='image/x-icon' href='/static/frontend/assets/images/favicon.ico' />
 <%@ include file="../common/library.jsp"%>
 
 <script type="text/javascript"

@@ -581,4 +581,57 @@ public class ManageServiceImpl implements ManageService {
 		return dao.getRevenuePersonal(user, dateFrom, dateTo);
 	}
 
+	@Override
+	public List<Revenue> getRevenueMonth() throws SQLException {
+		//get all user 
+		List<User> lstUser = dao.getMembers();
+		List<Revenue> revenues = new ArrayList<>();
+		for(User user : lstUser){
+			Revenue revenue = new Revenue();
+			revenue.setUserName(user.getDispName());
+			revenue.setReceiverId(user.getId());
+			for(int i = 1 ; i< 13 ; i++){
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.MONTH, i -1 );
+				//first day of month
+				cal.set(Calendar.DAY_OF_MONTH, 1);
+				Date dateFrom = cal.getTime();
+				//last day of mounth
+				cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+				Date dateTo = cal.getTime();
+				switch(i){
+					case 1 : revenue.setJan(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 2 : revenue.setFeb(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 3 : revenue.setMar(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 4 : revenue.setApr(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 5 : revenue.setMay(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 6 : revenue.setJun(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 7 : revenue.setJul(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 8 : revenue.setAug(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 9 : revenue.setSep(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 10 : revenue.setOct(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 11 : revenue.setNov(getRevenue(user ,dateFrom,dateTo));
+						break;
+					case 12 : revenue.setDec(getRevenue(user ,dateFrom,dateTo));
+						break;
+					default :
+						break;
+					
+				}
+				
+			}
+			revenues.add(revenue);
+		}
+		return revenues;
+	}
 }

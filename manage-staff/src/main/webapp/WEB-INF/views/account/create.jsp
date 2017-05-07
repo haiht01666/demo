@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Sign up page</title>
+<link rel='shortcut icon' type='image/x-icon' href='/static/frontend/assets/images/favicon.ico' />
 <!-- css -->
 <link href="<c:url value='/static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>

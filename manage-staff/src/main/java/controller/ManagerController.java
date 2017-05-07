@@ -249,4 +249,14 @@ public class ManagerController {
 		lstRevenue.setData(lst);
 		return lstRevenue;
 	}
+	
+	@RequestMapping(value = { "/revenueMonth" }, method = RequestMethod.GET)
+	public String  revenueMonth(ModelMap model) throws SQLException {
+		List<Revenue> lst = service.getRevenueMonth();
+		model.addAttribute("revenues", lst);
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/revenueMonth";
+	}
+	
 }

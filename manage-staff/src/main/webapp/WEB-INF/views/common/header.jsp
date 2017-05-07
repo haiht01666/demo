@@ -20,6 +20,7 @@
 				<li id="li-revenue-personal"><a href="/manage/revenuePersonal">Hoa hồng trực tiếp</a></li>
 				<li id="li-revenue-group"><a href="/manage/revenueGroup">Hoa hồng nhóm</a></li>
 				<li id="li-revenue"><a href="/manage/revenue">Hoa hồng doanh thu</a></li>
+				<li id="li-revenue-month"><a href="/manage/revenueMonth">Doanh thu theo tháng</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 

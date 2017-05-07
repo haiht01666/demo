@@ -39,4 +39,6 @@ public interface ManageService {
 	
 	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException; 
 	
+	public List<Revenue> getRevenueMonth() throws SQLException; 
+	
 }
