@@ -634,4 +634,36 @@ public class ManageServiceImpl implements ManageService {
 		}
 		return revenues;
 	}
+	
+	/**
+	 * 
+	 * @param form form data : userId , dateFrom , dateTo , type = 0 -> hoa hồng trực tiếp , = 1 -> hoa hồng group
+	 * @return
+	 * @throws SQLException
+	 */
+	private Double apiGetRevenue(RevenueForm form) throws SQLException {
+		Double result = 0.0;
+		// lấy danh sách các order trong khoảng thời gian
+		List<Order> lstOrder = dao.getAllOrder(form.getDateFrom(), form.getDateTo() , form.getUserId());
+		
+		if (form.getType() == RevenueType.PERSONAL.getValue()) {
+			//hoa hồng cá nhân
+			for (Order order : lstOrder) {
+				Revenue revenue = calcuRevenuePersonal(order);
+				if (revenue.getRevenueValue() != null) {
+					result += revenue.getRevenueValue();
+				}
+			}
+		}
+		if (form.getType() == RevenueType.GROUP.getValue()) {
+			// hoa hồng nhóm
+			for (Order order : lstOrder) {
+				Revenue revenue = calcuRevenueGroup(order);
+				if (revenue.getRevenueValue() != null) {
+					result += revenue.getRevenueValue();
+				}
+			}
+		}
+		return result;
+	}
 }
