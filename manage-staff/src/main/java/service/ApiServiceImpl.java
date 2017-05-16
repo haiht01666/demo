@@ -321,6 +321,7 @@ import java.util.*;
                     form.setDateFrom(dateTime.dayOfYear().withMinimumValue().toDate());
                     form.setDateTo(dateTime.dayOfYear().withMaximumValue().toDate());
                 }
+                form.setUserId(Integer.parseInt(userCode));
                 // hoa hồng trực tiếp
                 form.setType(RevenueType.PERSONAL.getValue());
                 commissionInfoModel.setDirectCommission(new BigDecimal(manageService.apiGetRevenue(form)));

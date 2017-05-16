@@ -640,8 +640,13 @@ public class ManageServiceImpl implements ManageService {
 			}
 		}
 		if (form.getType() == RevenueType.GROUP.getValue()) {
+			List<Order> orders = new ArrayList<>();
+			List<User> lstChild = dao.getChild(form.getUserId());
+			for(User child : lstChild){
+				orders.addAll(dao.getAllOrder(form.getDateFrom(), form.getDateTo() , child.getId()));
+			}
 			// hoa hồng nhóm
-			for (Order order : lstOrder) {
+			for (Order order : orders) {
 				Revenue revenue = calcuRevenueGroup(order);
 				if (revenue.getRevenueValue() != null) {
 					result += revenue.getRevenueValue();
