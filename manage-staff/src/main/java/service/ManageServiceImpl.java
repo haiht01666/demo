@@ -1,30 +1,13 @@
 package service;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
+import constant.*;
+import dao.ManageDao;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import constant.LeverType;
-import constant.OrderType;
-import constant.RevenueGroupType;
-import constant.RevenuePercent;
-import constant.RevenueType;
-import constant.Roles;
-import constant.Status;
-import constant.TimePeriodCheck;
-import dao.ManageDao;
-import model.EditRoleForm;
-import model.Feedback;
-import model.Order;
-import model.Revenue;
-import model.RevenueForm;
-import model.User;
+import java.sql.SQLException;
+import java.util.*;
 
 @Service
 public class ManageServiceImpl implements ManageService {
@@ -633,5 +616,43 @@ public class ManageServiceImpl implements ManageService {
 			revenues.add(revenue);
 		}
 		return revenues;
+	}
+	
+	/**
+	 * 
+	 * @param form form data : userId , dateFrom , dateTo , type = 0 -> hoa hồng trực tiếp , = 1 -> hoa hồng group
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public Double apiGetRevenue(RevenueForm form) throws SQLException {
+		Double result = 0.0;
+		// lấy danh sách các order trong khoảng thời gian
+		List<Order> lstOrder = dao.getAllOrder(form.getDateFrom(), form.getDateTo() , form.getUserId());
+		
+		if (form.getType() == RevenueType.PERSONAL.getValue()) {
+			//hoa hồng cá nhân
+			for (Order order : lstOrder) {
+				Revenue revenue = calcuRevenuePersonal(order);
+				if (revenue.getRevenueValue() != null) {
+					result += revenue.getRevenueValue();
+				}
+			}
+		}
+		if (form.getType() == RevenueType.GROUP.getValue()) {
+			List<Order> orders = new ArrayList<>();
+			List<User> lstChild = dao.getChild(form.getUserId());
+			for(User child : lstChild){
+				orders.addAll(dao.getAllOrder(form.getDateFrom(), form.getDateTo() , child.getId()));
+			}
+			// hoa hồng nhóm
+			for (Order order : orders) {
+				Revenue revenue = calcuRevenueGroup(order);
+				if (revenue.getRevenueValue() != null) {
+					result += revenue.getRevenueValue();
+				}
+			}
+		}
+		return result;
 	}
 }

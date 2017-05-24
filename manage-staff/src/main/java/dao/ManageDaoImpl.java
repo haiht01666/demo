@@ -724,6 +724,49 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}
 		return result;
 	}
+
+	@Override
+	public List<Order> getAllOrder(Date dateFrom, Date dateTo, int userId) throws SQLException {
+		List<Order> lstOrder = new ArrayList<>();
+		String sql = "SELECT user_id,name,cdate,price,quantity,type,total,id FROM orders where (cdate between ? and ? ) and user_id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setDate(1, new java.sql.Date(dateFrom.getTime()));
+			stmt.setDate(2, new java.sql.Date(dateTo.getTime()));
+			stmt.setInt(3, userId);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				Order order = new Order();
+				order.setUserId(rs.getInt(1));
+				order.setOrderName(rs.getString(2));
+				order.setOrderDate(rs.getDate(3));
+				order.setPrice(rs.getDouble(4));
+				order.setQuantity(rs.getInt(5));
+				order.setId(rs.getInt(8));
+				int type = rs.getInt(6);
+				order.setType(type);
+				if (type == OrderType.ORDER_PROACTIVE.getCode())
+					order.setTypeValue(OrderType.ORDER_PROACTIVE.getValue());
+				else if (type == OrderType.ORDER_PACKAGE.getCode())
+					order.setTypeValue(OrderType.ORDER_PACKAGE.getValue());
+				else if (type == OrderType.ORDER_PRODUCT.getCode())
+					order.setTypeValue(OrderType.ORDER_PRODUCT.getValue());
+				else
+					order.setTypeValue(OrderType.ORDER_PRODUCT.DefaultValue());
+				order.setTotal(rs.getDouble(7));
+				lstOrder.add(order);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return lstOrder;
+	}
 	
 
 }

@@ -71,4 +71,6 @@ public interface ManageDao {
 	 * @throws SQLException
 	 */
 	public Double getAllRevenue(Date dateFrom , Date dateto) throws SQLException;
+	
+	public List<Order> getAllOrder(Date dateFrom , Date dateTo , int userId) throws SQLException;
 }

@@ -321,16 +321,13 @@ import java.util.*;
                     form.setDateFrom(dateTime.dayOfYear().withMinimumValue().toDate());
                     form.setDateTo(dateTime.dayOfYear().withMaximumValue().toDate());
                 }
+                form.setUserId(Integer.parseInt(userCode));
                 // hoa hồng trực tiếp
                 form.setType(RevenueType.PERSONAL.getValue());
-                Revenue revenuePersonal = manageService.getRevenuePersonal(userCode, form);
-                commissionInfoModel.setDirectCommission(
-                        new BigDecimal(revenuePersonal != null ? revenuePersonal.getRevenueValue() : 0));
+                commissionInfoModel.setDirectCommission(new BigDecimal(manageService.apiGetRevenue(form)));
                 // hoa hồng nhóm
                 form.setType(RevenueType.GROUP.getValue());
-                Revenue revenueGroup = manageService.getRevenuePersonal(userCode, form);
-                commissionInfoModel.setGroupCommission(
-                        new BigDecimal(revenueGroup != null ? revenueGroup.getRevenueValue() : 0));
+                commissionInfoModel.setGroupCommission(new BigDecimal(manageService.apiGetRevenue(form)));
             }
             result.setResultData(commissionInfoModel);
             result.setResult(true);

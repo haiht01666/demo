@@ -3345,6 +3345,6 @@ var pConstants_VN = {
 
     'FORGOT_PASSWORD':'Để reset mật khẩu, vui lòng gửi mail về địa chỉ email abc@gmail.com',
 	// INDEX PAGE
-	//'INDEX_PAGE' : 'indexxsl/index-scr',
-	'INDEX_PAGE' : 'commissionxsl/comission-scr',
+	'INDEX_PAGE' : 'indexxsl/index-scr',
+	//'INDEX_PAGE' : 'commissionxsl/comission-scr',
 };
