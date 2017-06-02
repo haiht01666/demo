@@ -27,6 +27,8 @@
         </ul>
       </li>
       <li id="li-revenue-month"><a href="/manage/revenueMonth">Doanh thu theo tháng</a></li>
+      <li id="li-product"><a href="/product">Sản phẩm</a></li>
+      <li id="li-revenue-month"><a href="/manage/revenueMonth">Tin tức</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> ${user.dispName }</a></li>
