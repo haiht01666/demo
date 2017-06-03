@@ -50,6 +50,9 @@ $(document).ready(
 							CKEDITOR.instances.editor2.setData(response.resultData.detail);
 							$('#product-type').val(response.resultData.categoryId)
 							$('#txt-upload').val(response.resultData.imageUrl);
+							if(response.resultData.mainProduct){
+								$('#cb-main-product').prop('checked',true);
+							}
 							$('#add-product').modal('show');
 						} else{
 							alert('Error!');
@@ -230,6 +233,7 @@ function getFormData(){
 	formData.characteristic =  CKEDITOR.instances.editor1.getData();
 	formData.price =  $('#txt-product-price').val();
 	formData.detail =  CKEDITOR.instances.editor2.getData();
+	formData.mainProduct = $('#cb-main-product').is(':checked');
 	return formData;
 }
 
@@ -242,6 +246,7 @@ function clearModal(){
 	$('#btn-edit-product').hide();
 	$('#btn-add-product').show();
 	$('#lbl-price').val('');
+	$('#cb-main-product').prop('checked',false);
 	$('#txt-product-name').val('');
 	$('#txt-upload').val('');
 	$('#txt-product-price').val('');

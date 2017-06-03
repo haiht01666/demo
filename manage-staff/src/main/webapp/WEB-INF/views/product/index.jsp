@@ -87,7 +87,9 @@
 									<label id="lbl-upload">Upload ảnh của sản phẩm:</label></br>
 									 <input type="file" accept="image/png,image/gif,image/jpeg" name="file" style="display: inline;" id="txt-upload-file"/>
 									 <input type="button" value="Submit" id="btn-upload"/>
-									 <input type="hidden" id="txt-upload"/>	   
+									 <input type="hidden" id="txt-upload"/>	 
+									  <label id="lbl-upload">Sản phẩm chủ đạo </label> 
+									 <input type="checkbox" id="cb-main-product" style="width: 20px;height:20px;vertical-align: top; "/>
 								</div>
 								
 								<div class="form-group">

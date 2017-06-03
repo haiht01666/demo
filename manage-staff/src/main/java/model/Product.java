@@ -22,6 +22,16 @@ public class Product {
 
 	private int categoryId;
 	
+	private boolean mainProduct;
+	
+	public boolean getMainProduct() {
+		return mainProduct;
+	}
+
+	public void setMainProduct(boolean mainProduct) {
+		this.mainProduct = mainProduct;
+	}
+
 	public int getCategoryId() {
 		return categoryId;
 	}

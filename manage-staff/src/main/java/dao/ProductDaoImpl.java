@@ -79,7 +79,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	@Override
 	public Product getProductById(int id) {
 		Product product = new Product();
-		String sql = "SELECT p.id,p.name,description,characteristic,price,category_id ,image_url FROM products p  join categories c on p.category_id = c.id where p.id=?;";
+		String sql = "SELECT p.id,p.name,description,characteristic,price,category_id ,image_url,mail_product FROM products p  join categories c on p.category_id = c.id where p.id=?;";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -93,6 +93,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 				product.setPrice(rs.getDouble(5));
 				product.setCategoryId(rs.getInt(6));
 				product.setImageUrl(rs.getString(7));
+				product.setMainProduct(rs.getBoolean(8));
 			}
 
 		} catch (Exception ex) {
@@ -114,7 +115,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	@Override
 	public int createProduct(Product product) {
 		int result = 0;
-		String sql = "insert into products(name,description,characteristic,price,category_id,image_url , cdate) values(?,?,?,?,?,?,now())";
+		String sql = "insert into products(name,description,characteristic,price,category_id,image_url ,mail_product, cdate) values(?,?,?,?,?,?,?,now())";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -124,6 +125,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 			stmt.setDouble(4, product.getPrice());
 			stmt.setInt(5, product.getCategoryId());
 			stmt.setString(6, product.getImageUrl());
+			stmt.setBoolean(7, product.getMainProduct());
 			result = stmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -143,7 +145,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	@Override
 	public int updateProduct(Product product) {
 		int result = 0;
-		String sql = "update products set name = ? , description = ? , characteristic = ? , category_id = ?,image_url=? ,price = ? where id = ?";
+		String sql = "update products set name = ? , description = ? , characteristic = ? , category_id = ?,image_url=? ,price = ?,mail_product=? where id = ?";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -153,7 +155,8 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 			stmt.setInt(4, product.getCategoryId());
 			stmt.setString(5, product.getImageUrl());
 			stmt.setDouble(6, product.getPrice());
-			stmt.setInt(7, product.getId());
+			stmt.setBoolean(7, product.getMainProduct());
+			stmt.setInt(8, product.getId());
 			result = stmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();
