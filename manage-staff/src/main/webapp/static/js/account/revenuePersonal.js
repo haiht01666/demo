@@ -32,7 +32,11 @@ function initTable(filterDate){
             contentType: "application/json",
             data: function ( d ) {
                 return JSON.stringify(formData);
-            }
+            },
+            dataSrc: function ( json ) {
+            	$.LoadingOverlay("hide");
+                return json.data;
+            }    
         },
         columns: [
             { data: "receiverId" },
@@ -48,7 +52,7 @@ function initTable(filterDate){
 			title : 'Hoa hồng trực tiêp ('+ moment(filterDate).format('MM-YYYY') +')'
         }]
     } );
-	$.LoadingOverlay("hide");
+
 	var x = document.createElement("INPUT");
     x.setAttribute("type", "month");
     x.setAttribute("id", 'date-filter');

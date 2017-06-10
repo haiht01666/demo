@@ -173,7 +173,11 @@ function initTable(){
         ajax: {
             url: "/article/getAllArticle",
             type: 'GET',
-            contentType: "application/json"
+            contentType: "application/json",
+            dataSrc: function ( json ) {
+            	$.LoadingOverlay("hide");
+                return json.data;
+            }       
         },
         columns: [
             { data: "id" },
@@ -181,9 +185,9 @@ function initTable(){
             { data: "cdate" },
             { data: "author" }
         ]
-
+    	
     } );
-	$.LoadingOverlay("hide");
+	
 }
 
 function getFormData(){

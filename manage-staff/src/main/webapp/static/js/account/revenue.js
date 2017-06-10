@@ -106,7 +106,11 @@ function initTable(filterDate, type, num, firstday, lastday) {
 			contentType : "application/json",
 			data : function(d) {
 				return JSON.stringify(formData);
-			}
+			},
+			dataSrc: function ( json ) {
+            	$.LoadingOverlay("hide");
+                return json.data;
+            }    
 		},
 		columns : [ {
 			data : "receiverId"
@@ -125,7 +129,7 @@ function initTable(filterDate, type, num, firstday, lastday) {
 			title : 'Hoa hồng doanh thu ' + nameFile
 		}]
 	});
-	$.LoadingOverlay("hide");
+
 
 	if (type === $('#radio-week').val()) {
 		$('#tbl-staff_length').prepend(dateTo);
