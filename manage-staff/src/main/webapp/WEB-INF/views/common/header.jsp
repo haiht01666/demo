@@ -33,7 +33,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> ${user.dispName }</a></li>
 						
-      <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất</a></li>
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất</a></li>
     </ul>
   </div>
   </div>

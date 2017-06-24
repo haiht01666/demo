@@ -44,12 +44,12 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
             roles.add(a.getAuthority());
         }
  
-        if (isSuperAdmin(roles)) {
+		if (isSuperAdmin(roles)) {
             url = "/manage/home";
         } else if (isAdmin(roles)) {
             url = "/manage/home";
         } else {
-            url="/admin/access-denied";
+            url="/access-denied";
         }
  
         return url;

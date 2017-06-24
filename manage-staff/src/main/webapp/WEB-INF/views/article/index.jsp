@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>List Product</title>
+<title>Manage Article</title>
 <link rel='shortcut icon' type='image/x-icon'
 	href='/static/frontend/assets/images/favicon.ico' />
 <%@ include file="../common/library.jsp"%>
