@@ -46,7 +46,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	@Override
 	public List<Product> getAllProduct() {
 		List<Product> result = new ArrayList<>();
-		String sql = "SELECT id,name,cdate,price FROM products";
+		String sql = "SELECT id,name,cdate,price, image_url FROM products";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -57,6 +57,7 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 				product.setName(rs.getString(2));
 				product.setCdate(rs.getDate(3));
 				product.setPrice(rs.getDouble(4));
+				product.setImageUrl(rs.getString(5));
 				result.add(product);
 			}
 

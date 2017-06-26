@@ -4,11 +4,9 @@ import model.AjaxResult;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import service.ApiService;
+import service.ProductService;
 
 import java.util.Map;
 
@@ -16,6 +14,7 @@ import java.util.Map;
 @RequestMapping("api")
 public class ApiController {
 	@Autowired ApiService service;
+	@Autowired ProductService productService;
 
 	@RequestMapping(value = { "/getLoginInfo" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult getLoginInfo(@RequestBody Map loginMap) {
@@ -95,5 +94,21 @@ public class ApiController {
 		String time = (String)mapGetCommission.get("time");
 		String timeDetail = (String)mapGetCommission.get("timeDetail");
 		return service.getCommissionInfo(userCode, time, timeDetail);
+	}
+
+	@RequestMapping(value = { "/getAllProduct" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getAllProduct() {
+		AjaxResult result = new AjaxResult();
+		result.setResult(true);
+		result.setResultData(productService.getAllProduct());
+		return result;
+	}
+
+	@RequestMapping(value = { "/getProductById" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getProductById(@RequestParam("id") int id) {
+		AjaxResult result = new AjaxResult();
+		result.setResult(true);
+		result.setResultData(productService.getProductById(id));
+		return result;
 	}
 }
