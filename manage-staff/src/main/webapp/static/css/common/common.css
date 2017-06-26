@@ -11,9 +11,9 @@
 	padding: 3px;
 }
 
-.nav li:hover {
+/* .nav li:hover {
 	background-color: #1CB94E;
-}
+} */
 
 .color-red {
 	color: red;
@@ -26,13 +26,13 @@
 	color: #a94442;
 }
 
-li a, .dropbtn {
+/* li a, .dropbtn {
 	display: inline-block;
 	color: white;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-}
+} */
 
 /* li a:hover, .dropdown:hover .dropbtn {
     background-color: red;
@@ -58,9 +58,9 @@ li a, .dropbtn {
 	text-align: left;
 }
 
-.dropdown-content a:hover {
+/* .dropdown-content a:hover {
 	background-color: #f1f1f1
-}
+} */
 
 .dropdown:hover .dropdown-content {
 	display: block;

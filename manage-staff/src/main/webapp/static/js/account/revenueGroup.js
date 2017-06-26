@@ -32,7 +32,11 @@ function initTable(filterDate){
             contentType: "application/json",
             data: function ( d ) {
                 return JSON.stringify(formData);
-            }
+            },
+            dataSrc: function ( json ) {
+            	$.LoadingOverlay("hide");
+                return json.data;
+            }    
         },
         columns: [
             { data: "receiverId" },
@@ -50,7 +54,7 @@ function initTable(filterDate){
         }
         ]
     } );
-	$.LoadingOverlay("hide");
+
 	var x = document.createElement("INPUT");
     x.setAttribute("type", "month");
     x.setAttribute("id", 'date-filter');

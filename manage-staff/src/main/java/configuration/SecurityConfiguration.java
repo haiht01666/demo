@@ -49,11 +49,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       http.authorizeRequests()
         .antMatchers("/", "/home", "/member").access("hasRole('ADMIN') or hasRole('STAFF') or hasRole('SPADMIN')")
         .antMatchers("/manage/**").access("hasRole('SPADMIN') or hasRole('ADMIN')")
+        .antMatchers("/product/**").access("hasRole('SPADMIN') or hasRole('ADMIN')")
+        .antMatchers("/article/**").access("hasRole('SPADMIN') or hasRole('ADMIN')")
         .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
-        .failureUrl("/admin/login?error")
+        .failureUrl("/adminlogin?error")
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf()
-        .and().exceptionHandling().accessDeniedPage("/admin/access-denied");
+        .and().exceptionHandling().accessDeniedPage("/access-denied");
       //disable token
       	http.csrf().disable();
     }
