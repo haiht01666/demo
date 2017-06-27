@@ -55,6 +55,13 @@ public interface ManageDao {
 	
 	public boolean isUserActive(int userId) throws SQLException;
 	
+	/**
+	 * 
+	 * @param userId : user id
+	 * @param time : chu kỳ mua năng động
+	 * @return 
+	 * @throws SQLException
+	 */
 	public boolean isProactive(int userId,Date time) throws SQLException;
 	
 	public List<User> getChild(int userId) throws SQLException;
@@ -73,4 +80,6 @@ public interface ManageDao {
 	public Double getAllRevenue(Date dateFrom , Date dateto) throws SQLException;
 	
 	public List<Order> getAllOrder(Date dateFrom , Date dateTo , int userId) throws SQLException;
+	
+	public Date getLatestDateProActive(int userID) throws SQLException;
 }

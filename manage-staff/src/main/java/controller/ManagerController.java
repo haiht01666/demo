@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import constant.OrderType;
 import model.AjaxResult;
 import model.EditRoleForm;
 import model.Order;
@@ -208,6 +209,12 @@ public class ManagerController {
 			return result;
 		}
 		try {
+			if(form.getType() == OrderType.ORDER_PROACTIVE.getCode()){
+				//can not accept edit order pro-active
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E017", null, Locale.getDefault()));
+				return result;
+			}
 			if(service.updateOrder(form) > 0){
 				result.setResult(true);
 				result.setMessage(messageSource.getMessage("S005", null, Locale.getDefault()));

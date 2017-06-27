@@ -767,6 +767,29 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}
 		return lstOrder;
 	}
+
+	@Override
+	public Date getLatestDateProActive(int userID) throws SQLException {
+		String sql = "Select cdate from orders where  type = ? and user_id = ? order by cdate desc";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(2, userID);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				return rs.getDate(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return null;
+	}
 	
 
 }

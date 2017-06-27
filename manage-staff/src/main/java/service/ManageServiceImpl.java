@@ -14,6 +14,9 @@ public class ManageServiceImpl implements ManageService {
 
 	@Autowired
 	ManageDao dao;
+	
+	@Autowired
+	RevenueService revenueService;
 
 	@Override
 	public int createMember(User parent, int lever) throws SQLException {
@@ -48,6 +51,23 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public int createOrder(Order order) throws SQLException {
+		if(order.getType() == OrderType.ORDER_PROACTIVE.getCode()){
+			if(revenueService.isActive(order.getUserId(), new Date())){
+				User user = dao.getUserById(order.getUserId());
+				Date activeDate  = dao.getLatestDateProActive(order.getUserId());
+				Calendar cal = Calendar.getInstance();
+				if(activeDate == null){
+					cal.setTime(user.getCdate());
+					cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39 + 1);
+				}else{
+					cal.setTime(activeDate);
+					cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_30);
+				}
+				order.setOrderDate(cal.getTime());
+			}else{
+				order.setOrderDate(new Date());
+			}
+		}
 		return dao.createOrder(order);
 	}
 
@@ -247,20 +267,8 @@ public class ManageServiceImpl implements ManageService {
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
 		user.setLeverValue(getLever(user.getId()));
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(user.getCdate());
-		cal.add(Calendar.DATE, 45);
-		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 		String status = "";
-		if (new Date().before(cal.getTime())) {
-			if (user.getLeverValue().equals(LeverType.New.name())) {
-				status = Status.INACTIVE;
-			} else {
-				status = Status.ACTIVE;
-			}
-		} else {
-			status = dao.isUserActive(id) ? Status.ACTIVE : Status.INACTIVE;
-		}
+		status = revenueService.isActive(id, new Date()) ? Status.ACTIVE : Status.INACTIVE;
 		user.setStatus(status);
 		return user;
 	}

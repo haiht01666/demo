@@ -157,8 +157,31 @@ $(document).ready(function() {
 	});
 	// display format currency
 	$('#txt-order-price').keyup(function(){
-		$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en"));
+		$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en") + ' BV');
 				
+	});
+	
+	$('#order-type').on('change',function(){
+		// pro-active
+		if($('#order-type').val() === '2'){
+			$('#txt-order-quantity').val('1');
+			$('#txt-order-quantity').attr('disabled',true);
+			$('#txt-order-price').val('50');
+			$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en") + ' BV');
+			$('#txt-order-price').attr('disabled',true);
+			$('#txt-order-name').val('Đăng ký năng động');
+			$('#txt-order-name').attr('disabled',true);
+			$('#txt-order-date').attr('disabled',true);
+		}
+		else{
+			$('#txt-order-quantity').attr('disabled',false);
+			$('#txt-order-price').val('');
+			$('#lbl-price').text('');
+			$('#txt-order-price').attr('disabled',false);
+			$('#txt-order-name').val('');
+			$('#txt-order-name').attr('disabled',false);
+			$('#txt-order-date').attr('disabled',false);
+		}
 	});
 });
 
@@ -167,11 +190,18 @@ $(document).ready(function() {
 function innitModal(){
 	 $('#msg-error-modal').empty();
 	 $('#btn-add-order').attr('disabled',true);
-	 $('#txt-member-id').val('')
-	 $('#txt-order-name').val('')
-	 $('#txt-order-price').val('')
-	 $('#txt-order-quantity').val('')
+	 $('#txt-member-id').val('');
+	 $('#txt-order-name').val('');
+	 $('#txt-order-price').val('');
+	 $('#txt-order-quantity').val('');
 	 $('#lbl-price').text('');
+	 $('#txt-order-quantity').attr('disabled',false);
+	 $('#txt-order-price').val('');
+	 $('#lbl-price').text('');
+	 $('#txt-order-price').attr('disabled',false);
+	 $('#txt-order-name').val('');
+	 $('#txt-order-name').attr('disabled',false);
+	 $('#txt-order-date').attr('disabled',false);	
 }
 
 function getFormData(){

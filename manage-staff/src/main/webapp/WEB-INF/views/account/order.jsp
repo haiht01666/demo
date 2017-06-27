@@ -118,8 +118,8 @@
 										<option value="0" disabled selected="selected">Chọn
 											loại order</option>
 										<option value="1">Mua sản phẩm</option>
-										<option value="2">Mua năng động</option>
-										<option value="3">Đăng ký gói</option>
+										<option value="2">Đăng ký năng động</option>
+										<option value="3">Nâng cấp gói</option>
 									</select>
 								</div>
 							</form>
