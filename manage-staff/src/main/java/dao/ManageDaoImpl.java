@@ -29,6 +29,8 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		int memberId = 0;
 		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever) values(0,?,?,now(),?)";
 		String sql2 = "Insert into roles(role,user_id) values(?,?)";
+		String sql3 = "insert into revenues(name,cdate,user_id,value,type) values(?,now(),?,?,?)";
+		String sql4 = "insert into orders(name,cdate,user_id,price,quantity,type) values(?,now(),?,?,?,?)";
 		try {
 			conn = getConnection();
 			conn.setAutoCommit(false);
@@ -48,6 +50,42 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setString(1, "STAFF");
 			stmt.setInt(2, memberId);
 			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement(sql3);
+			stmt.setInt(2, parent.getId());
+			stmt.setInt(4, OrderType.ORDER_PACKAGE.getCode());
+			if(lever == LeverType.SALE_MEMBER.getValue()){
+				stmt.setString(1, LeverType.SALE_MEMBER.name());
+				stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount()*0.1);
+			}
+			if(lever == LeverType.SALE_PRO.getValue()){
+				stmt.setString(1, LeverType.SALE_PRO.name());
+				stmt.setDouble(3, LeverType.SALE_PRO.getAmount()*0.1);
+			}
+			if(lever == LeverType.PRO_DISTRIBUTE.getValue()){
+				stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
+				stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
+			}
+			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement(sql4);
+			stmt.setInt(2, memberId);
+			stmt.setInt(5, OrderType.ORDER_PACKAGE.getCode());
+			stmt.setInt(4, 1);
+			if(lever == LeverType.SALE_MEMBER.getValue()){
+				stmt.setString(1, LeverType.SALE_MEMBER.name());
+				stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount());
+			}
+			if(lever == LeverType.SALE_PRO.getValue()){
+				stmt.setString(1, LeverType.SALE_PRO.name());
+				stmt.setDouble(3, LeverType.SALE_PRO.getAmount());
+			}
+			if(lever == LeverType.PRO_DISTRIBUTE.getValue()){
+				stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
+				stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount());
+			}
+			stmt.executeUpdate();
+			
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,7 +245,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public List<Order> getAllOrder() throws SQLException {
 		List<Order> lstOrder = new ArrayList<>();
-		String sql = "SELECT user_id,name,cdate,price,quantity,type,total,id FROM orders";
+		String sql = "SELECT user_id,name,cdate,price,quantity,type,total,id FROM orders where type = 1";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
