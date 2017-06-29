@@ -96,7 +96,7 @@ public class ApiController {
 		return service.getCommissionInfo(userCode, time, timeDetail);
 	}
 
-	@RequestMapping(value = { "/getAllProduct" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/getAllProduct" }, method = RequestMethod.GET)
 	public @ResponseBody AjaxResult getAllProduct() {
 		AjaxResult result = new AjaxResult();
 		result.setResult(true);
