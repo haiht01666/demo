@@ -6,6 +6,8 @@ import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import common.CommonUtils;
+
 import java.sql.SQLException;
 import java.util.*;
 
@@ -51,6 +53,7 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public int createOrder(Order order) throws SQLException {
+		int status = 0;
 		if(order.getType() == OrderType.ORDER_PROACTIVE.getCode()){
 			if(revenueService.isActive(order.getUserId(), new Date())){
 				User user = dao.getUserById(order.getUserId());
@@ -68,7 +71,24 @@ public class ManageServiceImpl implements ManageService {
 				order.setOrderDate(new Date());
 			}
 		}
-		return dao.createOrder(order);
+		if(order.getType() == OrderType.ORDER_PACKAGE.getCode()){
+			order.setOrderDate(new Date());
+			User user = dao.getUserById(order.getUserId());
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(user.getCdate());
+			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
+			cal = CommonUtils.setMaxHour(cal);
+			if(new Date().after(cal.getTime())){
+				//update lever for user 
+				status = dao.updateLeverUser(user.getId(),order.getUserLever());
+			}else{
+				return -1;
+			}
+		}
+		if(status > 0)
+			return dao.createOrder(order);
+		else
+			return 0;
 	}
 
 	private Revenue calcuRevenuePersonal(Order order) throws SQLException {

@@ -173,6 +173,27 @@ $(document).ready(function() {
 			$('#txt-order-name').attr('disabled',true);
 			$('#txt-order-date').attr('disabled',true);
 		}
+		else if($('#order-type').val() === '3'){
+			//register lever
+			$('#select-lever').css('display','');
+			$('#txt-order-quantity').val('1');
+			$('#txt-order-quantity').attr('disabled',true);
+			$('#txt-order-price').val('217');
+			$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en") + ' BV');
+			$('#txt-order-price').attr('disabled',true);
+			$('#txt-order-name').val('Nâng cấp gói');
+			$('#txt-order-name').attr('disabled',true);
+			$('#txt-order-date').attr('disabled',true);
+			$('#select-lever').on('change',function(){
+				if($('#select-lever').val() === '1')
+					$('#txt-order-price').val('217');
+				if($('#select-lever').val() === '2')
+					$('#txt-order-price').val('652');
+				if($('#select-lever').val() === '3')
+					$('#txt-order-price').val('1300');
+				$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en") + ' BV');
+			});
+		}
 		else{
 			$('#txt-order-quantity').attr('disabled',false);
 			$('#txt-order-price').val('');
@@ -183,6 +204,8 @@ $(document).ready(function() {
 			$('#txt-order-date').attr('disabled',false);
 		}
 	});
+	
+	
 });
 
 
@@ -202,6 +225,8 @@ function innitModal(){
 	 $('#txt-order-name').val('');
 	 $('#txt-order-name').attr('disabled',false);
 	 $('#txt-order-date').attr('disabled',false);	
+	 $('#select-lever').css('display','none');
+	 $('#order-type').prop('selectedIndex',0);
 }
 
 function getFormData(){
@@ -213,6 +238,7 @@ function getFormData(){
 	formData.price =  $('#txt-order-price').val();
 	formData.quantity =  $('#txt-order-quantity').val();
 	formData.type =  $('#order-type').val();
+	formData.userLever = $('#select-lever').val();
 	return formData;
 }
 

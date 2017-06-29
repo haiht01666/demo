@@ -151,10 +151,15 @@ public class ManagerController {
 			result.setMessage(messageSource.getMessage("E008", null, Locale.getDefault()));
 		}
 		try {
-			if (service.createOrder(form) == 0) {
+			int number = service.createOrder(form);
+			if (number == 0) {
 				result.setResult(false);
 				result.setMessage(messageSource.getMessage("E007", null, Locale.getDefault()));
-			} else {
+			}else if(number == -1){
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E018", null, Locale.getDefault()));
+			}
+			else {
 				result.setResult(true);
 				result.setMessage(messageSource.getMessage("S004", null, Locale.getDefault()));
 				result.setResultData(form);

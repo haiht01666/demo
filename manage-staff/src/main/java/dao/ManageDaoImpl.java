@@ -828,6 +828,23 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public int updateLeverUser(int userID, int lever) throws SQLException {
+		String sql = "update users set lever = ? where id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, lever);
+			stmt.setInt(2, userID);
+			return stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			conn.close();
+			stmt.close();
+		}
+	}
 
 }

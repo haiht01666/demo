@@ -24,6 +24,16 @@ public class Order {
 	private int parentId;
 
 	private int id;
+	
+	private int userLever;
+
+	public int getUserLever() {
+		return userLever;
+	}
+
+	public void setUserLever(int userLever) {
+		this.userLever = userLever;
+	}
 
 	public int getId() {
 		return id;

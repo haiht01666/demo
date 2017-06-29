@@ -122,6 +122,13 @@
 										<option value="3">Nâng cấp gói</option>
 									</select>
 								</div>
+								<div class="form-group">
+									<select id="select-lever" class="form-control" style="display: none">
+										<option value="1">SALE MEMBER</option>
+										<option value="2">SALE PRO</option>
+										<option value="3">PRO DISTRIBUTE</option>
+									</select>
+								</div>
 							</form>
 						</div>
 					</div>
