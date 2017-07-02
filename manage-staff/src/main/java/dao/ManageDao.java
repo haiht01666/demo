@@ -84,4 +84,6 @@ public interface ManageDao {
 	public Date getLatestDateProActive(int userID) throws SQLException;
 	
 	public int updateLeverUser(int userID,int lever) throws SQLException;
+	
+	Double totalOrderValue(Date start, Date end,int userId)  throws SQLException;
 }

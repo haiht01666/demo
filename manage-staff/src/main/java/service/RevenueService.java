@@ -10,4 +10,8 @@ public interface RevenueService {
 	 * @return true if active , false if not
 	 */
 	public boolean isActive(int id,Date date) throws SQLException;
+	
+	public String getBaseLever(int userId,Date date) throws SQLException;
+	
+	public String getLever(int userId,Date date) throws SQLException;
 }

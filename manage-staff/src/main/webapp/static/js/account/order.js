@@ -164,6 +164,7 @@ $(document).ready(function() {
 	$('#order-type').on('change',function(){
 		// pro-active
 		if($('#order-type').val() === '2'){
+			$('#select-lever').css('display','none');
 			$('#txt-order-quantity').val('1');
 			$('#txt-order-quantity').attr('disabled',true);
 			$('#txt-order-price').val('50');
@@ -196,10 +197,10 @@ $(document).ready(function() {
 		}
 		else{
 			$('#txt-order-quantity').attr('disabled',false);
-			$('#txt-order-price').val('');
-			$('#lbl-price').text('');
+			//$('#txt-order-price').val('');
+			//$('#lbl-price').text('');
 			$('#txt-order-price').attr('disabled',false);
-			$('#txt-order-name').val('');
+			//$('#txt-order-name').val('');
 			$('#txt-order-name').attr('disabled',false);
 			$('#txt-order-date').attr('disabled',false);
 		}

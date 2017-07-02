@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import model.EditRoleForm;
@@ -42,4 +43,6 @@ public interface ManageService {
 	public List<Revenue> getRevenueMonth() throws SQLException;
 
     Double apiGetRevenue(RevenueForm form) throws SQLException;
+    
+    Double totalOrderValue(Date start , Date end) throws SQLException;
 }

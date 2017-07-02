@@ -49,4 +49,57 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 		}
 	}
 
+	@Override
+	public Date getProactiveDateCurrent(Date date,int userId) throws SQLException {
+		String sql = "Select cdate from orders where  type = ? and user_id = ? and date_format(cdate, '%Y-%m-%d') <= ?";
+		try {
+			Date cdate = null;
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(2, userId);
+			stmt.setDate(3, new java.sql.Date(date.getTime()));
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				cdate = rs.getDate(1);
+				return cdate;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isProActive(int userId, Date date) throws SQLException{
+		String sql = "Select cdate from orders where  type = ? and user_id = ? and date_format(cdate, '%Y-%m-%d') = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(2, userId);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.DATE, -30);
+			stmt.setDate(3, new java.sql.Date(cal.getTime().getTime()));
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return false;
+	}
 }

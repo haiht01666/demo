@@ -53,7 +53,7 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public int createOrder(Order order) throws SQLException {
-		int status = 0;
+		int status = 1;
 		if(order.getType() == OrderType.ORDER_PROACTIVE.getCode()){
 			if(revenueService.isActive(order.getUserId(), new Date())){
 				User user = dao.getUserById(order.getUserId());
@@ -286,7 +286,7 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
-		user.setLeverValue(getLever(user.getId()));
+		user.setLeverValue(revenueService.getLever(id, new Date()));
 		String status = "";
 		status = revenueService.isActive(id, new Date()) ? Status.ACTIVE : Status.INACTIVE;
 		user.setStatus(status);
@@ -682,5 +682,11 @@ public class ManageServiceImpl implements ManageService {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public Double totalOrderValue(Date start, Date end) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
