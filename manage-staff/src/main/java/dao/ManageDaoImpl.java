@@ -27,7 +27,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public int createMember(User parent, int lever) throws SQLException {
 		int memberId = 0;
-		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever) values(0,?,?,now(),?)";
+		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever,id) values(0,?,?,now(),?,?)";
 		String sql2 = "Insert into roles(role,user_id) values(?,?)";
 		String sql3 = "insert into revenues(name,cdate,user_id,value,type) values(?,now(),?,?,?)";
 		String sql4 = "insert into orders(name,cdate,user_id,price,quantity,type,total) values(?,now(),?,?,?,?,?)";
@@ -44,51 +44,54 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setInt(1, parent.getId());
 			stmt.setString(2, parent.getChildId() + "-" + memberId);
 			stmt.setInt(3, lever);
+			stmt.setInt(4, memberId);
 			stmt.executeUpdate();
 
 			stmt = conn.prepareStatement(sql2);
 			stmt.setString(1, "STAFF");
 			stmt.setInt(2, memberId);
 			stmt.executeUpdate();
-			
-			stmt = conn.prepareStatement(sql3);
-			stmt.setInt(2, parent.getId());
-			stmt.setInt(4, OrderType.ORDER_PACKAGE.getCode());
-			if(lever == LeverType.SALE_MEMBER.getValue()){
-				stmt.setString(1, LeverType.SALE_MEMBER.name());
-				stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount()*0.1);
+
+			if (lever > 0) {
+				stmt = conn.prepareStatement(sql3);
+				stmt.setInt(2, parent.getId());
+				stmt.setInt(4, OrderType.ORDER_PACKAGE.getCode());
+				if (lever == LeverType.SALE_MEMBER.getValue()) {
+					stmt.setString(1, LeverType.SALE_MEMBER.name());
+					stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount() * 0.1);
+				}
+				if (lever == LeverType.SALE_PRO.getValue()) {
+					stmt.setString(1, LeverType.SALE_PRO.name());
+					stmt.setDouble(3, LeverType.SALE_PRO.getAmount() * 0.1);
+				}
+				if (lever == LeverType.PRO_DISTRIBUTE.getValue()) {
+					stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
+					stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount() * 0.1);
+				}
+				stmt.executeUpdate();
+
+				stmt = conn.prepareStatement(sql4);
+				stmt.setInt(2, memberId);
+				stmt.setInt(5, OrderType.ORDER_PRODUCT.getCode());
+				stmt.setInt(4, 1);
+				if (lever == LeverType.SALE_MEMBER.getValue()) {
+					stmt.setString(1, LeverType.SALE_MEMBER.name());
+					stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount());
+					stmt.setDouble(6, LeverType.SALE_MEMBER.getAmount());
+				}
+				if (lever == LeverType.SALE_PRO.getValue()) {
+					stmt.setString(1, LeverType.SALE_PRO.name());
+					stmt.setDouble(3, LeverType.SALE_PRO.getAmount());
+					stmt.setDouble(6, LeverType.SALE_PRO.getAmount());
+				}
+				if (lever == LeverType.PRO_DISTRIBUTE.getValue()) {
+					stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
+					stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount());
+					stmt.setDouble(6, LeverType.PRO_DISTRIBUTE.getAmount());
+				}
+				stmt.executeUpdate();
 			}
-			if(lever == LeverType.SALE_PRO.getValue()){
-				stmt.setString(1, LeverType.SALE_PRO.name());
-				stmt.setDouble(3, LeverType.SALE_PRO.getAmount()*0.1);
-			}
-			if(lever == LeverType.PRO_DISTRIBUTE.getValue()){
-				stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
-				stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
-			}
-			stmt.executeUpdate();
-			
-			stmt = conn.prepareStatement(sql4);
-			stmt.setInt(2, memberId);
-			stmt.setInt(5, OrderType.ORDER_PRODUCT.getCode());
-			stmt.setInt(4, 1);
-			if(lever == LeverType.SALE_MEMBER.getValue()){
-				stmt.setString(1, LeverType.SALE_MEMBER.name());
-				stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount());
-				stmt.setDouble(6, LeverType.SALE_MEMBER.getAmount());
-			}
-			if(lever == LeverType.SALE_PRO.getValue()){
-				stmt.setString(1, LeverType.SALE_PRO.name());
-				stmt.setDouble(3, LeverType.SALE_PRO.getAmount());
-				stmt.setDouble(6, LeverType.SALE_PRO.getAmount());
-			}
-			if(lever == LeverType.PRO_DISTRIBUTE.getValue()){
-				stmt.setString(1, LeverType.PRO_DISTRIBUTE.name());
-				stmt.setDouble(3, LeverType.PRO_DISTRIBUTE.getAmount());
-				stmt.setDouble(6, LeverType.PRO_DISTRIBUTE.getAmount());
-			}
-			stmt.executeUpdate();
-			
+
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -606,7 +609,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setDate(1, new java.sql.Date(cal.getTime().getTime()));
 			stmt.setInt(2, userId);
-			stmt.setInt(3,OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(3, OrderType.ORDER_PROACTIVE.getCode());
 			rs = stmt.executeQuery();
 			return rs.next();
 		} catch (Exception e) {
@@ -620,7 +623,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	}
 
 	@Override
-	public boolean isProactive(int userId,Date date) throws SQLException {
+	public boolean isProactive(int userId, Date date) throws SQLException {
 		String sql = "Select cdate from orders where (cdate between ? and ?) and type = ? and user_id = ? order by cdate desc";
 		try {
 			Order order = new Order();
@@ -637,14 +640,14 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setInt(3, OrderType.ORDER_PROACTIVE.getCode());
 			stmt.setInt(4, userId);
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				order.setOrderDate(rs.getDate(1));
 				break;
 			}
-			if(order.getOrderDate() == null)
+			if (order.getOrderDate() == null)
 				return false;
-			else{
-				if(date.after(order.getOrderDate()))
+			else {
+				if (date.after(order.getOrderDate()))
 					return true;
 			}
 		} catch (Exception e) {
@@ -667,7 +670,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, userId);
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				User user = new User();
 				user.setId(rs.getInt(1));
 				user.setChildId(rs.getString(2));
@@ -675,7 +678,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setLever(rs.getInt(4));
 				lstUser.add(user);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
@@ -687,7 +690,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	}
 
 	@Override
-	public Double getRevenuePersonal(User user, Date dateFrom , Date dateTo) throws SQLException {
+	public Double getRevenuePersonal(User user, Date dateFrom, Date dateTo) throws SQLException {
 		Double result = 0.0;
 		String sql = "SELECT sum(total) as total FROM orders where user_id=? and (date_format(cdate, '%Y-%m-%d') between ? and ?)";
 		try {
@@ -696,12 +699,12 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setInt(1, user.getId());
 			stmt.setDate(2, new java.sql.Date(dateFrom.getTime()));
 			stmt.setDate(3, new java.sql.Date(dateTo.getTime()));
-			//stmt.setInt(4, OrderType.ORDER_PRODUCT.getCode());
+			// stmt.setInt(4, OrderType.ORDER_PRODUCT.getCode());
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				result = rs.getDouble(1);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
@@ -719,9 +722,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, childId+"-%");
+			stmt.setString(1, childId + "-%");
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				User user = new User();
 				user.setId(rs.getInt(1));
 				user.setChildId(rs.getString(2));
@@ -729,7 +732,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setLever(rs.getInt(4));
 				lstUser.add(user);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
@@ -751,10 +754,10 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setDate(2, new java.sql.Date(dateto.getTime()));
 			stmt.setInt(3, OrderType.ORDER_PRODUCT.getCode());
 			rs = stmt.executeQuery();
-			while(rs.next()){
-				result =  rs.getDouble(1);
+			while (rs.next()) {
+				result = rs.getDouble(1);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
@@ -817,7 +820,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
 			stmt.setInt(2, userID);
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				return rs.getDate(1);
 			}
 
@@ -850,7 +853,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	}
 
 	@Override
-	public Double totalOrderValue(Date start, Date end,int userId) throws SQLException {
+	public Double totalOrderValue(Date start, Date end, int userId) throws SQLException {
 		String sql = "select total from orders where type = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and user_id  = ?";
 		Double result = 0.0;
 		try {
@@ -861,7 +864,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setDate(3, new java.sql.Date(end.getTime()));
 			stmt.setInt(4, userId);
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				result += rs.getDouble(1);
 			}
 		} catch (Exception e) {

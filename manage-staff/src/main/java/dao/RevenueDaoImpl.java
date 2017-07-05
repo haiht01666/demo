@@ -102,4 +102,30 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 		}
 		return false;
 	}
+
+	@Override
+	public Double getDirectRevenue(int userId, Date fromDate, Date endDate) throws SQLException {
+		Double result = 0.0;
+		String sql = "Select value from revenues where  type = ? and user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?)";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, OrderType.ORDER_PACKAGE.getCode());
+			stmt.setInt(2, userId);
+			stmt.setDate(3, new java.sql.Date(fromDate.getTime()));
+			stmt.setDate(4, new java.sql.Date(endDate.getTime()));
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				result += rs.getDouble(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0.0;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
+	}
 }

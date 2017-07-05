@@ -308,33 +308,37 @@ public class ManageServiceImpl implements ManageService {
 		List<User> lstUser = dao.getMembers();
 		List<Revenue> lstRevenue = new ArrayList<>();
 		if (form.getType() == RevenueGroupType.WEEK.getValue()) {
-			for (User user : lstUser) {
-				String baseLever;
-				if (user.getLever() == LeverType.New.getAmount())
-					baseLever = dao.getLever(user.getCdate(), form.getDateFrom(), user.getId());
-				else
-					baseLever = getLever(user.getId());
-				if (baseLever.equals(LeverType.New.name())) {
-					continue;
-				}
-
-				// check mua năng động
-				if (!isProactive(user, form.getDateFrom()))
-					continue;
-				int lever = converLeverToInt(baseLever);
+			Calendar startDate = Calendar.getInstance();
+			startDate.setTime(form.getDateFrom());
+			Calendar endDate = Calendar.getInstance();
+			endDate.setTime(form.getDateTo());
+			endDate.add(Calendar.DATE, 1);
 			
-				String finalLever = getFinalLevel(user, form.getDateFrom(), form.getDateTo(), lever);
-				Double totalRevenue = totalRevenueGroup(user, form.getDateFrom(), form.getDateTo());
-				if (!finalLever.equals(LeverType.New.name())) {
-					Revenue revenue = new Revenue();
-					revenue.setReceiverId(user.getId());
-					revenue.setUserLever(finalLever);
-					revenue.setRevenuePecent("5%");
-					revenue.setOrderPrice(totalRevenue);
-					revenue.setRevenueValue(totalRevenue * 0.05);
-					lstRevenue.add(revenue);
-
+			for (User user : lstUser) {
+				Double totalRevenue = new Double(0.0);
+				Revenue revenue = new Revenue();
+				revenue.setReceiverId(user.getId());
+				for (Date date = startDate.getTime(); startDate.before(endDate); startDate.add(Calendar.DATE, 1), date = startDate.getTime()) {
+				    System.out.println(date);
+				    if(!revenueService.isActive(user.getId(), date))
+			    		continue;
+				    String lever = revenueService.getLever(user.getId(), date);
+				    if(lever.equals(LeverType.PRO_DISTRIBUTE.name())){
+				    	totalRevenue += totalRevenueGroup(user, date, date)*0.03;
+				    }else if(lever.equals(LeverType.MSD.name()) || lever.equals(LeverType.DSD.name()) ||lever.equals(LeverType.GDSD.name())){
+				    	totalRevenue += totalRevenueGroup(user, date, date)*0.05;
+				    }else{
+				    	continue;
+				    }
 				}
+				Calendar fromDate = Calendar.getInstance();
+				fromDate.setTime(form.getDateFrom());
+				fromDate.add(Calendar.DATE, 1);
+				//get revenue direct
+				revenue.setRevenueDirect(revenueService.getDirectRevenue(user.getId(), fromDate.getTime(), form.getDateTo()));
+				revenue.setUserName(user.getDispName());
+				revenue.setRevenueValue(totalRevenue);
+				lstRevenue.add(revenue);
 			}
 		}
 		if (form.getType() == RevenueGroupType.MONTH.getValue()) {
@@ -456,7 +460,6 @@ public class ManageServiceImpl implements ManageService {
 
 	private Double totalRevenueGroup(User user, Date dateFrom, Date dateTo) throws SQLException {
 		Double result = 0.0;
-		result += getRevenue(user, dateFrom, dateTo);
 		List<User> lstAllChild = dao.getAllChild(user.getChildId());
 		for (User child : lstAllChild) {
 			result += getRevenue(child, dateFrom, dateTo);

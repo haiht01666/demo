@@ -113,7 +113,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	@Override
 	public int updateArticle(Article article) {
 		int result = 0;
-		String sql = "update articles set title = ?,content=?,sub_title=?,author=?  where id=? ";
+		String sql = "update articles set title = ?,content=?,sub_title=?,author=? , image_url=? where id=? ";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -121,7 +121,8 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 			stmt.setString(2, article.getContent());
 			stmt.setString(3, article.getSubTitle());
 			stmt.setString(4, article.getAuthor());
-			stmt.setInt(5, article.getId());
+			stmt.setString(5, article.getImageUrl());
+			stmt.setInt(6, article.getId());
 			result = stmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -165,7 +166,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	@Override
 	public int createArticle(Article article) {
 		int result = 0;
-		String sql = "insert into articles(title,content,sub_title,author,cdate) values(?,?,?,?,now())";
+		String sql = "insert into articles(title,content,sub_title,author,cdate,image_url) values(?,?,?,?,now(),?)";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -173,6 +174,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 			stmt.setString(2, article.getContent());
 			stmt.setString(3, article.getSubTitle());
 			stmt.setString(4, article.getAuthor());
+			stmt.setString(5, article.getImageUrl());
 			result = stmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();

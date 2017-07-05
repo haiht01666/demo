@@ -115,11 +115,15 @@ public class RevenueServiceImpl implements RevenueService {
 	private String getFinalLever(User user, Date dateFrom, Date dateTo) throws SQLException {
 		Double totalRevenue = 0.0;
 		List<User> listChild = dao.getChild(user.getId());
+		//revenue of all child
 		List<Double> lstRevenueOfChild = new ArrayList<>();
+		//revenue of chile lever 1
+		List<Double> lstRevenueOfChild1 = new ArrayList<>();
 
 		for (User child : listChild) {
 			Double totalRevenueChild = 0.0;
 			totalRevenueChild += dao.getRevenuePersonal(child, dateFrom, dateTo);
+			lstRevenueOfChild1.add(totalRevenueChild);
 			List<User> lstAllChild = dao.getAllChild(child.getChildId());
 			for (User u : lstAllChild) {
 				totalRevenueChild += dao.getRevenuePersonal(u, dateFrom, dateTo);
@@ -155,7 +159,9 @@ public class RevenueServiceImpl implements RevenueService {
 				if (value >= LeverType.MSD.getAmount())
 					check = true;
 			}
-			if (countChildValid >= 2) {
+			if (countChildValid >= 2) 
+				return LeverType.MSD.name();
+			else{
 				if (check) {
 					for (Double value : lstRevenueOfChild) {
 						if (value < LeverType.MSD.getAmount() * 0.2) {
@@ -174,10 +180,20 @@ public class RevenueServiceImpl implements RevenueService {
 			// int countChildValid = 0;
 			boolean check = false;
 			boolean validTL = true;
-			for (Double value : lstRevenueOfChild) {
-				if (value >= LeverType.TL.getAmount()) {
-					check = true;
+			//check s1 >= 20% 
+			boolean checkS1 = false;
+			for(Double value : lstRevenueOfChild1){
+				if(value >=  LeverType.TL.getAmount() * 0.2){
+					checkS1 = true;
 					break;
+				}
+			}
+			if(!checkS1){
+				for (Double value : lstRevenueOfChild) {
+					if (value >= LeverType.TL.getAmount()) {
+						check = true;
+						break;
+					}
 				}
 			}
 			if (check) {
@@ -195,6 +211,11 @@ public class RevenueServiceImpl implements RevenueService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public Double getDirectRevenue(int userId, Date fromDate, Date endDate) throws SQLException {
+		return revenueDao.getDirectRevenue(userId, fromDate, endDate);
 	}
 
 }

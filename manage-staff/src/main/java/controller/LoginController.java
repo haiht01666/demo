@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
-	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/login" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) throws Exception {
 		return "frontend/index";
+	}
+	
+	@RequestMapping(value = {"/","/home" }, method = RequestMethod.GET)
+	public String home(ModelMap model) throws Exception {
+		return "frontend/home";
 	}
 }

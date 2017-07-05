@@ -146,6 +146,32 @@ $(document).ready(
 					});
 			});
 			
+			var file = [];
+			
+			$('#txt-upload-file').on('change',function(event){
+				 files=event.target.files;
+			});
+			
+			$('#btn-upload').on('click',function(){
+				var formData = new FormData();
+				formData.append("file", files[0]);
+				 $.ajax({
+				        type: "POST",
+				        url: "/article/uploadImage",
+				        data:formData,
+				        enctype: 'multipart/form-data',
+				        contentType: false,
+				        processData: false,
+				        success: function(data) {
+				        	$('#lbl-upload').text(data.msg);
+				        	$('#txt-upload').val(data.pathFile);
+				        },
+				        error:function(data) {
+				        	$('#lbl-upload').text(data.msg);
+				        }
+				    });
+			});
+			
 		});
 
 function emptyMessageError(){
@@ -194,6 +220,7 @@ function getFormData(){
 	var formData = {};
 	formData.id = $('tr.selected td:nth-child(1)').text(); 
 	formData.title = $('#txt-article-title').val();
+	formData.imageUrl = $('#txt-upload').val();
 	formData.subTitle = $('#txt-article-subtitle').val();
 	formData.content =  CKEDITOR.instances.editor1.getData();
 	return formData;

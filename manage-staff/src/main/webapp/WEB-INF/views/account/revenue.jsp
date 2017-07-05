@@ -35,10 +35,9 @@
 				<thead>
 					<tr>
 						<th>Mã id</th>
-						<th>Cấp bậc </th>
-						<th>Tổng doanh thu của nhóm</th>
-						<th>Tỷ lệ hưởng hoa hồng</th>
-						<th>Giá trị hoa hồng</th>
+						<th>Tên thành viên</th>
+						<th>Hoa hồng trực tiếp(BV)</th>
+						<th>Hoa hồng nhóm(BV)</th>
 					</tr>
 				</thead>
 

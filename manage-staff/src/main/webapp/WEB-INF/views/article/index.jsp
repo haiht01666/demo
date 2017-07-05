@@ -85,6 +85,13 @@
 								</div>
 								
 								<div class="form-group">
+									<label id="lbl-upload">Upload ảnh đại diện :</label></br>
+									 <input type="file" accept="image/png,image/gif,image/jpeg" name="file" style="display: inline;" id="txt-upload-file"/>
+									 <input type="button" value="Submit" id="btn-upload"/>
+									 <input type="hidden" id="txt-upload"/>	 
+								</div>
+								
+								<div class="form-group">
 									<label>Phụ đề bài viết:</label>
 									<input type="text" id="txt-article-subtitle" class="form-control"
 										placeholder="Phụ đề">

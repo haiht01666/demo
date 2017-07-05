@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.Locale;
 
@@ -13,12 +16,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import model.AjaxResult;
 import model.Article;
 import model.ArticleResult;
 import model.Product;
+import model.UploadResult;
 import model.User;
 import service.ArticleService;
 
@@ -99,6 +105,31 @@ public class ArticleController {
 		AjaxResult result = new AjaxResult();
 		result.setResultData(service.deleteArticle(form.getId()));
 		result.setResult(true);
+		return result;
+	}
+	
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+	public @ResponseBody UploadResult singleSave(@RequestParam("file") MultipartFile file) {
+		UploadResult result = new UploadResult();
+		String fileName = null;
+		if (!file.isEmpty()) {
+			try {
+				String relativeWebPath = "/static/images/article";
+				String absoluteFilePath = context.getRealPath(relativeWebPath);
+				fileName = file.getOriginalFilename();
+				File uploadedFile = new File(absoluteFilePath, fileName);
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+				buffStream.write(bytes);
+				buffStream.close();
+				result.setMsg("Upload thành công!");
+				result.setPathFile(relativeWebPath+"/"+fileName);
+			} catch (Exception e) {
+				result.setMsg("Upload thất bại !");
+			}
+		} else {
+			result.setMsg("Không thể upload file trống !");
+		}
 		return result;
 	}
 

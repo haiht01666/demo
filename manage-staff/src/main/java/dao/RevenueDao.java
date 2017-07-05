@@ -13,4 +13,6 @@ public interface RevenueDao {
 	 * @return
 	 */
 	public boolean isProActive(int userId,Date date)throws SQLException;
+	
+	public Double getDirectRevenue(int userId,Date fromDate, Date endDate) throws SQLException;
 } 

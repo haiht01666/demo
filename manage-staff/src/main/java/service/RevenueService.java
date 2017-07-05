@@ -14,4 +14,6 @@ public interface RevenueService {
 	public String getBaseLever(int userId,Date date) throws SQLException;
 	
 	public String getLever(int userId,Date date) throws SQLException;
+	
+	public Double getDirectRevenue(int userId,Date fromDate, Date endDate) throws SQLException;
 }

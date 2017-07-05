@@ -1,10 +1,10 @@
 $(document).ready(
 		function() {
 			var curr = new Date; // get current date
-			var first = curr.getDate() - curr.getDay(); // First day is the day
+			var first = curr.getDate() - curr.getDay() -1; // First day is the day
 														// of the month - the
 														// day of the week
-			var last = first + 6; // last day is the first day + 6
+			var last = first + 7; // last day is the first day + 6
 
 			var firstday = new Date(curr.setDate(first));
 			var lastday = new Date(curr.setDate(last));
@@ -115,11 +115,9 @@ function initTable(filterDate, type, num, firstday, lastday) {
 		columns : [ {
 			data : "receiverId"
 		}, {
-			data : "userLever"
+			data : "userName"
 		}, {
-			data : "orderPrice"
-		}, {
-			data : "revenuePecent"
+			data : "revenueDirect"
 		}, {
 			data : "revenueValue"
 		} ],

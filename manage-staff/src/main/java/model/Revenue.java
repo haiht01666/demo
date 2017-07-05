@@ -56,6 +56,16 @@ public class Revenue {
 	
 	private Double dec;
 	
+	private Double revenueDirect;
+	
+	public Double getRevenueDirect() {
+		return revenueDirect;
+	}
+
+	public void setRevenueDirect(Double revenueDirect) {
+		this.revenueDirect = revenueDirect;
+	}
+
 	public Double getJan() {
 		return jan;
 	}
