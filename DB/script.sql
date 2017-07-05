@@ -52,10 +52,10 @@ CREATE TABLE `orders` (
   `name` varchar(50) DEFAULT NULL,
   `cdate` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  `price` double DEFAULT NULL,
+  `price` DECIMAL( 10, 2 ) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
-  `total` double DEFAULT NULL,
+  `total` DECIMAL( 10, 2 ) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -81,6 +81,7 @@ CREATE TABLE `articles` (
   `content` varchar(200) DEFAULT NULL,
   `sub_title` varchar(200) DEFAULT NULL,
   `author` varchar(50) DEFAULT NULL,
+  `image_url` varchar(200) DEFAULT NULL,
   `status` int,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT= 1 DEFAULT CHARSET=utf8;
@@ -98,7 +99,7 @@ CREATE TABLE `products` (
   `characteristic` varchar(10000) DEFAULT NULL,
   `category_id` int DEFAULT NULL,
   `image_url` varchar(200) DEFAULT NULL,
-  `price` double,
+  `price` DECIMAL( 10, 2 ),
   `cdate` datetime DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `made_in` varchar(50) DEFAULT NULL,
@@ -112,7 +113,7 @@ CREATE TABLE `revenues` (
   `name` varchar(50) DEFAULT NULL,
   `cdate` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  `value` double DEFAULT NULL,
+  `value` DECIMAL( 10, 2 ) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
