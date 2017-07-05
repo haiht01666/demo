@@ -310,10 +310,10 @@ public class ManageServiceImpl implements ManageService {
 		if (form.getType() == RevenueGroupType.WEEK.getValue()) {
 			Calendar startDate = Calendar.getInstance();
 			startDate.setTime(form.getDateFrom());
+			startDate.add(Calendar.DATE, 1);
 			Calendar endDate = Calendar.getInstance();
 			endDate.setTime(form.getDateTo());
 			endDate.add(Calendar.DATE, 1);
-			
 			for (User user : lstUser) {
 				Double totalRevenue = new Double(0.0);
 				Revenue revenue = new Revenue();
@@ -335,10 +335,13 @@ public class ManageServiceImpl implements ManageService {
 				fromDate.setTime(form.getDateFrom());
 				fromDate.add(Calendar.DATE, 1);
 				//get revenue direct
-				revenue.setRevenueDirect(revenueService.getDirectRevenue(user.getId(), fromDate.getTime(), form.getDateTo()));
-				revenue.setUserName(user.getDispName());
-				revenue.setRevenueValue(totalRevenue);
-				lstRevenue.add(revenue);
+				Double revenueDirect = revenueService.getDirectRevenue(user.getId(), fromDate.getTime(), form.getDateTo());
+				if(revenueDirect > 0 || totalRevenue > 0){
+					revenue.setRevenueDirect(revenueDirect);
+					revenue.setUserName(user.getDispName());
+					revenue.setRevenueValue(totalRevenue);
+					lstRevenue.add(revenue);
+				}
 			}
 		}
 		if (form.getType() == RevenueGroupType.MONTH.getValue()) {
@@ -604,6 +607,7 @@ public class ManageServiceImpl implements ManageService {
 			Revenue revenue = new Revenue();
 			revenue.setUserName(user.getDispName());
 			revenue.setReceiverId(user.getId());
+			boolean check = false;
 			for(int i = 1 ; i< 13 ; i++){
 				Calendar cal = Calendar.getInstance();
 				cal.set(Calendar.MONTH, i -1 );
@@ -613,37 +617,84 @@ public class ManageServiceImpl implements ManageService {
 				//last day of mounth
 				cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 				Date dateTo = cal.getTime();
+				Double value = 0.0;
 				switch(i){
-					case 1 : revenue.setJan(getRevenue(user ,dateFrom,dateTo));
+					case 1 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setJan(value);
 						break;
-					case 2 : revenue.setFeb(getRevenue(user ,dateFrom,dateTo));
+					case 2 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setFeb(value);
 						break;
-					case 3 : revenue.setMar(getRevenue(user ,dateFrom,dateTo));
+					case 3 :
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setMar(value);
 						break;
-					case 4 : revenue.setApr(getRevenue(user ,dateFrom,dateTo));
+					case 4 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setApr(value);
 						break;
-					case 5 : revenue.setMay(getRevenue(user ,dateFrom,dateTo));
+					case 5 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setMay(value);
 						break;
-					case 6 : revenue.setJun(getRevenue(user ,dateFrom,dateTo));
+					case 6 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setJun(value);
 						break;
-					case 7 : revenue.setJul(getRevenue(user ,dateFrom,dateTo));
+					case 7 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setJul(value);
 						break;
-					case 8 : revenue.setAug(getRevenue(user ,dateFrom,dateTo));
+					case 8 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setAug(value);
 						break;
-					case 9 : revenue.setSep(getRevenue(user ,dateFrom,dateTo));
+					case 9 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setSep(value);
 						break;
-					case 10 : revenue.setOct(getRevenue(user ,dateFrom,dateTo));
+					case 10 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setOct(value);
 						break;
-					case 11 : revenue.setNov(getRevenue(user ,dateFrom,dateTo));
+					case 11 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;
+						revenue.setNov(value);
 						break;
-					case 12 : revenue.setDec(getRevenue(user ,dateFrom,dateTo));
+					case 12 : 
+						value = totalRevenueGroup(user ,dateFrom,dateTo);
+						if(value > 0)
+							check = true;revenue.setDec(value);
 						break;
 					default :
 						break;
-					
 				}
-				
 			}
+			if(check)
 			revenues.add(revenue);
 		}
 		return revenues;

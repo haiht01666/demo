@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/manage/home"><img class="navbar-brand" src="<c:url value='/static/images/logo1.png' />" alt="Logo" style="padding: 0"></img></a>
+      <a href="/manage/home"><img class="navbar-brand" src="<c:url value='/static/images/logo3.png' />" alt="Logo" style="padding: 0"></img></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">

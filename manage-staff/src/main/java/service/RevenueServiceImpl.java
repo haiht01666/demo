@@ -87,20 +87,34 @@ public class RevenueServiceImpl implements RevenueService {
 		String baseLever = getBaseLever(userId, date);
 		if(baseLever == null)
 			return LeverType.New.name();
-		if (!revenueDao.isActive(userId, date))
+		if (!isActive(userId, date))
 			return baseLever;
 		if ((baseLever.equals(LeverType.PRO_DISTRIBUTE.name()) || baseLever.equals(LeverType.SALE_PRO.name()))
 				&& user.getCdate() != null) {
 			Date dateFrom = null;
 			Date dateTo = date;
-			Date currentProActive = revenueDao.getProactiveDateCurrent(date, userId);
-			if (revenueDao.isProActive(userId, currentProActive)) {
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(date);
-				cal.add(Calendar.DATE, -30);
-				dateFrom = cal.getTime();
-			} else {
-				dateFrom = currentProActive;
+			Calendar cal1 = Calendar.getInstance();
+			cal1.setTime(user.getCdate());
+			cal1.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
+			cal1 = CommonUtils.setMaxHour(cal1);
+			if(date.after(cal1.getTime())){
+				//Nếu ngày check lever > ngày tạo 39 day thì sẽ check xem nó active hay ko ?
+				Date currentProActive = revenueDao.getProactiveDateCurrent(date, userId);
+				if(currentProActive == null){
+					return baseLever;
+				}
+				if (revenueDao.isProActive(userId, currentProActive)) {
+					//nếu active liên tiếp 2 tháng thì sẽ tính lever từ ngày check - 30 day
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(date);
+					cal.add(Calendar.DATE, -30);
+					dateFrom = cal.getTime();
+				} else {
+					//nếu không sẽ tính lever từ ngày active hiện tại
+					dateFrom = currentProActive;
+				}
+			}else{
+				dateFrom = user.getCdate();
 			}
 			String lever = getFinalLever(user, dateFrom, dateTo);
 			if (lever != null)
