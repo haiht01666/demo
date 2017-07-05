@@ -3343,7 +3343,7 @@ var pConstants_VN = {
 	// MESSAGE
     'WRONG_PASSWORD' : 'Quý Khách đã nhập sai mật khẩu. Vui lòng nhập lại',
 
-    'FORGOT_PASSWORD':'Để reset mật khẩu, vui lòng gửi mail về địa chỉ email abc@gmail.com',
+    'FORGOT_PASSWORD':'Để reset mật khẩu, vui lòng gửi mail về địa chỉ email admin@dfgvn.online',
 	// INDEX PAGE
 	'INDEX_PAGE' : 'indexxsl/index-scr',
 	//'INDEX_PAGE' : 'commissionxsl/comission-scr',

@@ -36,12 +36,14 @@ import java.util.*;
             String passwordEncrypt = dao.getPasswordEncrypt(userId);
             if (!passwordEncoder.matches(password, passwordEncrypt)) {
                 result.setResult(false);
+                return result;
             }
             User user = dao.getLoginInfo(userId);
             result.setResult(true);
             result.setResultData(user);
         } catch (Exception e) {
             result.setResult(false);
+            return  result;
 
         }
         return result;

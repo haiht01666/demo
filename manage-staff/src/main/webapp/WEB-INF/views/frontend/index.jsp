@@ -447,7 +447,7 @@ pageEncoding="UTF-8"%>
                 <div id="nav.btn.showslidemenu" class="icon-menulist handle" onClick="showSlideMenu();"
                      style="display:none;"></div>
                 <div class="navigationlogo" style="width:50%;left:22%;" align="center" onClick="gotoHomePage();"
-                     id="homepagexsl/homepage-scr"><img src="static/frontend/assets/images/bhip-logo-white.png" height="25px"/></div>
+                     id="homepagexsl/homepage-scr"><img src="static/frontend/promotion/logo.png" height="120px"/></div>
                 <div class="help" id="id.home.btn" style="left:40px;  display:none;" onClick="gotoHomePage();">
                     <div class='icon-home'></div>
                 </div>
