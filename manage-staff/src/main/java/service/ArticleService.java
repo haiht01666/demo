@@ -8,8 +8,10 @@ public interface ArticleService {
 	public List<Article> getAllArticle();
 	
 	public Article getArticleById(int id);
-	
-	public int updateArticle(Article article);
+
+    boolean existArticle(int id);
+
+    public int updateArticle(Article article);
 	
 	public int deleteArticle(int id);
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.ApiService;
+import service.ArticleServiceImpl;
 import service.ProductService;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class ApiController {
 	@Autowired ApiService service;
 	@Autowired ProductService productService;
+	@Autowired ArticleServiceImpl articleService;
 
 	@RequestMapping(value = { "/getLoginInfo" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult getLoginInfo(@RequestBody Map loginMap) {
@@ -118,11 +120,24 @@ public class ApiController {
 		return result;
 	}
 
-	@RequestMapping(value = { "/getAllTinTuc" }, method = RequestMethod.GET)
-	public @ResponseBody AjaxResult getAllTinTuc() {
+	@RequestMapping(value = { "/getAllArticle" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getAllArticle() {
 		AjaxResult result = new AjaxResult();
 		result.setResult(true);
-		result.setResultData(productService.getAllProduct());
+		result.setResultData(articleService.getAllArticle());
+		return result;
+	}
+
+	@RequestMapping(value = { "/getArticleById" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getArticleById(@RequestParam("id") int id) {
+		AjaxResult result = new AjaxResult();
+		if(!articleService.existArticle(id)){
+			result.setResult(false);
+			return result;
+		}else {
+			result.setResult(true);
+			result.setResultData(articleService.getArticleById(id));
+		}
 		return result;
 	}
 }

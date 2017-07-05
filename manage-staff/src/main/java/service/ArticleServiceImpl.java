@@ -24,6 +24,11 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public boolean existArticle(int id) {
+		return dao.existArticle(id);
+	}
+
+	@Override
 	public int updateArticle(Article article) {
 		return dao.updateArticle(article);
 	}

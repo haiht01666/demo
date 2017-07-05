@@ -83,6 +83,34 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	}
 
 	@Override
+	public boolean existArticle(int id) {
+		String sql = "SELECT EXISTS(SELECT 1 FROM articles WHERE id=?) COUNT";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				return rs.getBoolean(1);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					stmt.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public int updateArticle(Article article) {
 		int result = 0;
 		String sql = "update articles set title = ?,content=?,sub_title=?,author=?  where id=? ";
