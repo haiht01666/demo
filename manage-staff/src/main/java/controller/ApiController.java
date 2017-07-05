@@ -1,6 +1,7 @@
 package controller;
 
 import model.AjaxResult;
+import model.Product;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,8 +108,21 @@ public class ApiController {
 	@RequestMapping(value = { "/getProductById" }, method = RequestMethod.GET)
 	public @ResponseBody AjaxResult getProductById(@RequestParam("id") int id) {
 		AjaxResult result = new AjaxResult();
+		if(!productService.existProduct(id)){
+			result.setResult(false);
+			return result;
+		}else {
+			result.setResult(true);
+			result.setResultData(productService.getProductById(id));
+		}
+		return result;
+	}
+
+	@RequestMapping(value = { "/getAllTinTuc" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getAllTinTuc() {
+		AjaxResult result = new AjaxResult();
 		result.setResult(true);
-		result.setResultData(productService.getProductById(id));
+		result.setResultData(productService.getAllProduct());
 		return result;
 	}
 }

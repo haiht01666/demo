@@ -36,6 +36,11 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public boolean existProduct(int id) {
+		return dao.existProduct(id);
+	}
+
+	@Override
 	public int updateProduct(Product product) {
 		return dao.updateProduct(product);
 	}

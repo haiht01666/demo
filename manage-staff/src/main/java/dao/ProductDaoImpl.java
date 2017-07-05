@@ -114,6 +114,34 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	}
 
 	@Override
+	public boolean existProduct(int id) {
+		String sql = "SELECT EXISTS(SELECT 1 FROM products WHERE id=?) COUNT";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				return rs.getBoolean(1);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					stmt.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public int createProduct(Product product) {
 		int result = 0;
 		String sql = "insert into products(name,description,characteristic,price,category_id,image_url ,mail_product, cdate) values(?,?,?,?,?,?,?,now())";

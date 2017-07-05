@@ -12,8 +12,10 @@ public interface ProductDao {
 	public List<Product> getAllProduct();
 	
 	public Product getProductById(int id);
-	
-	public int createProduct(Product product);
+
+    boolean existProduct(int id);
+
+    public int createProduct(Product product);
 	
 	public int updateProduct(Product product);
 	
