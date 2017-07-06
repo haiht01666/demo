@@ -14,7 +14,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	@Override
 	public List<Article> getAllArticle() {
 		List<Article> result = new ArrayList<>();
-		String sql = "SELECT id,title,cdate,content,sub_title,author,status FROM articles;";
+		String sql = "SELECT id,title,cdate,content,sub_title,author,status, image_url  FROM articles;";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -28,6 +28,43 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 				article.setSubTitle(rs.getString(5));
 				article.setAuthor(rs.getString(6));
 				article.setStatus(rs.getInt(7));
+				article.setImageUrl(rs.getString(8));
+				result.add(article);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					st.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+	@Override
+	public List<Article> getArticlePage(int limit, int offset) {
+		List<Article> result = new ArrayList<>();
+		String sql = "SELECT id,title,cdate,content,sub_title,author,status, image_url  FROM articles order by cdate DESC LIMIT " + limit + " OFFSET " + offset;
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Article article = new Article();
+				article.setId(rs.getInt(1));
+				article.setTitle(rs.getString(2));
+				article.setCdate(rs.getDate(3));
+				article.setContent(rs.getString(4));
+				article.setSubTitle(rs.getString(5));
+				article.setAuthor(rs.getString(6));
+				article.setStatus(rs.getInt(7));
+				article.setImageUrl(rs.getString(8));
 				result.add(article);
 			}
 
@@ -50,7 +87,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	@Override
 	public Article getArticleById(int id) {
 		Article article = new Article();
-		String sql = "SELECT id,title,cdate,content,sub_title,author,status FROM articles where id=?;";
+		String sql = "SELECT id,title,cdate,content,sub_title,author,status,image_url FROM articles where id=?;";
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -64,6 +101,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 				article.setSubTitle(rs.getString(5));
 				article.setAuthor(rs.getString(6));
 				article.setStatus(rs.getInt(7));
+				article.setImageUrl(rs.getString(8));
 			}
 
 		} catch (Exception ex) {
@@ -161,6 +199,31 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 			}
 		}
 		return result;
+	}
+	@Override
+	public int getNumberArticle(){
+		String sql = "SELECT count(*) FROM articles";
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					st.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
 	}
 
 	@Override

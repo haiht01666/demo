@@ -26,6 +26,16 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public List<Product> getProductPage(int limit, int offset) {
+		return dao.getProductPage(limit, offset);
+	}
+
+	@Override
+	public int getNumberProducts() {
+		return dao.getNumberProducts();
+	}
+
+	@Override
 	public Product getProductById(int id) {
 		return dao.getProductById(id);
 	}

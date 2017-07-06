@@ -6,8 +6,10 @@ import model.Article;
 
 public interface ArticleDao {
 	public List<Article> getAllArticle();
-	
-	public Article getArticleById(int id);
+
+    List<Article> getArticlePage(int limit, int offset);
+
+    public Article getArticleById(int id);
 
     boolean existArticle(int id);
 
@@ -16,4 +18,6 @@ public interface ArticleDao {
 	public int deleteArticle(int id);
 	
 	public int createArticle(Article article);
+
+    int getNumberArticle();
 }

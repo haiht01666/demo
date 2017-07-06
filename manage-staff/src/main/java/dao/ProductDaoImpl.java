@@ -78,6 +78,66 @@ public class ProductDaoImpl extends DBManager implements ProductDao {
 	}
 
 	@Override
+	public int getNumberProducts(){
+		String sql = "SELECT count(*) FROM products";
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					st.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public List<Product> getProductPage(int limit, int offset) {
+		List<Product> result = new ArrayList<>();
+		String sql = "SELECT id,name,cdate,price, image_url FROM products order by cdate DESC LIMIT " + limit + " OFFSET " + offset;
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Product product = new Product();
+				product.setId(rs.getInt(1));
+				product.setName(rs.getString(2));
+				product.setCdate(rs.getDate(3));
+				product.setPrice(rs.getDouble(4));
+				product.setImageUrl(rs.getString(5));
+				result.add(product);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					st.close();
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public Product getProductById(int id) {
 		Product product = new Product();
 		String sql = "SELECT p.id,p.name,description,characteristic,price,category_id ,image_url,mail_product FROM products p  join categories c on p.category_id = c.id where p.id=?;";

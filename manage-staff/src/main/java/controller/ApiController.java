@@ -99,11 +99,13 @@ public class ApiController {
 		return service.getCommissionInfo(userCode, time, timeDetail);
 	}
 
-	@RequestMapping(value = { "/getAllProduct" }, method = RequestMethod.GET)
-	public @ResponseBody AjaxResult getAllProduct() {
+	@RequestMapping(value = { "/getProductPage" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getProductPage(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
 		AjaxResult result = new AjaxResult();
 		result.setResult(true);
-		result.setResultData(productService.getAllProduct());
+		result.setResultData(productService.getProductPage(limit, offset));
+		result.setNumberRecord(productService.getNumberProducts());
+
 		return result;
 	}
 
@@ -120,11 +122,12 @@ public class ApiController {
 		return result;
 	}
 
-	@RequestMapping(value = { "/getAllArticle" }, method = RequestMethod.GET)
-	public @ResponseBody AjaxResult getAllArticle() {
+	@RequestMapping(value = { "/getArticlePage" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getArticlePage(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
 		AjaxResult result = new AjaxResult();
 		result.setResult(true);
-		result.setResultData(articleService.getAllArticle());
+		result.setResultData(articleService.getArticlePage(limit, offset));
+		result.setNumberRecord(articleService.getNumberArticle());
 		return result;
 	}
 

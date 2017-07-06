@@ -6,8 +6,12 @@ import model.Article;
 
 public interface ArticleService {
 	public List<Article> getAllArticle();
-	
-	public Article getArticleById(int id);
+
+    int getNumberArticle();
+
+    List<Article> getArticlePage(int limit, int offset);
+
+    public Article getArticleById(int id);
 
     boolean existArticle(int id);
 

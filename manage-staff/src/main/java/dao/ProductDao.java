@@ -10,7 +10,11 @@ public interface ProductDao {
 	public List<Category> getAllCategory();
 
 	public List<Product> getAllProduct();
-	
+
+	int getNumberProducts();
+
+	List<Product> getProductPage(int limit, int offset);
+
 	public Product getProductById(int id);
 
     boolean existProduct(int id);

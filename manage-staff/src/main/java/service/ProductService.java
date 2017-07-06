@@ -10,7 +10,11 @@ public interface ProductService {
 	public List<Category> getAllCategory();
 
 	public List<Product> getAllProduct();
-	
+
+	List<Product> getProductPage(int limit, int offset);
+
+	int getNumberProducts();
+
 	public Product getProductById(int id);
 	
 	public int createProduct(Product product);
