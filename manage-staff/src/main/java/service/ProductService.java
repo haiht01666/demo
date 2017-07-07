@@ -24,5 +24,10 @@ public interface ProductService {
 	public int updateProduct(Product product);
 	
 	public int deleteProduct(int id);
-	
+
+	boolean existCategory(String category);
+
+	List<Product> getProductsByCategory(int limit, int offset, String category);
+
+	int getNumberProductsCategory(String category);
 }

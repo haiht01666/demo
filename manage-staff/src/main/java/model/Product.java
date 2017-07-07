@@ -3,105 +3,123 @@ package model;
 import java.util.Date;
 
 public class Product {
-	
-	private String code;
-	
-	private String name;
 
-	private int id;
-	
-	private Date cdate;
-	
-	private String characteristic;
-	
-	private String detail;
-	
-	private Double price;
-	
-	private String imageUrl;
+    private String code;
 
-	private int categoryId;
-	
-	private boolean mainProduct;
-	
-	public boolean getMainProduct() {
-		return mainProduct;
-	}
+    private String name;
 
-	public void setMainProduct(boolean mainProduct) {
-		this.mainProduct = mainProduct;
-	}
+    private int id;
 
-	public int getCategoryId() {
-		return categoryId;
-	}
+    private Date cdate;
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
+    private String characteristic;
 
-	public String getCode() {
-		return "SP0"+id;
-	}
+    private String detail;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    private Double price;
 
-	public String getName() {
-		return name;
-	}
+    private String imageUrl;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private int categoryId;
 
-	public int getId() {
-		return id;
-	}
+    private String categoryKey;
+    private String categoryName;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private boolean mainProduct;
 
-	public Date getCdate() {
-		return cdate;
-	}
+    public boolean getMainProduct() {
+        return mainProduct;
+    }
 
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
-	}
+    public void setMainProduct(boolean mainProduct) {
+        this.mainProduct = mainProduct;
+    }
 
-	public String getCharacteristic() {
-		return characteristic;
-	}
+    public int getCategoryId() {
+        return categoryId;
+    }
 
-	public void setCharacteristic(String characteristic) {
-		this.characteristic = characteristic;
-	}
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
-	public String getDetail() {
-		return detail;
-	}
+    public String getCode() {
+        return "SP0" + id;
+    }
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public Double getPrice() {
-		return price;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public Date getCdate() {
+        return cdate;
+    }
+
+    public void setCdate(Date cdate) {
+        this.cdate = cdate;
+    }
+
+    public String getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(String characteristic) {
+        this.characteristic = characteristic;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getCategoryKey() {
+        return categoryKey;
+    }
+
+    public void setCategoryKey(String categoryKey) {
+        this.categoryKey = categoryKey;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

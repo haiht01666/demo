@@ -122,6 +122,20 @@ public class ApiController {
 		return result;
 	}
 
+	@RequestMapping(value = { "/getProductsByCategory" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getProductsByCategory(@RequestParam("limit") int limit, @RequestParam("offset") int offset,@RequestParam("category") String category) {
+		AjaxResult result = new AjaxResult();
+		if(!productService.existCategory(category)){
+			result.setResult(false);
+			return result;
+		}else {
+			result.setResult(true);
+			result.setResultData(productService.getProductsByCategory(limit, offset, category));
+			result.setNumberRecord(productService.getNumberProductsCategory(category));
+		}
+		return result;
+	}
+
 	@RequestMapping(value = { "/getArticlePage" }, method = RequestMethod.GET)
 	public @ResponseBody AjaxResult getArticlePage(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
 		AjaxResult result = new AjaxResult();
@@ -141,6 +155,14 @@ public class ApiController {
 			result.setResult(true);
 			result.setResultData(articleService.getArticleById(id));
 		}
+		return result;
+	}
+
+	@RequestMapping(value = { "/getCategories" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getCategories() {
+		AjaxResult result = new AjaxResult();
+			result.setResult(true);
+			result.setResultData(productService.getAllCategory());
 		return result;
 	}
 }

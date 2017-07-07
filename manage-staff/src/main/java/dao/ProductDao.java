@@ -13,6 +13,8 @@ public interface ProductDao {
 
 	int getNumberProducts();
 
+	int getNumberProductsCategory(String category);
+
 	List<Product> getProductPage(int limit, int offset);
 
 	public Product getProductById(int id);
@@ -24,4 +26,8 @@ public interface ProductDao {
 	public int updateProduct(Product product);
 	
 	public int deleteProduct(int id);
+
+    boolean existCategory(String category);
+
+	List<Product> getProductsByCategory(int limit, int offset, String category);
 }

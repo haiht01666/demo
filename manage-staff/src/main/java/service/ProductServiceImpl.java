@@ -60,4 +60,16 @@ public class ProductServiceImpl implements ProductService{
 		return dao.deleteProduct(id);
 	}
 
+	@Override public boolean existCategory(String category) {
+		return dao.existCategory(category);
+	}
+
+	@Override public List<Product> getProductsByCategory(int limit, int offset, String category) {
+		return dao.getProductsByCategory(limit,offset,category);
+	}
+
+	@Override public int getNumberProductsCategory(String category) {
+		return dao.getNumberProductsCategory(category);
+	}
+
 }
