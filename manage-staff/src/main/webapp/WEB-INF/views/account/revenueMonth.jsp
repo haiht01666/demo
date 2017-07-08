@@ -77,7 +77,7 @@
 							<td><fmt:formatNumber
 									value="${revenue.nov }" type="number" maxFractionDigits="3" /></td>
 							<td><fmt:formatNumber
-									value="${revenue.nov }" type="number" maxFractionDigits="3" /></td>
+									value="${revenue.dec }" type="number" maxFractionDigits="3" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

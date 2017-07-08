@@ -58,6 +58,16 @@ public class Revenue {
 	
 	private Double revenueDirect;
 	
+	private Double totalOrderValue;
+	
+	public Double getTotalOrderValue() {
+		return totalOrderValue;
+	}
+
+	public void setTotalOrderValue(Double totalOrderValue) {
+		this.totalOrderValue = totalOrderValue;
+	}
+
 	public Double getRevenueDirect() {
 		return revenueDirect;
 	}

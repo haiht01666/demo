@@ -745,14 +745,13 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 
 	@Override
 	public Double getAllRevenue(Date dateFrom, Date dateto) throws SQLException {
-		String sql = "SELECT sum(total) as total FROM orders where cdate between ? and ?  and type = ? ";
+		String sql = "SELECT sum(total) as total FROM orders where date_format(cdate, '%Y-%m-%d') between ? and ?";
 		Double result = 0.0;
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setDate(1, new java.sql.Date(dateFrom.getTime()));
 			stmt.setDate(2, new java.sql.Date(dateto.getTime()));
-			stmt.setInt(3, OrderType.ORDER_PRODUCT.getCode());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				result = rs.getDouble(1);

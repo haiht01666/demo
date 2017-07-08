@@ -117,7 +117,13 @@ function initTable(filterDate, type, num, firstday, lastday) {
 		}, {
 			data : "userName"
 		}, {
+			data : "userLever"
+		}, {
 			data : "revenueDirect"
+		}, {
+			data : "totalOrderValue"
+		}, {
+			data : "revenuePecent"
 		}, {
 			data : "revenueValue"
 		} ],
@@ -127,8 +133,7 @@ function initTable(filterDate, type, num, firstday, lastday) {
 			title : 'Hoa hồng doanh thu ' + nameFile
 		}]
 	});
-
-
+		
 	if (type === $('#radio-week').val()) {
 		$('#tbl-staff_length').prepend(dateTo);
 		$('#tbl-staff_length').prepend($('<label>').text('Đến'));

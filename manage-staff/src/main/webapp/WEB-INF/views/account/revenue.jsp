@@ -30,14 +30,17 @@
 				</label> -->
 
 			<table id="tbl-staff"
-				class="display table table-hover table-striped table-bordered"
+				class="display table table-hover table-striped table-bordered tbl-revenue-week"
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>Mã id</th>
 						<th>Tên thành viên</th>
+						<th id="th-lever">Cấp bậc</th>
 						<th>Hoa hồng trực tiếp(BV)</th>
-						<th>Hoa hồng nhóm(BV)</th>
+						<th id="th-total">Tổng BV</th>
+						<th id="th-percen">Tỉ lệ hoa hồng</th>
+						<th id="th-value">Giá trị hoa hồng</th>
 					</tr>
 				</thead>
 
