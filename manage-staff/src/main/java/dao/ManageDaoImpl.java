@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import constant.LeverType;
 import constant.OrderType;
+import constant.RevenueType;
 import constant.TimePeriodCheck;
 import model.EditRoleForm;
 import model.Feedback;
@@ -55,7 +56,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			if (lever > 0) {
 				stmt = conn.prepareStatement(sql3);
 				stmt.setInt(2, parent.getId());
-				stmt.setInt(4, OrderType.ORDER_PACKAGE.getCode());
+				stmt.setInt(4, RevenueType.DIRECT.getValue());
 				if (lever == LeverType.SALE_MEMBER.getValue()) {
 					stmt.setString(1, LeverType.SALE_MEMBER.name());
 					stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount() * 0.1);

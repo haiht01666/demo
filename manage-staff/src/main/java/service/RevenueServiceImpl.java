@@ -14,6 +14,8 @@ import constant.LeverType;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import dao.RevenueDao;
+import model.Revenue;
+import model.RevenueApi;
 import model.User;
 
 @Service
@@ -230,6 +232,21 @@ public class RevenueServiceImpl implements RevenueService {
 	@Override
 	public Double getDirectRevenue(int userId, Date fromDate, Date endDate) throws SQLException {
 		return revenueDao.getDirectRevenue(userId, fromDate, endDate);
+	}
+
+	@Override
+	public int saveRevenue(Revenue revenue, User user, Date cate) throws SQLException {
+		return revenueDao.saveRevenue(revenue, user, cate);
+	}
+
+	@Override
+	public RevenueApi getTotalRevenueInfo(Date cdate,int userId) throws SQLException {
+		return revenueDao.getRevenueInfo(cdate, userId);
+	}
+
+	@Override
+	public RevenueApi getRevenueInfo(Date from, Date to, int userId) throws SQLException {
+		return revenueDao.getRevenueInfo(from, to, userId);
 	}
 
 }
