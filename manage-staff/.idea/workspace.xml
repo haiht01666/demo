@@ -2,225 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59acd127-1f9e-4597-8eb2-3664d02dae38" name="Default" comment="delete deploy folder">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/SFUHelveticaBold.TTF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/SFUHelveticaLight.TTF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/UTM Aurora.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfont.svg.tmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/fonts/font-awesome/fontawesome-webfontd41d.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bg-button-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bg-button-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bg-line-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bg-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bg-topbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bgdot-bottom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bgdot-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/bgdot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/btn-social.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/cd-top-arrow.svg.tmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/customerComment.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/fix-title-left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/fix-title-right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/frame.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon-bgleft.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon-bgright.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon-search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon-sprite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/icon_hot.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/item-news.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/line-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/logo2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/pre.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/remoingay-black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/remoingay.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/rmn_logo2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/select-caret.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/service-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/service-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/service-3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/service-4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/title-index.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/tuvan.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/white40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/white90.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/SFUHelveticaBold.TTF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/SFUHelveticaLight.TTF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/UTM Aurora.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfont.svg.tmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/fonts/font-awesome/fontawesome-webfontd41d.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bg-button-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bg-button-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bg-line-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bg-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bg-topbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bgdot-bottom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bgdot-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/bgdot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/btn-social.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/cd-top-arrow.svg.tmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/customerComment.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/fix-title-left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/fix-title-right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/frame.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon-bgleft.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon-bgright.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon-search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon-sprite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/icon_hot.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/item-news.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/line-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/logo2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/pre.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/remoingay-black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/remoingay.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/rmn_logo2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/select-caret.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/service-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/service-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/service-3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/service-4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/title-index.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/tuvan.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/white40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/white90.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/jquery-1.11.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/jquery.bxslider.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/jquery.simplyscroll.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/images/jquery.simplyscroll.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/libs/custom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/libs/jquery-1.11.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/libs/jquery.bxslider.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/libs/jquery.bxslider.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/libs/jquery.simplyscroll.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/about-page.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/home-page.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/jquery.bxslider.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/jquery.simplyscroll.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/news.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/news.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/news_special.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/styles/styles.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.babelrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.editorconfig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.istanbul.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.npmrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/CONTRIBUTORS.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/appveyor.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/docs/FAQ.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/actions/articlesActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/actions/categoryActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/actions/fuelSavingsActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/actions/fuelSavingsActions.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/actions/productsActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/AboutPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/AboutPage.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/App.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Banner/Banner.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/CustomerComment/CustomerComment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/CustomerComment/CustomerComment_old.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Footer/Footer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsForm.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsForm.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsResults.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsResults.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsTextInput.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/FuelSavingsTextInput.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Header/Header.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Lienhe.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/NewFeeds/NewFeeds.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/NewFeeds/NewFeeds_old.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/News/News.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/NewsDetail/NewsDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/NotFoundPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/ProductDetail/ProductDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Products/Products.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/components/Root.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/constants/actionTypes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/FuelSavingsPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/FuelSavingsPage.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/HomePage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/ProductDetailPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/ProductsPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/ProductsSearchPage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/TinTuc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/containers/TinTucDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/jquery-1.11.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/jquery.bxslider.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/jquery.simplyscroll.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/images/jquery.simplyscroll.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/index.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/libs/custom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/libs/jquery-1.11.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/libs/jquery.bxslider.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/libs/jquery.bxslider.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/libs/jquery.simplyscroll.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/categoriesReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/fuelSavingsReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/fuelSavingsReducer.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/infoReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/initialState.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/newsDetailReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/newsReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/productDetailReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/reducers/productsReducer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/routes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/store/__snapshots__/store.spec.js.snap" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/store/configureStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/store/store.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/about-page.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/home-page.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/jquery.bxslider.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/jquery.simplyscroll.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/news.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/news.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/news_special.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/styles/styles.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/dateHelper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/dateHelper.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/fuelSavingsCalculator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/fuelSavingsCalculator.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/mathHelper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/mathHelper.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/numberFormatter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/utils/numberFormatter.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/src/webpack-public-path.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/.yarnclean" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/analyzeBundle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/build.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/chalkConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/distServer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/fileMock.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/nodeVersionCheck.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/removeDemo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/srcServer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/startMessage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/tools/testCi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/webpack.config.dev.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/webpack.config.prod.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webSrc/yarn.lock" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/5c/70234176a81900171afffc8ffa0c1032" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/73/b04e3f76a81900171afffc8ffa0c1032" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/7f/f0083b76a81900171afffc8ffa0c1032" afterPath="" />
@@ -276,12 +57,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.jboss.tools.project.examples/quickstarts-json/URLTransportCache.cacheIndex.properties" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.jboss.tools.project.examples/quickstarts-json/URLTransportCache.cacheIndex.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/version.ini" afterPath="$PROJECT_DIR$/../.metadata/version.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ApiController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ApiController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/ProductDao.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ProductDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/ProductDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ProductDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ProductService.java" afterPath="$PROJECT_DIR$/src/main/java/service/ProductService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ProductServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/service/ProductServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/home.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/home.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/web/main.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/web/main.js" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -304,21 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/ProductService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductDaoImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProductDaoImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProductDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="114" column="32" lean-forward="false" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+            <state relative-caret-position="216">
+              <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="24" selection-end-line="169" selection-end-column="32" />
               <folding>
                 <marker date="1499672345154" expanded="true" signature="404:447" ph="SELECT id,na... categories" />
                 <marker date="1499672345154" expanded="true" signature="1394:1445" ph="SELECT id,na... products" />
@@ -377,11 +143,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/static/web/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
-              <caret line="14" column="231040" lean-forward="false" selection-start-line="14" selection-start-column="231033" selection-end-line="14" selection-end-column="231040" />
+              <caret line="0" column="71858" lean-forward="false" selection-start-line="0" selection-start-column="71858" selection-end-line="0" selection-end-column="71858" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/model/Product.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+              <folding>
+                <element signature="e#1219#1220#0" expanded="true" />
+                <element signature="e#1253#1254#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultSetImpl.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36-sources.jar!/com/mysql/jdbc/ResultSetImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="2012" column="0" lean-forward="false" selection-start-line="2012" selection-start-column="0" selection-end-line="2012" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -418,7 +207,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bankAddress</find>
       <find>CHANGE_PASS_FAIL</find>
       <find>bank_address</find>
       <find>p</find>
@@ -448,6 +236,7 @@
       <find>jquery.simplyscroll.min.js</find>
       <find>min.js</find>
       <find>custom.js</find>
+      <find>../../images/logo2.png</find>
     </findStrings>
     <replaceStrings>
       <replace>static/frontend/pages/</replace>
@@ -472,7 +261,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/frontend.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/index.html" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/WebMvcConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/frontend/assets/preload.js" />
@@ -523,6 +311,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/web/main.540fabddf85ce643228d.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/frontend/home.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/web/main.js" />
       </list>
     </option>
   </component>
@@ -923,11 +712,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="webSrc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -941,15 +726,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webSrc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -983,6 +764,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="SearchEverywhereHistoryKey" value="static/frontend/assets/images/bhip-logo-white.png&#9;FILE&#9;file://E:/demo/manage-staff/src/main/webapp/static/frontend/assets/images/bhip-logo-white.png" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1733,7 +1515,7 @@
       <workItem from="1499221554309" duration="13593000" />
       <workItem from="1499309492182" duration="10671000" />
       <workItem from="1499393074197" duration="10268000" />
-      <workItem from="1499657563794" duration="7296000" />
+      <workItem from="1499657563794" duration="7909000" />
     </task>
     <task id="LOCAL-00001" summary="đẩy frontend">
       <created>1491376689491</created>
@@ -1819,11 +1601,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499424152015</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="10/07 2">
+      <created>1499683632686</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1499683632686</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127436000" />
+    <option name="totallyTimeSpent" value="128049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
@@ -1853,7 +1642,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49356222" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21620172" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21620172" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1928,7 +1717,8 @@
     <MESSAGE value="get article" />
     <MESSAGE value="delete deploy folder" />
     <MESSAGE value="07/07" />
-    <option name="LAST_COMMIT_MESSAGE" value="07/07" />
+    <MESSAGE value="10/07 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="10/07 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2225,13 +2015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36-sources.jar!/com/mysql/jdbc/ResultSetImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86955">
-          <caret line="5172" column="0" lean-forward="false" selection-start-line="5172" selection-start-column="0" selection-end-line="5172" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/ArticleDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
@@ -2252,53 +2035,6 @@
             <marker date="1499334524148" expanded="true" signature="4970:4998" ph="SELECT count... article" />
             <marker date="1499334524148" expanded="true" signature="4970:4999" ph="SELECT count... articles" />
             <marker date="1499334524148" expanded="true" signature="5482:5574" ph="insert into articles... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="114" column="5" lean-forward="false" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
-          <folding>
-            <element signature="e#448#449#0" expanded="false" />
-            <element signature="e#482#483#0" expanded="false" />
-            <element signature="e#537#538#0" expanded="false" />
-            <element signature="e#583#584#0" expanded="false" />
-            <element signature="e#617#618#0" expanded="false" />
-            <element signature="e#650#651#0" expanded="false" />
-            <element signature="e#774#775#0" expanded="false" />
-            <element signature="e#807#808#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#879#880#0" expanded="false" />
-            <element signature="e#910#911#0" expanded="false" />
-            <element signature="e#937#938#0" expanded="false" />
-            <element signature="e#977#978#0" expanded="false" />
-            <element signature="e#1009#1010#0" expanded="false" />
-            <element signature="e#1035#1036#0" expanded="false" />
-            <element signature="e#1060#1061#0" expanded="false" />
-            <element signature="e#1093#1094#0" expanded="false" />
-            <element signature="e#1121#1122#0" expanded="false" />
-            <element signature="e#1151#1152#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="false" />
-            <element signature="e#1219#1220#0" expanded="false" />
-            <element signature="e#1253#1254#0" expanded="false" />
-            <element signature="e#1294#1295#0" expanded="false" />
-            <element signature="e#1331#1332#0" expanded="false" />
-            <element signature="e#1391#1392#0" expanded="false" />
-            <element signature="e#1443#1444#0" expanded="false" />
-            <element signature="e#1476#1477#0" expanded="false" />
-            <element signature="e#1505#1506#0" expanded="false" />
-            <element signature="e#1549#1550#0" expanded="false" />
-            <element signature="e#1585#1586#0" expanded="false" />
-            <element signature="e#1617#1618#0" expanded="false" />
-            <element signature="e#1645#1646#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1721#1722#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1787#1788#0" expanded="false" />
-            <element signature="e#1835#1836#0" expanded="false" />
-            <element signature="e#1875#1876#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2422,37 +2158,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProductDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="114" column="32" lean-forward="false" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
-          <folding>
-            <marker date="1499672345154" expanded="true" signature="404:447" ph="SELECT id,na... categories" />
-            <marker date="1499672345154" expanded="true" signature="1394:1445" ph="SELECT id,na... products" />
-            <marker date="1499672345154" expanded="true" signature="2424:2453" ph="SELECT count... products" />
-            <marker date="1499672345154" expanded="true" signature="3150:3251" ph="SELECT count... products" />
-            <marker date="1499672345154" expanded="true" signature="3150:3252" ph="SELECT count... products" />
-            <marker date="1499672345154" expanded="true" signature="4119:4134" ph="SELECT count... products" />
-            <marker date="1499672345154" expanded="true" signature="4119:4217" ph="SELECT count... products" />
-            <marker date="1499672345154" expanded="true" signature="5034:5163" ph="SELECT id,na... products" />
-            <marker date="1499672345154" expanded="true" signature="5034:5183" ph="SELECT id,na... products" />
-            <marker date="1499672345154" expanded="true" signature="5034:5235" ph="SELECT id,na... products" />
-            <marker date="1499672345154" expanded="true" signature="6385:6568" ph="SELECT p.id,... products" />
-            <marker date="1499672345154" expanded="true" signature="7796:7850" ph="SELECT EXIST... " />
-            <marker date="1499672345154" expanded="true" signature="7810:7843" ph="SELECT 1 FRO... products" />
-            <marker date="1499672345154" expanded="true" signature="8608:8738" ph="insert into products... " />
-            <marker date="1499672345154" expanded="true" signature="9728:9864" ph="update produ... " />
-            <marker date="1499672345154" expanded="true" signature="10890:10923" ph="delete from " />
-            <marker date="1499672345154" expanded="true" signature="11535:11601" ph="SELECT EXIST... " />
-            <marker date="1499672345154" expanded="true" signature="11549:11594" ph="SELECT 1 FRO... categories" />
-            <marker date="1499672345154" expanded="true" signature="12451:12626" ph="SELECT p.id,... products" />
-            <marker date="1499672345154" expanded="true" signature="12451:12642" ph="SELECT p.id,... products" />
-            <marker date="1499672345154" expanded="true" signature="13965:14096" ph="SELECT p.id,... products" />
-            <marker date="1499672345154" expanded="true" signature="13965:14238" ph="SELECT p.id,... products" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/ApiController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -2504,8 +2209,58 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/web/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
-          <caret line="14" column="231040" lean-forward="false" selection-start-line="14" selection-start-column="231033" selection-end-line="14" selection-end-column="231040" />
+          <caret line="0" column="71858" lean-forward="false" selection-start-line="0" selection-start-column="71858" selection-end-line="0" selection-end-column="71858" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36-sources.jar!/com/mysql/jdbc/ResultSetImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="2012" column="0" lean-forward="false" selection-start-line="2012" selection-start-column="0" selection-end-line="2012" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+          <folding>
+            <element signature="e#1219#1220#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProductDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="24" selection-end-line="169" selection-end-column="32" />
+          <folding>
+            <marker date="1499672345154" expanded="true" signature="404:447" ph="SELECT id,na... categories" />
+            <marker date="1499672345154" expanded="true" signature="1394:1445" ph="SELECT id,na... products" />
+            <marker date="1499672345154" expanded="true" signature="2424:2453" ph="SELECT count... products" />
+            <marker date="1499672345154" expanded="true" signature="3150:3251" ph="SELECT count... products" />
+            <marker date="1499672345154" expanded="true" signature="3150:3252" ph="SELECT count... products" />
+            <marker date="1499672345154" expanded="true" signature="4119:4134" ph="SELECT count... products" />
+            <marker date="1499672345154" expanded="true" signature="4119:4217" ph="SELECT count... products" />
+            <marker date="1499672345154" expanded="true" signature="5034:5163" ph="SELECT id,na... products" />
+            <marker date="1499672345154" expanded="true" signature="5034:5183" ph="SELECT id,na... products" />
+            <marker date="1499672345154" expanded="true" signature="5034:5235" ph="SELECT id,na... products" />
+            <marker date="1499672345154" expanded="true" signature="6385:6568" ph="SELECT p.id,... products" />
+            <marker date="1499672345154" expanded="true" signature="7796:7850" ph="SELECT EXIST... " />
+            <marker date="1499672345154" expanded="true" signature="7810:7843" ph="SELECT 1 FRO... products" />
+            <marker date="1499672345154" expanded="true" signature="8608:8738" ph="insert into products... " />
+            <marker date="1499672345154" expanded="true" signature="9728:9864" ph="update produ... " />
+            <marker date="1499672345154" expanded="true" signature="10890:10923" ph="delete from " />
+            <marker date="1499672345154" expanded="true" signature="11535:11601" ph="SELECT EXIST... " />
+            <marker date="1499672345154" expanded="true" signature="11549:11594" ph="SELECT 1 FRO... categories" />
+            <marker date="1499672345154" expanded="true" signature="12451:12626" ph="SELECT p.id,... products" />
+            <marker date="1499672345154" expanded="true" signature="12451:12642" ph="SELECT p.id,... products" />
+            <marker date="1499672345154" expanded="true" signature="13965:14096" ph="SELECT p.id,... products" />
+            <marker date="1499672345154" expanded="true" signature="13965:14238" ph="SELECT p.id,... products" />
+          </folding>
         </state>
       </provider>
     </entry>
