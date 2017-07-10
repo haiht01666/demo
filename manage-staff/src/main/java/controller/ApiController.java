@@ -109,6 +109,15 @@ public class ApiController {
 		return result;
 	}
 
+	@RequestMapping(value = { "/searchProduct" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult searchProduct(@RequestParam("limit") int limit, @RequestParam("offset") int offset, @RequestParam("searchStr") String searchStr) {
+		AjaxResult result = new AjaxResult();
+		result.setResult(true);
+		result.setResultData(productService.searchProduct(limit, offset, searchStr));
+		result.setNumberRecord(productService.getNumberProductsSearch(searchStr));
+		return result;
+	}
+
 	@RequestMapping(value = { "/getProductById" }, method = RequestMethod.GET)
 	public @ResponseBody AjaxResult getProductById(@RequestParam("id") int id) {
 		AjaxResult result = new AjaxResult();
@@ -161,8 +170,8 @@ public class ApiController {
 	@RequestMapping(value = { "/getCategories" }, method = RequestMethod.GET)
 	public @ResponseBody AjaxResult getCategories() {
 		AjaxResult result = new AjaxResult();
-			result.setResult(true);
-			result.setResultData(productService.getAllCategory());
+		result.setResult(true);
+		result.setResultData(productService.getAllCategory());
 		return result;
 	}
 }

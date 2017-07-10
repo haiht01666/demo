@@ -14,6 +14,7 @@ public interface ProductService {
 	List<Product> getProductPage(int limit, int offset);
 
 	int getNumberProducts();
+	int getNumberProductsSearch(String searchStr);
 
 	public Product getProductById(int id);
 	
@@ -30,4 +31,8 @@ public interface ProductService {
 	List<Product> getProductsByCategory(int limit, int offset, String category);
 
 	int getNumberProductsCategory(String category);
+
+	List<Product> searchProduct(int limit, int offset, String searchStr);
+
+
 }

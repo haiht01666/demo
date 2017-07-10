@@ -100,6 +100,34 @@ import model.Product;
         return 0;
     }
 
+    @Override public int getNumberProductsSearch(String searchStr) {
+        String sql = "SELECT count(*) FROM products p where p.name LIKE ? || p.characteristic LIKE ? || p.description LIKE ?";
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + searchStr + "%");
+            stmt.setString(2, "%" + searchStr + "%");
+            stmt.setString(3, "%" + searchStr + "%");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                    stmt.close();
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
     @Override public int getNumberProductsCategory(String category) {
         String sql = "SELECT count(*) FROM products p join categories c on p.category_id = c.id WHERE c.category_key = ?";
         try {
@@ -345,6 +373,45 @@ import model.Product;
             stmt.setString(1, category);
             stmt.setInt(2, limit);
             stmt.setInt(3, offset);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt(1));
+                product.setName(rs.getString(2));
+                product.setCdate(rs.getDate(3));
+                product.setPrice(rs.getDouble(4));
+                product.setImageUrl(rs.getString(5));
+                product.setCategoryKey(rs.getString(6));
+                product.setCategoryName(rs.getString(7));
+                result.add(product);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                    stmt.close();
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override public List<Product> searchProduct(int limit, int offset, String searchStr) {
+        List<Product> result = new ArrayList<>();
+        String sql =
+                "SELECT p.id,p.name,p.cdate,p.price, p.image_url, c.category_key,c.name  FROM products p join categories c on p.category_id = c.id  where p.name LIKE ? || p.characteristic LIKE ? || p.description LIKE ? order by cdate DESC LIMIT "
+                        + limit + " OFFSET " + offset;
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + searchStr + "%");
+            stmt.setString(2, "%" + searchStr + "%");
+            stmt.setString(3, "%" + searchStr + "%");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Product product = new Product();

@@ -13,6 +13,8 @@ public interface ProductDao {
 
 	int getNumberProducts();
 
+	int getNumberProductsSearch(String searchStr);
+
 	int getNumberProductsCategory(String category);
 
 	List<Product> getProductPage(int limit, int offset);
@@ -30,4 +32,6 @@ public interface ProductDao {
     boolean existCategory(String category);
 
 	List<Product> getProductsByCategory(int limit, int offset, String category);
+
+	List<Product> searchProduct(int limit, int offset, String searchStr);
 }

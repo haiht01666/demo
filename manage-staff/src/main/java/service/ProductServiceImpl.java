@@ -35,6 +35,10 @@ public class ProductServiceImpl implements ProductService{
 		return dao.getNumberProducts();
 	}
 
+	@Override public int getNumberProductsSearch(String searchStr) {
+		return dao.getNumberProductsSearch(searchStr);
+	}
+
 	@Override
 	public Product getProductById(int id) {
 		return dao.getProductById(id);
@@ -70,6 +74,10 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override public int getNumberProductsCategory(String category) {
 		return dao.getNumberProductsCategory(category);
+	}
+
+	@Override public List<Product> searchProduct(int limit, int offset, String searchStr) {
+		return dao. searchProduct(limit, offset, searchStr);
 	}
 
 }
