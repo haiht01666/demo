@@ -3306,6 +3306,7 @@ var pConstants_VN = {
 	'COMMISSION_YEAR_VOLUME':'Doanh số năm hiện tại',
 	'COMMISSION_DIRECT':'Hoa hồng trực tiếp',
 	'COMMISSION_GROUP':'Hoa hồng nhóm',
+	'COMMISSION_TOTAL':'Tổng hoa hồng',
 	'COMMISSION_LEADER':'Thưởng cấp bậc lãnh đạo quý',
 	'COMMISSION_PRESIDENT':'Chia lợi nhuận CLB chủ tịch',
 	'COMMISSION_TOTAL_VOLUME':'Tổng thu nhập hiện tại',

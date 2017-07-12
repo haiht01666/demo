@@ -14,6 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import scala.Int;
 import scala.Tuple2;
 
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ import java.util.*;
 @Service public class ApiServiceImpl implements ApiService {
 
     @Autowired ManageService manageService;
+    @Autowired RevenueService revenueService;
 
     @Autowired ApiDao dao;
 
@@ -247,19 +249,11 @@ import java.util.*;
             for (User user : listNpp) {
                 listGroupId.add(user.getUserCode());
             }
-            // doanh số cá nhân tuần hiện tại
-            TimeModel timeweek = CommonUtils.getTimeWeek(0);
-            BigDecimal weekPersonalVolume = dao
-                    .getWeekPersonalVolume(userCode, timeweek.getStartDate(), timeweek.getEndDate());
-            commissionInfoModel.setWeekPersonalVolume(weekPersonalVolume);
 
-            // doanh số cá nhân tháng hiện tại
-            BigDecimal monthPersonalVolume = dao.getMonthPersonalVolume(userCode, CommonUtils.getTimeMonth(0));
-            commissionInfoModel.setMonthPersonalVolume(monthPersonalVolume);
-
-            // doanh số cá nhân năm hiện tại
-            BigDecimal yearPersonalVolume = dao.getYearPersonalVolume(userCode, CommonUtils.getTimeYear(0));
-            commissionInfoModel.setYearPersonalVolume(yearPersonalVolume);
+            RevenueApi revenueApi = revenueService.getTotalRevenueInfo(userInfo.getSignUpDate(), userInfo.getId());
+            commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect());
+            commissionInfoModel.setCommissionDirectSummary(revenueApi.getGroup());
+            commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect() + revenueApi.getGroup());
 
             // combo box list week
             int numberWeek = CommonUtils.numberWeekFromRegister(userInfo.getSignUpDate(), new Date());
@@ -323,13 +317,11 @@ import java.util.*;
                     form.setDateFrom(dateTime.dayOfYear().withMinimumValue().toDate());
                     form.setDateTo(dateTime.dayOfYear().withMaximumValue().toDate());
                 }
-                form.setUserId(Integer.parseInt(userCode));
-                // hoa hồng trực tiếp
-                form.setType(RevenueType.PERSONAL.getValue());
-                commissionInfoModel.setDirectCommission(new BigDecimal(manageService.apiGetRevenue(form)));
-                // hoa hồng nhóm
-                form.setType(RevenueType.GROUP.getValue());
-                commissionInfoModel.setGroupCommission(new BigDecimal(manageService.apiGetRevenue(form)));
+
+                RevenueApi revenue = revenueService.getRevenueInfo(form.getDateFrom(), form.getDateTo(), userInfo.getId());
+                commissionInfoModel.setDirectCommission(revenue.getDirect());
+                commissionInfoModel.setGroupCommission(revenue.getGroup());
+                commissionInfoModel.setTotalCommission(revenue.getDirect() + revenue.getGroup());
             }
             result.setResultData(commissionInfoModel);
             result.setResult(true);

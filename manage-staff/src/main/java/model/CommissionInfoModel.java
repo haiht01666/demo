@@ -4,21 +4,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class CommissionInfoModel {
-    private BigDecimal weekPersonalVolume;
+    private double commissionDirectSummary;
 
-    private BigDecimal monthPersonalVolume;
+    private double commissionGroupSummary;
 
-    private BigDecimal yearPersonalVolume;
+    private double commissionTotalSummary;
 
-    private BigDecimal directCommission;
+    private double directCommission;
 
-    private BigDecimal groupCommission;
+    private double groupCommission;
 
-    private BigDecimal leaderQuarterCommission;
-
-    private BigDecimal leaderClubCommission;
-
-    private BigDecimal totalCommission;
+    private double totalCommission;
 
     private List<String> weekTimeDispList;
 
@@ -32,60 +28,52 @@ public class CommissionInfoModel {
 
     private List<String> yearTimeValList;
 
-    public BigDecimal getWeekPersonalVolume() {
-        return weekPersonalVolume;
+    public double getCommissionDirectSummary() {
+        return commissionDirectSummary;
     }
 
-    public void setWeekPersonalVolume(BigDecimal weekPersonalVolume) {
-        this.weekPersonalVolume = weekPersonalVolume;
+    public void setCommissionDirectSummary(double commissionDirectSummary) {
+        this.commissionDirectSummary = commissionDirectSummary;
     }
 
-    public BigDecimal getMonthPersonalVolume() {
-        return monthPersonalVolume;
+    public double getCommissionGroupSummary() {
+        return commissionGroupSummary;
     }
 
-    public void setMonthPersonalVolume(BigDecimal monthPersonalVolume) {
-        this.monthPersonalVolume = monthPersonalVolume;
+    public void setCommissionGroupSummary(double commissionGroupSummary) {
+        this.commissionGroupSummary = commissionGroupSummary;
     }
 
-    public BigDecimal getYearPersonalVolume() {
-        return yearPersonalVolume;
+    public double getCommissionTotalSummary() {
+        return commissionTotalSummary;
     }
 
-    public void setYearPersonalVolume(BigDecimal yearPersonalVolume) {
-        this.yearPersonalVolume = yearPersonalVolume;
+    public void setCommissionTotalSummary(double commissionTotalSummary) {
+        this.commissionTotalSummary = commissionTotalSummary;
     }
 
-    public BigDecimal getDirectCommission() {
+    public double getDirectCommission() {
         return directCommission;
     }
 
-    public void setDirectCommission(BigDecimal directCommission) {
+    public void setDirectCommission(double directCommission) {
         this.directCommission = directCommission;
     }
 
-    public BigDecimal getGroupCommission() {
+    public double getGroupCommission() {
         return groupCommission;
     }
 
-    public void setGroupCommission(BigDecimal groupCommission) {
+    public void setGroupCommission(double groupCommission) {
         this.groupCommission = groupCommission;
     }
 
-    public BigDecimal getLeaderQuarterCommission() {
-        return leaderQuarterCommission;
+    public double getTotalCommission() {
+        return totalCommission;
     }
 
-    public void setLeaderQuarterCommission(BigDecimal leaderQuarterCommission) {
-        this.leaderQuarterCommission = leaderQuarterCommission;
-    }
-
-    public BigDecimal getLeaderClubCommission() {
-        return leaderClubCommission;
-    }
-
-    public void setLeaderClubCommission(BigDecimal leaderClubCommission) {
-        this.leaderClubCommission = leaderClubCommission;
+    public void setTotalCommission(double totalCommission) {
+        this.totalCommission = totalCommission;
     }
 
     public List<String> getWeekTimeDispList() {
@@ -134,13 +122,5 @@ public class CommissionInfoModel {
 
     public void setYearTimeValList(List<String> yearTimeValList) {
         this.yearTimeValList = yearTimeValList;
-    }
-
-    public BigDecimal getTotalCommission() {
-        return totalCommission;
-    }
-
-    public void setTotalCommission(BigDecimal totalCommission) {
-        this.totalCommission = totalCommission;
     }
 }

@@ -221,9 +221,9 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 	@Override
 	public RevenueApi getRevenueInfo(Date from, Date to, int userId) throws SQLException {
 		RevenueApi result = new RevenueApi();
-		String sql= "select value from revenues where user_id = ? and  and (date_format(cdate, '%Y-%m-%d') between ? and ?) and type = ?";
+		String sql= "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and type = ?";
 		
-		String sql1= "select value from revenues where user_id = ? and  and (date_format(cdate, '%Y-%m-%d') between ? and ?) and (type = ? || type = ? || type = ?)";
+		String sql1= "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and (type = ? || type = ? || type = ?)";
 		try {
 			Double revenueDirect = 0.0;
 			Double revenueGroup = 0.0;

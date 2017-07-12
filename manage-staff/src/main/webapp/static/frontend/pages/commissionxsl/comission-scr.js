@@ -66,17 +66,17 @@ function setDataInfo(dataInfo) {
     $('#userCode').html(gUserInfo.userCode);
 
     // week volume
-    var weekPersonalVolume = formatNumberToCurrency(dataInfo.weekPersonalVolume);
-    if (weekPersonalVolume === '0' || weekPersonalVolume === 0 || !weekPersonalVolume) weekPersonalVolume = '0';
-    document.getElementById("weekVolume").innerHTML = weekPersonalVolume;
+    var commissionDirectSummary = formatNumberToCurrency(dataInfo.commissionDirectSummary);
+    if (commissionDirectSummary === '0' || commissionDirectSummary === 0 || !commissionDirectSummary) commissionDirectSummary = '0';
+    document.getElementById("commissionDirectSummary").innerHTML = commissionDirectSummary;
     // month volume
-    var monthPersonalVolume = formatNumberToCurrency(dataInfo.monthPersonalVolume);
-    if (monthPersonalVolume === '0' || monthPersonalVolume === 0 || !monthPersonalVolume) monthPersonalVolume = '0';
-    document.getElementById("monthVolume").innerHTML = monthPersonalVolume;
+    var commissionGroupSummary = formatNumberToCurrency(dataInfo.commissionGroupSummary);
+    if (commissionGroupSummary === '0' || commissionGroupSummary === 0 || !commissionGroupSummary) monthPersonalVolume = '0';
+    document.getElementById("commissionGroupSummary").innerHTML = commissionGroupSummary;
     // year volume
-    var yearPersonalVolume = formatNumberToCurrency(dataInfo.yearPersonalVolume);
-    if (yearPersonalVolume === '0' || yearPersonalVolume === 0 || !yearPersonalVolume) yearPersonalVolume = '0';
-    document.getElementById("yearVolume").innerHTML = yearPersonalVolume;
+    var commissionTotalSummary = formatNumberToCurrency(dataInfo.commissionTotalSummary);
+    if (commissionTotalSummary === '0' || commissionTotalSummary === 0 || !commissionTotalSummary) commissionTotalSummary = '0';
+    document.getElementById("commissionTotalSummary").innerHTML = commissionTotalSummary;
 
     tmpWeekArrayDisp = dataInfo.weekTimeDispList;
     tmpWeekArrayVal = dataInfo.weekTimeValList;
@@ -94,16 +94,6 @@ function setDataInfo(dataInfo) {
     var groupCommission = formatNumberToCurrency(dataInfo.groupCommission);
     if (groupCommission === '0' || groupCommission === 0 || !groupCommission) groupCommission = '0';
     $(".groupCommission").html(groupCommission);
-
-    // leaderQuarterCommission
-    var leaderQuarterCommission = formatNumberToCurrency(dataInfo.leaderQuarterCommission);
-    if (leaderQuarterCommission === '0' || leaderQuarterCommission === 0 || !leaderQuarterCommission) leaderQuarterCommission = '0';
-    $(".leaderQuarterCommission").html(leaderQuarterCommission);
-
-    // leaderClubCommission
-    var leaderClubCommission = formatNumberToCurrency(dataInfo.leaderClubCommission);
-    if (leaderClubCommission === '0' || leaderClubCommission === 0 || !leaderClubCommission) leaderClubCommission = '0';
-    $(".leaderClubCommission").html(leaderClubCommission);
 
     // totalCommission
     var totalCommission = formatNumberToCurrency(dataInfo.totalCommission);

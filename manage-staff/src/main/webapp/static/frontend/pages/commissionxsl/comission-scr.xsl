@@ -30,33 +30,33 @@
                                 <table align='left' id="commission-volume" class='table-account'>
                                     <tr class="trow-title">
                                         <th width="25%" align='center'>
-                                            <span>COMMISSION_WEEK_VOLUME</span>
+                                            <span>COMMISSION_DIRECT</span>
                                         </th>
                                         <th width="25%" align='center'>
-                                            <span>COMMISSION_MONTH_VOLUME</span>
+                                            <span>COMMISSION_GROUP</span>
                                         </th>
                                         <th width="25%" align='center'>
-                                            <span>COMMISSION_YEAR_VOLUME</span>
+                                            <span>COMMISSION_TOTAL</span>
                                         </th>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="mobile-mode">
-                                                <span>COMMISSION_WEEK_VOLUME</span>
+                                                <span>COMMISSION_DIRECT</span>
                                             </div>
-                                            <div class="content-detail" id="weekVolume"></div>
+                                            <div class="content-detail" id="commissionDirectSummary"></div>
                                         </td>
                                         <td>
-                                            <div class="td-date-gold" id="monthVolume"></div>
+                                            <div class="td-date-gold" id="commissionGroupSummary"></div>
                                             <div class="mobile-mode-gold">
-                                                <span>COMMISSION_MONTH_VOLUME</span>
+                                                <span>COMMISSION_GROUP</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="mobile-mode">
-                                                <span>COMMISSION_YEAR_VOLUME</span>
+                                                <span>COMMISSION_TOTAL</span>
                                             </div>
-                                            <div class="content-detail" id="yearVolume"></div>
+                                            <div class="content-detail" id="commissionTotalSummary"></div>
                                         </td>
                                     </tr>
                                 </table>
@@ -105,13 +105,7 @@
                                             <span>COMMISSION_GROUP</span>
                                         </th>
                                         <th width="20%" align='center'>
-                                            <span>COMMISSION_LEADER</span>
-                                        </th>
-                                        <th width="20%" align='center'>
-                                            <span>COMMISSION_PRESIDENT</span>
-                                        </th>
-                                        <th width="25%" align='center'>
-                                            <span>COMMISSION_TOTAL_VOLUME</span>
+                                            <span>COMMISSION_TOTAL</span>
                                         </th>
                                     </tr>
                                     <tr>
@@ -129,21 +123,9 @@
                                         </td>
                                         <td>
                                             <div class="mobile-mode">
-                                                <span>COMMISSION_LEADER</span>
+                                                <span>COMMISSION_TOTAL</span>
                                             </div>
-                                            <div class="content-detail leaderQuarterCommission">0</div>
-                                        </td>
-                                        <td>
-                                            <div class="mobile-mode">
-                                                <span>COMMISSION_PRESIDENT</span>
-                                            </div>
-                                            <div class="content-detail leaderClubCommission">0</div>
-                                        </td>
-                                        <td>
-                                            <div class="mobile-mode">
-                                                <span>COMMISSION_TOTAL_VOLUME</span>
-                                            </div>
-                                            <div class="content-detail totalCommission"></div>
+                                            <div class="content-detail totalCommission">0</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -216,28 +198,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="desktopmode1"><span>COMMISSION_LEADER</span></td>
+                                                    <td class="desktopmode1"><span>COMMISSION_TOTAL</span></td>
                                                     <td>
                                                         <div class="mobile-mode">
-                                                            <span>COMMISSION_LEADER</span>
-                                                        </div>
-                                                        <div class="content-detail leaderQuarterCommission"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="desktopmode1"><span>COMMISSION_PRESIDENT</span></td>
-                                                    <td>
-                                                        <div class="mobile-mode">
-                                                            <span>COMMISSION_PRESIDENT</span>
-                                                        </div>
-                                                        <div class="content-detail leaderClubCommission"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="desktopmode1"><span>COMMISSION_TOTAL_VOLUME</span></td>
-                                                    <td>
-                                                        <div class="mobile-mode">
-                                                            <span>COMMISSION_TOTAL_VOLUME</span>
+                                                            <span>COMMISSION_TOTAL</span>
                                                         </div>
                                                         <div class="content-detail totalCommission"></div>
                                                     </td>

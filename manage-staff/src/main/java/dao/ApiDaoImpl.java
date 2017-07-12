@@ -26,13 +26,14 @@ import java.util.List;
 
     @Override public User getLoginInfo(String userId) {
         User user = new User();
-        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.signup_date FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
+        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.cdate FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userId);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                user.setId(rs.getInt(1));
                 user.setUserCode(rs.getString(1));
                 user.setDispName(rs.getString(2));
                 user.setEmail(rs.getString(3));
