@@ -15,7 +15,7 @@ public interface ApiDao {
 	 * @param userId user id
 	 * @return true if valid
 	 */
-	User getLoginInfo(String userId);
+	User getLoginInfo(String userId) throws Exception;
 
 	int updatePersonalInfo(User user);
 	int saveAvatar(User user);

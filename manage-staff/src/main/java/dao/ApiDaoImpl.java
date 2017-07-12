@@ -24,7 +24,7 @@ import java.util.List;
                         "			u1.child_id LIKE CONCAT('%', ?, '-%') ";
 
 
-    @Override public User getLoginInfo(String userId) {
+    @Override public User getLoginInfo(String userId) throws Exception {
         User user = new User();
         String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.cdate FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
@@ -59,6 +59,7 @@ import java.util.List;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            throw new Exception(ex.getMessage());
         } finally {
             closeConnection(conn, stmt, rs);
         }
@@ -194,10 +195,10 @@ import java.util.List;
         List<User> listAllNpp = new ArrayList<>();
         String sql;
         if (directNpp) {
-            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.parent_id = ? ORDER BY u1."
+            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.cdate, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.parent_id = ? ORDER BY u1."
                     + orderby;
         } else {
-            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.signup_date, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.child_id LIKE CONCAT('%', ? , '-%') ORDER BY u1."
+            sql = "SELECT u1.id, u1.name, u1.child_id, u1.parent_id, u2.name parent_name, u1.cdate, u1.phone, u1.city, u1.enable FROM users u1 LEFT JOIN users u2 on u1.parent_id  = u2.id where u1.child_id LIKE CONCAT('%', ? , '-%') ORDER BY u1."
                     + orderby;
         }
         if (limit != -1) {

@@ -91,7 +91,7 @@ function viewDidLoadSuccess() {
                 }
 
                 document.getElementById('cus-profile-fullname').innerHTML = response.resultData.dispName;
-                document.getElementById('cus-profile-birthday').innerHTML =  moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY');
+                document.getElementById('cus-profile-birthday').innerHTML =  response.resultData.birthday ? moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY') : '';
                 document.getElementById('cus-profile-userid').innerHTML = response.resultData.identifier;
                 document.getElementById('cus-profile-address').innerHTML = response.resultData.address;
                 document.getElementById('cus-profile-mobile').innerHTML = response.resultData.phone;

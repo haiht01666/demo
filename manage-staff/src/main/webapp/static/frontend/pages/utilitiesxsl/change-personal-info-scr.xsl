@@ -90,6 +90,7 @@
 									</tr>
 								</table>
 							</table>
+							<div id="temp" style="height:80px"></div>
 						</div>
 					</div>
 				</div>

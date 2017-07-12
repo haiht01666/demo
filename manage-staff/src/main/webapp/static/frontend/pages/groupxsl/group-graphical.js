@@ -23,8 +23,10 @@ function viewDidLoadSuccess() {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            //applyDynamicPageStyleSheet1(true, 1920,1080);
             hideLoadingMask();
             if (response.result) {
+                isGraphical = true;
                 detailInfo = response.resultData.userInfo;
                 setDetailInfo(response.resultData);
                 // draw chart

@@ -27,7 +27,7 @@
             <div align='right' id="order.pagination" style="margin-right: 15px;">
 
             </div>
-
+            <div id="temp" style="height:80px"></div>
           </div>
         </div>
         <div id="selection-dialog" class="dialog-blacktrans" align="center" style="display:none">

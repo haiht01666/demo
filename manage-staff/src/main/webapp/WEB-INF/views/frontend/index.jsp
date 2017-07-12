@@ -266,7 +266,7 @@ pageEncoding="UTF-8"%>
                             <tr>
                                 <td width="30"></td>
                                 <td width="190" valign="middle" style="padding-top:0px;padding-bottom:0px;"><a
-                                        href="/login" target="_blank"> <img src="static/frontend/promotion/logo.png" alt=""/>
+                                        href="/login"> <img src="static/frontend/promotion/logo.png" alt=""/>
                                 </a></td>
                                 <td width="204"></td>
                                 <td width="80"></td>

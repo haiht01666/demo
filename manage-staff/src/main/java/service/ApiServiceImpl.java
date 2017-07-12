@@ -46,7 +46,6 @@ import java.util.*;
         } catch (Exception e) {
             result.setResult(false);
             return  result;
-
         }
         return result;
     }
@@ -401,11 +400,6 @@ import java.util.*;
 
     public static void main(String[] args) {
         DateTime dateTime = new DateTime().withMonthOfYear(12);
-        System.out.println(dateTime.dayOfYear().withMinimumValue());
-        System.out.println(dateTime.dayOfYear().withMaximumValue());
         LocalDate now = new LocalDate();
-
-        System.out.println(now.withDayOfYear(DateTimeConstants.MONDAY));
-
     }
 }

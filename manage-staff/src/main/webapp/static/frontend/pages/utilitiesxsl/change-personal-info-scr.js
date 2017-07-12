@@ -39,7 +39,7 @@ function setDefaultInfo() {
             hideLoadingMask();
             if (response.result) {
                 document.getElementById("name").innerHTML = response.resultData.dispName;
-                document.getElementById("birthday").innerHTML = moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY');
+                document.getElementById("birthday").innerHTML = response.resultData.birthday ? moment(response.resultData.birthday, "YYYY-MM-DD").format('DD/MM/YYYY') : '';
                 document.getElementById("userid").innerHTML = response.resultData.identifier;
                 document.getElementById("mobile").value = response.resultData.phone;
                 document.getElementById("address").value = response.resultData.address;

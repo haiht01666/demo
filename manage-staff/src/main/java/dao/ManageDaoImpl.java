@@ -28,7 +28,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public int createMember(User parent, int lever) throws SQLException {
 		int memberId = 0;
-		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever,id) values(0,?,?,now(),?,?)";
+		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever,id, birthday) values(0,?,?,now(),?,?, null)";
 		String sql2 = "Insert into roles(role,user_id) values(?,?)";
 		String sql3 = "insert into revenues(name,cdate,user_id,value,type) values(?,now(),?,?,?)";
 		String sql4 = "insert into orders(name,cdate,user_id,price,quantity,type,total) values(?,now(),?,?,?,?,?)";

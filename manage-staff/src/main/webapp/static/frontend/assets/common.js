@@ -9,6 +9,8 @@
 
 /*** DETECT DEVICE Environment.isMobile()***/
 
+var isGraphical = false;
+
 var Environment = {
     //mobile or desktop compatible event name, to be used with '.on' function
     TOUCH_DOWN_EVENT_NAME:'mousedown touchstart',
@@ -1287,6 +1289,7 @@ function hideLoadingMask() {
     }, 900);
 }
 function showLoadingMask(sender) {
+    isGraphical = false;
     hiddenKeyBoard();
 	windowScrollToTop();
     var sender = document.getElementById('loadingMask');
@@ -2374,6 +2377,8 @@ function applyDynamicPageStyleSheet(forced) {
 			hideScrollbar:false,
 			fixedScrollbar:false,
 			checkDOMChanges:true,
+            hScrollbar:true,
+            vScrollbar:true,
 			draggableScrollbars: true,
 			onBeforeScrollMove:function (e) {
 				if (this.absDistX > (this.absDistY + 5 )) {
@@ -2390,8 +2395,17 @@ function applyDynamicPageStyleSheet(forced) {
 			},
 			onScrollEnd: function() {
 				hasMainContentScrollEvent = false;
-			},
+			}
 		});
+    }
+
+    if(isGraphical) {
+        if ((mainContentScroll !== undefined) && (mainContentScroll !== null)) {
+            if (!Environment.isWindows()) { //fix on Windows Phone
+                mainContentScroll.destroy();
+                $('#mainViewContent').css('overflow', 'auto');
+            }
+        }
     }
 
 	//UPDATE TITLE - LAMPT
@@ -3440,8 +3454,6 @@ function loadPage(page, haveJs, successCallback, failCallback) {
 								successCallback();
 							}
 							document.dispatchEvent(evtLoadPageSuccess);
-
-							handleKeyboardShowAndHidden();
 						}, 10);
 
 					}, function() {
@@ -3508,8 +3520,6 @@ function loadPage(page, haveJs, successCallback, failCallback) {
 						},10)
 					}
 					document.dispatchEvent(evtLoadPageSuccess);
-
-					handleKeyboardShowAndHidden();
 				}, 10);
 			}, function() {
 				logInfo("Page: " + page + " not found!!!");
@@ -3862,8 +3872,6 @@ function navInitPageFromXmlAndXsl(page, iXml, inXsl, statusCache, successCallbac
 						}
 						//using with page load has delegate
 						document.dispatchEvent(evtLoadPageSuccess);
-
-						handleKeyboardShowAndHidden();
 					}, 50);
 				}, 300);
 			}
@@ -3901,8 +3909,6 @@ function navInitPageFromXmlAndXsl(page, iXml, inXsl, statusCache, successCallbac
 					}
 					//using with page load has delegate
 					document.dispatchEvent(evtLoadPageSuccess);
-
-					handleKeyboardShowAndHidden();
 				}, 50);
 			}
 			else {
@@ -3953,8 +3959,6 @@ function navInitPageFromXmlAndXsl(page, iXml, inXsl, statusCache, successCallbac
 				}
 				//using with page load has delegate
 				document.dispatchEvent(evtLoadPageSuccess);
-
-				handleKeyboardShowAndHidden();
 			}, 50);
 		}
 	//}
@@ -5112,7 +5116,6 @@ function handleTouchEnd(evt) {
             closeMenuContent();
         }
 		if ((contentPromotion != undefined) && contentPromotion.isOpen && stNode) {
-			closeMenuPromotion();
 		}
 	}
     document.removeEventListener(MOVE_EV, handleTouchMove, false);
@@ -5578,156 +5581,6 @@ function getAgreeDownloadApp() {
     }
 }
 
-/*** STORAGE DATA END ***/
-
-/*** HANDLE KEYBOARD ***/
-
-function handleKeyboardShowAndHidden() {
-    var arrayInputs = document.getElementById('tabHost').getElementsByTagName('input');
-    var arrayInputsTextArea = document.getElementById('tabHost').getElementsByTagName('textarea');
-    //var focused = false;
-	var timeOutFocus;
-	var tmpWP = navigator.userAgent.match(/IEMobile|WPDesktop/i);
-	var tmpIPad = navigator.userAgent.match(/iPad/i);
-
-	if(arrayInputs && arrayInputs.length > 0) {
-		for (var i = 0; i < arrayInputs.length; i++) {
-			var elm = arrayInputs[i];
-			elm.setAttribute('autocomplete', 'off');
-			elm.setAttribute('autocorrect', 'off');
-			elm.setAttribute('autocapitalize', 'off');
-			elm.setAttribute('spellcheck', 'off');
-			elm.addEventListener('focus', function() {
-				if(Environment.isMobile()) {
-					if(gModeScreenView == CONST_MODE_SCR_SMALL) {
-						//document.getElementById('mainlayoutfooter').style.display = 'none';
-					}
-					else {
-						//document.getElementById('pageFooter').style.display = 'none';
-					}
-					clearTimeout(timeOutToChangeSize); //fix on iPad iOS6
-					timeOutToChangeSize = null;
-				}
-
-				clearTimeout(timeOutFocus);
-				timeOutFocus = null;
-			}, true);
-			if(!tmpWP) {
-				elm.addEventListener('blur', function() {
-					if(Environment.isMobile()) {
-						if(gModeScreenView == CONST_MODE_SCR_SMALL) {
-							// document.getElementById('mainlayoutfooter').style.display = '';
-						}
-						else {
-							// document.getElementById('pageFooter').style.display = '';
-						}
-					}
-					timeOutFocus = setTimeout(function(){
-						if(timeOutFocus) {
-							clearTimeout(timeOutFocus);
-							timeOutFocus = null;
-						}
-						if(tmpIPad) {
-							window.scroll(0,0); //fix on ipad
-						}
-						if(Environment.isMobile()) {
-							applyDynamicCommonStyleSheet();
-							applyDynamicPageStyleSheet(true);
-							//applyVerticalScrollPage(true, -80);
-							//applyDynamicPromotionWithNumOfItems(gPromotionContentArray.length);
-							// applyDynamicPromotionWithNumOfItems(10);
-						}
-					}, 500);
-
-				}, true);
-			}
-		}
-	}
-
-	if(arrayInputsTextArea && arrayInputsTextArea.length > 0) {
-		for (var i = 0; i < arrayInputsTextArea.length; i++) {
-			var elm = arrayInputsTextArea[i];
-			elm.setAttribute('autocomplete', 'off');
-			elm.setAttribute('autocorrect', 'off');
-			elm.setAttribute('autocapitalize', 'off');
-			elm.setAttribute('spellcheck', 'off');
-			elm.addEventListener('focus', function() {
-				if(Environment.isMobile()) {
-					if(gModeScreenView == CONST_MODE_SCR_SMALL) {
-						// document.getElementById('mainlayoutfooter').style.display = 'none';
-					}
-					else {
-						// document.getElementById('pageFooter').style.display = 'none';
-					}
-					clearTimeout(timeOutToChangeSize); //fix on iPad iOS6
-					timeOutToChangeSize = null;
-				}
-				clearTimeout(timeOutFocus);
-				timeOutFocus = null;
-
-			}, true);
-			if(!tmpWP) {
-				elm.addEventListener('blur', function() {
-					if(Environment.isMobile()) {
-						if(gModeScreenView == CONST_MODE_SCR_SMALL) {
-							// document.getElementById('mainlayoutfooter').style.display = '';
-						}
-						else {
-							// document.getElementById('pageFooter').style.display = '';
-						}
-					}
-					timeOutFocus = setTimeout(function(){
-						if(timeOutFocus) {
-							clearTimeout(timeOutFocus);
-							timeOutFocus = null;
-						}
-						if(tmpIPad) {
-							window.scroll(0,0); //fix on ipad
-						}
-						if(Environment.isMobile()) {
-							applyDynamicCommonStyleSheet();
-							applyDynamicPageStyleSheet(true);
-							//applyVerticalScrollPage(true, -80);
-							//applyDynamicPromotionWithNumOfItems(gPromotionContentArray.length);
-							// applyDynamicPromotionWithNumOfItems(10);
-						}
-					}, 500);
-
-				}, true);
-			}
-		}
-	}
-}
-
-/*** HANDLE KEYBOARD END ***/
-
-/*** EGOLD TRANSACTION ***/
-
-function openEGoldView() {
-
-	//openEGoldMenu();
-	if(!gUserInfo.goldTermConfirmed) {
-		navController.pushToView('egold/gold-term-confirm-scr', true);
-	}
-	else {
-		navController.initWithRootView('egold/gold-main-page-scr', true);
-		openEGoldMenu();
-	}
-}
-
-function openEGoldMenu() {
-	setTimeout(function(e) {
-		if (!content.isOpen && !contentPromotion.isOpen) {
-			openMenuContent();
-
-			var nodeEGoldMenu = document.getElementById('goldTrade');
-			if((nodeEGoldMenu != undefined) && (nodeEGoldMenu != null) && (currentDisplayMenu != nodeEGoldMenu)) {
-				applyScrollForMe(nodeEGoldMenu);
-			}
-		}
-	}, 300);
-}
-
 /*** EGOLD TRANSACTION END ***/
 
 /*** STRING UTILITY ***/
@@ -5959,62 +5812,6 @@ function updateMainContentWidth(inWidth, inHeight) {
 	}
 }
 
-function keyboardEvent() {
-
-	var tmpArrayInput = document.getElementsByTagName('input');
-	for(var i=0; i<tmpArrayInput.length; i++) {
-		var tmpInputNode = tmpArrayInput[i];
-		tmpInputNode.onfocus = function() {
-			var currentClientHeight = window.innerHeight
-			|| document.documentElement.clientHeight
-			|| document.body.clientHeight;
-			gOldDeviceHeight = currentClientHeight;
-			//setTimeout(function() {
-				//alert('focus me!!');
-			//}, 10);
-
-		}
-		tmpInputNode.onblur = function() {
-			setTimeout(function() {
-				//alert('blur me!!');
-				var currentClientHeight = window.innerHeight
-				|| document.documentElement.clientHeight
-				|| document.body.clientHeight;
-				if(gOldDeviceHeight < currentClientHeight) {
-					gOldDeviceHeight = currentClientHeight;
-					windowScrollToTop();
-				}
-
-			}, 10);
-
-		}
-	}
-	var tmpArrayTextarea = document.getElementsByTagName('textarea');
-	for(var i=0; i<tmpArrayTextarea.length; i++) {
-		var tmpTextareNode = tmpArrayTextarea[i];
-		tmpTextareNode.onfocus = function() {
-			var currentClientHeight = window.innerHeight
-			|| document.documentElement.clientHeight
-			|| document.body.clientHeight;
-			gOldDeviceHeight = currentClientHeight;
-			//setTimeout(function(){
-				//alert('focus me!!');
-			//}, 10);
-		}
-		tmpTextareNode.onblur = function() {
-			setTimeout(function(){
-				//alert('blur me!!');
-				var currentClientHeight = window.innerHeight
-				|| document.documentElement.clientHeight
-				|| document.body.clientHeight;
-				if(gOldDeviceHeight < currentClientHeight) {
-					gOldDeviceHeight = currentClientHeight;
-					windowScrollToTop();
-				}
-			}, 10);
-		}
-	}
-}
 var clientHeightAbc;
 function windowScrollToTop() {
 	var isIPad = navigator.userAgent.match(/iPad/i);
@@ -6207,79 +6004,6 @@ var gConditions = {	"amount":
 							}
 
 				}
-
-function validateFunc(inValue, inConditions){
-	if(inConditions == undefined || inConditions == null) return;
-	if(typeof(inValue) == 'number') inStr = inValue.toString();
-	else var inStr = inValue;
-	var tmpValidateObj = inConditions;//inConditions[tmpObj]
-	for(var tmpObjProperty in tmpValidateObj) {
-		//alert(tmpObjProperty);
-		var tmpValue = tmpValidateObj[tmpObjProperty];
-		if((tmpValue == undefined) || (tmpValue.length == 0)) continue;
-		switch(tmpObjProperty) {
-			case "allow": {
-				var rex = new RegExp(tmpValue, "gi");
-				var tmprex = inStr.match(rex);
-				if((tmprex == undefined) || (tmprex.length < 1)) {
-					console.log('allow');
-					return false;
-				}
-				break;
-			}
-			case "notallow": {
-				var rex = new RegExp(tmpValue, "gi");
-				var tmprex = inStr.match(rex);
-				if((tmprex == undefined) || (tmprex.length > 0)) {
-					console.log('not allow');
-					return false;
-				}
-				break;
-			}
-			case "minlength": {
-				if(!(inStr.length > (parseInt(tmpValue) - 1))) {
-					console.log('min length fail');
-					return false;
-				}
-				break;
-			}
-			case "maxlength": {
-				if(!(inStr.length < (parseInt(tmpValue) + 1))) {
-					 console.log('max length fail');
-					return false;
-				}
-				break;
-			}
-			case "func": {
-				if(tmpValue != undefined) {
-					console.log('call function');
-					if(typeof(tmpValue) == 'function') {
-						if(!tmpValue()) {
-							console.log('condition extent fail');
-							return false;
-						}
-					}
-					else if(typeof(tmpValue) == 'string' && (typeof(window[tmpValue]) == 'function')) {
-						if(!window[tmpValue]()) {
-							console.log('condition extent fail');
-							return false;
-						}
-					}
-					else {
-						console.log('not exist function');
-					}
-				}
-				break;
-			}
-			default: {
-				console.log('do not match property.');
-				return false;
-				break;
-			}
-		}
-	}
-	return true;
-}
 
 /*** VALIDATE FUNCTION END ***/
 
@@ -6628,121 +6352,6 @@ function selectedPageAtIndex(idx, inNode, inTotalPage, inMaxNum, inArrDisable) {
 	fadeInMainContentScreen();
 }
 
-/*** PAGE INDICATOR END ***/
-
-/*** PRINT ***/
-
-function printNodeWithAll(inNode) {
-	//Save old page
-	var oldPage = document.body.innerHTML;
-
-	var printContainer = document.createElement("div");
-	printContainer.setAttribute("style", "sytle='padding-top:10px;'");
-	printContainer.innerHTML = inNode.innerHTML;
-
-	var linkStyle1 = document.createElement("link");
-	linkStyle1.setAttribute("rel", "stylesheet");
-	linkStyle1.setAttribute("type", "text/css");
-	linkStyle1.setAttribute("href", "css/style.css");
-	printContainer.appendChild(linkStyle1);
-	var linkStyle2 = document.createElement("link");
-	linkStyle2.setAttribute("rel", "stylesheet");
-	linkStyle2.setAttribute("type", "text/css");
-	linkStyle2.setAttribute("href", "css/ebankstyle.css");
-	printContainer.appendChild(linkStyle2);
-
-	/*var pri = document.getElementById("ifmcontentstoprint").contentWindow;
-	pri.document.open();
-	pri.document.write(printContainer.innerHTML);
-	pri.document.close();
-	pri.focus();
-	//pri.scroll(0,0);
-	pri.print();*/
-	document.body.innerHTML =
-          "<html><head><title></title></head><body>" +
-          printContainer.innerHTML + "</body>";
-	setTimeout(function(){
-		//Print Page
-        window.print();
-
-		//Restore orignal HTML
-		document.body.innerHTML = oldPage;
-	}, 300);
-
-}
-
-/*** PRINT END ***/
-
-
-
-
-
-
-
-/*** EXT ***/
-
-//TuanNQ1.FSoft
-//Pervent on paste function
-// Register onpaste on inputs and textareas in browsers that don't
-// natively support it.
-/*(function () {
-    var onload = window.onload;
-
-    window.onload = function () {
-        if (typeof onload == "function") {
-            onload.apply(this, arguments);
-        }
-
-        var fields = [];
-        var inputs = document.getElementsByTagName("input");
-        var textareas = document.getElementsByTagName("textarea");
-
-        for (var i = 0; i < inputs.length; i++) {
-            fields.push(inputs[i]);
-        }
-
-        for (var i = 0; i < textareas.length; i++) {
-            fields.push(textareas[i]);
-        }
-
-        for (var i = 0; i < fields.length; i++) {
-            var field = fields[i];
-
-            if (typeof field.onpaste != "function" && !!field.getAttribute("onpaste")) {
-                field.onpaste = eval("(function () { " + field.getAttribute("onpaste") + " })");
-            }
-
-            if (typeof field.onpaste == "function") {
-                var oninput = field.oninput;
-
-                field.oninput = function () {
-                    if (typeof oninput == "function") {
-                        oninput.apply(this, arguments);
-                    }
-
-                    if (typeof this.previousValue == "undefined") {
-                        this.previousValue = this.value;
-                    }
-
-                    var pasted = (Math.abs(this.previousValue.length - this.value.length) > 1 && this.value != "");
-
-                    if (pasted && !this.onpaste.apply(this, arguments)) {
-                        this.value = this.previousValue;
-                    }
-
-                    this.previousValue = this.value;
-                };
-
-                if (field.addEventListener) {
-                    field.addEventListener("input", field.oninput, false);
-                } else if (field.attachEvent) {
-                    field.attachEvent("oninput", field.oninput);
-                }
-            }
-        }
-    }
-})();*/
-
 //TuanNQ1.FSoft
 // replace the 'n'th character of 's' with 't'
 function replaceAt(s, n, t) {
@@ -6757,398 +6366,6 @@ var newMonthStr;
 var newYearStr;
 var minYear = 1900;
 var maxYear = 2100;
-
-//TuanNQ1.FSoft
-//handle calendar using navigation (arrow keys, delete key), and numberic keys
-//dd/mm/yyyy
-function handleCalendarNav(tbx, e) {
-	var keynum;
-	carretPos = carretPos == undefined ? 0 : carretPos;
-	var day;
-	var month;
-	var year;
-	var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-
-	if (tbx.value.length == 0) {
-		tbx.value = "dd/mm/yyyy";
-	}
-
-	if (tbx.value.length > 0) {
-		var tmpArr = tbx.value.split('/');
-		tmpArr[0] = tmpArr[0] == "dd" ? "1" : tmpArr[0];
-		day = Number(tmpArr[0]);
-		tmpArr[1] = tmpArr[1] == "mm" ? "1" : tmpArr[1];
-		month = Number(tmpArr[1]);
-		tmpArr[2] = tmpArr[2] == "yyyy" ? minYear + "" : tmpArr[2];
-		year = Number(tmpArr[2]);
-
-		// Adjust for leap years
-		if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
-			monthLength[1] = 29;
-		} else {
-			monthLength[1] = 28;
-		}
-	}
-
-	if (e.type == "click") {
-		carretPos = 0;
-		setSelection(tbx, 0, 0);
-		newDayStr = "";
-		newMonthStr = "";
-		newYearStr = "";
-		return;
-	}
-
-	if(window.event){ // IE
-		keynum = e.keyCode;
-	}else if(e.which){ // Netscape/Firefox/Opera
-		keynum = e.which;
-	 }
-//	logInfo(keynum);
-	if (keynum == 9) {
-		return true;
-	}
-	if (keynum != 8 && keynum != 32 && keynum != 37 && keynum != 38 && keynum != 39 && keynum != 40 && (keynum < 48 || (keynum > 57 && keynum < 96) || keynum > 105)) {
-		return false;
-	}
-
-	//HANDLE NAVIGATION KEY
-
-	//left
-	if (keynum == 37) {
-		if (carretPos == 6) {
-			newMonthStr = "";
-			setSelection(tbx, 3, 5);
-		} else if (carretPos == 3) {
-			newDayStr = "";
-			setSelection(tbx, 0, 2);
-		}
-		return false;
-	//up
-	} else if (keynum == 38) {
-
-		//dd
-		if (carretPos == 0) {
-			// Check the range of the day
-   			if (day < monthLength[month - 1]) {
-				day++;
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 0, 2);
-		//mm
-		} else if (carretPos == 3) {
-			// Check the range of the month
-   			if (month < 12) {
-				month++;
-
-				if (day > monthLength[month - 1]) {
-					day = monthLength[month - 1];
-				}
-
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 3, 5);
-		//yyyy
-		} else if (carretPos == 6) {
-			// Check the range of the year
-   			if (year < maxYear) {
-				year++;
-
-				// Adjust for leap years
-				if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
-					monthLength[1] = 29;
-				} else {
-					monthLength[1] = 28;
-				}
-
-				if (day > monthLength[month - 1]) {
-					day = monthLength[month - 1];
-				}
-
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 6, 10);
-		}
-		return false;
-	//right and space
-	} else if (keynum == 39 || keynum == 32) {
-		if (carretPos == 3) {
-			newYearStr = "";
-			setSelection(tbx, 6, 10);
-		} else if (carretPos == 0) {
-			newMonthStr = "";
-			setSelection(tbx, 3, 5);
-		}
-		return false;
-	//down
-	} else if (keynum == 40) {
-
-		//dd
-		if (carretPos == 0) {
-			// Check the range of the day
-   			if (day > 1) {
-				day--;
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 0, 2);
-		//mm
-		} else if (carretPos == 3) {
-			// Check the range of the month
-   			if (month > 1) {
-				month--;
-
-				if (day > monthLength[month - 1]) {
-					day = monthLength[month - 1];
-				}
-
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 3, 5);
-		//yyyy
-		} else if (carretPos == 6) {
-			// Check the range of the year
-   			if (year > minYear) {
-				year--;
-
-				// Adjust for leap years
-				if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
-					monthLength[1] = 29;
-				} else {
-					monthLength[1] = 28;
-				}
-
-				if (day > monthLength[month - 1]) {
-					day = monthLength[month - 1];
-				}
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" + year : month + "/" + year;
-			}
-			setSelection(tbx, 6, 10);
-		}
-		return false;
-	}
-
-	//HANDLE NUMBERIC KEY and DELETE KEY
-	if (keynum == 8 || (keynum >= 48 && keynum <= 57) || (keynum >= 96 && keynum <= 105)) {
-
-
-		if (keynum == 8) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
-
-		var tmpDate = tbx.value;
-		var oriDate = tmpDate;
-		var newDay, newMonth, newYear;
-		keynum = keynum > 57 ? keynum - 48 : keynum;
-
-		//dd
-		if (carretPos == 0) {
-
-			//delete key
-			if (keynum == 8) {
-				tmpDate = replaceAt(tmpDate, 0, "d");
-				tmpDate = replaceAt(tmpDate, 1, "d");
-				tbx.value = tmpDate;
-				newDayStr = "";
-				setSelection(tbx, 0, 2);
-				return;
-			}
-
-			if (newDayStr.length == 0 || newDayStr.length >= 2) {
-				newDayStr = String.fromCharCode(keynum);
-				newDay = Number(newDayStr);
-			} else {
-				newDayStr += String.fromCharCode(keynum);
-				newDay = Number(newDayStr);
-			}
-
-			// Check the range of the day
-   			if (newDay >= 1 && newDay <= monthLength[month - 1]) {
-				tbx.value = newDay < 10 ? "0" + newDay + "/" : newDay + "/";
-				tbx.value += month < 10 ? "0" + month + "/" : month + "/";
-				if (year < 10) {
-					tbx.value += "000" + year;
-				} else if (year < 100) {
-					tbx.value += "00" + year;
-				} else if (year < 1000) {
-					tbx.value += "0" + year;
-				} else {
-					tbx.value += year;
-				}
-
-				if ((newDayStr.length == 1 && newDay > 3) ||
-					(newDayStr.length == 2)) {
-					carretPos = 3;
-				}
-			} else {
-				if (keynum != 48 && keynum != 96) {
-					e.preventDefault();
-					e.stopPropagation();
-					newDayStr = "";
-				}
-				else {
-					newDayStr = "0";
-				}
-				//newDayStr = newDayStr.length == 2 ? newDayStr.charAt(1) : "";
-				carretPos = 0;
-				tbx.value = oriDate;
-			}
-			if (carretPos == 3) {
-				setSelection(tbx, 3, 5);
-			} else {
-				setSelection(tbx, 0, 0);
-			}
-		//mm
-		} else if (carretPos == 3) {
-
-			//delete key
-			if (keynum == 8) {
-				if (tmpDate.substring(3, 5) == "mm") {
-					tmpDate = replaceAt(tmpDate, 0, "d");
-					tmpDate = replaceAt(tmpDate, 1, "d");
-					tbx.value = tmpDate;
-					newDayStr = "";
-					carretPos = 0;
-					setSelection(tbx, 0, 2);
-					return;
-				} else {
-					tmpDate = replaceAt(tmpDate, 3, "m");
-					tmpDate = replaceAt(tmpDate, 4, "m");
-					tbx.value = tmpDate;
-					newMonthStr = "";
-					setSelection(tbx, 3, 5);
-					return;
-				}
-			}
-
-			if (newMonthStr.length == 0 || newMonthStr.length >= 2) {
-				newMonthStr = String.fromCharCode(keynum);
-				newMonth = Number(newMonthStr);
-			} else {
-				newMonthStr += String.fromCharCode(keynum);
-				newMonth = Number(newMonthStr);
-			}
-
-			// Check the range of the month
-   			if (newMonth >= 1 && newMonth <= 12) {
-
-				if (day > monthLength[newMonth - 1]) {
-					day = monthLength[newMonth - 1];
-				}
-
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += newMonth < 10 ? "0" + newMonth + "/" : newMonth + "/";
-				if (year < 10) {
-					tbx.value += "000" + year;
-				} else if (year < 100) {
-					tbx.value += "00" + year;
-				} else if (year < 1000) {
-					tbx.value += "0" + year;
-				} else {
-					tbx.value += year;
-				}
-
-				if ((newMonthStr.length == 1 && newMonth > 1) || (newMonthStr.length == 2)) {
-					carretPos = 6;
-				}
-			} else {
-				if (keynum != 48 && keynum != 96) {
-					e.preventDefault();
-					e.stopPropagation();
-					newMonthStr = "";
-				} else {
-					newMonthStr = "0";
-				}
-
-				//newMonthStr = newMonthStr.length == 2 ? newMonthStr.charAt(1) : "";
-
-				carretPos = 3;
-				tbx.value = oriDate;
-			}
-			if (carretPos == 6) {
-				setSelection(tbx, 6, 10);
-			} else {
-				setSelection(tbx, 3, 5);
-			}
-		//yyyy
-		} else if (carretPos == 6) {
-
-			//delete key
-			if (keynum == 8) {
-				if (tmpDate.substring(6,10) == "yyyy") {
-					tmpDate = replaceAt(tmpDate, 3, "m");
-					tmpDate = replaceAt(tmpDate, 4, "m");
-					tbx.value = tmpDate;
-					newMonthStr = "";
-					carretPos = 3;
-					setSelection(tbx, 3, 5);
-					return;
-				} else {
-					tmpDate = replaceAt(tmpDate, 6, "y");
-					tmpDate = replaceAt(tmpDate, 7, "y");
-					tmpDate = replaceAt(tmpDate, 8, "y");
-					tmpDate = replaceAt(tmpDate, 9, "y");
-					tbx.value = tmpDate;
-					newYearStr = "";
-					setSelection(tbx, 6, 10);
-					return;
-				}
-			}
-
-			if (newYearStr.length == 0 || newYearStr.length >= 4) {
-				newYearStr = String.fromCharCode(keynum);
-				newYear = Number(newYearStr);
-			} else {
-				newYearStr += String.fromCharCode(keynum);
-				newYear = Number(newYearStr);
-			}
-
-			// Check the range of the year
-   			if (newYear >= 1 && newYear <= maxYear) {
-
-				// Adjust for leap years
-				if(newYear % 400 == 0 || (newYear % 100 != 0 && newYear % 4 == 0)) {
-					monthLength[1] = 29;
-				} else {
-					monthLength[1] = 28;
-				}
-
-				if (day > monthLength[month - 1]) {
-					day = monthLength[month - 1];
-				}
-
-				tbx.value = day < 10 ? "0" + day + "/" : day + "/";
-				tbx.value += month < 10 ? "0" + month + "/" : month + "/";
-				if (newYear < 10) {
-					tbx.value += "000" + newYear;
-				} else if (newYear < 100) {
-					tbx.value += "00" + newYear;
-				} else if (newYear < 1000) {
-					tbx.value += "0" + newYear;
-				} else {
-					tbx.value += newYear;
-				}
-				carretPos = 6;
-			} else {
-				e.preventDefault();
-				e.stopPropagation();
-				newYearStr = newYearStr.length == 4 ? "" : newYearStr;
-				//newYearStr = "";
-				carretPos = 6;
-				tbx.value = oriDate;
-			}
-			setSelection(tbx, 6, 10);
-		}
-
-		return false;
-	}
-}
 
 //TuanNQ1.FSoft
 // Validates that the input string is a valid date formatted as "dd/mm/yyyy"
@@ -7428,39 +6645,6 @@ function genMenuSection() {
 							tmpFuncDivLang.innerHTML = tmpChildMenuObj.keyLang;
 							tmpFuncDiv.appendChild(tmpFuncDivLang);
 							var tmpFuncSpan = document.createElement('span');
-							/*if(tmpChildMenuObj.parentMenuID =='transfer'&&tmpChildMenuObj.keyLang=='MENU_VIEW_FUNDSTRANSFER' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_VIEW_FUNDTRANFER");');
-								tmpFuncSpan.style.display ='block';
-							}
-							if(tmpChildMenuObj.parentMenuID =='transfer'&&tmpChildMenuObj.keyLang=='MENU_LIST_BENEFIC' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_BENEFIC_LIST");');
-								tmpFuncSpan.style.display ='block';
-							}
-							if(tmpChildMenuObj.parentMenuID =='jumboAcc'&&tmpChildMenuObj.keyLang=='JUMBO_AUTO_SAVINGS_TITLE' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_AUTO_SAVING");');
-								tmpFuncSpan.style.display ='block';
-							}
-							if(tmpChildMenuObj.parentMenuID =='mLoan'&&tmpChildMenuObj.keyLang=='LOAN_MENU_PARENT' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_LOAN_SAVING");');
-								tmpFuncSpan.style.display ='block';
-							}
-							if(tmpChildMenuObj.parentMenuID =='cardservice'&&tmpChildMenuObj.keyLang=='MENU_CARD_ADVANCE' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_CARD_ADVANCE");');
-								tmpFuncSpan.style.display ='block';
-							}
-							if(tmpChildMenuObj.parentMenuID =='setting'&&tmpChildMenuObj.keyLang=='CUSTOMIZE_MENU_TITLE' ){
-								tmpFuncSpan.setAttribute('class','icon-help icon-helpstyle');
-								tmpFuncSpan.setAttribute('onClick','show_hint(event, "QUICK_TIP_CUSTOMIZE_MENU");');
-								tmpFuncSpan.style.display ='block';
-							}*/
-
-
-
 							tmpFuncDiv.appendChild(tmpFuncSpan);
 							if(tmpChildMenuObj.imgHighlight && tmpChildMenuObj.imgHighlight.length > 0) {
 								var tmpFuncImg = document.createElement('img');
@@ -7477,10 +6661,6 @@ function genMenuSection() {
 			}
 		}
 	}
-
-	//logInfo('Menu section: ' + menuContentList.innerHTML);
-	//var gMenuRawData = document.createElement('div');
-	// add quick change menu style default
     var tmpModuleNode = document.createElement('li');
     tmpModuleNode.setAttribute('id', 'quick_default_menu_btn');
 

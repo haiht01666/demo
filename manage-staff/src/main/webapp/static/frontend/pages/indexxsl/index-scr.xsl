@@ -178,6 +178,7 @@
                             <div align='right' id="volumeHistory.pagination" style="margin-right: 15px;">
 
                             </div>
+                            <div id="temp" style="height:80px"></div>
                         </div>
                     </div>
                 </div>

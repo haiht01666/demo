@@ -364,7 +364,6 @@ public class ManageServiceImpl implements ManageService {
 				boolean check = false;
 				for (Date date = dateFrom.getTime(); dateFrom.before(dateTo); dateFrom.add(Calendar.DATE,
 						1), date = dateFrom.getTime()) {
-					System.out.println(date);
 					String lever = revenueService.getLever(user.getId(), date);
 					if (lever.equals(LeverType.GDSD.name())) {
 						check = true;
