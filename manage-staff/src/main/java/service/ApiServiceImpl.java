@@ -159,13 +159,14 @@ import java.util.*;
             nppGraphicModel.setUserInfo(userInfo);
             nppGraphicModel.setListNpp(listNpp);
             for (User npp : listNpp) {
-                String levelUser = manageService.getLeverUser(Integer.parseInt(npp.getUserCode()));
+                User userTmp = manageService.detailUser(Integer.parseInt(npp.getUserCode()));
+                String levelUser = userTmp.getLeverValue();
                 if (levelUser.equals(LeverType.New.name())) {
                     nppGraphicModel.setNumberNM(nppGraphicModel.getNumberNM() + 1);
                 } else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
                     nppGraphicModel.setNumberSM(nppGraphicModel.getNumberSM() + 1);
                 } else if (levelUser.equals(LeverType.SALE_PRO.name())) {
-                    nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
+                        nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
                 } else if (levelUser.equals(LeverType.PRO_DISTRIBUTE.name())) {
                     nppGraphicModel.setNumberPD(nppGraphicModel.getNumberPD() + 1);
                 } else if (levelUser.equals(LeverType.TL.name())) {
@@ -174,7 +175,7 @@ import java.util.*;
                     nppGraphicModel.setNumberMSD(nppGraphicModel.getNumberMSD() + 1);
                 } else if (levelUser.equals(LeverType.DSD.name())) {
                     nppGraphicModel.setNumberDSD(nppGraphicModel.getNumberDSD() + 1);
-                } else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
+                } else if (levelUser.equals(LeverType.GDSD.name())) {
                     nppGraphicModel.setNumberGDSD(nppGraphicModel.getNumberGDSD() + 1);
                 }
                 npp.setAgentLevel(CommonUtils.getLevelChild(userInfo.getChildId(), npp.getChildId()));
