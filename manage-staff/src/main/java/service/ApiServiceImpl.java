@@ -180,6 +180,7 @@ import java.util.*;
                 }
                 npp.setAgentLevel(CommonUtils.getLevelChild(userInfo.getChildId(), npp.getChildId()));
                 npp.setLeverValue(levelUser);
+                npp.setStatus(userTmp.getStatus());
             }
             result.setResult(true);
             result.setResultData(nppGraphicModel);
