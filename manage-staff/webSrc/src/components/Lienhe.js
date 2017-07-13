@@ -1,4 +1,3 @@
-import '../styles/about-page.css';
 import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -15,12 +14,6 @@ class AboutPage extends React.Component {
                 <h2 className="">Liên hệ</h2>
                 <div className="clearfix"/>
               </div>
-            {/*<p>Thông tin liên hệ</p>*/}
-              {/*<p><strong>Công ty DFG</strong></p>*/}
-            {/*<p>Địa chỉ:</p>*/}
-            {/*<p>Điện Thoại</p>*/}
-            {/*<p>Email:</p>*/}
-            {/*<p>Website:</p>*/}
           </div>
           </div>
         </div>

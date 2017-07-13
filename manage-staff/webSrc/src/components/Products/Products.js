@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import '../../styles/home-page.css';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';

@@ -11,6 +11,8 @@ import {loadTopProducts, loadProducts} from './actions/productsActions';
 import {loadTopArticles} from './actions/articlesActions';
 import {loadCategories} from './actions/categoryActions';
 
+require('./static/web/libs/jquery-1.11.2.min');
+
 // require('./favicon.ico'); // Tell webpack to load favicon.ico
 // import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
 import { syncHistoryWithStore } from 'react-router-redux';

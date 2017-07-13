@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import '../../styles/home-page.css';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import * as actions from '../../actions/productsActions';

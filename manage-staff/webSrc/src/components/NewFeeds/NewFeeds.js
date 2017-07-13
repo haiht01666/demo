@@ -1,9 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
-import '../../styles/home-page.css';
 import {connect} from 'react-redux';
+require('../../static/web/libs/jquery.simplyscroll.min');
+import '../../static/web/styles/jquery.simplyscroll.css';
 
 class NewFeeds extends React.Component {
+  componentDidMount() {
+    $('#scroller').simplyScroll({orientation: 'vertical'});
+  }
+
   render() {
     return (
       <div className="col-xs-12 col-md-5">

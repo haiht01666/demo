@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/home-page.css';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
