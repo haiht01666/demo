@@ -41,7 +41,7 @@ class ProductsPage extends React.Component {
   }
   render() {
     let categoryName = '';
-    if(this.props.category){
+    if(this.props.category != null){
       this.props.categories.forEach((item)=>{
         if(item.category_key == this.props.category){
           categoryName = item.name;
@@ -55,7 +55,7 @@ class ProductsPage extends React.Component {
           <div className="container">
             <div className="row">
                 <div className="title-global">
-                  <h2 className="productDetailSpecial"><Link to={`/sanpham`} onClick={(e)=>{this.handleClickProducts(e, null)}}>Sản Phẩm</Link>{this.props.category ? ' > ' + categoryName : ''}</h2>
+                  <h2 className="productDetailSpecial"><Link to={`/sanpham`} onClick={(e)=>{this.handleClickProducts(e, null)}}>Sản Phẩm</Link>{this.props.category != null ? ' > ' + categoryName : ''}</h2>
                   <div className="clearfix"/>
                 </div>
               <Products
