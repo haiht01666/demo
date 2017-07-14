@@ -309,7 +309,7 @@ public class ManageServiceImpl implements ManageService {
 		List<User> lstUser = dao.getMembers();
 		List<Revenue> lstRevenue = new ArrayList<>();
 		if (form.getType() == RevenueGroupType.WEEK.getValue()) {
-			
+
 			for (User user : lstUser) {
 				Calendar startDate = Calendar.getInstance();
 				startDate.setTime(form.getDateFrom());
@@ -317,10 +317,14 @@ public class ManageServiceImpl implements ManageService {
 				Calendar endDate = Calendar.getInstance();
 				endDate.setTime(form.getDateTo());
 				endDate.add(Calendar.DATE, 1);
-				
+
 				Double totalRevenue = new Double(0.0);
 				Revenue revenue = new Revenue();
 				revenue.setReceiverId(user.getId());
+				Double revenueProD = 0.0;
+				Date revenueDate = revenueService.getDateRevenue(user.getId());
+
+				boolean check = false;
 				for (Date date = startDate.getTime(); startDate.before(endDate); startDate.add(Calendar.DATE,
 						1), date = startDate.getTime()) {
 					// System.out.println(date);
@@ -328,9 +332,39 @@ public class ManageServiceImpl implements ManageService {
 						continue;
 					String lever = revenueService.getLever(user.getId(), date);
 					if (lever.equals(LeverType.PRO_DISTRIBUTE.name())) {
-						totalRevenue += totalRevenueGroup(user, date, date) * 0.03;
-					} else if (lever.equals(LeverType.TL.name()) || lever.equals(LeverType.MSD.name()) || lever.equals(LeverType.DSD.name())
-							|| lever.equals(LeverType.GDSD.name())) {
+						if (check) {
+							Double total = totalRevenueGroup(user, date, date);
+							revenueProD += total;
+							totalRevenue += total * 0.03;
+						} else {
+							if (revenueDate == null) {
+								Calendar cal = Calendar.getInstance();
+								cal.setTime(date);
+								cal.add(Calendar.DATE, -30);
+								Double totalBVGroup = totalRevenueGroup(user, cal.getTime(), date);
+								if (totalBVGroup >= LeverType.PRO_DISTRIBUTE.getAmount()) {
+									revenueProD += totalBVGroup;
+									totalRevenue += totalBVGroup * 0.03;
+									check = true;
+								}
+							} else {
+								Calendar cal = Calendar.getInstance();
+								cal.setTime(revenueDate);
+								cal.add(Calendar.DATE, 1);
+								Double totalBVGroup = totalRevenueGroup(user, cal.getTime(), date);
+								if (totalBVGroup >= LeverType.PRO_DISTRIBUTE.getAmount()) {
+									revenueProD += totalBVGroup;
+									totalRevenue += totalBVGroup * 0.03;
+									check = true;
+								}
+							}
+
+						}
+					} else if (lever.equals(LeverType.TL.name()) || lever.equals(LeverType.MSD.name())
+							|| lever.equals(LeverType.DSD.name()) || lever.equals(LeverType.GDSD.name())) {
+						// nhận thêm 2% từ trước nữa
+						totalRevenue += revenueProD * 0.02;
+						revenueProD = 0.0;
 						totalRevenue += totalRevenueGroup(user, date, date) * 0.05;
 					} else {
 						continue;
@@ -348,8 +382,9 @@ public class ManageServiceImpl implements ManageService {
 					revenue.setRevenueValue(totalRevenue);
 					revenue.setOrderName("Hoa hồng nhóm theo tuần");
 					revenue.setType(RevenueType.WEEK.getValue());
-					if(revenueService.saveRevenue(revenue, user, form.getDateTo()) > 0 )
-						lstRevenue.add(revenue);
+					revenue.setCdate(form.getDateTo());
+					revenue.setReceiverId(user.getId());
+					lstRevenue.add(revenue);
 				}
 			}
 		}
@@ -383,8 +418,9 @@ public class ManageServiceImpl implements ManageService {
 						revenue.setRevenuePecent(RevenuePercent.ONE.name());
 						revenue.setOrderName("Hoa hồng nhóm theo tháng");
 						revenue.setType(RevenueType.MONTH.getValue());
-						if(revenueService.saveRevenue(revenue, user, dateTo.getTime()) > 0 )
-							lstRevenue.add(revenue);
+						revenue.setCdate(dateTo.getTime());
+						revenue.setReceiverId(user.getId());
+						lstRevenue.add(revenue);
 					}
 				}
 
@@ -396,17 +432,17 @@ public class ManageServiceImpl implements ManageService {
 				String lever1 = "";
 				String lever2 = "";
 				String lever3 = "";
-				
+
 				Calendar dateFrom1 = Calendar.getInstance();
 				dateFrom1.set(Calendar.MONTH, form.getNum() * 3 - 3);
 				dateFrom1.set(Calendar.DAY_OF_MONTH, 1);
 				dateFrom1.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
-				
+
 				Calendar dateTo1 = Calendar.getInstance();
 				dateTo1.setTime(dateFrom1.getTime());
 				dateTo1.set(Calendar.DAY_OF_MONTH, dateTo1.getActualMaximum(Calendar.DAY_OF_MONTH));
 				dateTo1 = CommonUtils.setMaxHour(dateTo1);
-				
+
 				for (Date date = dateFrom1.getTime(); dateFrom1.before(dateTo1); dateFrom1.add(Calendar.DATE,
 						1), date = dateFrom1.getTime()) {
 					// check first month
@@ -425,7 +461,7 @@ public class ManageServiceImpl implements ManageService {
 				}
 				if (lever1.equals(""))
 					continue;
-				
+
 				Calendar dateFrom2 = Calendar.getInstance();
 				dateFrom2.set(Calendar.MONTH, form.getNum() * 3 - 2);
 				dateFrom2.set(Calendar.DAY_OF_MONTH, 1);
@@ -453,7 +489,7 @@ public class ManageServiceImpl implements ManageService {
 				}
 				if (lever2.equals(""))
 					continue;
-				
+
 				Calendar dateFrom3 = Calendar.getInstance();
 				dateFrom3.set(Calendar.MONTH, form.getNum() * 3 - 1);
 				dateFrom3.set(Calendar.DAY_OF_MONTH, 1);
@@ -463,7 +499,7 @@ public class ManageServiceImpl implements ManageService {
 				dateTo3.setTime(dateFrom3.getTime());
 				dateTo3.set(Calendar.DAY_OF_MONTH, dateTo3.getActualMaximum(Calendar.DAY_OF_MONTH));
 				dateTo3 = CommonUtils.setMaxHour(dateTo3);
-				
+
 				for (Date date = dateFrom3.getTime(); dateFrom3.before(dateTo3); dateFrom3.add(Calendar.DATE,
 						1), date = dateFrom3.getTime()) {
 					// check 3th month
@@ -483,7 +519,8 @@ public class ManageServiceImpl implements ManageService {
 				if (lever3.equals(""))
 					continue;
 				Double total = totalRevenueGroup(user, dateFrom1.getTime(), dateTo3.getTime());
-				if(lever1.equals(LeverType.MSD.name()) || lever2.equals(LeverType.MSD.name()) || lever3.equals(LeverType.MSD.name())){
+				if (lever1.equals(LeverType.MSD.name()) || lever2.equals(LeverType.MSD.name())
+						|| lever3.equals(LeverType.MSD.name())) {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
 					revenue.setUserName(user.getDispName());
@@ -491,14 +528,17 @@ public class ManageServiceImpl implements ManageService {
 					revenue.setUserLever(LeverType.MSD.name());
 					revenue.setTotalOrderValue(total);
 					revenue.setRevenuePecent(RevenuePercent.TWO.name());
+					revenue.setCdate( dateTo3.getTime());
+					revenue.setReceiverId(user.getId());
 					lstRevenue.add(revenue);
 					continue;
-				}else {
+				} else {
 					Revenue revenue = new Revenue();
 					revenue.setReceiverId(user.getId());
 					revenue.setUserName(user.getDispName());
 					revenue.setRevenueValue(total * RevenuePercent.THREE.getValue());
-					if(lever1.equals(LeverType.DSD.name()) || lever2.equals(LeverType.DSD.name()) || lever3.equals(LeverType.DSD.name()))
+					if (lever1.equals(LeverType.DSD.name()) || lever2.equals(LeverType.DSD.name())
+							|| lever3.equals(LeverType.DSD.name()))
 						revenue.setUserLever(LeverType.DSD.name());
 					else
 						revenue.setUserLever(LeverType.GDSD.name());
@@ -506,8 +546,9 @@ public class ManageServiceImpl implements ManageService {
 					revenue.setRevenuePecent(RevenuePercent.THREE.name());
 					revenue.setOrderName("Hoa hồng nhóm theo tháng");
 					revenue.setType(RevenueType.QUATER.getValue());
-					if(revenueService.saveRevenue(revenue, user, dateTo3.getTime()) > 0 )
-						lstRevenue.add(revenue);
+					revenue.setCdate( dateTo3.getTime());
+					revenue.setReceiverId(user.getId());
+					lstRevenue.add(revenue);
 				}
 			}
 		}
@@ -806,7 +847,7 @@ public class ManageServiceImpl implements ManageService {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public Double totalOrderValue(Date start, Date end) throws SQLException {
 		// TODO Auto-generated method stub

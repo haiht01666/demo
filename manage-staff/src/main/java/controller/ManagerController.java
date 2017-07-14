@@ -23,8 +23,10 @@ import model.Order;
 import model.Revenue;
 import model.RevenueForm;
 import model.RevenueResult;
+import model.Revenues;
 import model.User;
 import service.ManageService;
+import service.RevenueService;
 
 @Controller
 @RequestMapping("manage")
@@ -38,6 +40,9 @@ public class ManagerController {
 
 	@Autowired
 	ManageService service;
+	
+	@Autowired
+	RevenueService revenueService;
 
 	@RequestMapping(value = { "", "/home" }, method = RequestMethod.GET)
 	public String index(ModelMap model) throws SQLException {
@@ -269,6 +274,19 @@ public class ManagerController {
 		User user = (User) session.getAttribute("ss-user");
 		model.addAttribute("user", user);
 		return "account/revenueMonth";
+	}
+	
+	@RequestMapping(value = { "/saveRevenues" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult saveRevenues(@RequestBody Revenues form) throws SQLException {
+		AjaxResult result = new AjaxResult();
+		if(revenueService.saveRevenues(form) > 0){
+			result.setResult(true);
+			result.setMessage("Lưu thông tin thành công!");
+		}else{
+			result.setResult(false);
+			result.setMessage("Lưu thông tin thất bại!");
+		}
+		return result;
 	}
 	
 }

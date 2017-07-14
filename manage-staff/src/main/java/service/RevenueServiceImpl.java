@@ -16,6 +16,7 @@ import dao.ManageDao;
 import dao.RevenueDao;
 import model.Revenue;
 import model.RevenueApi;
+import model.Revenues;
 import model.User;
 
 @Service
@@ -247,6 +248,26 @@ public class RevenueServiceImpl implements RevenueService {
 	@Override
 	public RevenueApi getRevenueInfo(Date from, Date to, int userId) throws SQLException {
 		return revenueDao.getRevenueInfo(from, to, userId);
+	}
+
+	@Override
+	public Double getTotalRevenue(Date date,User user) throws SQLException {
+		Double result = 0.0;
+		List<User> lstAllChild = dao.getAllChild(user.getChildId());
+		for (User u : lstAllChild) {
+			result += revenueDao.getTotalRevenue(date, u.getId());
+		}
+		return result;
+	}
+
+	@Override
+	public Date getDateRevenue(int id) throws SQLException {
+		return revenueDao.getDateRevenue(id);
+	}
+
+	@Override
+	public int saveRevenues(Revenues lstRevenue) throws SQLException {
+		return revenueDao.saveRevenues(lstRevenue);
 	}
 
 }

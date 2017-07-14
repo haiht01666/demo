@@ -251,7 +251,7 @@ import java.util.*;
                 listGroupId.add(user.getUserCode());
             }
 
-            RevenueApi revenueApi = revenueService.getTotalRevenueInfo(userInfo.getSignUpDate(), userInfo.getId());
+            RevenueApi revenueApi = revenueService.getTotalRevenueInfo(new Date(), userInfo.getId());
             commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect());
             commissionInfoModel.setCommissionDirectSummary(revenueApi.getGroup());
             commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect() + revenueApi.getGroup());

@@ -21,9 +21,9 @@
       <li class="dropdown">
     	<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hoa hồng <span class="caret"></span></a>
         <ul class="dropdown-menu">			
-          <li> <a href="/manage/revenuePersonal">Hoa hồng trực tiếp</a></li>
-          <li><a href="/manage/revenueGroup">Hoa hồng nhóm</a></li>
-          <li><a href="/manage/revenue">Hoa hồng doanh thu</a></li>
+<!--           <li> <a href="/manage/revenuePersonal">Hoa hồng trực tiếp</a></li>
+          <li><a href="/manage/revenueGroup">Hoa hồng nhóm</a></li> -->
+          <li><a href="/manage/revenue">Hoa hồng quản lý nhóm</a></li>
         </ul>
       </li>
       <li id="li-revenue-month"><a href="/manage/revenueMonth">Doanh thu theo tháng</a></li>

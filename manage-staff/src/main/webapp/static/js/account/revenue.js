@@ -1,3 +1,4 @@
+var REVENUES = [];
 $(document).ready(
 		function() {
 			var curr = new Date; // get current date
@@ -31,6 +32,7 @@ $(document).ready(
  * @returns
  */
 function initTable(filterDate, type, num, firstday, lastday) {
+	REVENUES = [];
 	$.LoadingOverlay("show");
 	var formData = {};
 	var select;
@@ -109,6 +111,7 @@ function initTable(filterDate, type, num, firstday, lastday) {
 			},
 			dataSrc: function ( json ) {
             	$.LoadingOverlay("hide");
+            	REVENUES = json.data;
                 return json.data;
             }    
 		},
@@ -131,7 +134,45 @@ function initTable(filterDate, type, num, firstday, lastday) {
 		buttons : [{
 			extend : 'excelHtml5',
 			title : 'Hoa hồng doanh thu ' + nameFile
-		}]
+		},
+		{
+            text: 'Trả hoa hồng',
+            action: function ( e, dt, node, config ) {
+            	if(REVENUES.length == 0){
+            		alert('Không có thông tin hoa hồng!');
+            	}else{
+	            	 $.confirm({
+	         			title: 'Bạn chắc chắn muốn thanh toán hoa hồng?',
+	         			buttons: {
+	         				Ok: function(){
+	         					$.ajax({
+	         						type: "POST",
+	         						url:"/manage/saveRevenues",
+	         						data: JSON.stringify({lstRevenue:REVENUES}),
+	         						contentType: "application/json; charset=utf-8",
+	         						beforeSend: function(){
+	         							$.LoadingOverlay("show");
+	         			               },
+	         						success:function(response){
+	         							$.LoadingOverlay("hide");
+	         							alert(response.message);
+	         							if(response.result){
+	         								REVENUES = [];
+	         							}
+	         						},
+	         						error:function(response){
+	         							$.LoadingOverlay("hide");
+	         							alert("Hiện tại server đang bận!xin vui lòng thử lại sau.");
+	         						}
+	         					});
+	         				},
+	         				Cancel : function(){
+	         				}
+	         			}
+	         		});
+            	}
+            }
+        }]
 	});
 		
 	if (type === $('#radio-week').val()) {
