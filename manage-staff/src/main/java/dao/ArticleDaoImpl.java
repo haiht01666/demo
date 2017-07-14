@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +13,9 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 
 	@Override
 	public List<Article> getAllArticle() {
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
 		List<Article> result = new ArrayList<>();
 		String sql = "SELECT id,title,cdate,content,sub_title,author,status, image_url  FROM articles;";
 		try {
@@ -35,20 +38,15 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-					st.close();
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeConnectionS(conn,st,rs);
 		}
 		return result;
 	}
 	@Override
 	public List<Article> getArticlePage(int limit, int offset) {
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
 		List<Article> result = new ArrayList<>();
 		String sql = "SELECT id,title,cdate,content,sub_title,author,status, image_url  FROM articles order by cdate DESC LIMIT " + limit + " OFFSET " + offset;
 		try {
@@ -71,21 +69,16 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-					st.close();
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeConnectionS(conn,st,rs);
 		}
 		return result;
 	}
 
 	@Override
 	public Article getArticleById(int id) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		Article article = new Article();
 		String sql = "SELECT id,title,cdate,content,sub_title,author,status,image_url FROM articles where id=?;";
 		try {
@@ -107,21 +100,16 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-					stmt.close();
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeConnection(conn,stmt,rs);
 		}
 		return article;
 	}
 
 	@Override
 	public boolean existArticle(int id) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		String sql = "SELECT EXISTS(SELECT 1 FROM articles WHERE id=?) COUNT";
 		try {
 			conn = getConnection();
@@ -135,15 +123,7 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-					stmt.close();
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			closeConnection(conn,stmt,rs);
 		}
 		return false;
 	}
@@ -202,6 +182,9 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 	}
 	@Override
 	public int getNumberArticle(){
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
 		String sql = "SELECT count(*) FROM articles";
 		try {
 			conn = getConnection();

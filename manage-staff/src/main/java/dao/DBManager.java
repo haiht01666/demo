@@ -50,14 +50,34 @@ public class DBManager {
 	}
 
 	public void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs){
-		if (conn != null) {
-			try {
+		try {
+			if (conn != null) {
 				conn.close();
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void closeConnectionS(Connection conn, Statement st, ResultSet rs){
+		try {
+			if (conn != null) {
+				conn.close();
+			}
+			if (st != null) {
+				st.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

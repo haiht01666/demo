@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +12,12 @@ import model.Product;
 @Repository public class ProductDaoImpl extends DBManager implements ProductDao {
 
     @Override public List<Category> getAllCategory() {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
         List<Category> result = new ArrayList<>();
-        String sql = "SELECT id,name,category_key FROM categories;";
         try {
+            String sql = "SELECT id,name,category_key FROM categories";
             conn = getConnection();
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -29,20 +32,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    st.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnectionS(conn, st, rs);
         }
         return result;
     }
 
     @Override public List<Product> getAllProduct() {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
         List<Product> result = new ArrayList<>();
         String sql = "SELECT id,name,cdate,price, image_url FROM products";
         try {
@@ -62,20 +60,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    st.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnectionS(conn, st, rs);
         }
         return result;
     }
 
     @Override public int getNumberProducts() {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
         String sql = "SELECT count(*) FROM products";
         try {
             conn = getConnection();
@@ -87,20 +80,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    st.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnectionS(conn, st, rs);
         }
         return 0;
     }
 
     @Override public int getNumberProductsSearch(String searchStr) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String sql = "SELECT count(*) FROM products p where p.name LIKE ? || p.characteristic LIKE ? || p.description LIKE ?";
         try {
             conn = getConnection();
@@ -115,20 +103,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return 0;
     }
 
     @Override public int getNumberProductsCategory(String category) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String sql = "SELECT count(*) FROM products p join categories c on p.category_id = c.id WHERE c.category_key = ?";
         try {
             conn = getConnection();
@@ -141,20 +124,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return 0;
     }
 
     @Override public List<Product> getProductPage(int limit, int offset) {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
         List<Product> result = new ArrayList<>();
         String sql =
                 "SELECT p.id,p.name,p.cdate,p.price, p.image_url, c.category_key,c.name  FROM products p join categories c on p.category_id = c.id order by cdate DESC LIMIT "
@@ -177,20 +155,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    st.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnectionS(conn, st, rs);
         }
         return result;
     }
 
     @Override public Product getProductById(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Product product = new Product();
         String sql = "SELECT p.id,p.name,description,characteristic,price,category_id ,image_url,mail_product, c.name, c.category_key FROM products p  join categories c on p.category_id = c.id where p.id=?";
         try {
@@ -214,20 +187,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return product;
     }
 
     @Override public boolean existProduct(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String sql = "SELECT EXISTS(SELECT 1 FROM products WHERE id=?) COUNT";
         try {
             conn = getConnection();
@@ -241,15 +209,7 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return false;
     }
@@ -271,13 +231,18 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
+            try {
+                if (conn != null) {
                     conn.close();
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return result;
@@ -301,13 +266,18 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
+            try {
+                if (conn != null) {
                     conn.close();
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return result;
@@ -324,19 +294,27 @@ import model.Product;
         } catch (Exception ex) {
             return 0;
         } finally {
-            if (conn != null) {
-                try {
+            try {
+                if (conn != null) {
                     conn.close();
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return result;
     }
 
     @Override public boolean existCategory(String category) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String sql = "SELECT EXISTS(SELECT 1 FROM categories WHERE category_key=?) COUNT";
         try {
             conn = getConnection();
@@ -350,23 +328,17 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return false;
     }
 
     @Override public List<Product> getProductsByCategory(int limit, int offset, String category) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         List<Product> result = new ArrayList<>();
-        String sql =
-                "SELECT p.id,p.name,p.cdate,p.price, p.image_url, c.category_key,c.name  FROM products p join categories c on p.category_id = c.id WHERE c.category_key = ? order by cdate DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT p.id,p.name,p.cdate,p.price, p.image_url, c.category_key,c.name  FROM products p join categories c on p.category_id = c.id WHERE c.category_key = ? order by cdate DESC LIMIT ? OFFSET ?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -388,20 +360,15 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return result;
     }
 
     @Override public List<Product> searchProduct(int limit, int offset, String searchStr) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         List<Product> result = new ArrayList<>();
         String sql =
                 "SELECT p.id,p.name,p.cdate,p.price, p.image_url, c.category_key,c.name  FROM products p join categories c on p.category_id = c.id  where p.name LIKE ? || p.characteristic LIKE ? || p.description LIKE ? order by cdate DESC LIMIT "
@@ -427,17 +394,8 @@ import model.Product;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                    stmt.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeConnection(conn, stmt, rs);
         }
         return result;
     }
-
 }

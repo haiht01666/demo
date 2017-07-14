@@ -59,5 +59,9 @@ export default {
       nameCustomer: "KIỀU LINH",
       comment: `Thơm lắm, không lộ vân và không bết dính. Quá tiện lợi khi sử dụng sản phẩm.`
     },
-  ]
+  ],
+  common:{
+    pathname: '',
+    language:'vi'
+  }
 };

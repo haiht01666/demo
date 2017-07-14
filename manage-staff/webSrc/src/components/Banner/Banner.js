@@ -3,16 +3,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import 'owl.carousel/dist/assets/owl.carousel.css';
 require('owl.carousel');
-import '../../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css';
-import '../../../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css';
-require('../../../node_modules/owl.carousel/dist/owl.carousel.min');
+require('owl.carousel/dist/assets/owl.carousel.min.css');
+require('owl.carousel/dist/assets/owl.theme.default.min.css');
 
 
 class Banner extends React.Component {
   componentDidMount() {
     var owl = $('.owl-carousel');
+    console.log(owl);
     owl.owlCarousel({
       items: 1,
       loop: true,
@@ -24,12 +23,6 @@ class Banner extends React.Component {
       animateIn: 'fadeIn',
       smartSpeed: 1000
     });
-    // $('.play').on('click', function () {
-    //   owl.trigger('play.owl.autoplay', [1000])
-    // })
-    // $('.stop').on('click', function () {
-    //   owl.trigger('stop.owl.autoplay')
-    // })
   }
 
   render() {

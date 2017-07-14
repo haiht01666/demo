@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+require('../../static/web/libs/jquery.bxslider.min');
+// require('../../static/web/styles/jquery.bxslider.css');
 
-import 'owl.carousel/dist/assets/owl.carousel.css';
-require('owl.carousel');
-import '../../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css';
-import '../../../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css';
-require('../../../node_modules/owl.carousel/dist/owl.carousel.min.js');
 
 class CustomerComment extends React.Component {
   componentDidMount() {

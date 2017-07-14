@@ -253,8 +253,8 @@ import java.util.*;
 
             RevenueApi revenueApi = revenueService.getTotalRevenueInfo(userInfo.getSignUpDate(), userInfo.getId());
             commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect());
-            commissionInfoModel.setCommissionDirectSummary(revenueApi.getGroup());
-            commissionInfoModel.setCommissionDirectSummary(revenueApi.getDirect() + revenueApi.getGroup());
+            commissionInfoModel.setCommissionGroupSummary(revenueApi.getGroup());
+            commissionInfoModel.setCommissionTotalSummary(revenueApi.getDirect() + revenueApi.getGroup());
 
             // combo box list week
             int numberWeek = CommonUtils.numberWeekFromRegister(userInfo.getSignUpDate(), new Date());
