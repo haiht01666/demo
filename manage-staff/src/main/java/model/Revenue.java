@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 public class Revenue {
@@ -277,7 +279,9 @@ public class Revenue {
 	}
 
 	public Double getRevenueValue() {
-		return revenueValue;
+		return BigDecimal.valueOf(revenueValue)
+	    .setScale(3, RoundingMode.HALF_UP)
+	    .doubleValue();
 	}
 
 	public void setRevenueValue(Double revenueValue) {

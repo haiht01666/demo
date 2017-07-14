@@ -5,6 +5,7 @@ import java.util.Date;
 
 import model.Revenue;
 import model.RevenueApi;
+import model.Revenues;
 import model.User;
 
 public interface RevenueService {
@@ -26,4 +27,11 @@ public interface RevenueService {
 	public RevenueApi getTotalRevenueInfo(Date from,int userId )throws SQLException;
 	
 	public RevenueApi getRevenueInfo(Date from , Date to,int userId )throws SQLException;
+	
+	public Double getTotalRevenue(Date date, User user) throws SQLException;
+	
+	//Lấy ngày trả hoa hồng theo tuần mới nhất.
+	public Date getDateRevenue(int id) throws SQLException;
+	
+	public int saveRevenues(Revenues lstRevenue)throws SQLException;
 }

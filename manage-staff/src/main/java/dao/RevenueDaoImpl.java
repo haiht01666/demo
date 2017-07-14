@@ -12,13 +12,15 @@ import constant.RevenueType;
 import constant.TimePeriodCheck;
 import model.Revenue;
 import model.RevenueApi;
+import model.RevenueForm;
+import model.Revenues;
 import model.User;
 
 @Repository
-public class RevenueDaoImpl extends DBManager implements RevenueDao{
+public class RevenueDaoImpl extends DBManager implements RevenueDao {
 
 	@Override
-	public boolean isActive(int id , Date date) throws SQLException {
+	public boolean isActive(int id, Date date) throws SQLException {
 		String sql = "Select cdate from orders where  type = ? and user_id = ? order by cdate desc";
 		try {
 			Date cdate = null;
@@ -27,18 +29,18 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
 			stmt.setInt(2, id);
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				cdate = rs.getDate(1);
 				break;
 			}
-			if(cdate == null)
+			if (cdate == null)
 				return false;
-			else{
+			else {
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(cdate);
-				cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_30 -1);
+				cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_30 - 1);
 				cal = CommonUtils.setMaxHour(cal);
-				if(date.after(cal.getTime()))
+				if (date.after(cal.getTime()))
 					return false;
 				else
 					return true;
@@ -54,7 +56,7 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 	}
 
 	@Override
-	public Date getProactiveDateCurrent(Date date,int userId) throws SQLException {
+	public Date getProactiveDateCurrent(Date date, int userId) throws SQLException {
 		String sql = "Select cdate from orders where  type = ? and user_id = ? and date_format(cdate, '%Y-%m-%d') <= ?";
 		try {
 			Date cdate = null;
@@ -64,7 +66,7 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setInt(2, userId);
 			stmt.setDate(3, new java.sql.Date(date.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				cdate = rs.getDate(1);
 				return cdate;
 			}
@@ -81,7 +83,7 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 	}
 
 	@Override
-	public boolean isProActive(int userId, Date date) throws SQLException{
+	public boolean isProActive(int userId, Date date) throws SQLException {
 		String sql = "Select cdate from orders where  type = ? and user_id = ? and date_format(cdate, '%Y-%m-%d') = ?";
 		try {
 			conn = getConnection();
@@ -93,7 +95,7 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			cal.add(Calendar.DATE, -30);
 			stmt.setDate(3, new java.sql.Date(cal.getTime().getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -119,7 +121,7 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setDate(3, new java.sql.Date(fromDate.getTime()));
 			stmt.setDate(4, new java.sql.Date(endDate.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				result += rs.getDouble(1);
 			}
 		} catch (Exception e) {
@@ -142,27 +144,27 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			int revenueId = 0;
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql1);
-			//check revenue exist
+			// check revenue exist
 			stmt.setInt(2, revenue.getType());
 			stmt.setInt(3, user.getId());
 			stmt.setDate(1, new java.sql.Date(cate.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				revenueId += rs.getInt(1);
 			}
-			if(revenueId > 0){
-				//if exist
+			if (revenueId > 0) {
+				// if exist
 				stmt = conn.prepareStatement(sql3);
 				stmt.setDouble(1, revenue.getRevenueValue());
 				stmt.setInt(2, revenueId);
 				return stmt.executeUpdate();
-			}else{
+			} else {
 				stmt = conn.prepareStatement(sql2);
 				stmt.setString(1, revenue.getOrderName());
 				stmt.setDate(2, new java.sql.Date(cate.getTime()));
 				stmt.setInt(3, user.getId());
 				stmt.setDouble(4, revenue.getRevenueValue());
-				stmt.setInt(5,  revenue.getType());
+				stmt.setInt(5, revenue.getType());
 				return stmt.executeUpdate();
 			}
 		} catch (Exception e) {
@@ -176,11 +178,11 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 	}
 
 	@Override
-	public RevenueApi getRevenueInfo(Date cdate,int userId) throws SQLException {
+	public RevenueApi getRevenueInfo(Date cdate, int userId) throws SQLException {
 		RevenueApi result = new RevenueApi();
-		String sql= "select value from revenues where user_id = ? and cdate <= ? and type = ?";
-		
-		String sql1= "select value from revenues where user_id = ? and cdate <= ? and (type = ? || type = ? || type = ?)";
+		String sql = "select value from revenues where user_id = ? and cdate <= ? and type = ?";
+
+		String sql1 = "select value from revenues where user_id = ? and cdate <= ? and (type = ? || type = ? || type = ?)";
 		try {
 			Double revenueDirect = 0.0;
 			Double revenueGroup = 0.0;
@@ -190,12 +192,12 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setInt(1, userId);
 			stmt.setDate(2, new java.sql.Date(cdate.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
-				//get hoa hồng trực tiếp
+			while (rs.next()) {
+				// get hoa hồng trực tiếp
 				revenueDirect += rs.getDouble(1);
 			}
 			result.setDirect(revenueDirect);
-			
+
 			stmt = conn.prepareStatement(sql1);
 			stmt.setInt(3, RevenueType.WEEK.getValue());
 			stmt.setInt(4, RevenueType.MONTH.getValue());
@@ -203,8 +205,8 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setInt(1, userId);
 			stmt.setDate(2, new java.sql.Date(cdate.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
-				//get hoa hồng nhóm
+			while (rs.next()) {
+				// get hoa hồng nhóm
 				revenueGroup += rs.getDouble(1);
 			}
 			result.setGroup(revenueGroup);
@@ -221,9 +223,9 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 	@Override
 	public RevenueApi getRevenueInfo(Date from, Date to, int userId) throws SQLException {
 		RevenueApi result = new RevenueApi();
-		String sql= "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and type = ?";
-		
-		String sql1= "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and (type = ? || type = ? || type = ?)";
+		String sql = "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and type = ?";
+
+		String sql1 = "select value from revenues where user_id = ? and (date_format(cdate, '%Y-%m-%d') between ? and ?) and (type = ? || type = ? || type = ?)";
 		try {
 			Double revenueDirect = 0.0;
 			Double revenueGroup = 0.0;
@@ -234,12 +236,12 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setDate(2, new java.sql.Date(from.getTime()));
 			stmt.setDate(3, new java.sql.Date(to.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
-				//get hoa hồng trực tiếp
+			while (rs.next()) {
+				// get hoa hồng trực tiếp
 				revenueDirect += rs.getDouble(1);
 			}
 			result.setDirect(revenueDirect);
-			
+
 			stmt = conn.prepareStatement(sql1);
 			stmt.setInt(4, RevenueType.WEEK.getValue());
 			stmt.setInt(5, RevenueType.MONTH.getValue());
@@ -248,8 +250,8 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.setDate(2, new java.sql.Date(from.getTime()));
 			stmt.setDate(3, new java.sql.Date(to.getTime()));
 			rs = stmt.executeQuery();
-			while(rs.next()){
-				//get hoa hồng nhóm
+			while (rs.next()) {
+				// get hoa hồng nhóm
 				revenueGroup += rs.getDouble(1);
 			}
 			result.setGroup(revenueGroup);
@@ -260,6 +262,90 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao{
 			stmt.close();
 			rs.close();
 		}
+		return result;
+	}
+
+	@Override
+	public Double getTotalRevenue(Date date, int userID) throws SQLException {
+		Double result = 0.0;
+		String sql = "SELECT sum(total) as total FROM orders where user_id=? and cdate <= ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.setDate(2, new java.sql.Date(date.getTime()));
+			// stmt.setInt(4, OrderType.ORDER_PRODUCT.getCode());
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				result = rs.getDouble(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
+	}
+
+	@Override
+	public Date getDateRevenue(int id) throws SQLException {
+		String sql = "SELECT cdate from revenues where user_id = ? and type = ? order by cdate desc";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.setInt(2, RevenueType.WEEK.getValue());
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				return rs.getDate(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return null;
+	}
+
+	@Override
+	public int saveRevenues(Revenues lstRevenue) throws SQLException {
+		String sql = "insert into revenues(name,cdate,user_id,value,type) values (?,?,?,?,?)";
+		int result = 0;
+		try {
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(sql);
+
+			if (lstRevenue != null) {
+				for (Revenue revenue : lstRevenue.getLstRevenue()) {
+					if (revenue.getRevenueValue() > 0) {
+						stmt.setString(1, revenue.getOrderName());
+						stmt.setDate(2, new java.sql.Date(revenue.getCdate().getTime()));
+						stmt.setInt(3, revenue.getReceiverId());
+						stmt.setDouble(4, revenue.getRevenueValue());
+						stmt.setInt(5, revenue.getType());
+						result += stmt.executeUpdate();
+					}
+				}
+			}
+			conn.commit();
+
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+
 		return result;
 	}
 }
