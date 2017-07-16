@@ -22,6 +22,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 // require('tether');
 require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
+import './static/web/styles/styles.scss';
 
 const store = configureStore();
 store.dispatch(changeLaguage('vi'));
