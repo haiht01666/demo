@@ -301,7 +301,7 @@ import java.util.*;
             if (StringUtils.isNotEmpty(timeDetail)) {
                 if (time.equals("weekly")) {
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    TimeModel timeModel = CommonUtils.getTimeWeek(Integer.parseInt(timeDetail));
+                    TimeModel timeModel = CommonUtils.getTimeWeekData(numberWeek - Integer.parseInt(timeDetail));
                     form.setCdate(new Date());
                     form.setDateFrom(df.parse(timeModel.getStartDate()));
                     form.setDateTo(df.parse(timeModel.getEndDate()));

@@ -6,6 +6,7 @@ import org.joda.time.*;
 
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
  * Created by BlueSky on 4/12/2017.
  */
 public class CommonUtils {
+
     public static String getLevelChild(String parentId, String childId) {
         int level = 0;
         if (!StringUtils.isEmpty(parentId) && childId.contains(parentId)) {
@@ -29,6 +31,22 @@ public class CommonUtils {
         c.add(Calendar.DATE, (weekPeriosNumber) * (-7));
         // Set the calendar to monday of the current week
         c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c.add(Calendar.DATE, -2);
+        //cal start date, end date
+        TimeModel timeModel = new TimeModel();
+        timeModel.setStartDate(df1.format(c.getTime()));
+        c.add(Calendar.DATE, 6);
+        timeModel.setEndDate(df1.format(c.getTime()));
+        return timeModel;
+    }
+
+    public static TimeModel getTimeWeekData(int weekPeriosNumber) {
+        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, (weekPeriosNumber) * (-7));
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c.add(Calendar.DATE, -1);
         //cal start date, end date
         TimeModel timeModel = new TimeModel();
         timeModel.setStartDate(df1.format(c.getTime()));
@@ -53,21 +71,49 @@ public class CommonUtils {
     }
 
     public static int numberWeekFromRegister(Date dateRegister, Date caculateDate) {
+        int numberWeek = 0;
         DateTime dateStartTmp = new DateTime(dateRegister);
-        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.MONDAY);
         DateTime dateEndTmp = new DateTime(caculateDate);
-        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.SUNDAY);
-        if(dateStart.isAfter(dateEnd)){
+        DateTime firstDate = dateStartTmp;
+        DateTime lastDate = dateEndTmp;
+
+        if(dateStartTmp.isAfter(dateEndTmp)){
             return 0;
         }
-        return Weeks.weeksBetween(dateStart, dateEnd).getWeeks() + 1;
+
+        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.SATURDAY);
+        if(dateStartTmp.isBefore(dateStart)){
+            numberWeek += 1;
+            firstDate = dateStart;
+        }
+
+        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.FRIDAY);
+        if(dateEnd.isBefore(dateEndTmp)){
+            numberWeek += 1;
+            lastDate  = dateEnd;
+        }
+
+        while (firstDate.isBefore(lastDate)){
+            Calendar c = Calendar.getInstance();
+            c.setTime(firstDate.toDate());
+            c.add(Calendar.DATE, 7);
+            firstDate = new DateTime(c.getTime());
+            numberWeek  += 1;
+        }
+        return numberWeek;
     }
 
     public static int numberMonthFromRegister(Date dateRegister, Date caculateDate) {
         DateTime dateStartTmp = new DateTime(dateRegister);
-        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.MONDAY);
+        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.SATURDAY);
+        if(dateStartTmp.isBefore(dateStart)){
+            dateStart = dateStartTmp;
+        }
         DateTime dateEndTmp = new DateTime(caculateDate);
-        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.SUNDAY);
+        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.FRIDAY);
+        if(dateEndTmp.isAfter(dateEnd)){
+            dateEnd = dateEndTmp;
+        }
         if(dateStart.isAfter(dateEnd)){
             return 0;
         }
@@ -75,19 +121,31 @@ public class CommonUtils {
     }
     public static int numberYearFromRegister(Date dateRegister, Date caculateDate) {
         DateTime dateStartTmp = new DateTime(dateRegister);
-        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.MONDAY);
+        DateTime dateStart = dateStartTmp.withDayOfWeek(DateTimeConstants.SATURDAY);
+        if(dateStartTmp.isBefore(dateStart)){
+            dateStart = dateStartTmp;
+        }
         DateTime dateEndTmp = new DateTime(caculateDate);
-        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.SUNDAY);
+        DateTime dateEnd = dateEndTmp.withDayOfWeek(DateTimeConstants.FRIDAY);
+        if(dateEndTmp.isAfter(dateEnd)){
+            dateEnd = dateEndTmp;
+        }
         if(dateStart.isAfter(dateEnd)){
             return 0;
         }
         return Years.yearsBetween(dateStart, dateEnd).getYears() + 1;
     }
+
     public static Calendar setMaxHour(Calendar cal){
     	cal.set(Calendar.HOUR_OF_DAY, 23);
 		cal.set(Calendar.MINUTE, 59);
 		cal.set(Calendar.SECOND, 59);
 		cal.set(Calendar.MILLISECOND, 59);
     	return cal;
+    }
+
+    public static void main(String[] arg) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.print(CommonUtils.numberWeekFromRegister(df.parse("08/07/2017"), new Date()));
     }
 }
