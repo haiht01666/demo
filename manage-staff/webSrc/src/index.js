@@ -8,11 +8,12 @@ import Root from './components/Root';
 
 import configureStore from './store/configureStore';
 import {loadTopProducts, loadProducts} from './actions/productsActions';
+import {changeLaguage} from './actions/commonActions';
 import {loadTopArticles} from './actions/articlesActions';
 import {loadCategories} from './actions/categoryActions';
 
 // require('./favicon.ico'); // Tell webpack to load favicon.ico
-// import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
+ // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
 import { syncHistoryWithStore } from 'react-router-redux';
 // import 'tether';
 // import 'jquery';
@@ -23,6 +24,7 @@ require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
 
 const store = configureStore();
+store.dispatch(changeLaguage('vi'));
 store.dispatch(loadTopProducts());
 store.dispatch(loadProducts(10,0));
 store.dispatch(loadTopArticles());

@@ -6,3 +6,10 @@ export function changePathName(pathname) {
     pathname
   };
 }
+
+export function changeLaguage(language) {
+  return {
+    type: types.CHANGE_LANGUAGE,
+    language
+  };
+}

@@ -12,38 +12,41 @@ import {browserHistory} from 'react-router';
 import Pagination from 'rc-pagination';
 
 class ProductsPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(page){
-    window.scrollTo(0,0);
-    if(this.props.category != null) {
-      this.props.actions.loadProductsWithCategory(10,(page - 1)*10,this.props.category);
-    }else{
-      this.props.actions.loadProducts(10,(page - 1)*10);
+  onChange(page) {
+    window.scrollTo(0, 0);
+    if (this.props.category != null) {
+      this.props.actions.loadProductsWithCategory(10, (page - 1) * 10, this.props.category);
+    } else {
+      this.props.actions.loadProducts(10, (page - 1) * 10);
     }
     this.props.actions.setCurrentPage(page);
   }
-  componentDidMount(){
+
+  componentDidMount() {
     $('.titleSpecial').hide();
   }
-  handleClickProducts(e, category_key){
+
+  handleClickProducts(e, category_key) {
     e.preventDefault();
-    if(category_key != null) {
-      this.props.actions.loadProductsWithCategory(10,0,category_key);
+    if (category_key != null) {
+      this.props.actions.loadProductsWithCategory(10, 0, category_key);
       browserHistory.push(`/sanpham/${category_key}`);
-    }else{
-      this.props.actions.loadProducts(10,0);
+    } else {
+      this.props.actions.loadProducts(10, 0);
       browserHistory.push(`/sanpham`);
     }
   }
+
   render() {
     let categoryName = '';
-    if(this.props.category != null){
-      this.props.categories.forEach((item)=>{
-        if(item.category_key == this.props.category){
+    if (this.props.category != null) {
+      this.props.categories.forEach((item) => {
+        if (item.category_key == this.props.category) {
           categoryName = item.name;
         }
       });
@@ -54,23 +57,29 @@ class ProductsPage extends React.Component {
         <div id="main">
           <div className="container">
             <div className="row">
+              <div className="col-xs-12 col-md-12">
                 <div className="title-global">
-                  <h2 className="productDetailSpecial"><Link to={`/sanpham`} onClick={(e)=>{this.handleClickProducts(e, null)}}>Sản Phẩm</Link>{this.props.category != null ? ' > ' + categoryName : ''}</h2>
+                  <h2 className="productDetailSpecial"><Link to={`/sanpham`} onClick={(e) => {
+                    this.handleClickProducts(e, null)
+                  }}>{this.props.message.productTitle}</Link>{this.props.category != null ? ' > ' + categoryName : ''}
+                  </h2>
                   <div className="clearfix"/>
                 </div>
-              <Products
-                productTitle=""
-                productList={this.props.products}/>
-              <div style={{float: 'right', paddingBottom: '20px'}}>
-                <Pagination onChange={this.onChange} current={this.props.currentPage} total={this.props.numberPage} pageSize={10} />
+                <Products
+                  productTitle=""
+                  productList={this.props.products}/>
+                <div style={{float: 'right', paddingBottom: '20px'}}>
+                  <Pagination onChange={this.onChange} current={this.props.currentPage} total={this.props.numberPage}
+                              pageSize={10}/>
+                </div>
               </div>
             </div>
           </div>
           {/*<div className="container">*/}
-            {/*<div className="row">*/}
-              {/*<CustomerComment/>*/}
-              {/*<NewFeeds/>*/}
-            {/*</div>*/}
+          {/*<div className="row">*/}
+          {/*<CustomerComment/>*/}
+          {/*<NewFeeds/>*/}
+          {/*</div>*/}
           {/*</div>*/}
         </div>
         <Footer/>
@@ -82,9 +91,10 @@ const mapStateToProps = (state, ownProps) => {
   return {
     category: ownProps.routeParams.category,
     products: state.products.data,
-    categories : state.categories,
-    numberPage : state.products.numberPage,
-    currentPage : state.products.currentPage
+    categories: state.categories,
+    numberPage: state.products.numberPage,
+    currentPage: state.products.currentPage,
+    message: state.common.message,
   };
 };
 
@@ -93,7 +103,6 @@ const mapDispatchToProps = (dispatch) => {
     actions: bindActionCreators(actions, dispatch)
   };
 };
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);

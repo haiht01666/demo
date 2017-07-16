@@ -44,7 +44,7 @@ class HomePage extends React.Component {
               <CustomerComment/>
             </div>
             <Products productList={this.props.products}
-                      productTitle="SẢM PHẦM CHỦ ĐẠO"
+                      productTitle={this.props.message.mainProducts}
             />
           </div>
         </div>
@@ -57,6 +57,7 @@ class HomePage extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     products: state.products.topProducts,
+    message: state.common.message
   };
 };
 

@@ -16,7 +16,7 @@ class NewFeeds extends React.Component {
           <div className="">
             <div className="">
               <div className="">
-                <div className="global-title"><h2>Tư vấn sức khỏe - làm đẹp</h2>
+                <div className="global-title"><h2>{this.props.message.beautyConsultant}</h2>
                   <div className="clearfix"/>
                 </div>
                 <div className="clearfix"/>
@@ -34,7 +34,7 @@ class NewFeeds extends React.Component {
                                     <div className="row">
                                       <div className="col-xs-4">
                                         <div className="row">
-                                          <div className="image">
+                                          <div className="image" id="newFeed-img">
                                             <Link to={"/tintuc/" + item.id} title={item.title}><img
                                               src={'http://localhost:8080' + item.imageUrl}
                                               className="img-responsive"
@@ -75,6 +75,7 @@ class NewFeeds extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     news: state.news.topNews,
+    message: state.common.message
   };
 };
 

@@ -22,7 +22,7 @@ class NewsDetail extends React.Component {
                   <div className="text-center">
                     <figure className="caption"><img alt="" height="435"
                                                      src={'http://localhost:8080'+this.props.newsDetail.imageUrl}
-                                                     width="695"/>
+                                                     width="auto"/>
                       <figcaption className="figcaption" style={{fontStyle: 'italic', paddingTop: '10px', paddingBottom: '10px'}}>{this.props.newsDetail.title}</figcaption>
                     </figure>
                   </div>
@@ -35,7 +35,7 @@ class NewsDetail extends React.Component {
                   </div>
 
                   <div className="other-news">
-                    <h3>Thông tin khác</h3>
+                    <h3>{this.props.message.otherNews}</h3>
                     <ul>
                       {this.props.topNews.filter((item)=>{return item.id != this.props.id}).map((item, index)=>{
                         return(
@@ -60,7 +60,8 @@ const mapStateToProps = (state, ownProps) => {
     id: state.newsDetail.id,
     newsDetail: state.newsDetail,
     news : state.news.data,
-    topNews: state.news.topNews
+    topNews: state.news.topNews,
+    message: state.common.message
   };
 };
 

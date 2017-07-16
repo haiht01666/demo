@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import {connect} from 'react-redux';
 
 class AboutPage extends React.Component {
   render() {
@@ -10,8 +11,8 @@ class AboutPage extends React.Component {
         <div id="main">
           <div className="container">
             <div className="row">
-              <div className="global-title">
-                <h2 className="">Liên hệ</h2>
+              <div className="col-xs-12 col-md-12 global-title">
+                <h2 className="">{this.props.message.contact}</h2>
                 <div className="clearfix"/>
               </div>
           </div>
@@ -23,4 +24,15 @@ class AboutPage extends React.Component {
   }
 }
 
-export default AboutPage;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    message: state.common.message
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AboutPage);

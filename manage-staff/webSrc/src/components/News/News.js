@@ -50,7 +50,7 @@ class News extends React.Component {
                           </div>
                           <div className="content">
                             <div className="row-8">
-                              <div className="col-xs-3 col-8">
+                              <div className="col-xs-3">
                                 <Link to={"/tintuc/" + item.id}
                                    title={item.title}>
                                   <img className="img-responsive image-thumb"
@@ -85,8 +85,8 @@ class News extends React.Component {
             </div>
           </div>
           <div className="clearfix"/>
-          <div style={{float: 'right', paddingBottom: '20px'}}>
-            <Pagination onChange={this.onChange} current={this.state.page} total={this.props.numberPage} pageSize={10} />
+          <div style={{width: '100%', paddingBottom: '20px'}}>
+            <Pagination style={{float: 'right'}}onChange={this.onChange} current={this.state.page} total={this.props.numberPage} pageSize={10} />
           </div>
         </div>
       </div>

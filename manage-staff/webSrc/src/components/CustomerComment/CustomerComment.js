@@ -28,7 +28,7 @@ class CustomerComment extends React.Component {
             <div className="">
               <div className="">
                 <div className="">
-                  <div className="global-title"><h2>Ý kiến khách hàng</h2>
+                  <div className="global-title"><h2>{this.props.message.comment}</h2>
                     <div className="clearfix"/>
                   </div>
                   <div className="clearfix"/>
@@ -76,6 +76,7 @@ CustomerComment.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     customer: state.customer,
+    message: state.common.message
   };
 };
 

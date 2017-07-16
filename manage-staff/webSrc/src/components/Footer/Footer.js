@@ -9,17 +9,17 @@ class Footer extends React.Component {
         <div className="inner clearfix">
           <div className="container">
 
-            <div className="row bottom">
+            <div className="bottom">
               <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                 <nav className="nav">
                   <ul>
                     <li>
                       <a href="#" title="">
-                        THÔNG TIN LIÊN HỆ
+                        {this.props.message.contactInfo}
                       </a>
                       <p><strong>Công ty TNHH {this.props.info.congty}</strong><br/></p>
-                      <p><strong>Địa chỉ: </strong>{this.props.info.diachi}</p>
-                      <p><strong>Điện thoại: </strong>{this.props.info.dienthoai}</p>
+                      <p><strong>{this.props.message.address}: </strong>{this.props.info.diachi}</p>
+                      <p><strong>{this.props.message.phone}: </strong>{this.props.info.dienthoai}</p>
                       <p><strong>Email: </strong>{this.props.info.email}</p>
                       <p>&nbsp;</p>
                     </li>
@@ -46,6 +46,7 @@ class Footer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     info: state.info,
+    message: state.common.message
   };
 };
 

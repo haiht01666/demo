@@ -62,6 +62,45 @@ export default {
   ],
   common:{
     pathname: '',
-    language:'vi'
+    language:'vi',
+    message: {}
+  },
+  viMessage : {
+    login: 'ĐĂNG NHẬP',
+    index: 'TRANG CHỦ',
+    intro: 'GIỚI THIỆU',
+    product: 'SẢN PHẨM',
+    news: 'TIN TỨC',
+    contact: 'LIÊN HỆ',
+    comment: 'Ý KIẾN KHÁCH HÀNG',
+    beautyConsultant: 'TƯ VẤN SỨC KHỎE - LÀM ĐẸP',
+    mainProducts: 'SẢN PHẨM CHỦ ĐẠO',
+    productInfo: 'Thông tin sản phẩm',
+    highlightsFeatures: 'Đặc điểm nổi bật',
+    productTitle: 'Sản phẩm',
+    contactCompany: 'GIỚI THIỆU CÔNG TY',
+    contactInfo: 'Thông TIN LIÊN HỆ',
+    address: 'Địa chỉ',
+    phone: 'Điện thoại',
+    otherNews: 'Thông tin khác'
+  },
+  enMessage: {
+    login: 'Login',
+    index: 'HOME',
+    intro: 'INTRODUCE',
+    product: 'PRODUCTS',
+    news: 'NEWS',
+    contact: 'CONTACT',
+    comment: 'CUSTOMER COMMENT',
+    beautyConsultant: 'Beauty Consultant',
+    mainProducts: 'MAIN PRODUCTS',
+    productInfo: 'Product Infomation',
+    highlightsFeatures: 'Highlights Features',
+    productTitle: 'Product',
+    contactCompany: 'Contact Detail',
+    contactInfo: 'CONTACT INFO',
+    address: 'Adress',
+    phone: 'phone',
+    otherNews: 'More News'
   }
 };

@@ -11,7 +11,6 @@ require('owl.carousel/dist/assets/owl.theme.default.min.css');
 class Banner extends React.Component {
   componentDidMount() {
     var owl = $('.owl-carousel');
-    console.log(owl);
     owl.owlCarousel({
       items: 1,
       loop: true,

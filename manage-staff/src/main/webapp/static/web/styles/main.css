@@ -2055,7 +2055,14 @@ pre code {
 .container-fluid {
   padding-left: 5px;
   padding-right: 5px;
-  background-image: url(../images/bgdot-bottom.png);
+  /*background-image: url(../images/bgdot-bottom.png);*/
+}
+
+#main .container {
+  background-color: #fafcfc;
+}
+#head-nav, #header .head-row{
+  background-color: #f5f7f6;
 }
 
 .pre-scrollable {
@@ -10667,7 +10674,7 @@ textarea {
 }
 
 .expandContactDetail label {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .expandContactDetail img {
@@ -10715,7 +10722,7 @@ textarea {
 }
 
 #header .navbar {
-  height: 50px;
+  height: 100px;
   border: none;
   /*border-bottom: 1px solid #ccc;*/
   margin: 0;
@@ -11589,7 +11596,7 @@ a.sb-button:hover {
 }
 
 .product-detail .top-detail {
-  background: url(../images/bgdot.png) 0 100% repeat-x;
+  /*background: url(../images/bgdot.png) 0 100% repeat-x;*/
   padding-bottom: 65px
 }
 
@@ -11966,7 +11973,7 @@ a.sb-button:hover {
 .product-detail .comment,
 .product-detail .product-info,
 .product-detail .services {
-  background: url(../images/bgdot.png) 0 100% repeat-x;
+  /*background: url(../images/bgdot.png) 0 100% repeat-x;*/
   padding-bottom: 65px
 }
 
@@ -18061,6 +18068,10 @@ a.sb-button:hover {
   font-size: 20px !important;
   font-family: initial !important;
   color: black !important;
+  z-index: 999;
+}
+.productDetailSpecial a:hover{
+  text-decoration: none;
 }
 
 .productDetailSearch{
@@ -18354,4 +18365,76 @@ a.sb-button:hover {
 
 .editorColor{
   color:rgb(29, 33, 41)
+}
+
+.my-carousel{
+  padding-top: 10px;
+}
+
+.head-logo{
+  width: 270px;
+}
+.head-ul{
+  font-size: 20px;
+  font-family: "SFUHelveticaLight";
+}
+#head-nav .head-ul li>.nav-link{
+  color: rgb(7, 103, 82);
+  font-family: serif;
+}
+.head-ul li{
+  padding-left: 7px;
+  padding-right: 7px;
+  text-transform: uppercase;
+}
+.head-ul li .nav-link:hover{
+  background-color: rgba(211, 239, 245, 0.69);
+  border-bottom: 1px solid green;
+}
+
+#head-nav .head-ul .active .nav-link{
+  border-bottom: 1px solid green;
+}
+
+#head-nav .head-ul .dropdown-menu{
+  font-size: 15px;
+  color: rgb(7, 103, 82);
+}
+
+#head-nav .head-ul .dropdown-item{
+  color: rgb(7, 103, 82);
+}
+#head-nav{
+  height: 200px;
+}
+
+@media (max-width: 991px){
+  .head-logo{
+    position: absolute;
+    left: 35%;
+    top: -30px;
+  }
+
+  #head-navbar{
+    z-index: 10;
+  }
+
+  .head-content{
+    z-index: 1;
+  }
+
+  #head-nav .head-ul .active .nav-link{
+    border-bottom: none;
+    background-color: rgba(211, 239, 245, 0.69);
+  }
+}
+
+.fanpageDiv iframe{
+  float: right;
+}
+
+#newFeed-img img{
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

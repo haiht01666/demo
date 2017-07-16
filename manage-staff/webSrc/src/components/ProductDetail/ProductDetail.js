@@ -48,7 +48,7 @@ class ProductDetail extends React.Component {
 
               <div className="product-info">
                 <div className="title-global">
-                  <h2>Đặc điểm nổi bật</h2>
+                  <h2>{this.props.message.highlightsFeatures}</h2>
                   <div className="clearfix"/>
                 </div>
                 <div className="editor">
@@ -57,12 +57,11 @@ class ProductDetail extends React.Component {
               </div>
               <div className="product-info">
                 <div className="title-global">
-                  <h2>Thông tin sản phẩm</h2>
+                  <h2>{this.props.message.productInfo}</h2>
                   <div className="clearfix"/>
                 </div>
                 <div className="editor">
                   <div dangerouslySetInnerHTML={{ __html: this.props.productDetail.detail }} />
-
                 </div>
 
               </div>
@@ -76,6 +75,7 @@ class ProductDetail extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    message: state.common.message,
     productDetail: state.productDetail,
   };
 };
