@@ -18438,3 +18438,11 @@ a.sb-button:hover {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+#navbarNavDropdown{
+  width: 100%;
+}
+
+#head-nav{
+  width: 100%;
+}

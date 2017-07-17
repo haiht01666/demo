@@ -32,7 +32,8 @@ class Footer extends React.Component {
               <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 googleMapDiv">
                 <iframe src="https://www.google.com/maps/d/embed?mid=1z5z4nPaMp_U0VFcKcEL2v6CDZLE"
                         className="googleMap"/>
-                <div className="totalAccess text-right"><p>Tổng số lượt truy cập: </p>
+                <div className="totalAccess text-right">
+                  {/*<p>Tổng số lượt truy cập: </p>*/}
                 </div>
               </div>
             </div>
