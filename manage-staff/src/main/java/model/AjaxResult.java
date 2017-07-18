@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class AjaxResult {
     /**
      * Result data
@@ -11,8 +13,18 @@ public class AjaxResult {
     private boolean result;
 
     private long numberRecord;
+    
+    private List<Banner> data;
 
-    public String getMessage() {
+    public List<Banner> getData() {
+		return data;
+	}
+
+	public void setData(List<Banner> data) {
+		this.data = data;
+	}
+
+	public String getMessage() {
         return message;
     }
 

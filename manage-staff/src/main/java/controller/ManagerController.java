@@ -1,13 +1,18 @@
 package controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,15 +20,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import constant.OrderType;
 import model.AjaxResult;
+import model.Article;
+import model.ArticleResult;
+import model.Banner;
 import model.EditRoleForm;
 import model.Order;
 import model.Revenue;
 import model.RevenueForm;
 import model.RevenueResult;
 import model.Revenues;
+import model.UploadResult;
 import model.User;
 import service.ManageService;
 import service.RevenueService;
@@ -31,6 +41,8 @@ import service.RevenueService;
 @Controller
 @RequestMapping("manage")
 public class ManagerController {
+	@Autowired
+	ServletContext context;
 
 	@Autowired
 	private HttpSession session;
@@ -286,6 +298,69 @@ public class ManagerController {
 			result.setResult(false);
 			result.setMessage("Lưu thông tin thất bại!");
 		}
+		return result;
+	}
+	
+	@RequestMapping(value = { "/banner" }, method = RequestMethod.GET)
+	public String banner(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "account/banner";
+	}
+
+	@RequestMapping(value = { "/getAllBanner" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getAllBanner() throws SQLException {
+		AjaxResult result = new AjaxResult();
+		result.setData(service.getAllBanner());
+		return result;
+	}
+	
+	@RequestMapping(value = "/uploadBanner", method = RequestMethod.POST)
+	public @ResponseBody UploadResult singleSave(@RequestParam("file") MultipartFile file) {
+		UploadResult result = new UploadResult();
+		String fileName = null;
+		if (!file.isEmpty()) {
+			try {
+				String relativeWebPath = "/static/images/banner";
+				String absoluteFilePath = context.getRealPath(relativeWebPath);
+				fileName = file.getOriginalFilename();
+				File uploadedFile = new File(absoluteFilePath, fileName);
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+				buffStream.write(bytes);
+				buffStream.close();
+				result.setMsg("Upload thành công!");
+				result.setPathFile(relativeWebPath+"/"+fileName);
+			} catch (Exception e) {
+				result.setMsg("Upload thất bại !");
+			}
+		} else {
+			result.setMsg("Không thể upload file trống !");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = { "/createBanner" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult createBanner(@RequestBody Banner form) throws NoSuchMessageException, SQLException {
+		AjaxResult result = new AjaxResult();
+		if (form != null) {
+			if (service.createBanner(form) == 0) {
+				result.setResult(false);
+				result.setMessage("Tạo banner thất bại!");
+			} else {
+				result.setResult(true);
+				result.setResultData(form);
+			}
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = { "/deleteBanner" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult deleteArticle(@RequestBody Banner form) throws SQLException {
+		AjaxResult result = new AjaxResult();
+		result.setResultData(service.deleteBanner(form.getId()));
+		result.setResult(true);
 		return result;
 	}
 	

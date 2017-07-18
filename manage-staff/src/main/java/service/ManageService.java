@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import model.Banner;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
@@ -45,4 +46,11 @@ public interface ManageService {
     Double apiGetRevenue(RevenueForm form) throws SQLException;
     
     Double totalOrderValue(Date start , Date end) throws SQLException;
+    
+    public List<Banner> getAllBanner()throws SQLException;
+    
+    public int createBanner(Banner banner) throws SQLException;
+    
+    public int deleteBanner(int id) throws SQLException;
+    
 }

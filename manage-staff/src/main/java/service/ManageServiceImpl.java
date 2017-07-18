@@ -853,4 +853,21 @@ public class ManageServiceImpl implements ManageService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Banner> getAllBanner() throws SQLException {
+		return dao.getAllBanner();
+	}
+
+	@Override
+	public int createBanner(Banner banner) throws SQLException {
+		return dao.createBanner(banner);
+	}
+
+	@Override
+	public int deleteBanner(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		return dao.deleteBanner(id);
+	}
+
 }

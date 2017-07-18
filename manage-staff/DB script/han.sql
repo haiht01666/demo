@@ -145,6 +145,14 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100001 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `cdate` datetime DEFAULT NULL,
+  `image_url` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 --  Records 
 -- ----------------------------

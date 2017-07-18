@@ -14,6 +14,7 @@ import constant.LeverType;
 import constant.OrderType;
 import constant.RevenueType;
 import constant.TimePeriodCheck;
+import model.Banner;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
@@ -876,6 +877,71 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			rs.close();
 		}
 		return result;
+	}
+
+	@Override
+	public List<Banner> getAllBanner() throws SQLException {
+		List<Banner> result = new ArrayList<>();
+		String sql = "select name,cdate,id,image_url from banners";
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Banner banner = new Banner();
+				banner.setName(rs.getString(1));
+				banner.setCdate(rs.getDate(2));
+				banner.setId(rs.getInt(3));
+				banner.setImageUrl(rs.getString(4));
+				result.add(banner);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+			st.close();
+			rs.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int createBanner(Banner banner) throws SQLException {
+		String sql = "insert into banners(name,cdate,image_url) values(?,now(),?)";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, banner.getName());
+			stmt.setString(2, banner.getImageUrl());
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+	}
+
+	@Override
+	public int deleteBanner(int id) throws SQLException {
+		String sql = "delete from banners where id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
 	}
 
 }
