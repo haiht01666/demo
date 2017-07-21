@@ -1,15 +1,32 @@
 package service;
 
-import constant.*;
-import dao.ManageDao;
-import model.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import common.CommonUtils;
-
-import java.sql.SQLException;
-import java.util.*;
+import constant.LeverType;
+import constant.OrderType;
+import constant.RevenueGroupType;
+import constant.RevenuePercent;
+import constant.RevenueType;
+import constant.Roles;
+import constant.Status;
+import constant.TimePeriodCheck;
+import dao.ManageDao;
+import model.Banner;
+import model.EditRoleForm;
+import model.Feedback;
+import model.Order;
+import model.Revenue;
+import model.RevenueForm;
+import model.User;
 
 @Service
 public class ManageServiceImpl implements ManageService {
@@ -293,16 +310,6 @@ public class ManageServiceImpl implements ManageService {
 		return user;
 	}
 
-	private int converLeverToInt(String lever) {
-		if (lever.equals(LeverType.PRO_DISTRIBUTE.name()))
-			return LeverType.PRO_DISTRIBUTE.getValue();
-		else if (lever.equals(LeverType.SALE_PRO.name()))
-			return LeverType.SALE_PRO.getValue();
-		else if (lever.equals(LeverType.SALE_MEMBER.name()))
-			return LeverType.SALE_MEMBER.getValue();
-		else
-			return LeverType.New.getValue();
-	}
 
 	@Override
 	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException {
@@ -556,147 +563,12 @@ public class ManageServiceImpl implements ManageService {
 		return lstRevenue;
 	}
 
-	private boolean isProactive(User user, Date time) throws SQLException {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(user.getCdate());
-		cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_45);
-		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-		if (time.after(cal.getTime())) {
-			return dao.isProactive(user.getId(), time);
-		} else
-			return true;
-	}
 
 	private Double totalRevenueGroup(User user, Date dateFrom, Date dateTo) throws SQLException {
 		Double result = 0.0;
 		List<User> lstAllChild = dao.getAllChild(user.getChildId());
 		for (User child : lstAllChild) {
 			result += getRevenue(child, dateFrom, dateTo);
-		}
-		return result;
-	}
-
-	private String getFinalLevel(User user, Date dateFrom, Date dateTo, int lever) throws SQLException {
-		String result = LeverType.New.name();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(dateFrom);
-		// - 1 month
-		cal.add(Calendar.MONTH, -1);
-		cal.set(Calendar.DATE, 1);
-		Calendar cal1 = Calendar.getInstance();
-		cal1.setTime(user.getCdate());
-		cal1.add(Calendar.MONTH, -1);
-		int maxlever = 0;
-		while (cal.getTime().after(cal1.getTime())) {
-			// tính lever từ tháng create account đến trước thời điểm tính hoa
-			// hồng 1 tháng
-			int baselever = getBaseLever(user, cal.getTime(), lever);
-			cal.add(Calendar.MONTH, -1);
-			if (baselever > maxlever)
-				maxlever = baselever;
-		}
-		if (maxlever == LeverType.GDSD.getValue())
-			return LeverType.GDSD.name();
-		if (maxlever == LeverType.DSD.getValue())
-			return LeverType.DSD.name();
-		if (maxlever == LeverType.MSD.getValue())
-			return LeverType.MSD.name();
-		if (maxlever == LeverType.TL.getValue())
-			return LeverType.TL.name();
-		return result;
-	}
-
-	private int getBaseLever(User user, Date time, int lever) throws SQLException {
-		int result = 0;
-		Double totalRevenue = 0.0;
-		List<User> listChild = dao.getChild(user.getId());
-		List<Double> lstRevenueOfChild = new ArrayList<>();
-		Date dateFrom = time;
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(time);
-		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-		Date dateTo = cal.getTime();
-		// calculate revenue personal
-		Double revenuePerson = getRevenue(user, dateFrom, dateTo);
-		totalRevenue += revenuePerson;
-		for (User child : listChild) {
-			Double totalRevenueChild = 0.0;
-			totalRevenueChild += getRevenue(child, dateFrom, dateTo);
-			List<User> lstAllChild = dao.getAllChild(child.getChildId());
-			for (User u : lstAllChild) {
-				totalRevenueChild += getRevenue(u, dateFrom, dateTo);
-			}
-			lstRevenueOfChild.add(totalRevenueChild);
-			totalRevenue += totalRevenueChild;
-		}
-		if (totalRevenue >= LeverType.GDSD.getAmount()) {
-			int countChildValid = 0;
-			for (Double value : lstRevenueOfChild) {
-				if (value >= LeverType.MSD.getAmount())
-					countChildValid++;
-			}
-			if (countChildValid >= 6 && lever >= LeverType.SALE_PRO.getValue())
-				return LeverType.GDSD.getValue();
-		}
-		if (totalRevenue >= LeverType.DSD.getAmount()) {
-			int countChildValid = 0;
-			for (Double value : lstRevenueOfChild) {
-				if (value >= LeverType.MSD.getAmount())
-					countChildValid++;
-			}
-			if (countChildValid >= 3 && lever >= LeverType.SALE_PRO.getValue())
-				return LeverType.DSD.getValue();
-		}
-		if (totalRevenue >= LeverType.MSD.getAmount()) {
-			int countChildValid = 0;
-			boolean check = false;
-			boolean validTL = true;
-			for (Double value : lstRevenueOfChild) {
-				if (value >= LeverType.TL.getAmount())
-					countChildValid++;
-				if (value >= LeverType.MSD.getAmount())
-					check = true;
-			}
-			if (countChildValid >= 2 && lever >= LeverType.SALE_PRO.getValue()) {
-				if (check) {
-					for (Double value : lstRevenueOfChild) {
-						if (value < LeverType.MSD.getAmount() * 0.2) {
-							validTL = false;
-							break;
-						}
-					}
-					if (validTL)
-						return LeverType.MSD.getValue();
-				} else {
-					return LeverType.MSD.getValue();
-				}
-			}
-		}
-		if (totalRevenue >= LeverType.TL.getAmount()) {
-			// int countChildValid = 0;
-			boolean check = false;
-			boolean validTL = true;
-			for (Double value : lstRevenueOfChild) {
-				if (value >= LeverType.TL.getAmount()) {
-					check = true;
-					break;
-				}
-			}
-			if (lever >= LeverType.SALE_MEMBER.getValue()) {
-				if (check) {
-					for (Double value : lstRevenueOfChild) {
-						if (value < LeverType.TL.getAmount() * 0.2) {
-							validTL = false;
-							break;
-						}
-					}
-					if (validTL)
-						return LeverType.TL.getValue();
-				} else {
-					return LeverType.TL.getValue();
-				}
-			}
-
 		}
 		return result;
 	}
@@ -850,7 +722,6 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public Double totalOrderValue(Date start, Date end) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -866,7 +737,6 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public int deleteBanner(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return dao.deleteBanner(id);
 	}
 

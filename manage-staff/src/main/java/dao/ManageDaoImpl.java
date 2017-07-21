@@ -111,7 +111,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public List<User> getStaffs() throws SQLException {
 		List<User> result = new ArrayList<>();
-		String sql = "SELECT distinct u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF'";
+		String sql = "SELECT distinct u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever,u.phone,u.email,u.bank_name,u.bank_account,u.bank_branch FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF'";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -126,6 +126,12 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setRole(rs.getString(6));
 				user.setParentId(rs.getInt(7));
 				int lever = rs.getInt(8);
+				user.setPhone(rs.getString(9));
+				user.setEmail(rs.getString(10));
+				user.setBankName(rs.getString(11));
+				user.setBankAccount(rs.getString(12));
+				user.setBankBranch(rs.getString(13));
+				
 				if (lever == LeverType.SALE_MEMBER.getValue())
 					user.setLeverValue(LeverType.SALE_MEMBER.name());
 				else if (lever == LeverType.SALE_PRO.getValue())
@@ -151,7 +157,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	public List<User> getMembers() throws SQLException {
 		List<User> result = new ArrayList<>();
 
-		String sql = "SELECT distinct u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever,u.child_id FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
+		String sql = "SELECT distinct u.id,u.name,u.cdate,u.enable,o.order_date,r.role,u.parent_id,u.lever,u.child_id,u.phone,u.email,u.bank_name,u.bank_account,u.bank_branch  FROM users u join roles r on u.id = r.user_id left join (select max(cdate) as order_date , user_id from orders) o on u.id = o.user_id WHERE r.role = 'STAFF' or r.role = 'ADMIN'";
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -166,7 +172,11 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				user.setRole(rs.getString(6));
 				user.setParentId(rs.getInt(7));
 				int lever = rs.getInt(8);
-				user.setChildId(rs.getString(9));
+				user.setPhone(rs.getString(10));
+				user.setEmail(rs.getString(11));
+				user.setBankName(rs.getString(12));
+				user.setBankAccount(rs.getString(13));
+				user.setBankBranch(rs.getString(14));
 				if (lever == LeverType.SALE_MEMBER.getValue())
 					user.setLeverValue(LeverType.SALE_MEMBER.name());
 				else if (lever == LeverType.SALE_PRO.getValue())

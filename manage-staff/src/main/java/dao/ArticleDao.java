@@ -20,4 +20,12 @@ public interface ArticleDao {
 	public int createArticle(Article article);
 
     int getNumberArticle();
+    
+    public List<Article> getHomeArticle();
+    
+    public int updateHome(Article article);
+	
+	public int deleteHome(int id);
+	
+	public Article getHomeById(int id);
 }

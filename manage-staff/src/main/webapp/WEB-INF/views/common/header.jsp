@@ -34,6 +34,8 @@
            	<li id="li-product"><a href="/product">Sản phẩm</a></li>
       		<li id="li-article"><a href="/article">Tin tức</a></li>
       		<li id="li-banner"><a href="/manage/banner">Banner</a></li>
+      		<li id="li-home"><a href="/article/home">Trang chủ và Giới thiệu</a></li>
+      		<li id="li-home"><a href="/manage/getAllUserInfo">Thông tin người dùng</a></li>
         </ul>
       </li>
 

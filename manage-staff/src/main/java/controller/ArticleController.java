@@ -132,5 +132,78 @@ public class ArticleController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
+	public String home(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		model.addAttribute("user", user);
+		return "article/home";
+	}
+	
+	@RequestMapping(value = { "/getHomeArticle" }, method = RequestMethod.GET)
+	public @ResponseBody ArticleResult home() throws SQLException {
+		ArticleResult result = new ArticleResult();
+		result.setData(service.getHomeArticle());
+		return result;
+	}
+	
+	@RequestMapping(value = "/uploadHomeImage", method = RequestMethod.POST)
+	public @ResponseBody UploadResult uploadImage(@RequestParam("file") MultipartFile file) {
+		UploadResult result = new UploadResult();
+		String fileName = null;
+		if (!file.isEmpty()) {
+			try {
+				String relativeWebPath = "/static/images/home";
+				String absoluteFilePath = context.getRealPath(relativeWebPath);
+				fileName = file.getOriginalFilename();
+				File uploadedFile = new File(absoluteFilePath, fileName);
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+				buffStream.write(bytes);
+				buffStream.close();
+				result.setMsg("Upload thành công!");
+				result.setPathFile(relativeWebPath+"/"+fileName);
+			} catch (Exception e) {
+				result.setMsg("Upload thất bại !");
+			}
+		} else {
+			result.setMsg("Không thể upload file trống !");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = { "/deleteHome" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult deleteHome(@RequestBody Article form) {
+		AjaxResult result = new AjaxResult();
+		result.setResultData(service.deleteHome(form.getId()));
+		result.setResult(true);
+		return result;
+	}
+	
+	@RequestMapping(value = { "/updateHome" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult updateHome(@RequestBody Article form) {
+		AjaxResult result = new AjaxResult();
+		if (form != null) {
+			User user = (User) session.getAttribute("ss-user");
+			form.setAuthor(user.getDispName());
+			if (service.updateHome(form) == 0) {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E016", null, Locale.getDefault()));
+			} else {
+				result.setResult(true);
+				result.setResultData(form);
+			}
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = { "/getHome" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getHome(@RequestBody Product form) {
+		AjaxResult result = new AjaxResult();
+		result.setResultData(service.getHomeById(form.getId()));
+		result.setResult(true);
+		return result;
+	}
 
 }

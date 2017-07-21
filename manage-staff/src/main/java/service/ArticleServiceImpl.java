@@ -50,4 +50,20 @@ public class ArticleServiceImpl implements ArticleService {
 	public int createArticle(Article article) {
 		return dao.createArticle(article);
 	}
+	@Override
+	public List<Article> getHomeArticle() {
+		return dao.getHomeArticle();
+	}
+	@Override
+	public int updateHome(Article article) {
+		return dao.updateHome(article);
+	}
+	@Override
+	public int deleteHome(int id) {
+		return dao.deleteHome(id);
+	}
+	@Override
+	public Article getHomeById(int id) {
+		return dao.getHomeById(id);
+	}
 }

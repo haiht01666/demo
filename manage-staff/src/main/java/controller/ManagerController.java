@@ -24,8 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import constant.OrderType;
 import model.AjaxResult;
-import model.Article;
-import model.ArticleResult;
 import model.Banner;
 import model.EditRoleForm;
 import model.Order;
@@ -66,6 +64,18 @@ public class ManagerController {
 		model.addAttribute("lstMember", lstMember);
 		model.addAttribute("role", userRole);
 		return "account/index";
+	}
+	
+	@RequestMapping(value = { "", "/getAllUserInfo" }, method = RequestMethod.GET)
+	public String getUserInfo(ModelMap model) throws SQLException {
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		String userRole = user.getRoles().get(0);
+		model.addAttribute("user", user);
+		List<User> lstMember = service.lstUser(userRole);
+		model.addAttribute("lstMember", lstMember);
+		model.addAttribute("role", userRole);
+		return "account/userInfo";
 	}
 
 	@RequestMapping(value = { "/addMember" }, method = RequestMethod.POST)

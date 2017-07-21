@@ -236,5 +236,108 @@ public class ArticleDaoImpl extends DBManager implements ArticleDao{
 		}
 		return result;
 	}
+	@Override
+	public List<Article> getHomeArticle() {
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		List<Article> result = new ArrayList<>();
+		String sql = "SELECT id,title,cdate,content, image_url  FROM homes;";
+		try {
+			conn = getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Article article = new Article();
+				article.setId(rs.getInt(1));
+				article.setTitle(rs.getString(2));
+				article.setCdate(rs.getDate(3));
+				article.setContent(rs.getString(4));
+				article.setImageUrl(rs.getString(5));
+				result.add(article);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnectionS(conn,st,rs);
+		}
+		return result;
+	}
+	@Override
+	public int updateHome(Article article) {
+		int result = 0;
+		String sql = "update homes set content=?, image_url=? where id=? ";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, article.getContent());
+			stmt.setString(2, article.getImageUrl());
+			stmt.setInt(3, article.getId());
+			result = stmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+	@Override
+	public int deleteHome(int id) {
+		int result = 0;
+		String sql = "delete FROM homes where id=?;";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			result = stmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+	@Override
+	public Article getHomeById(int id) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Article article = new Article();
+		String sql = "SELECT id,title,cdate,content,image_url FROM homes where id=?;";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				article.setId(rs.getInt(1));
+				article.setTitle(rs.getString(2));
+				article.setCdate(rs.getDate(3));
+				article.setContent(rs.getString(4));
+				article.setImageUrl(rs.getString(5));
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection(conn,stmt,rs);
+		}
+		return article;
+	}
 
 }
