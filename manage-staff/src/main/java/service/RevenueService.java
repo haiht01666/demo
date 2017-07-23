@@ -14,11 +14,11 @@ public interface RevenueService {
 	 * @param id : user id
 	 * @return true if active , false if not
 	 */
-	public boolean isActive(int id,Date date) throws SQLException;
+	public boolean isActive(User user,Date date) throws SQLException;
 	
-	public String getBaseLever(int userId,Date date) throws SQLException;
+	public String getBaseLever(User user,Date date) throws SQLException;
 	
-	public String getLever(int userId,Date date) throws SQLException;
+	public String getLever(User user,Date date) throws SQLException;
 	
 	public Double getDirectRevenue(int userId,Date fromDate, Date endDate) throws SQLException;
 	
