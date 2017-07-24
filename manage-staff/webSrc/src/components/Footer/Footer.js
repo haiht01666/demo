@@ -28,7 +28,7 @@ class Footer extends React.Component {
                 </div>
                 <div className="col-lg-4 col-md-8 col-sm-6 col-xs-6 fanpageDiv">
                   <iframe
-                    src="https://www.facebook.com/plugins/like_box.php?app_id=&amp;header=true&amp;height=300&amp;href=https://www.facebook.com/facebook/&amp;locale=vi_VN&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=380"
+                    src="https://www.facebook.com/plugins/like_box.php?app_id=&amp;header=true&amp;height=300&amp;href=https://www.facebook.com/dfgcompanyvn/&amp;locale=vi_VN&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=380"
                     width="340" height="300"
                     style={{border: 'none', visibility: 'visible', width: '380px', height: '220px',}} scrolling="no"
                     frameBorder="0" allowFullScreen="true" allowTransparency="true"></iframe>
