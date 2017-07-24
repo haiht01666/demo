@@ -20,6 +20,10 @@
   <meta charset="utf-8"/>
   <link rel="stylesheet" type="text/css" href="../../static/web/styles/main.css" media="screen">
   <link rel="shortcut icon" href="../../static/web/images/favicon.ico"></head>
+  <script type="text/javascript" src="../../static/web/libs/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="../../static/web/libs/owl.carousel.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../static/web/styles/owl.carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="../../static/web/styles/owl.theme.default.min.css">
   <link href="static/web/main.css" rel="stylesheet"></head>
   <title>Công ty TNHH DFG</title>
 <body>

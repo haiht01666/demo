@@ -20,27 +20,10 @@ export default {
   categories: [],
   lienhe:{
     congty: 'DFG',
-    diachi: '165 Thái Hà, Đống Đa, Hà Nội',
-    dienthoai: '0985584989',
-    email: 'admin@dfgvn.online'
+    diachi: 'Tòa nhà Capital Garden số 87 ngõ 102 Trường Chinh, phường Phương Mai quận Đống Đa TP Hà Nội',
+    dienthoai: '+84 438 727 666',
+    email: 'dfg.company.vn@gmail.com'
   },
-  carousel: [
-    {
-      urlImg : 'http://www.remoingay.com/uploads/banner_ads/20160913110935_73245.png'
-    },
-    {
-      urlImg : 'http://www.remoingay.com/uploads/banner_ads/20160912140916_14316.png'
-    },
-    {
-      urlImg : "http://www.remoingay.com/uploads/banner_ads/20160912140920_81920.png"
-    },
-    {
-      urlImg : "http://www.remoingay.com/uploads/banner_ads/20160912140949_67323.png"
-    },
-    {
-      urlImg : "http://www.remoingay.com/uploads/banner_ads/20160913110919_52645.png"
-    },
-  ],
   customerComment: [
     {
       urlImg : "http://princesswhite.vn/upload/baiviet/128003091695017354088132625915184443863102n-3523.jpg",
@@ -63,7 +46,11 @@ export default {
   common:{
     pathname: '',
     language:'vi',
-    message: {}
+    message: {},
+    introduce : '',
+    contact: '',
+    banner: [],
+    count : 0,
   },
   viMessage : {
     login: 'ĐĂNG NHẬP',
@@ -80,6 +67,14 @@ export default {
     productTitle: 'Sản phẩm',
     contactCompany: 'GIỚI THIỆU CÔNG TY',
     contactInfo: 'Thông TIN LIÊN HỆ',
+
+
+
+
+
+
+
+
     address: 'Địa chỉ',
     phone: 'Điện thoại',
     otherNews: 'Thông tin khác'

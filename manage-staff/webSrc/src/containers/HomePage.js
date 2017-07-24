@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/Header/Header';
 import Banner from '../components/Banner/Banner';
 import NewFeeds from '../components/NewFeeds/NewFeeds';
-import CustomerComment from '../components/CustomerComment/CustomerComment';
 import Products from '../components/Products/Products';
 import Footer from '../components/Footer/Footer';
 import {connect} from 'react-redux';
@@ -19,17 +18,6 @@ class HomePage extends React.Component {
   handleLoad() {
     $("#scroller").simplyScroll({orientation: 'vertical'});
     $(".i4ewOd-pzNkMb-haAclf").hide();
-
-    $("#bxslider1").bxSlider({
-      pager: !1,
-      controls: !0,
-      moveSlides: 1,
-      hideControlOnEnd: !0,
-      infiniteLoop: !0,
-      auto: !0,
-      pause: 7e3,
-      speed: 2e3
-    });
   }
 
   render() {
@@ -41,7 +29,6 @@ class HomePage extends React.Component {
           <div className="container">
             <div className="row">
               <NewFeeds/>
-              <CustomerComment/>
             </div>
             <Products productList={this.props.products}
                       productTitle={this.props.message.mainProducts}

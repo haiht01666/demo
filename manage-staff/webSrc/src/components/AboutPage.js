@@ -15,13 +15,14 @@ class AboutPage extends React.Component {
                 <h2 className="">{this.props.message.contactCompany}</h2>
                 <div className="clearfix"/>
               </div>
-            {/*<p>Thông tin liên hệ</p>*/}
+              {/*<p>Thông tin liên hệ</p>*/}
               {/*<p><strong>Công ty DFG</strong></p>*/}
-            {/*<p>Địa chỉ:</p>*/}
-            {/*<p>Điện Thoại</p>*/}
-            {/*<p>Email:</p>*/}
-            {/*<p>Website:</p>*/}
-          </div>
+              {/*<p>Địa chỉ:</p>*/}
+              {/*<p>Điện Thoại</p>*/}
+              {/*<p>Email:</p>*/}
+              {/*<p>Website:</p>*/}
+            </div>
+            <div dangerouslySetInnerHTML={{__html: this.props.introduce}}/>
           </div>
         </div>
         <Footer/>
@@ -32,7 +33,8 @@ class AboutPage extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    message: state.common.message
+    message: state.common.message,
+    introduce: state.common.introduce
   };
 };
 

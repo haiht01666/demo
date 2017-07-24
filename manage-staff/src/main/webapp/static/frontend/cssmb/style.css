@@ -750,13 +750,13 @@ body {
 
 }
 
-.main-layout .header {
+x.main-layout .header {
     z-index: 1000;
     position: absolute;
     width: 100%;
 	left:0px;
     height: 100px;
-    background-color: rgba(36, 58, 144, 0.93);
+    background-color: rgb(230, 238, 187);
     /*box-shadow: 0px 0px 3px #000000;*/
     /*-moz-box-shadow: 0px 0px 3px #000000;*/
     /*-webkit-box-shadow: 0px 0px 3px #000000;*/

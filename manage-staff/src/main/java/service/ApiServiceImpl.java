@@ -23,16 +23,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service public class ApiServiceImpl implements ApiService {
+@Service
+public class ApiServiceImpl implements ApiService {
 
-    @Autowired ManageService manageService;
-    @Autowired RevenueService revenueService;
+    @Autowired
+    ManageService manageService;
+    @Autowired
+    RevenueService revenueService;
 
-    @Autowired ApiDao dao;
+    @Autowired
+    ApiDao dao;
 
-    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @Override public AjaxResult checkLogin(String userId, String password) {
+    @Override
+    public AjaxResult checkLogin(String userId, String password) {
         AjaxResult result = new AjaxResult();
         try {
             String passwordEncrypt = dao.getPasswordEncrypt(userId);
@@ -45,12 +51,13 @@ import java.util.*;
             result.setResultData(user);
         } catch (Exception e) {
             result.setResult(false);
-            return  result;
+            return result;
         }
         return result;
     }
 
-    @Override public AjaxResult getSummaryPersonalInfo(String userCode) {
+    @Override
+    public AjaxResult getSummaryPersonalInfo(String userCode) {
         AjaxResult result = new AjaxResult();
         try {
             User user = dao.getLoginInfo(userCode);
@@ -63,7 +70,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult updatePersonalInfo(User user) {
+    @Override
+    public AjaxResult updatePersonalInfo(User user) {
         AjaxResult result = new AjaxResult();
         try {
             result.setResult(dao.updatePersonalInfo(user) > 0);
@@ -73,7 +81,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult saveAvatar(User user) {
+    @Override
+    public AjaxResult saveAvatar(User user) {
         AjaxResult result = new AjaxResult();
         try {
             result.setResult(dao.saveAvatar(user) > 0);
@@ -83,7 +92,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult changePassword(String userCode, String oldPass, String newPass) {
+    @Override
+    public AjaxResult changePassword(String userCode, String oldPass, String newPass) {
         AjaxResult result = new AjaxResult();
         try {
             result.setResult(true);
@@ -99,7 +109,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult requestSupport(String userCode, String title, String content) {
+    @Override
+    public AjaxResult requestSupport(String userCode, String title, String content) {
         AjaxResult result = new AjaxResult();
         try {
             result.setResult(dao.requestSupport(userCode, title, content) > 0);
@@ -109,8 +120,9 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit,
-            Integer offset, String orderby) {
+    @Override
+    public AjaxResult getNpp(boolean directNpp, String userCode, String childId, Integer limit,
+                             Integer offset, String orderby) {
         AjaxResult result = new AjaxResult();
         try {
             long totalNpp = dao.getTotalNpp(directNpp, userCode);
@@ -130,8 +142,9 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getListOrder(String userCode, String childId, Integer limit, Integer offset,
-            String orderby) {
+    @Override
+    public AjaxResult getListOrder(String userCode, String childId, Integer limit, Integer offset,
+                                   String orderby) {
         AjaxResult result = new AjaxResult();
         try {
             // get child order
@@ -149,7 +162,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getNppGraphical(String userCode) {
+    @Override
+    public AjaxResult getNppGraphical(String userCode) {
         AjaxResult result = new AjaxResult();
         try {
             List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
@@ -166,7 +180,7 @@ import java.util.*;
                 } else if (levelUser.equals(LeverType.SALE_MEMBER.name())) {
                     nppGraphicModel.setNumberSM(nppGraphicModel.getNumberSM() + 1);
                 } else if (levelUser.equals(LeverType.SALE_PRO.name())) {
-                        nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
+                    nppGraphicModel.setNumberPS(nppGraphicModel.getNumberPS() + 1);
                 } else if (levelUser.equals(LeverType.PRO_DISTRIBUTE.name())) {
                     nppGraphicModel.setNumberPD(nppGraphicModel.getNumberPD() + 1);
                 } else if (levelUser.equals(LeverType.TL.name())) {
@@ -190,7 +204,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getSummaryInfo(String userCode, String time, int limit, int offset) {
+    @Override
+    public AjaxResult getSummaryInfo(String userCode, String time, int limit, int offset) {
         AjaxResult result = new AjaxResult();
         try {
             SumaryInfoModel sumaryInfoModel = new SumaryInfoModel();
@@ -237,7 +252,8 @@ import java.util.*;
         return result;
     }
 
-    @Override public AjaxResult getCommissionInfo(String userCode, String time, String timeDetail) {
+    @Override
+    public AjaxResult getCommissionInfo(String userCode, String time, String timeDetail) {
         AjaxResult result = new AjaxResult();
         try {
             CommissionInfoModel commissionInfoModel = new CommissionInfoModel();
@@ -326,6 +342,30 @@ import java.util.*;
             }
             result.setResultData(commissionInfoModel);
             result.setResult(true);
+        } catch (Exception e) {
+            result.setResult(false);
+        }
+        return result;
+    }
+
+    @Override
+    public AjaxResult getInfoCompany() {
+        AjaxResult result = new AjaxResult();
+        try {
+            result.setResult(true);
+            result.setResultData(dao.getCompanyInfo());
+        } catch (Exception e) {
+            result.setResult(false);
+        }
+        return result;
+    }
+
+    @Override
+    public AjaxResult getBannerList() {
+        AjaxResult result = new AjaxResult();
+        try {
+            result.setResult(true);
+            result.setResultData(dao.getBannerList());
         } catch (Exception e) {
             result.setResult(false);
         }

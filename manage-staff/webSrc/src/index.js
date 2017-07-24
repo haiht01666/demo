@@ -7,8 +7,8 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './components/Root';
 
 import configureStore from './store/configureStore';
-import {loadTopProducts, loadProducts} from './actions/productsActions';
-import {changeLaguage} from './actions/commonActions';
+import {loadTopProducts} from './actions/productsActions';
+import {changeLaguage, loadCompanyInfoData, loadBannerList} from './actions/commonActions';
 import {loadTopArticles} from './actions/articlesActions';
 import {loadCategories} from './actions/categoryActions';
 
@@ -25,11 +25,14 @@ require('bootstrap/dist/css/bootstrap.min.css');
 import './static/web/styles/styles.scss';
 
 const store = configureStore();
+store.dispatch(loadBannerList());
 store.dispatch(changeLaguage('vi'));
+store.dispatch(loadCompanyInfoData());
 store.dispatch(loadTopProducts());
-store.dispatch(loadProducts(10,0));
+//store.dispatch(loadProducts(10,0));
 store.dispatch(loadTopArticles());
 store.dispatch(loadCategories());
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 

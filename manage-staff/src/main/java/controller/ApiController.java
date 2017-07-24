@@ -174,4 +174,20 @@ public class ApiController {
 		result.setResultData(productService.getAllCategory());
 		return result;
 	}
+
+	@RequestMapping(value = { "/getInfoCompany" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getInfoCompany() {
+		AjaxResult result = service.getInfoCompany();
+		result.setResult(result.isResult());
+		result.setResultData(result.getResultData());
+		return result;
+	}
+
+	@RequestMapping(value = { "/getBannerList" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxResult getBannerList() {
+		AjaxResult result = service.getBannerList();
+		result.setResult(result.isResult());
+		result.setResultData(result.getResultData());
+		return result;
+	}
 }

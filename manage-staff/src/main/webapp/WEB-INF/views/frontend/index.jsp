@@ -266,7 +266,7 @@ pageEncoding="UTF-8"%>
                             <tr>
                                 <td width="30"></td>
                                 <td width="190" valign="middle" style="padding-top:0px;padding-bottom:0px;"><a
-                                        href="/login"> <img src="static/frontend/promotion/logo.png" alt=""/>
+                                        href="/login"> <img src="static/frontend/promotion/logo.png" alt="" width="150px"/>
                                 </a></td>
                                 <td width="204"></td>
                                 <td width="80"></td>
@@ -447,7 +447,7 @@ pageEncoding="UTF-8"%>
                 <div id="nav.btn.showslidemenu" class="icon-menulist handle" onClick="showSlideMenu();"
                      style="display:none;"></div>
                 <div class="navigationlogo" style="width:50%;left:22%;" align="center" onClick="gotoHomePage();"
-                     id="homepagexsl/homepage-scr"><img src="static/frontend/promotion/logo.png" height="120px"/></div>
+                     id="homepagexsl/homepage-scr"><img src="static/frontend/promotion/logo.png" height="85px"/></div>
                 <div class="help" id="id.home.btn" style="left:40px;  display:none;" onClick="gotoHomePage();">
                     <div class='icon-home'></div>
                 </div>

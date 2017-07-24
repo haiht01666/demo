@@ -1,5 +1,6 @@
 package dao;
 
+import model.CompanyInfo;
 import model.Order;
 import model.User;
 
@@ -31,4 +32,6 @@ public interface ApiDao {
 	BigDecimal getMonthGroupVolume(String userCode, String monthYear);
 	BigDecimal getYearPersonalVolume(String userCode, String dateTime);
 	BigDecimal getYearGroupVolume(String userCode, String monthYear);
+    CompanyInfo getCompanyInfo();
+	List<String> getBannerList();
 }

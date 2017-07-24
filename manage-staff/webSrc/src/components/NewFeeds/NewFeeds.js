@@ -11,7 +11,7 @@ class NewFeeds extends React.Component {
 
   render() {
     return (
-      <div className="col-xs-12 col-md-5">
+      <div className="col-xs-12 col-md-12">
         <div className="news-top">
           <div className="">
             <div className="">
@@ -27,12 +27,12 @@ class NewFeeds extends React.Component {
                         <ul id="scroller" className="simply-scroll-list" style={{height: '1044px'}}>
                           {
                             this.props.news.map((item, index) => {
-                              let subtitle = item.subTitle.substring(0, item.subTitle.indexOf('.', 50) > 0 ? item.subTitle.indexOf('.', 50) : item.subTitle.length);
+                              //let subtitle = item.subTitle.substring(0, item.subTitle.indexOf('.', 100) > 0 ? item.subTitle.indexOf('.', 100) : item.subTitle.length);
                               return (
                                 <li key={index}>
                                   <div className="col-xs-12 col-md-12 item-news">
                                     <div className="row">
-                                      <div className="col-xs-4">
+                                      <div className="col-xs-3">
                                         <div className="row">
                                           <div className="image" id="newFeed-img">
                                             <Link to={"/tintuc/" + item.id} title={item.title}><img
@@ -41,13 +41,13 @@ class NewFeeds extends React.Component {
                                               alt={item.title}/></Link></div>
                                         </div>
                                       </div>
-                                      <div className="col-xs-8">
+                                      <div className="col-xs-9">
                                         <div className="row-8">
                                           <div className="name-news"><Link
                                             to={"/tintuc/" + item.id}
                                             title={item.title}>{item.title}</Link></div>
                                           <div className="desc-news">
-                                            {subtitle}...
+                                            {item.subTitle}...
                                           </div>
                                         </div>
                                       </div>

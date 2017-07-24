@@ -5,7 +5,6 @@ import newsDetail from './newsDetailReducer';
 import news from './newsReducer';
 import categories from './categoriesReducer';
 import info from './infoReducer';
-import banner from './bannerReducer';
 import customer from './customerReducer';
 import common from './commonReducer';
 import {routerReducer} from 'react-router-redux';
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   news,
   categories,
   info,
-  banner,
   customer,
   common,
   routing: routerReducer

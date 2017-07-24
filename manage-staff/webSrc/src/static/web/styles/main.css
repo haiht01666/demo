@@ -18150,7 +18150,7 @@ a.sb-button:hover {
 #contact  .global-title:after,#contact  .title-global:after{display:none}
 #contact  .global-title h2,#contact  .title-global h2{background:transparent}
 .global-title:after,.title-global:after,.global-title:before{    content: "";
-  width: 100%;
+  width: 98%;
   background-color: #00b18a;
   height: 1px;
   bottom: 1px;
@@ -18435,9 +18435,10 @@ a.sb-button:hover {
 }
 
 #newFeed-img img{
-  padding-right: 10px;
+  padding-right: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
+  width: 210px;
 }
 
 #navbarNavDropdown{

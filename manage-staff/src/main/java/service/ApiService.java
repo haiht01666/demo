@@ -37,5 +37,7 @@ public interface ApiService {
 
     AjaxResult getCommissionInfo(String userCode, String time, String timeDetail);
 
+    AjaxResult getInfoCompany();
 
+    AjaxResult getBannerList();
 }

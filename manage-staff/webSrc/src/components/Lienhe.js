@@ -15,7 +15,8 @@ class AboutPage extends React.Component {
                 <h2 className="">{this.props.message.contact}</h2>
                 <div className="clearfix"/>
               </div>
-          </div>
+            </div>
+            <div dangerouslySetInnerHTML={{__html: this.props.contact}}/>
           </div>
         </div>
         <Footer/>
@@ -26,13 +27,13 @@ class AboutPage extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    message: state.common.message
+    message: state.common.message,
+    contact: state.common.contact
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+  return {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AboutPage);
