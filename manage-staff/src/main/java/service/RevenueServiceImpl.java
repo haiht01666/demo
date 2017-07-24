@@ -29,29 +29,6 @@ public class RevenueServiceImpl implements RevenueService {
 	RevenueDao revenueDao;
 
 	@Override
-	public boolean isActive(int id, Date date) throws SQLException {
-		User user = dao.getUserById(id);
-		if (user.getCdate() != null) {
-			// date create account
-			Date createDate = user.getCdate();
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(createDate);
-			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
-			cal = CommonUtils.setMaxHour(cal);
-			System.err.println(cal.getTime().toString());
-			if (date.after(cal.getTime())) {
-				// if date > create date + 39 day then check user buy pro-active
-				// ?
-				return revenueDao.isActive(id, date);
-			} else {
-				return true;
-			}
-
-		}
-		return false;
-	}
-
-	@Override
 	public String getBaseLever(int userId, Date date) throws SQLException {
 		User user = dao.getUserById(userId);
 		Double totalOrderValue = 0.0;
@@ -82,6 +59,29 @@ public class RevenueServiceImpl implements RevenueService {
 				return LeverType.SALE_MEMBER.name();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isActive(int id, Date date) throws SQLException {
+		User user = dao.getUserById(id);
+		if (user.getCdate() != null) {
+			// date create account
+			Date createDate = user.getCdate();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(createDate);
+			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
+			cal = CommonUtils.setMaxHour(cal);
+			System.err.println(cal.getTime().toString());
+			if (date.after(cal.getTime())) {
+				// if date > create date + 39 day then check user buy pro-active
+				// ?
+				return revenueDao.isActive(id, date);
+			} else {
+				return true;
+			}
+
+		}
+		return false;
 	}
 
 	@Override
