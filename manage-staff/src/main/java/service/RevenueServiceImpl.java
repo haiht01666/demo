@@ -29,8 +29,7 @@ public class RevenueServiceImpl implements RevenueService {
 	RevenueDao revenueDao;
 
 	@Override
-	public String getBaseLever(int userId, Date date) throws SQLException {
-		User user = dao.getUserById(userId);
+	public String getBaseLever(User user, Date date) throws SQLException {
 		Double totalOrderValue = 0.0;
 		if (user.getCdate() != null) {
 			int lever = user.getLever();
@@ -47,9 +46,9 @@ public class RevenueServiceImpl implements RevenueService {
 					if (lever == LeverType.SALE_MEMBER.getValue())
 						return LeverType.SALE_MEMBER.name();
 				}
-				totalOrderValue = dao.totalOrderValue(user.getCdate(), cal.getTime(), userId);
+				totalOrderValue = dao.totalOrderValue(user.getCdate(), cal.getTime(), user.getId());
 			} else {
-				totalOrderValue = dao.totalOrderValue(user.getCdate(), date, userId);
+				totalOrderValue = dao.totalOrderValue(user.getCdate(), date, user.getId());
 			}
 			if (totalOrderValue >= LeverType.PRO_DISTRIBUTE.getAmount())
 				return LeverType.PRO_DISTRIBUTE.name();
@@ -62,8 +61,7 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public boolean isActive(int id, Date date) throws SQLException {
-		User user = dao.getUserById(id);
+	public boolean isActive(User user, Date date) throws SQLException {
 		if (user.getCdate() != null) {
 			// date create account
 			Date createDate = user.getCdate();
@@ -75,7 +73,7 @@ public class RevenueServiceImpl implements RevenueService {
 			if (date.after(cal.getTime())) {
 				// if date > create date + 39 day then check user buy pro-active
 				// ?
-				return revenueDao.isActive(id, date);
+				return revenueDao.isActive(user.getId(), date);
 			} else {
 				return true;
 			}
@@ -85,12 +83,11 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public String getLever(int userId, Date date) throws SQLException {
-		User user = dao.getUserById(userId);
-		String baseLever = getBaseLever(userId, date);
+	public String getLever(User user, Date date) throws SQLException {
+		String baseLever = getBaseLever(user, date);
 		if(baseLever == null)
 			return LeverType.New.name();
-		if (!isActive(userId, date))
+		if (!isActive(user, date))
 			return baseLever;
 		if ((baseLever.equals(LeverType.PRO_DISTRIBUTE.name()) || baseLever.equals(LeverType.SALE_PRO.name()))
 				&& user.getCdate() != null) {
@@ -102,11 +99,11 @@ public class RevenueServiceImpl implements RevenueService {
 			cal1 = CommonUtils.setMaxHour(cal1);
 			if(date.after(cal1.getTime())){
 				//Nếu ngày check lever > ngày tạo 39 day thì sẽ check xem nó active hay ko ?
-				Date currentProActive = revenueDao.getProactiveDateCurrent(date, userId);
+				Date currentProActive = revenueDao.getProactiveDateCurrent(date, user.getId());
 				if(currentProActive == null){
 					return baseLever;
 				}
-				if (revenueDao.isProActive(userId, currentProActive)) {
+				if (revenueDao.isProActive(user.getId(), currentProActive)) {
 					//nếu active liên tiếp 2 tháng thì sẽ tính lever từ ngày check - 30 day
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(date);

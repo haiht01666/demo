@@ -71,9 +71,9 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public int createOrder(Order order) throws SQLException {
 		int status = 1;
+		User user = dao.getUserById(order.getUserId());
 		if (order.getType() == OrderType.ORDER_PROACTIVE.getCode()) {
-			if (revenueService.isActive(order.getUserId(), new Date())) {
-				User user = dao.getUserById(order.getUserId());
+			if (revenueService.isActive(user, new Date())) {
 				Date activeDate = dao.getLatestDateProActive(order.getUserId());
 				Calendar cal = Calendar.getInstance();
 				if (activeDate == null) {
@@ -90,7 +90,6 @@ public class ManageServiceImpl implements ManageService {
 		}
 		if (order.getType() == OrderType.ORDER_PACKAGE.getCode()) {
 			order.setOrderDate(new Date());
-			User user = dao.getUserById(order.getUserId());
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(user.getCdate());
 			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
@@ -303,9 +302,9 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
-		user.setLeverValue(revenueService.getLever(id, new Date()));
+		user.setLeverValue(revenueService.getLever(user, new Date()));
 		String status = "";
-		status = revenueService.isActive(id, new Date()) ? Status.ACTIVE : Status.INACTIVE;
+		status = revenueService.isActive(user, new Date()) ? Status.ACTIVE : Status.INACTIVE;
 		user.setStatus(status);
 		return user;
 	}
@@ -335,9 +334,9 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = startDate.getTime(); startDate.before(endDate); startDate.add(Calendar.DATE,
 						1), date = startDate.getTime()) {
 					// System.out.println(date);
-					if (!revenueService.isActive(user.getId(), date))
+					if (!revenueService.isActive(user, date))
 						continue;
-					String lever = revenueService.getLever(user.getId(), date);
+					String lever = revenueService.getLever(user, date);
 					if (lever.equals(LeverType.PRO_DISTRIBUTE.name())) {
 						if (check) {
 							Double total = totalRevenueGroup(user, date, date);
@@ -406,7 +405,7 @@ public class ManageServiceImpl implements ManageService {
 				boolean check = false;
 				for (Date date = dateFrom.getTime(); dateFrom.before(dateTo); dateFrom.add(Calendar.DATE,
 						1), date = dateFrom.getTime()) {
-					String lever = revenueService.getLever(user.getId(), date);
+					String lever = revenueService.getLever(user, date);
 					if (lever.equals(LeverType.GDSD.name())) {
 						check = true;
 						break;
@@ -453,7 +452,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom1.getTime(); dateFrom1.before(dateTo1); dateFrom1.add(Calendar.DATE,
 						1), date = dateFrom1.getTime()) {
 					// check first month
-					String lever = revenueService.getLever(user.getId(), date);
+					String lever = revenueService.getLever(user, date);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever1 = lever;
 						break;
@@ -481,7 +480,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom2.getTime(); dateFrom2.before(dateTo1); dateFrom2.add(Calendar.DATE,
 						1), date = dateFrom2.getTime()) {
 					// check second month
-					String lever = revenueService.getLever(user.getId(), date);
+					String lever = revenueService.getLever(user, date);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever2 = lever;
 						break;
@@ -510,7 +509,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom3.getTime(); dateFrom3.before(dateTo3); dateFrom3.add(Calendar.DATE,
 						1), date = dateFrom3.getTime()) {
 					// check 3th month
-					String lever = revenueService.getLever(user.getId(), date);
+					String lever = revenueService.getLever(user, date);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever3 = lever;
 						break;
