@@ -59,7 +59,7 @@ class Banner extends React.Component {
               return (
                 <div className="owl-item" key={index}>
                   <img
-                    src={'http://localhost:8080' + item} alt=""/>
+                    src={'' + item} alt=""/>
                 </div>
               );
             })

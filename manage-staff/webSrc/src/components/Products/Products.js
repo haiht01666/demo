@@ -27,7 +27,7 @@ class Products extends React.Component {
                   <div className="item">
                     <div className="thumb">
                       <Link to={`/sanpham/${product.categoryKey}/${product.id}`} title={product.name}>
-                        <img src={'http://localhost:8080'+product.imageUrl}
+                        <img src={''+product.imageUrl}
                              alt={product.name}/>
                         <span className="overlay"/>
                       </Link>

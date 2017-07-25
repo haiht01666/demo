@@ -36,7 +36,7 @@ class NewFeeds extends React.Component {
                                         <div className="row">
                                           <div className="image" id="newFeed-img">
                                             <Link to={"/tintuc/" + item.id} title={item.title}><img
-                                              src={'http://localhost:8080' + item.imageUrl}
+                                              src={'' + item.imageUrl}
                                               className="img-responsive"
                                               alt={item.title}/></Link></div>
                                         </div>

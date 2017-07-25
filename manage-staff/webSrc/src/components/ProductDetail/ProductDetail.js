@@ -39,7 +39,7 @@ class ProductDetail extends React.Component {
                 <div className="photo">
                   <div className="preview"><
                     img itemProp="image"
-                        src={'http://localhost:8080'+this.props.productDetail.imageUrl}
+                        src={''+this.props.productDetail.imageUrl}
                         alt={this.props.productDetail.name} title={this.props.productDetail.name}/>
                   </div>
                 </div>

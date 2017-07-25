@@ -21,7 +21,7 @@ class NewsDetail extends React.Component {
 
                   <div className="text-center">
                     <figure className="caption"><img alt="" height="435"
-                                                     src={'http://localhost:8080'+this.props.newsDetail.imageUrl}
+                                                     src={''+this.props.newsDetail.imageUrl}
                                                      width="auto"/>
                       <figcaption className="figcaption" style={{fontStyle: 'italic', paddingTop: '10px', paddingBottom: '10px'}}>{this.props.newsDetail.title}</figcaption>
                     </figure>

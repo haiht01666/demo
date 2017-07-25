@@ -54,7 +54,7 @@ class News extends React.Component {
                                 <Link to={"/tintuc/" + item.id}
                                    title={item.title}>
                                   <img className="img-responsive image-thumb"
-                                       src={'http://localhost:8080'+item.imageUrl}
+                                       src={''+item.imageUrl}
                                        alt={item.title}
                                   /> </Link>
                               </div>
