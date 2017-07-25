@@ -67,7 +67,7 @@ export function setCurrentSearchPage(currentSearchPage) {
 export function searchProduct(limit, offset, searchStr) {
   return function (dispatch) {
     dispatch(clearProductsSearch());
-    return axios.get('http://localhost:8080/api/searchProduct?limit=' + limit + '&offset=' + offset+ '&searchStr=' + searchStr)
+    return axios.get('/api/searchProduct?limit=' + limit + '&offset=' + offset+ '&searchStr=' + searchStr)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadProductsSearchSuccess(response.data.resultData, response.data.numberRecord));
@@ -85,7 +85,7 @@ export function searchProduct(limit, offset, searchStr) {
 export function loadProducts(limit, offset) {
   return function (dispatch) {
     dispatch(clearProducts());
-    return axios.get('http://localhost:8080/api/getProductPage?limit=' + limit + '&offset=' + offset)
+    return axios.get('/api/getProductPage?limit=' + limit + '&offset=' + offset)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadProductsSuccess(response.data.resultData, response.data.numberRecord));
@@ -102,7 +102,7 @@ export function loadProducts(limit, offset) {
 export function loadProductsWithCategory(limit, offset, category) {
   return function (dispatch) {
     dispatch(clearProducts());
-    return axios.get('http://localhost:8080/api/getProductsByCategory?limit=' + limit + '&offset=' + offset+ '&category=' + category)
+    return axios.get('/api/getProductsByCategory?limit=' + limit + '&offset=' + offset+ '&category=' + category)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadProductsSuccess(response.data.resultData, response.data.numberRecord));
@@ -118,7 +118,7 @@ export function loadProductsWithCategory(limit, offset, category) {
 
 export function loadTopProducts() {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getProductPage?limit=10&offset=0')
+    return axios.get('/api/getProductPage?limit=10&offset=0')
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadTopProductsSuccess(response.data.resultData));
@@ -135,7 +135,7 @@ export function loadTopProducts() {
 export function loadProductDetail(id) {
   return function (dispatch) {
     dispatch(clearProductsDetails());
-    return axios.get('http://localhost:8080/api/getProductById?id=' + id)
+    return axios.get('/api/getProductById?id=' + id)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadProductsDetailSuccess(response.data.resultData));

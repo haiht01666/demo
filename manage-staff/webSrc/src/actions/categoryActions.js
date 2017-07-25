@@ -12,7 +12,7 @@ export function loadCategoriesSuccess(categories) {
 
 export function loadCategories() {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getCategories')
+    return axios.get('/api/getCategories')
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadCategoriesSuccess(response.data.resultData));

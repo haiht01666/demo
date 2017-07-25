@@ -34,7 +34,7 @@ export function clearArticlesDetails() {
 
 export function loadArticles(limit, offset) {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getArticlePage?limit=' + limit + '&offset=' + offset)
+    return axios.get('/api/getArticlePage?limit=' + limit + '&offset=' + offset)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadArticlesSuccess(response.data.resultData, response.data.numberRecord));
@@ -51,7 +51,7 @@ export function loadArticles(limit, offset) {
 export function loadArticleDetail(id) {
   return function (dispatch) {
     dispatch(clearArticlesDetails());
-    return axios.get('http://localhost:8080/api/getArticleById?id=' + id)
+    return axios.get('/api/getArticleById?id=' + id)
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadArticlesDetailSuccess(response.data.resultData));
@@ -68,7 +68,7 @@ export function loadArticleDetail(id) {
 
 export function loadTopArticles() {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getArticlePage?limit=10&offset=0')
+    return axios.get('/api/getArticlePage?limit=10&offset=0')
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadTopArticlesSuccess(response.data.resultData));

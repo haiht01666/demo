@@ -25,7 +25,7 @@ export function loadCompanyInfo(introduce, contact) {
 
 export function loadCompanyInfoData() {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getInfoCompany')
+    return axios.get('/api/getInfoCompany')
       .then(function (response) {
         if(response.data.result) {
           dispatch(loadCompanyInfo(response.data.resultData.introduce, response.data.resultData.contact));
@@ -54,7 +54,7 @@ export function setBannerCount(count) {
 
 export function loadBannerList() {
   return function (dispatch) {
-    return axios.get('http://localhost:8080/api/getBannerList')
+    return axios.get('/api/getBannerList')
       .then(function (response) {
         if(response.data.result) {
           dispatch(setBannerList(response.data.resultData));
