@@ -11,9 +11,6 @@ class TinTucDetail extends React.Component {
   constructor(props, context) {
     super(props, context);
   }
-  componentWillMount(){
-    this.props.actions.loadArticleDetail(this.props.id);
-  }
   render() {
     return (
       <div>

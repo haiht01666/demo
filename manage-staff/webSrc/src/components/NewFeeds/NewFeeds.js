@@ -3,10 +3,20 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 require('../../static/web/libs/jquery.simplyscroll.min');
 import '../../static/web/styles/jquery.simplyscroll.css';
+import {browserHistory} from 'react-router';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../actions/articlesActions';
+
 
 class NewFeeds extends React.Component {
   componentDidMount() {
     $('#scroller').simplyScroll({orientation: 'vertical'});
+  }
+
+  handleTintuc1(e, url, id) {
+    e.preventDefault();
+    browserHistory.push(url);
+    this.props.actions.loadArticleDetail(id);
   }
 
   render() {
@@ -35,7 +45,7 @@ class NewFeeds extends React.Component {
                                       <div className="col-xs-3">
                                         <div className="row">
                                           <div className="image" id="newFeed-img">
-                                            <Link to={"/tintuc/" + item.id} title={item.title}><img
+                                            <Link to={`/tintuc/${item.id}`} title={item.title} onClick={(e) => {this.handleTintuc1(e, `/tintuc/${item.id}`, item.id)}}><img
                                               src={'' + item.imageUrl}
                                               className="img-responsive"
                                               alt={item.title}/></Link></div>
@@ -44,8 +54,8 @@ class NewFeeds extends React.Component {
                                       <div className="col-xs-9">
                                         <div className="row-8">
                                           <div className="name-news"><Link
-                                            to={"/tintuc/" + item.id}
-                                            title={item.title}>{item.title}</Link></div>
+                                            to={`/tintuc/${item.id}`}
+                                            title={item.title} onClick={(e) => {this.handleTintuc1(e, `/tintuc/${item.id}`, item.id)}}>{item.title}</Link></div>
                                           <div className="desc-news">
                                             {item.subTitle}...
                                           </div>
@@ -62,7 +72,6 @@ class NewFeeds extends React.Component {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -81,9 +90,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onComponentWillMount() {
-    //   dispatch(cartAction.toggleEditorView(false));
-    // },
+    actions: bindActionCreators(actions, dispatch)
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NewFeeds);

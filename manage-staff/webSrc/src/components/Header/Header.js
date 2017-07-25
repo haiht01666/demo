@@ -91,7 +91,7 @@ class Header extends React.Component {
               </div>
               <div className="block contact">
                 <a className="" onClick={this.toggleShowLanguage} title=""><img
-                  src={this.props.language == 'vi' ? "../../static/web/images/vi.png" : "../../static/web/images/en.png"} style={{width: '38px'}}/><i
+                  src={this.props.language == 'vi' ? "../../../static/web/images/vi.png" : "../../../static/web/images/en.png"} style={{width: '38px'}}/><i
                   className="fa fa-angle-down"/></a>
                 <div className="expandcontact" style={style}>
                   <div className="col-xs-6"/>
@@ -99,14 +99,14 @@ class Header extends React.Component {
                     this.changeLanguage('vi')
                   }}>
                     <label>Tiếng Việt</label>
-                    <img src="../../static/web/images/vi.png"/>
+                    <img src="../../../static/web/images/vi.png"/>
                   </div>
                   <div className="col-xs-6"/>
                   <div className="col-md-12 col-sm-12 col-xs-6 expandContactDetail" onClick={() => {
                     this.changeLanguage('en')
                   }}>
                     <label>English</label>
-                    <img src="../../static/web/images/en.png"/>
+                    <img src="../../../static/web/images/en.png"/>
                   </div>
                 </div>
               </div>
@@ -205,7 +205,7 @@ class Header extends React.Component {
                       aria-label="Toggle navigation" id="head-navbar">
                 <span className="navbar-toggler-icon"></span>
               </button>
-              <Link to="/home"><img width="100%" className="head-logo" src='../../static/web/images/logo2.png' alt=""/></Link>
+              <Link to="/home"><img width="100%" className="head-logo" src='../../../static/web/images/logo2.png' alt=""/></Link>
               <div className="collapse navbar-collapse head-content" id="navbarNavDropdown">
                 <ul className="navbar-nav head-ul">
                   <li className={pathname == '' || pathname.indexOf('home') != -1 ? "nav-item active" : "nav-item"}>

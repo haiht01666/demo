@@ -11605,7 +11605,7 @@ a.sb-button:hover {
 }
 
 .product-detail .top-detail .photo .preview {
-  height: 500px;
+  max-height: 500px;
   overflow: hidden;
   margin-bottom: 10px;
   text-align: center
@@ -18056,10 +18056,8 @@ a.sb-button:hover {
 }
 
 .titleSpecial{
-  text-align: center !important;
   float: none !important;
   font-size: 26px;
-  font-family: initial !important;
   padding-top: 20px !important;
   padding-right: 0 !important;
 }
@@ -18448,3 +18446,17 @@ a.sb-button:hover {
 #head-nav{
   width: 100%;
 }
+
+.titleProductDetail{
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #0b7760;
+}
+.priceProductDetail{
+  text-align: center;
+  font-size: 14px;
+  color: #063e32;
+  font-style: italic;
+}
+

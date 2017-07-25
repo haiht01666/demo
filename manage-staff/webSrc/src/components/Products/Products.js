@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -13,6 +13,11 @@ class Products extends React.Component {
     return parseInt(num).toFixed(0).replace(/./g, function (c, i, a) {
       return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
     });
+  }
+
+  handleProductDetail(url, id){
+    browserHistory.push(url);
+    this.props.actions.loadProductDetail(id);
   }
 
   render() {
@@ -34,8 +39,7 @@ class Products extends React.Component {
                     </div>
                     <div className="caption" style={{textAlign:'center'}}>
                       <h3 className="title">
-
-                        <Link to={`/sanpham/${product.categoryKey}/${product.id}`} title={product.name}>{product.name}</Link>
+                        <Link to={`/sanpham/${product.categoryKey}/${product.id}`} title={product.name} onClick={()=>{this.handleProductDetail(`/sanpham/${product.categoryKey}/${product.id}`, product.id)}}>{product.name}</Link>
                       </h3>
                       <p className="meta">
                         <span className="price">{this.formatMoney(product.price)}đ</span>

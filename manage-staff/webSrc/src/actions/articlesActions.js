@@ -16,6 +16,11 @@ export function loadTopArticlesSuccess(topNews) {
     topNews,
   };
 }
+export function clearArticles() {
+  return {
+    type: types.CLEAR_ARTICLES
+  };
+}
 
 export function loadArticlesDetailSuccess(newsDetail) {
   return {
@@ -34,6 +39,7 @@ export function clearArticlesDetails() {
 
 export function loadArticles(limit, offset) {
   return function (dispatch) {
+    dispatch(clearArticles());
     return axios.get('/api/getArticlePage?limit=' + limit + '&offset=' + offset)
       .then(function (response) {
         if(response.data.result) {

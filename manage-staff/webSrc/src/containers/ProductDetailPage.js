@@ -17,6 +17,7 @@ class ProductDetailPage extends React.Component {
   componentWillMount(){
     this.props.actions.loadProductDetail(this.props.id);
   }
+
   render() {
     return (
       <div>
@@ -26,12 +27,6 @@ class ProductDetailPage extends React.Component {
           <Products productTitle="SẢN PHẦM TƯƠNG TỰ"
                     productList = {this.props.products.filter((item)=>{return item.id != this.props.id})}
           />
-          {/*<div className="container">*/}
-            {/*<div className="row">*/}
-              {/*<CustomerComment/>*/}
-              {/*<NewFeeds/>*/}
-            {/*</div>*/}
-          {/*</div>*/}
         </div>
         <Footer/>
       </div>

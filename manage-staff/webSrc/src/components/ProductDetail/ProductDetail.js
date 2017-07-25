@@ -8,10 +8,6 @@ class ProductDetail extends React.Component {
   constructor(props, context) {
     super(props, context);
   }
-  componentDidMount() {
-    //let id = this.props.params[id];
-    //console.log(1);
-  }
   handleClickProducts(e, category_key){
     e.preventDefault();
     if(category_key != null) {
@@ -21,6 +17,11 @@ class ProductDetail extends React.Component {
       this.props.actions.loadProducts(10,0);
       browserHistory.push(`/sanpham`);
     }
+  }
+  formatMoney(num) {
+    return parseInt(num).toFixed(0).replace(/./g, function (c, i, a) {
+      return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
   }
 
   render() {
@@ -33,7 +34,7 @@ class ProductDetail extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-10 col-md-12">
+          <div className="col-xs-12">
             <div className="product-detail">
               <div className="top-detail">
                 <div className="photo">
@@ -41,6 +42,15 @@ class ProductDetail extends React.Component {
                     img itemProp="image"
                         src={''+this.props.productDetail.imageUrl}
                         alt={this.props.productDetail.name} title={this.props.productDetail.name}/>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="titleProductDetail">
+                    {this.props.productDetail.name}
+                  </div>
+                  <div className="priceProductDetail">
+                    {this.formatMoney(this.props.productDetail.price)}đ
                   </div>
                 </div>
 

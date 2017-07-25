@@ -1,8 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import moment from 'moment';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../actions/articlesActions';
+
 class NewsDetail extends React.Component {
+  handleTintuc(url, id) {
+    browserHistory.push(url);
+    this.props.actions.loadArticleDetail(id);
+  }
+
   render() {
     return (
       <div className="container">
@@ -21,12 +29,16 @@ class NewsDetail extends React.Component {
 
                   <div className="text-center">
                     <figure className="caption"><img alt="" height="435"
-                                                     src={''+this.props.newsDetail.imageUrl}
+                                                     src={'' + this.props.newsDetail.imageUrl}
                                                      width="auto"/>
-                      <figcaption className="figcaption" style={{fontStyle: 'italic', paddingTop: '10px', paddingBottom: '10px'}}>{this.props.newsDetail.title}</figcaption>
+                      <figcaption className="figcaption" style={{
+                        fontStyle: 'italic',
+                        paddingTop: '10px',
+                        paddingBottom: '10px'
+                      }}>{this.props.newsDetail.title}</figcaption>
                     </figure>
                   </div>
-                  <div dangerouslySetInnerHTML={{ __html: this.props.newsDetail.content }} />
+                  <div dangerouslySetInnerHTML={{__html: this.props.newsDetail.content}}/>
                   <br/>
                   <div className="description" style={{textAlign: 'right'}}>
                     {this.props.newsDetail.author}
@@ -37,9 +49,12 @@ class NewsDetail extends React.Component {
                   <div className="other-news">
                     <h3>{this.props.message.otherNews}</h3>
                     <ul>
-                      {this.props.topNews.filter((item)=>{return item.id != this.props.id}).map((item, index)=>{
-                        return(
-                          <li key={index}>»&nbsp;<Link to={"/tintuc/" + item.id} title={item.title}>{item.title}</Link> <span className="date">({moment(item.cdate, 'YYYY-MM-DD').format('DD-MM-YYYY')})</span></li>
+                      {this.props.topNews.filter((item) => {
+                        return item.id != this.props.id
+                      }).map((item, index) => {
+                        return (
+                          <li key={index}>»&nbsp;<Link to={`/tintuc/${item.id}`} title={item.title} onClick={() => {this.handleTintuc(`/tintuc/${item.id}`, item.id)}}>{item.title}</Link> <span
+                            className="date">({moment(item.cdate, 'YYYY-MM-DD').format('DD-MM-YYYY')})</span></li>
                         )
                       })}
                     </ul>
@@ -59,7 +74,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     id: state.newsDetail.id,
     newsDetail: state.newsDetail,
-    news : state.news.data,
+    news: state.news.data,
     topNews: state.news.topNews,
     message: state.common.message
   };
@@ -67,10 +82,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onComponentWillMount() {
-    //   dispatch(cartAction.toggleEditorView(false));
-    // },
-  }
+    actions: bindActionCreators(actions, dispatch)
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsDetail);

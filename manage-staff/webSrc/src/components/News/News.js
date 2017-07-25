@@ -51,7 +51,7 @@ class News extends React.Component {
                           <div className="content">
                             <div className="row-8">
                               <div className="col-xs-3">
-                                <Link to={"/tintuc/" + item.id}
+                                <Link to={`/tintuc/${item.id}`}
                                    title={item.title}>
                                   <img className="img-responsive image-thumb"
                                        src={''+item.imageUrl}
@@ -60,7 +60,7 @@ class News extends React.Component {
                               </div>
                               <div className="col-xs-9 col-8">
                                 <div className="name-news-">
-                                  <h3><Link to={"/tintuc/" + item.id}
+                                  <h3><Link to={`/tintuc/${item.id}`}
                                          title={item.title}>{item.title}</Link></h3>
                                   <div className="clearfix"/>
                                 </div>
@@ -70,7 +70,7 @@ class News extends React.Component {
                                 <div className="text-blog">
                                   {subtitle}...
                                   <div className="clearfix"/>
-                                  <Link to={"/tintuc/" + item.id}
+                                  <Link to={`/tintuc/${item.id}`}
                                      title={item.title}><em>Xem thêm</em></Link>
                                 </div>
                               </div>
