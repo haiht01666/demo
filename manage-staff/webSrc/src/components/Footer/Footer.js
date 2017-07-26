@@ -34,8 +34,7 @@ class Footer extends React.Component {
                     frameBorder="0" allowFullScreen="true" allowTransparency="true"></iframe>
                 </div>
                 <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 googleMapDiv">
-                  <iframe src="https://www.google.com/maps/d/embed?mid=1z5z4nPaMp_U0VFcKcEL2v6CDZLE"
-                          className="googleMap"/>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.2063041861771!2d105.83738382919196!3d20.99964225115819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac7afe6d50af%3A0x74968c3786ae3857!2zbmfDtSAxMDIgVHLGsOG7nW5nIENoaW5oLCBQaMawxqFuZyBNYWksIMSQ4buRbmcgxJBhLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1501044008377" width="400" height="300" frameBorder style={{border:'none'}} allowFullscreen className="googleMap"></iframe>
                   <div className="totalAccess text-right">
                     {/*<p>Tổng số lượt truy cập: </p>*/}
                   </div>
