@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import constant.OrderType;
 import model.AjaxResult;
 import model.Banner;
+import model.EditLeverForm;
 import model.EditRoleForm;
 import model.Order;
 import model.Revenue;
@@ -281,6 +282,26 @@ public class ManagerController {
 		return result;
 	}
 	
+	@RequestMapping(value = { "/editLever" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult editLever(@RequestBody EditLeverForm form) {
+		AjaxResult result = new AjaxResult();
+		try {
+			if (service.editLever(form) > 0) {
+				result.setResult(true);
+				result.setMessage(messageSource.getMessage("S007", null, Locale.getDefault()));
+			} else {
+				result.setResult(false);
+				result.setMessage(messageSource.getMessage("E019", null, Locale.getDefault()));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result.setResult(false);
+			result.setMessage(messageSource.getMessage("E019", null, Locale.getDefault()));
+			return result;
+		}
+		return result;
+	}
+	
 	@RequestMapping(value = { "/revenueGroup" }, method = RequestMethod.POST)
 	public @ResponseBody RevenueResult revenueGroup(@RequestBody RevenueForm form) throws SQLException {
 		RevenueResult lstRevenue = new RevenueResult();
@@ -341,7 +362,7 @@ public class ManagerController {
 				buffStream.write(bytes);
 				buffStream.close();
 				result.setMsg("Upload thành công!");
-				result.setPathFile(relativeWebPath+"/"+fileName);
+				result.setPathFile("/manage-staff"+relativeWebPath+"/"+fileName);
 			} catch (Exception e) {
 				result.setMsg("Upload thất bại !");
 			}

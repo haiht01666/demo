@@ -9,7 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Manage staff</title>
-<link rel='shortcut icon' type='image/x-icon' href='/static/frontend/assets/images/favicon.ico' />
+<link rel='shortcut icon' type='image/x-icon'
+	href='/static/frontend/assets/images/favicon.ico' />
 <%@ include file="../common/library.jsp"%>
 
 <script type="text/javascript"
@@ -26,15 +27,18 @@
 				<button type="button" class="btn btn-default btn-sm" id="addRow">
 					<span class="glyphicon glyphicon-plus"></span> Thêm
 				</button>
-
+				<button type="button" class="btn btn-default btn-sm"
+					id="edit-data-lever" disabled="disabled">
+					<span class="glyphicon glyphicon-edit"></span> Chỉnh sửa cấp bậc
+				</button>
 				<c:if test="${role == 'SPADMIN'}">
 					<button type="button" class="btn btn-default btn-sm" id="edit-data"
 						disabled="disabled">
-						<span class="glyphicon glyphicon-edit"></span> Chỉnh sửa
+						<span class="glyphicon glyphicon-edit"></span> Chỉnh sửa quyền
 					</button>
-					
-					<button type="button" class="btn btn-default btn-sm" id="reset-password"
-						disabled="disabled">
+
+					<button type="button" class="btn btn-default btn-sm"
+						id="reset-password" disabled="disabled">
 						<span class="glyphicon glyphicon-edit"></span> Reset mật khẩu
 					</button>
 				</c:if>
@@ -50,7 +54,7 @@
 						<th>Ngày tạo</th>
 						<th>Quyền</th>
 						<th>Kích hoạt</th>
-<!-- 						<th>Cấp bậc</th>
+						<!-- 						<th>Cấp bậc</th>
 						<th>Trạng thái</th> -->
 					</tr>
 				</thead>
@@ -106,7 +110,7 @@
 
 		</div>
 	</div>
-	
+
 	<!-- Modal reate member -->
 	<div class="modal fade" id="create-member-modal" role="dialog">
 		<div class="modal-dialog">
@@ -117,7 +121,7 @@
 					<h4 class="modal-title">Tạo mới thành viên</h4>
 				</div>
 				<div class="modal-body">
-				<div id="msg-error-modal"></div>
+					<div id="msg-error-modal"></div>
 					<div class="row">
 						<div class="col-xs-12">
 							<form>
@@ -142,6 +146,46 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default"
 						id="btn-create-member">Create</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Modal edit lever-->
+	<div class="modal fade" id="edit-lever" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Thay đổi gói đăng ký đầu vào</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<form>
+								<div class="form-group">
+									<label>Mã thành viên:<span id="user-id"></span></label>
+								</div>
+								<div class="form-group">
+								<label>Chọn gói đăng ký đầu vào:</label>
+									<select id="lever-edit-type" class="form-control">
+										<option value="0">New</option>
+										<option value="1">SALE MEMBER</option>
+										<option value="2">SALE PRO</option>
+										<option value="3">PRO DISTRIBUTE</option>
+									</select>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="btn-edit-lever">Thay
+						đổi</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>

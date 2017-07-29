@@ -21,6 +21,7 @@ import constant.Status;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import model.Banner;
+import model.EditLeverForm;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
@@ -309,7 +310,6 @@ public class ManageServiceImpl implements ManageService {
 		return user;
 	}
 
-
 	@Override
 	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException {
 		List<User> lstUser = dao.getMembers();
@@ -534,7 +534,7 @@ public class ManageServiceImpl implements ManageService {
 					revenue.setUserLever(LeverType.MSD.name());
 					revenue.setTotalOrderValue(total);
 					revenue.setRevenuePecent(RevenuePercent.TWO.name());
-					revenue.setCdate( dateTo3.getTime());
+					revenue.setCdate(dateTo3.getTime());
 					revenue.setReceiverId(user.getId());
 					lstRevenue.add(revenue);
 					continue;
@@ -552,7 +552,7 @@ public class ManageServiceImpl implements ManageService {
 					revenue.setRevenuePecent(RevenuePercent.THREE.name());
 					revenue.setOrderName("Hoa hồng nhóm theo tháng");
 					revenue.setType(RevenueType.QUATER.getValue());
-					revenue.setCdate( dateTo3.getTime());
+					revenue.setCdate(dateTo3.getTime());
 					revenue.setReceiverId(user.getId());
 					lstRevenue.add(revenue);
 				}
@@ -561,7 +561,6 @@ public class ManageServiceImpl implements ManageService {
 
 		return lstRevenue;
 	}
-
 
 	private Double totalRevenueGroup(User user, Date dateFrom, Date dateTo) throws SQLException {
 		Double result = 0.0;
@@ -737,6 +736,93 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public int deleteBanner(int id) throws SQLException {
 		return dao.deleteBanner(id);
+	}
+
+	@Override
+	public int editLever(EditLeverForm formdata) throws SQLException {
+		User user = dao.getUserById(formdata.getId());
+		if (user.getCdate() == null) {
+			return 0;
+		}
+		// get order info by user id
+		Order order = dao.getOrderByUser(user);
+		Revenue revenue = new Revenue();
+		revenue.setReceiverId(user.getParentId());
+		revenue.setByerId(user.getId());
+		if (order != null) {
+			// update order and update revenue
+			
+			if (formdata.getLever() == LeverType.New.getValue()) {
+				// delete order
+				if(dao.deleteOrder(order.getId()) > 0)
+					return dao.deleteRevenues(revenue);
+			} else {
+				// update order
+				order.setUserId(user.getId());
+				order.setQuantity(1);
+				order.setType(OrderType.ORDER_PRODUCT.getCode());
+				if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()) {
+					order.setOrderName(LeverType.SALE_MEMBER.name());
+					order.setPrice((double)LeverType.SALE_MEMBER.getAmount());
+					revenue.setOrderName(LeverType.SALE_MEMBER.name());
+					revenue.setOrderPrice((double)LeverType.SALE_MEMBER.getAmount()*0.1);
+				}
+
+				if (formdata.getLever() == LeverType.SALE_PRO.getValue()) {
+					order.setOrderName(LeverType.SALE_PRO.name());
+					order.setPrice((double)LeverType.SALE_PRO.getAmount());
+					revenue.setOrderName(LeverType.SALE_PRO.name());
+					revenue.setOrderPrice((double)LeverType.SALE_PRO.getAmount()*0.1);
+				}
+				if (formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
+					order.setOrderName(LeverType.PRO_DISTRIBUTE.name());
+					order.setPrice((double)LeverType.PRO_DISTRIBUTE.getAmount());
+					revenue.setOrderName(LeverType.PRO_DISTRIBUTE.name());
+					revenue.setOrderPrice((double)LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
+				}
+				if(dao.updateOrder(order) > 0)
+					return dao.updateRevenue(revenue);
+			}
+		} else {
+			// insert order and revenue
+			if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()
+					|| formdata.getLever() == LeverType.SALE_PRO.getValue()
+					|| formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
+				//insert into orders(name,cdate,user_id,price,quantity,type,total) values(?,?,?,?,?,?,?)
+				Order ord = new Order();
+				ord.setOrderDate(user.getCdate());
+				ord.setQuantity(1);
+				ord.setType(OrderType.ORDER_PRODUCT.getCode());
+				ord.setUserId(user.getId());
+				if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()) {
+					ord.setOrderName(LeverType.SALE_MEMBER.name());
+					ord.setPrice((double)LeverType.SALE_MEMBER.getAmount());
+					revenue.setOrderName(LeverType.SALE_MEMBER.name());
+					revenue.setOrderPrice((double)LeverType.SALE_MEMBER.getAmount()*0.1);
+				}
+
+				if (formdata.getLever() == LeverType.SALE_PRO.getValue()) {
+					ord.setOrderName(LeverType.SALE_PRO.name());
+					ord.setPrice((double)LeverType.SALE_PRO.getAmount());
+					revenue.setOrderName(LeverType.SALE_PRO.name());
+					revenue.setOrderPrice((double)LeverType.SALE_PRO.getAmount()*0.1);
+				}
+				if (formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
+					ord.setOrderName(LeverType.PRO_DISTRIBUTE.name());
+					ord.setPrice((double)LeverType.PRO_DISTRIBUTE.getAmount());
+					revenue.setOrderName(LeverType.PRO_DISTRIBUTE.name());
+					revenue.setOrderPrice((double)LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
+				}
+				if(dao.createOrder(ord) > 0){
+					revenue.setCdate(user.getCdate());
+					revenue.setType(RevenueType.DIRECT.getValue());
+					return dao.createRevenue(revenue);
+				}
+			}else{
+				return 1;
+			}
+		}
+		return 0;
 	}
 
 }

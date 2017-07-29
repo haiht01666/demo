@@ -123,7 +123,7 @@ public class ArticleController {
 				buffStream.write(bytes);
 				buffStream.close();
 				result.setMsg("Upload thành công!");
-				result.setPathFile(relativeWebPath+"/"+fileName);
+				result.setPathFile("/manage-staff"+relativeWebPath+"/"+fileName);
 			} catch (Exception e) {
 				result.setMsg("Upload thất bại !");
 			}
@@ -163,7 +163,7 @@ public class ArticleController {
 				buffStream.write(bytes);
 				buffStream.close();
 				result.setMsg("Upload thành công!");
-				result.setPathFile(relativeWebPath+"/"+fileName);
+				result.setPathFile("/manage-staff"+relativeWebPath+"/"+fileName);
 			} catch (Exception e) {
 				result.setMsg("Upload thất bại !");
 			}

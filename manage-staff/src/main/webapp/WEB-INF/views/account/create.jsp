@@ -54,7 +54,7 @@
 									<label><form:errors path="id"
 											class="help-inline color-red" /></label>
 									<form:input type="text" class="form-control" path="id"
-										placeholder="Mã id" required="required" maxlength="6" />
+										placeholder="Mã id" required="required"/>
 								</div>
 							</div>
 

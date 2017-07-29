@@ -32,9 +32,11 @@ $(document).ready(
 				// disable button edit role
 				if ($('#tbody-staff tr.selected').length === 0){
 					$('#edit-data').attr('disabled',true);
+					$('#edit-data-lever').attr('disabled',true);
 					$('#reset-password').attr('disabled',true);
 				}else{
 					$('#edit-data').attr('disabled',false);
+					$('#edit-data-lever').attr('disabled',false);
 					$('#reset-password').attr('disabled',false);
 				}
 				
@@ -42,6 +44,17 @@ $(document).ready(
 			// edit row
 			$('#edit-data').on('click', function() {
 				$('#edit-role').modal('show');
+			});
+			
+			// edit lever
+			$('#edit-data-lever').on('click', function() {
+				if ($('#tbody-staff tr.selected').length > 1){
+					alert('Chỉ được chỉnh sửa từng tài khoản 1!');
+				}else{
+					$('#user-id').empty();
+					$('#user-id').html($('tr.selected td:nth-child(1)').html());
+					$('#edit-lever').modal('show');
+				}
 			});
 
 			$('#btn-edit-role').on('click', function() {
@@ -65,6 +78,7 @@ $(document).ready(
 							$.LoadingOverlay("show");
 		                   },
 						success:function(response){
+							$('#msg-error').empty();
 							if(response.result){
 								$('tr.selected td:nth-child(5)').html(role);
 								$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
@@ -74,12 +88,48 @@ $(document).ready(
 							$.LoadingOverlay("hide");
 						},
 						error:function(response){
+							$('#msg-error').empty();
 							$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra khi thay đổi quyền!"));
 							$.LoadingOverlay("hide");
 						}
 					});
 
 					$('#edit-role').modal('hide');
+				}
+			});
+			
+			$('#btn-edit-lever').on('click',function(){
+				if ($('#tbody-staff tr.selected').length > 1){
+					alert('Chỉ được chỉnh sửa từng tài khoản 1!');
+				}
+				if ($('#tbody-staff tr.selected').length == 1){
+					var formData = {};
+					formData.id = $('#user-id').html();
+					formData.lever = $('#lever-edit-type').val();
+					$.ajax({
+						type: "POST",
+						url:"/manage/editLever",
+						data: JSON.stringify(formData),
+						contentType: "application/json; charset=utf-8",
+						beforeSend: function(){
+							$.LoadingOverlay("show");
+		                   },
+						success:function(response){
+							$('#msg-error').empty();
+							if(response.result){
+								$('#msg-error').append($('<div>',{class:'alert alert-success'}).text(response.message));
+							} else {
+								$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text(response.message));
+							}
+							$.LoadingOverlay("hide");
+						},
+						error:function(response){
+							$('#msg-error').empty();
+							$('#msg-error').append($('<div>',{class:'alert alert-danger'}).text("Có lỗi xẩy ra khi thay đổi lever!"));
+							$.LoadingOverlay("hide");
+						}
+					});
+					$('#edit-lever').modal('hide');
 				}
 			});
 			

@@ -18,6 +18,7 @@ import model.Banner;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
+import model.Revenue;
 import model.User;
 
 @Repository
@@ -31,7 +32,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		int memberId = 0;
 		String sql1 = "Insert into users(enable,parent_id,child_id,cdate,lever,id, birthday) values(0,?,?,now(),?,?, null)";
 		String sql2 = "Insert into roles(role,user_id) values(?,?)";
-		String sql3 = "insert into revenues(name,cdate,user_id,value,type) values(?,now(),?,?,?)";
+		String sql3 = "insert into revenues(name,cdate,user_id,value,type,child_id) values(?,now(),?,?,?,?)";
 		String sql4 = "insert into orders(name,cdate,user_id,price,quantity,type,total) values(?,now(),?,?,?,?,?)";
 		try {
 			conn = getConnection();
@@ -58,6 +59,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 				stmt = conn.prepareStatement(sql3);
 				stmt.setInt(2, parent.getId());
 				stmt.setInt(4, RevenueType.DIRECT.getValue());
+				stmt.setInt(5, memberId);
 				if (lever == LeverType.SALE_MEMBER.getValue()) {
 					stmt.setString(1, LeverType.SALE_MEMBER.name());
 					stmt.setDouble(3, LeverType.SALE_MEMBER.getAmount() * 0.1);
@@ -954,4 +956,116 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}
 	}
 
+	@Override
+	public Order getOrderByUser(User user) throws SQLException {
+		Order order = new Order();
+		String sql = "select id,cdate from orders where user_id = ? and (date_format(cdate, '%Y-%m-%d') = ?) order by cdate";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, user.getId());
+			stmt.setDate(2, new java.sql.Date(user.getCdate().getTime()));
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				order.setId(rs.getInt(1));
+				order.setOrderDate(rs.getDate(2));
+				return order;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return null;
+	}
+
+	@Override
+	public int deleteOrder(int id) throws SQLException {
+		String sql = "delete from orders where id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+	}
+
+	@Override
+	public int deleteRevenues(Revenue revenue) throws SQLException {
+		String sql = "delete from revenues where user_id = ? and child_id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, revenue.getReceiverId());
+			stmt.setInt(2, revenue.getByerId());
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+	}
+
+	@Override
+	public int updateRevenue(Revenue revenue) throws SQLException {
+		int result = 0;
+		String sql = "update revenues set name =? ,value=? where user_id =? and child_id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, revenue.getOrderName());
+			stmt.setDouble(2, revenue.getOrderPrice());
+			stmt.setInt(3, revenue.getReceiverId());
+			stmt.setInt(4, revenue.getByerId());
+			result = stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int createRevenue(Revenue revenue) throws SQLException {
+		int result = 0;
+		String sql = "insert into revenues(name,cdate,user_id,value,type,child_id) values(?,?,?,?,?,?)";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, revenue.getOrderName());
+			stmt.setDate(2, new java.sql.Date(revenue.getCdate().getTime()));
+			stmt.setInt(3, revenue.getReceiverId());
+			stmt.setDouble(4, revenue.getOrderPrice());
+			stmt.setInt(5, revenue.getType());
+			stmt.setInt(6, revenue.getByerId());
+			result = stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conn.close();
+			stmt.close();
+		}
+		return result;
+	}
 }

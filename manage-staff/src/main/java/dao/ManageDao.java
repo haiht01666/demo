@@ -8,6 +8,7 @@ import model.Banner;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
+import model.Revenue;
 import model.User;
 
 public interface ManageDao {
@@ -98,4 +99,15 @@ public interface ManageDao {
 	public int createBanner(Banner banner) throws SQLException;
 	
 	public int deleteBanner(int id) throws SQLException;
+	
+	public Order getOrderByUser(User user) throws SQLException;
+	
+	public int deleteOrder(int id) throws SQLException;
+	
+	public int deleteRevenues(Revenue revenue) throws SQLException;
+	
+	public int updateRevenue(Revenue revenue) throws SQLException;
+	
+	public int createRevenue(Revenue revenue) throws SQLException;
+
 }

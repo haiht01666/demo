@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.Banner;
+import model.EditLeverForm;
 import model.EditRoleForm;
 import model.Feedback;
 import model.Order;
@@ -18,6 +19,8 @@ public interface ManageService {
 	public List<User> lstUser(String role) throws SQLException;
 	
 	public int editRole(EditRoleForm formdata) throws SQLException;
+	
+	public int editLever(EditLeverForm formdata) throws SQLException;
 	
 	public User getUserById(int id) throws SQLException;
 	
