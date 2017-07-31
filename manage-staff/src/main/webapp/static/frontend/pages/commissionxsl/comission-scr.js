@@ -4,12 +4,12 @@
  * Date: 14/7/14
  */
 
-var tmpWeekArrayDisp = new Array();
-var tmpWeekArrayVal = new Array();
-var tmpMonthArrayDisp = new Array();
-var tmpMonthArrayVal = new Array();
-var tmpYearArrayDisp = new Array();
-var tmpYearArrayVal = new Array();
+var tmpWeekArrayDisp ;
+var tmpWeekArrayVal ;
+var tmpMonthArrayDisp ;
+var tmpMonthArrayVal ;
+var tmpYearArrayDisp;
+var tmpYearArrayVal;
 
 /*** VIEW LOAD SUCCESS ***/
 function viewBackFromOther() {
@@ -21,14 +21,6 @@ function viewDidLoadSuccess() {
     $('input[name="time"]').on('change', function () {
         document.getElementById("commissionTimeDisp").value = CONST_STR.get('SEQ_INPUT_TITLE');
         document.getElementById("commissionTime").value = "";
-        $('#commission-volume.weekCommission').css('display', 'table');
-        $('#commission-volume.monthYearCommission').css('display', 'none');
-        if($('input[name="time"]:checked').val() !== 'weekly'){
-            $('#commission-volume.weekCommission').css('display', 'none');
-            $('#commission-volume.monthYearCommission').css('display', 'table');
-        }
-
-
     });
     sendJsonRequest();
 }
@@ -81,12 +73,12 @@ function setDataInfo(dataInfo) {
     if (commissionTotalSummary === '0' || commissionTotalSummary === 0 || !commissionTotalSummary) commissionTotalSummary = '0';
     document.getElementById("commissionTotalSummary").innerHTML = commissionTotalSummary;
 
-    tmpWeekArrayDisp = dataInfo.weekTimeDispList;
-    tmpWeekArrayVal = dataInfo.weekTimeValList;
-    tmpMonthArrayDisp = dataInfo.monthTimeDispList;
-    tmpMonthArrayVal = dataInfo.monthTimeValList;
-    tmpYearArrayDisp = dataInfo.yearTimeDispList;
-    tmpYearArrayVal = dataInfo.yearTimeValList;
+    if(tmpWeekArrayDisp == null) tmpWeekArrayDisp = dataInfo.weekTimeDispList;
+    if(tmpWeekArrayVal == null) tmpWeekArrayVal= dataInfo.weekTimeValList;
+    if(tmpMonthArrayDisp == null) tmpMonthArrayDisp = dataInfo.monthTimeDispList;
+    if(tmpMonthArrayVal == null) tmpMonthArrayVal = dataInfo.monthTimeValList;
+    if(tmpYearArrayDisp == null) tmpYearArrayDisp = dataInfo.yearTimeDispList;
+    if(tmpYearArrayVal == null) tmpYearArrayVal = dataInfo.yearTimeValList;
 
     // direct Commission
     var directCommission = formatNumberToCurrency(dataInfo.directCommission);

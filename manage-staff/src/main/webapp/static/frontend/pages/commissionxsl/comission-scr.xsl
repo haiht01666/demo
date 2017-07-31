@@ -96,7 +96,7 @@
                                     </tr>
                                 </table>
                                 <table id="commission-volume" align='left' class='weekCommission table-account'
-                                       style="margin-top:10px">
+                                       style="margin-top:10px; display: none">
                                     <tr class="trow-title">
                                         <th width="20%" align='center'>
                                             <span>COMMISSION_DIRECT</span>
@@ -129,7 +129,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <table id="commission-volume" class='monthYearCommission' style="width: 100%;display:none;margin-top: 10px;">
+                                <table id="commission-volume" class='monthYearCommission' style="width: 100%;margin-top: 10px;">
                                     <!--<tr>-->
                                         <!--<td colspan="5" align="center">-->
                                             <!--<h5>-->
