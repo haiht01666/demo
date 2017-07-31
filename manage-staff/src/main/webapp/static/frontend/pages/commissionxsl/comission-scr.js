@@ -96,7 +96,7 @@ function setDataInfo(dataInfo) {
     $(".totalCommission").html(totalCommission);
     $("#ComChk1_ckAmountLbl").html(totalCommission);
     $("#ComChk1_ckAmountStrLbl").html(convertNum2WordWithLang(totalCommission, 'VI'));
-    $("#ComChk1_memoLbl").html(($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '') + ' ' +  $("#ComChk1_ckAmountLbl").html() + ' đồng');
+    $("#ComChk1_memoLbl").html(($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '') + ' ' +  $("#ComChk1_ckAmountLbl").html() + ' BV');
     $('#ComChk1_ckDateLbl').html($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '');
 
 }

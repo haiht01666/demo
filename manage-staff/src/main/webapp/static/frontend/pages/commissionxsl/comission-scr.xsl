@@ -197,7 +197,7 @@
                                                             <span id="ComChk1_ckAmountStrLbl" class="checkInfo" style="font-size:11pt;padding-left: 10px; margin-right: -10px"></span>
                                                         </td>
                                                         <td width="100px" align="left" valign="bottom" nowrap="">
-                                                            <span id="ComChk1_dollarsLbl" class="checkInfo" style="font-size:9pt;font-weight:bold;padding-left: 10px;">ĐỒNG</span>
+                                                            <span id="ComChk1_dollarsLbl" class="checkInfo" style="font-size:9pt;font-weight:bold;padding-left: 10px;">BV</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
