@@ -34,6 +34,7 @@ function viewDidLoadSuccess() {
                 google.charts.load('current', {packages: ["orgchart"]});
                 google.charts.setOnLoadCallback(drawChart);
                 drawChart();
+                applyDynamicPageStyleSheet(true);
             } else {
                 showAlertText(CONST_STR.get('GET_ALL_NPP_FAIL'));
             }

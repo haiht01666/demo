@@ -11,10 +11,7 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.math.BigDecimal;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +29,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public User getLoginInfo(String userId) throws Exception {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         User user = new User();
         String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.cdate FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
@@ -75,6 +75,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public String getPasswordEncrypt(String userId) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         String password = "";
         String sql = "SELECT password FROM users u where u.id=?";
         try {
@@ -95,6 +98,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public int updatePersonalInfo(User user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         int record = 0;
         String sql = "UPDATE users SET address = ?, phone = ?, email = ?, bank_name = ?, bank_account = ?, bank_branch = ?, bank_user = ?, city = ? where id=?";
         try {
@@ -120,6 +126,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public int saveAvatar(User user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         int record = 0;
         String sql = "UPDATE users SET avatar = ? where id=?";
         try {
@@ -143,6 +152,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public int changePassword(String userCode, String newPass) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         int record = 0;
         String sql = "UPDATE users SET password = ? where id=?";
         try {
@@ -161,6 +173,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public int requestSupport(String userCode, String title, String content) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         int record = 0;
         String sql = "INSERT INTO feedbacks (title, content, user_id, cdate) VALUES (?,?,?, NOW())";
         try {
@@ -180,6 +195,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public long getTotalNpp(boolean directNpp, String userCode) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         long totalRecord = 0;
         String sql;
         if (directNpp) {
@@ -206,6 +224,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
     @Override
     public List<User> getNpp(boolean directNpp, String userCode, Integer limit, Integer offset,
                              String orderby) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         List<User> listAllNpp = new ArrayList<>();
         String sql;
         if (directNpp) {
@@ -250,6 +271,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public long getTotalOrder(String userCode) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         long totalRecord = 0;
         String sql;
         sql = "SELECT count(*) FROM orders o where user_id IN (" + childQuery + ")" + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode();
@@ -271,6 +295,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public List<Order> getListOrder(String userCode, Integer limit, Integer offset, String orderby) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         List<Order> lstOrder = new ArrayList<>();
         String sql = "SELECT " +
                 "	o.user_id, " +
@@ -332,6 +359,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getWeekGroupVolume(String userCode, String startDate, String endDate) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal weekGroupVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?)" + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try {
@@ -355,6 +385,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getWeekPersonalVolume(String userCode, String startDate, String endDate) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal weekGroupVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try {
@@ -377,6 +410,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getMonthPersonalVolume(String userCode, String monthYear) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal monthPersonalVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try {
@@ -398,6 +434,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getMonthGroupVolume(String userCode, String monthYear) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal monthGroupVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?) " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try {
@@ -420,6 +459,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getYearPersonalVolume(String userCode, String year) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal monthPersonalVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where user_id = ? " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%Y') = ?";
         try {
@@ -441,6 +483,9 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
 
     @Override
     public BigDecimal getYearGroupVolume(String userCode, String year) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         BigDecimal monthGroupVolume = new BigDecimal(0);
         String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?) " + " AND o.type=" + OrderType.ORDER_PRODUCT.getCode() + " and  DATE_FORMAT(cdate,'%Y') = ?";
         try {

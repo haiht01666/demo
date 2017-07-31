@@ -31,10 +31,10 @@ function requestJsonRequest() {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            hideLoadingMask();
             if (response.result) {
                 setDataInfo(response.resultData);
-                parserVolumeHistory(response.resultData.totalRecord,response.resultData.volumeInfoList)
+                parserVolumeHistory(response.resultData.totalRecord,response.resultData.volumeInfoList);
+                hideLoadingMask();
             } else {
                 showAlertText(CONST_STR.get('GET_INFO_FAIL'));
             }

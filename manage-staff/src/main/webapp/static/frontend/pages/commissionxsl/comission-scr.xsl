@@ -130,35 +130,95 @@
                                     </tr>
                                 </table>
                                 <table id="commission-volume" class='monthYearCommission' style="width: 100%;display:none;margin-top: 10px;">
-                                    <tr>
-                                        <td colspan="5" align="center">
-                                            <h5>
-                                                <span style="font-size: 18px;font-weight: bold;">Cheque Payment</span>
-                                            </h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" align="right">
-                                            <h5>
-                                                <span>Date: </span>
-                                                <span id="currentDate"></span>
-                                            </h5>
-                                        </td>
-                                    </tr>
+                                    <!--<tr>-->
+                                        <!--<td colspan="5" align="center">-->
+                                            <!--<h5>-->
+                                                <!--<span style="font-size: 18px;font-weight: bold;">Cheque Payment</span>-->
+                                            <!--</h5>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td colspan="5" align="right">-->
+                                            <!--<h5>-->
+                                                <!--<span>Date: </span>-->
+                                                <!--<span id="currentDate"></span>-->
+                                            <!--</h5>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td colspan="5" align="left">-->
+                                            <!--<h5>-->
+                                                <!--<span>Name:</span>-->
+                                                <!--<span id="userName"></span>-->
+                                            <!--</h5>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td colspan="5" align="left">-->
+                                            <!--<h5>-->
+                                                <!--<span>ID:</span>-->
+                                                <!--<span id="userCode"></span>-->
+                                            <!--</h5>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
                                     <tr>
                                         <td colspan="5" align="left">
-                                            <h5>
-                                                <span>Name:</span>
-                                                <span id="userName"></span>
-                                            </h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" align="left">
-                                            <h5>
-                                                <span>ID:</span>
-                                                <span id="userCode"></span>
-                                            </h5>
+                                            <table cellpadding="0" cellspacing="0" border="0" width="99%">
+                                                <tbody>
+                                                    <tr>
+                                                    <td colspan="2" width="95%" align="center">
+                                                        <div class="checkLogo2">
+                                                            <img id="ComChk1_checkLogoImg" src="static/frontend/promotion/logo.png" width="170px" style="border-width:0px;"/>
+                                                        </div>
+                                                        <div class="checkBank">
+                                                            <span id="ComChk1_ckBankNameLbl">THE INTERNATIONAL BANK<br/>HOMETOWN, USA, 000000</span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="150" valign="top" align="right" class="checkInput" nowrap="" style="min-width: 150px">
+                                                        <span id="ComChk1_ckPayMethodLbl" style="font-size:12pt;font-weight:bold;text-align: right; vertical-align: top;">Direct Deposit</span>
+                                                        <div style="padding-top: 65px; padding-left: 12px; text-align: left;">
+                                                            <span id="ComChk1_ckDateLbl" class="checkInput" style="font-size:11pt;font-weight:bold;"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                    <tr>
+                                                        <td valign="bottom" height="35px" style="padding-top: 20px;" nowrap="">
+                                                            <span id="ComChk1_payToLbl" class="checkInfo" style="font-size:9pt;font-weight:bold;">PAY TO THE<br/>ORDER OF</span>
+                                                        </td>
+                                                        <td width="95%" align="left" valign="bottom" nowrap="nowrap" class="checkInput">
+                                                            <span id="ComChk1_ckPayToAgentLbl" class="checkInfo" style="font-size:11pt;padding-left: 20px;"></span>
+                                                        </td>
+                                                        <td width="5%" align="left" valign="bottom" nowrap="" class="checkInput" style="padding-left: 10px;">
+                                                            <span id="ComChk1_ckAmountLbl" class="checkInfo" style="font-size:11pt;"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="left" valign="bottom" nowrap="" class="checkInput" height="35px">
+                                                            <span id="ComChk1_ckAmountStrLbl" class="checkInfo" style="font-size:11pt;padding-left: 10px; margin-right: -10px"></span>
+                                                        </td>
+                                                        <td width="100px" align="left" valign="bottom" nowrap="">
+                                                            <span id="ComChk1_dollarsLbl" class="checkInfo" style="font-size:9pt;font-weight:bold;padding-left: 10px;">ĐỒNG</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="70px" align="right" valign="bottom" style="padding-right: 10px; line-height: 60px;">
+                                                            <span id="ComChk1_memoTitleLbl" class="checkInfo" style="font-size:9pt;font-weight:bold;">MEMO:</span>
+                                                        </td>
+                                                        <td colspan="2" valign="bottom" nowrap="">
+                                                            <div style="float: left; margin-top: 50px; line-height: 25px;">
+                                                                <span id="ComChk1_memoLbl" class="checkMemo"></span>
+                                                            </div>
+                                                            <div style="float: right; vertical-align: bottom; margin-top: 10px;">
+                                                                <img alt="" src="static/frontend/assets/images/checkSignature.png"/>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" valign="bottom" align="center">
+                                                            <img alt="" src="static/frontend/assets/images/checkAcctBar.png"/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody></table>
                                         </td>
                                     </tr>
                                     <tr>

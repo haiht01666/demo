@@ -93,7 +93,6 @@ function sendJSONRequest(loginUser, loginPass) {
 function requestMBServiceSuccess(loginInfo) {
     hideLoadingMask();
     removeBackGround();
-    hideLoadingMask();
     gIsLogin = true;
     // set info data
     gUserInfo.userCode = loginInfo.userCode;

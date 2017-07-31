@@ -47,7 +47,9 @@ function sendJsonRequest() {
         success: function (response) {
             hideLoadingMask();
             if (response.result) {
+                isGraphical = true;
                 setDataInfo(response.resultData);
+                applyDynamicPageStyleSheet(true);
             } else {
                 showAlertText(CONST_STR.get('GET_INFO_FAIL'));
             }
@@ -61,9 +63,10 @@ function sendJsonRequest() {
 
 function setDataInfo(dataInfo) {
     // set info
-    $('#currentDate').html(moment(new Date()).format('DD/MM/YYYY'));
-    $('#userName').html(gUserInfo.dispName);
-    $('#userCode').html(gUserInfo.userCode);
+    //$('#ComChk1_ckDateLbl').html(moment(new Date()).format('DD/MM/YYYY'));
+    $('#ComChk1_ckPayToAgentLbl').html(gUserInfo.dispName);
+    //$('#userCode').html(gUserInfo.userCode);
+
 
     // week volume
     var commissionDirectSummary = formatNumberToCurrency(dataInfo.commissionDirectSummary);
@@ -99,13 +102,17 @@ function setDataInfo(dataInfo) {
     var totalCommission = formatNumberToCurrency(dataInfo.totalCommission);
     if (totalCommission === '0' || totalCommission === 0 || !totalCommission) totalCommission = '0';
     $(".totalCommission").html(totalCommission);
+    $("#ComChk1_ckAmountLbl").html(totalCommission);
+    $("#ComChk1_ckAmountStrLbl").html(convertNum2WordWithLang(totalCommission, 'VI'));
+    $("#ComChk1_memoLbl").html(($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '') + ' ' +  $("#ComChk1_ckAmountLbl").html() + ' đồng');
+    $('#ComChk1_ckDateLbl').html($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '');
 
 }
 
 function showRequestCommissionTime() {
-    var tmpArray1;
-    var tmpArray2;
-    var listTitle;
+    var tmpArray1 = [];
+    var tmpArray2= [];
+    var listTitle = [];
     var timeType = $('input[name="time"]:checked').val();
     if (timeType === 'weekly') {
         tmpArray1 = tmpWeekArrayDisp;

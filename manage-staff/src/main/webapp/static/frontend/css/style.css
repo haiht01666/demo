@@ -1228,3 +1228,44 @@ body {
 #parse_transaction{
     margin-top: -30px;
 }
+
+.checkBlank {
+    border: solid 1px #C4CCD9;
+    border-bottom: dotted 2px #C4CCD9;
+    height: 280px;
+    margin-bottom: 15px;
+}
+td.checkInput
+{
+    color: black;
+    font-family: Arial;
+    border-bottom: solid 1px #000000;
+}
+
+.checkInfo {
+    font-family: Sans-Serif;
+    font-weight: bold;
+    font-size: 9pt;
+    color: #000000;
+    padding-bottom: 3px;
+}
+.checkMemo {
+    font-family: Sans-Serif;
+    font-size: 9pt;
+    color: Gray;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.checkBank {
+    font-family: Times New Roman;
+    font-size: 10pt;
+    color: #000000;
+    text-align: center;
+}
+
+.checkLogo2 {
+    width: 200px;
+    height: 100px;
+    float: left;
+}

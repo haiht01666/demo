@@ -1142,3 +1142,49 @@ x.main-layout .header {
 	width:45px;
 }
 /*END DatMD custom menu*/
+.checkBlank {
+    border: solid 1px #C4CCD9;
+    border-bottom: dotted 2px #C4CCD9;
+    height: 280px;
+    margin-bottom: 15px;
+}
+td.checkInput
+{
+    color: black;
+    font-family: Arial;
+    border-bottom: solid 1px #000000;
+}
+
+.checkInfo {
+    font-family: Sans-Serif;
+    font-weight: bold;
+    font-size: 9pt;
+    color: #000000;
+    padding-bottom: 3px;
+}
+.checkMemo {
+    font-family: Sans-Serif;
+    font-size: 9pt;
+    color: Gray;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.checkBank {
+    font-family: Times New Roman;
+    font-size: 10pt;
+    color: #000000;
+    text-align: center;
+}
+
+.checkLogo2 {
+    width: 200px;
+    height: 100px;
+    float: left;
+}
+
+.monthYearCommission{
+    background-color: #b5b5e6;
+    min-width: 700px;
+    overflow: scroll;
+}
