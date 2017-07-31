@@ -29,6 +29,7 @@
 					<tr>
 						<th>Mã Id</th>
 						<th>Tên Thành Viên</th>
+						<th>Cấp bậc</th>
 						<th>Số ĐT</th>
 						<th>Địa Chỉ Email</th>
 						<th>Số Tài Khoản NH</th>
@@ -38,17 +39,7 @@
 				</thead>
 
 				<tbody id="tbody-staff">
-					<c:forEach items="${lstMember }" var="member">
-						<tr data-id=${member.id }>
-							<td><a href="/manage/detail?id=${member.id }">${member.id }</a></td>
-							<td><a href="/manage/detail?id=${member.id }">${member.dispName }</a></td>
-							<td>${member.phone }</td>
-							<td>${member.email }</td>
-							<td>${member.bankAccount }</td>
-							<td>${member.bankBranch }</td>
-							<td>${member.bankName}</td>
-						</tr>
-					</c:forEach>
+					
 				</tbody>
 			</table>
 		</div>

@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('#li-home').addClass('active');
 	// initial table
+	$.LoadingOverlay("show");
 	var table = $('#tbl-staff').DataTable({
 		responsive : false,
 		"paging" : true,
@@ -16,6 +17,32 @@ $(document).ready(function() {
 			"infoEmpty" : "No records available",
 			"infoFiltered" : "(filtered from _MAX_ total records)"
 		},
+		ajax : {
+			url : "/manage/getAllUser",
+			type : 'GET',
+			contentType : "application/json",
+			dataSrc: function ( json ) {
+            	$.LoadingOverlay("hide");
+                return json.data;
+            }    
+		},
+		columns : [ {
+			data : "id"
+		}, {
+			data : "dispName"
+		}, {
+			data : "leverValue"
+		}, {
+			data : "phone"
+		}, {
+			data : "email"
+		}, {
+			data : "bankAccount"
+		}, {
+			data : "bankBranch"
+		}, {
+			data : "bankName"
+		} ],
 		dom : 'lBfrtip',
 		buttons : [ {
 			extend : 'excelHtml5',

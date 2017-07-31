@@ -15,6 +15,16 @@ public class AjaxResult {
     private long numberRecord;
     
     private List<Banner> data;
+    
+    public List<User> getLstUser() {
+		return lstUser;
+	}
+
+	public void setLstUser(List<User> lstUser) {
+		this.lstUser = lstUser;
+	}
+
+	private List<User> lstUser;
 
     public List<Banner> getData() {
 		return data;

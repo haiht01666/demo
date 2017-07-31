@@ -2,7 +2,12 @@ package dao;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Locale;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
 public class DBManager {
+	
 	@Autowired
 	private MessageSource messageSource;
 	
@@ -60,6 +66,24 @@ public class DBManager {
 			if (rs != null) {
 				rs.close();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs,Statement st){
+		try {
+			if (conn != null) {
+				conn.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+			if(st != null)
+				st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

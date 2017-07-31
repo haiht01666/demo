@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +48,12 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public List<User> lstUser(String role) throws SQLException {
+		List<User> result = null;
 		if (role.equals(Roles.ROLE_ADMIN.toString()))
 			return dao.getStaffs();
-		else if (role.equals(Roles.ROLE_SPADMIN.toString()))
+		if (role.equals(Roles.ROLE_SPADMIN.toString()))
 			return dao.getMembers();
-		else
-			return null;
+		return result;
 	}
 
 	@Override
@@ -580,10 +582,23 @@ public class ManageServiceImpl implements ManageService {
 		// get all user
 		List<User> lstUser = dao.getMembers();
 		List<Revenue> revenues = new ArrayList<>();
+		Map<Integer, List<User>> mapRevenue = new HashMap<>();
+		for (int i = 1; i < 13; i++) {
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.MONTH, i - 1);
+			// first day of month
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			Date dateFrom = cal.getTime();
+			// last day of mounth
+			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+			Date dateTo = cal.getTime();
+			mapRevenue.put(i-1, dao.getRevenueInfo(dateFrom, dateTo,lstUser));
+		}
 		for (User user : lstUser) {
 			Revenue revenue = new Revenue();
 			revenue.setUserName(user.getDispName());
 			revenue.setReceiverId(user.getId());
+			List<User> lstAllChild = dao.getAllChild(user.getChildId());
 			boolean check = false;
 			for (int i = 1; i < 13; i++) {
 				Calendar cal = Calendar.getInstance();
@@ -595,75 +610,65 @@ public class ManageServiceImpl implements ManageService {
 				cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 				Date dateTo = cal.getTime();
 				Double value = 0.0;
+				value = totalRevenueGroupNew(lstAllChild, dateFrom, dateTo,mapRevenue.get(i-1));
 				switch (i) {
 				case 1:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setJan(value);
 					break;
 				case 2:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setFeb(value);
 					break;
 				case 3:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setMar(value);
 					break;
 				case 4:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setApr(value);
 					break;
 				case 5:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setMay(value);
 					break;
 				case 6:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setJun(value);
 					break;
 				case 7:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setJul(value);
 					break;
 				case 8:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setAug(value);
 					break;
 				case 9:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setSep(value);
 					break;
 				case 10:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setOct(value);
 					break;
 				case 11:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
+
 					if (value > 0)
 						check = true;
 					revenue.setNov(value);
 					break;
 				case 12:
-					value = totalRevenueGroup(user, dateFrom, dateTo);
 					if (value > 0)
 						check = true;
 					revenue.setDec(value);
@@ -751,10 +756,10 @@ public class ManageServiceImpl implements ManageService {
 		revenue.setByerId(user.getId());
 		if (order != null) {
 			// update order and update revenue
-			
+
 			if (formdata.getLever() == LeverType.New.getValue()) {
 				// delete order
-				if(dao.deleteOrder(order.getId()) > 0)
+				if (dao.deleteOrder(order.getId()) > 0)
 					return dao.deleteRevenues(revenue);
 			} else {
 				// update order
@@ -763,24 +768,24 @@ public class ManageServiceImpl implements ManageService {
 				order.setType(OrderType.ORDER_PRODUCT.getCode());
 				if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()) {
 					order.setOrderName(LeverType.SALE_MEMBER.name());
-					order.setPrice((double)LeverType.SALE_MEMBER.getAmount());
+					order.setPrice((double) LeverType.SALE_MEMBER.getAmount());
 					revenue.setOrderName(LeverType.SALE_MEMBER.name());
-					revenue.setOrderPrice((double)LeverType.SALE_MEMBER.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.SALE_MEMBER.getAmount() * 0.1);
 				}
 
 				if (formdata.getLever() == LeverType.SALE_PRO.getValue()) {
 					order.setOrderName(LeverType.SALE_PRO.name());
-					order.setPrice((double)LeverType.SALE_PRO.getAmount());
+					order.setPrice((double) LeverType.SALE_PRO.getAmount());
 					revenue.setOrderName(LeverType.SALE_PRO.name());
-					revenue.setOrderPrice((double)LeverType.SALE_PRO.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.SALE_PRO.getAmount() * 0.1);
 				}
 				if (formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
 					order.setOrderName(LeverType.PRO_DISTRIBUTE.name());
-					order.setPrice((double)LeverType.PRO_DISTRIBUTE.getAmount());
+					order.setPrice((double) LeverType.PRO_DISTRIBUTE.getAmount());
 					revenue.setOrderName(LeverType.PRO_DISTRIBUTE.name());
-					revenue.setOrderPrice((double)LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.PRO_DISTRIBUTE.getAmount() * 0.1);
 				}
-				if(dao.updateOrder(order) > 0)
+				if (dao.updateOrder(order) > 0)
 					return dao.updateRevenue(revenue);
 			}
 		} else {
@@ -788,7 +793,9 @@ public class ManageServiceImpl implements ManageService {
 			if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()
 					|| formdata.getLever() == LeverType.SALE_PRO.getValue()
 					|| formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
-				//insert into orders(name,cdate,user_id,price,quantity,type,total) values(?,?,?,?,?,?,?)
+				// insert into
+				// orders(name,cdate,user_id,price,quantity,type,total)
+				// values(?,?,?,?,?,?,?)
 				Order ord = new Order();
 				ord.setOrderDate(user.getCdate());
 				ord.setQuantity(1);
@@ -796,33 +803,63 @@ public class ManageServiceImpl implements ManageService {
 				ord.setUserId(user.getId());
 				if (formdata.getLever() == LeverType.SALE_MEMBER.getValue()) {
 					ord.setOrderName(LeverType.SALE_MEMBER.name());
-					ord.setPrice((double)LeverType.SALE_MEMBER.getAmount());
+					ord.setPrice((double) LeverType.SALE_MEMBER.getAmount());
 					revenue.setOrderName(LeverType.SALE_MEMBER.name());
-					revenue.setOrderPrice((double)LeverType.SALE_MEMBER.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.SALE_MEMBER.getAmount() * 0.1);
 				}
 
 				if (formdata.getLever() == LeverType.SALE_PRO.getValue()) {
 					ord.setOrderName(LeverType.SALE_PRO.name());
-					ord.setPrice((double)LeverType.SALE_PRO.getAmount());
+					ord.setPrice((double) LeverType.SALE_PRO.getAmount());
 					revenue.setOrderName(LeverType.SALE_PRO.name());
-					revenue.setOrderPrice((double)LeverType.SALE_PRO.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.SALE_PRO.getAmount() * 0.1);
 				}
 				if (formdata.getLever() == LeverType.PRO_DISTRIBUTE.getValue()) {
 					ord.setOrderName(LeverType.PRO_DISTRIBUTE.name());
-					ord.setPrice((double)LeverType.PRO_DISTRIBUTE.getAmount());
+					ord.setPrice((double) LeverType.PRO_DISTRIBUTE.getAmount());
 					revenue.setOrderName(LeverType.PRO_DISTRIBUTE.name());
-					revenue.setOrderPrice((double)LeverType.PRO_DISTRIBUTE.getAmount()*0.1);
+					revenue.setOrderPrice((double) LeverType.PRO_DISTRIBUTE.getAmount() * 0.1);
 				}
-				if(dao.createOrder(ord) > 0){
+				if (dao.createOrder(ord) > 0) {
 					revenue.setCdate(user.getCdate());
 					revenue.setType(RevenueType.DIRECT.getValue());
 					return dao.createRevenue(revenue);
 				}
-			}else{
+			} else {
 				return 1;
 			}
 		}
 		return 0;
 	}
+
+	@Override
+	public List<User> getUserInfo(String role) throws SQLException {
+		List<User> result = null;
+		if (role.equals(Roles.ROLE_ADMIN.toString()))
+			result =  dao.getStaffs();
+		if (role.equals(Roles.ROLE_SPADMIN.toString()))
+			result = dao.getMembers();
+		if(result != null){
+			for(User user : result ){
+				user.setLeverValue(revenueService.getLever(user, new Date()));
+			}
+		}
+		return result;
+	}
+	
+	private Double totalRevenueGroupNew(List<User> lstAllChild, Date dateFrom, Date dateTo,List<User> allRevenue) throws SQLException {
+		Double result = 0.0;
+		for (User child : lstAllChild) {
+			for(User us : allRevenue){
+				if(child.getId() == us.getId()){
+					result += us.getTotalOrderValue();
+					break;
+				}	
+			}
+		}
+		return result;
+	}
+	
+
 
 }

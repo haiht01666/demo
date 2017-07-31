@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import constant.OrderType;
+import model.AjaxDataTable;
 import model.AjaxResult;
 import model.Banner;
 import model.EditLeverForm;
@@ -73,10 +74,19 @@ public class ManagerController {
 		User user = (User) session.getAttribute("ss-user");
 		String userRole = user.getRoles().get(0);
 		model.addAttribute("user", user);
-		List<User> lstMember = service.lstUser(userRole);
-		model.addAttribute("lstMember", lstMember);
 		model.addAttribute("role", userRole);
 		return "account/userInfo";
+	}
+	
+	@RequestMapping(value = {"/getAllUser" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxDataTable getAllUser() throws SQLException {
+		AjaxDataTable result = new AjaxDataTable();
+		// get current user from session
+		User user = (User) session.getAttribute("ss-user");
+		String userRole = user.getRoles().get(0);
+		List<User> lstMember = service.getUserInfo(userRole);
+		result.setData(lstMember);
+		return result;
 	}
 
 	@RequestMapping(value = { "/addMember" }, method = RequestMethod.POST)
@@ -318,6 +328,16 @@ public class ManagerController {
 		model.addAttribute("user", user);
 		return "account/revenueMonth";
 	}
+	
+	
+	@RequestMapping(value = {"/getRevenueMonth" }, method = RequestMethod.GET)
+	public @ResponseBody AjaxDataTable getRevenueMonth() throws SQLException {
+		AjaxDataTable result = new AjaxDataTable();
+		List<Revenue> lst = service.getRevenueMonth();
+		result.setData(lst);
+		return result;
+	}
+
 	
 	@RequestMapping(value = { "/saveRevenues" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult saveRevenues(@RequestBody Revenues form) throws SQLException {

@@ -53,6 +53,7 @@
 						<th>Mã người bảo trợ</th>
 						<th>Ngày tạo</th>
 						<th>Quyền</th>
+						<th>Cấp bậc</th>
 						<th>Kích hoạt</th>
 						<!-- 						<th>Cấp bậc</th>
 						<th>Trạng thái</th> -->
@@ -67,6 +68,7 @@
 							<td>${member.parentId }</td>
 							<td>${member.cdate }</td>
 							<td>${member.role}</td>
+							<td>${member.leverValue}</td>
 							<td><c:if test="${member.enable }">
 									<span class="glyphicon glyphicon-ok" style="color: #41be47"></span>
 								</c:if></td>

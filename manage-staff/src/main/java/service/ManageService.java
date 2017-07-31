@@ -18,6 +18,8 @@ public interface ManageService {
 	
 	public List<User> lstUser(String role) throws SQLException;
 	
+	public List<User> getUserInfo(String role) throws SQLException;
+	
 	public int editRole(EditRoleForm formdata) throws SQLException;
 	
 	public int editLever(EditLeverForm formdata) throws SQLException;

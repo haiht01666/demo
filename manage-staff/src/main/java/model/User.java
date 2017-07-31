@@ -78,8 +78,22 @@ public class User implements Serializable {
     private String userAvatar;
 
     private String city;
+    
+    private Double totalOrderValue;
 
-    // cấp đại lý
+    public Double getTotalOrderValue() {
+		return totalOrderValue;
+	}
+
+	public void setTotalOrderValue(Double totalOrderValue) {
+		this.totalOrderValue = totalOrderValue;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	// cấp đại lý
     private String agentLevel;
     
     private String status;

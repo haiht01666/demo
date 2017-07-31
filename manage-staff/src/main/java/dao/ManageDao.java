@@ -109,5 +109,7 @@ public interface ManageDao {
 	public int updateRevenue(Revenue revenue) throws SQLException;
 	
 	public int createRevenue(Revenue revenue) throws SQLException;
+	
+	public List<User> getRevenueInfo(Date dateFrom, Date dateTo,List<User> lstUser) throws SQLException;
 
 }
