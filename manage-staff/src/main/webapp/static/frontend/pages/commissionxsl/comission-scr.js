@@ -95,8 +95,8 @@ function setDataInfo(dataInfo) {
     if (totalCommission === '0' || totalCommission === 0 || !totalCommission) totalCommission = '0';
     $(".totalCommission").html(totalCommission);
     $("#ComChk1_ckAmountLbl").html(totalCommission);
-    $("#ComChk1_ckAmountStrLbl").html(convertNum2WordWithLang(totalCommission, 'VI'));
-    $("#ComChk1_memoLbl").html(($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '') + ' ' +  $("#ComChk1_ckAmountLbl").html() + ' BV');
+    $("#ComChk1_ckAmountStrLbl").html(convertNum2WordWithLang(totalCommission, 'EN'));
+    $("#ComChk1_memoLbl").html(($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '') + ' ' +  $("#ComChk1_ckAmountLbl").html() + ' USD');
     $('#ComChk1_ckDateLbl').html($("#commissionTime").val() != '' ? $("#commissionTimeDisp").val() : '');
 
 }

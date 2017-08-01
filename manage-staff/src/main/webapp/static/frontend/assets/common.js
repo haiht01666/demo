@@ -3042,10 +3042,10 @@ function convertNumToWord(val) {
 
     // special cases
     if (val[0] === "-") {
-        return "negative " + convert(val.slice(1) + " dong");
+        return "negative " + convert(val.slice(1) + " ");
     }
     if (val === "0") {
-        return "zero" + " dong";
+        return "zero" + " ";
     }
 
     val = trim_zeros(val);
@@ -3053,10 +3053,10 @@ function convertNumToWord(val) {
 
     // general cases
     if (len < max) {
-        return convert_lt_max(val) + " dong";
+        return convert_lt_max(val) + " ";
     }
     if (len >= max) {
-        return convert_max(val) + " dong";
+        return convert_max(val) + " ";
     }
 }
 
