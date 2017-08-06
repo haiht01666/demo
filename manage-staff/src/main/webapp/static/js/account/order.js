@@ -176,7 +176,7 @@ $(document).ready(function() {
 			$('#txt-order-name').attr('disabled',true);
 			$('#txt-order-date').attr('disabled',true);
 		}
-		else if($('#order-type').val() === '3'){
+		if($('#order-type').val() === '3'){
 			//register lever
 			$('#select-lever').css('display','');
 			$('#txt-order-quantity').val('1');
@@ -197,7 +197,7 @@ $(document).ready(function() {
 				$('#lbl-price').text(Number($('#txt-order-price').val()).toLocaleString("en") + ' BV');
 			});
 		}
-		else{
+		if($('#order-type').val() === '1'){
 			$('#select-lever').css('display','none');
 			$('#txt-order-quantity').attr('disabled',false);
 			//$('#txt-order-price').val('');
@@ -206,6 +206,18 @@ $(document).ready(function() {
 			//$('#txt-order-name').val('');
 			$('#txt-order-name').attr('disabled',false);
 			$('#txt-order-date').attr('disabled',false);
+		}
+		if($('#order-type').val() === '4'){
+			$('#select-lever').css('display','none');
+			$('#txt-order-quantity').val('1');
+			$('#txt-order-quantity').attr('disabled',true);
+			$('#txt-order-price').val('');
+			$('#txt-order-quantity').val('');
+			$('#lbl-price').text('');
+			$('#txt-order-price').attr('disabled',true);
+			$('#txt-order-name').val('Mua backoffice');
+			$('#txt-order-name').attr('disabled',true);
+			$('#txt-order-date').attr('disabled',true);
 		}
 	});
 	

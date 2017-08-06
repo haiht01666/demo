@@ -125,6 +125,7 @@
 										<option value="1">Mua sản phẩm</option>
 										<option value="2">Đăng ký năng động</option>
 										<option value="3">Nâng cấp gói</option>
+										<option value="4">Mua Backoffice</option>
 									</select>
 								</div>
 								<div class="form-group">

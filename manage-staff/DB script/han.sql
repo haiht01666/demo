@@ -189,3 +189,6 @@ Insert into roles(id,role,user_id) values (1,'SPADMIN',100000);
 -- add columl child id to table revenues
 ALTER TABLE revenues
 ADD child_id int(11) ;
+-- add column back_office to table users
+ALTER TABLE users
+ADD back_office datetime DEFAULT NULL;

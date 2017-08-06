@@ -80,6 +80,19 @@ public class ManageServiceImpl implements ManageService {
 	public int createOrder(Order order) throws SQLException {
 		int status = 1;
 		User user = dao.getUserById(order.getUserId());
+		if(order.getType() == OrderType.ORDER_BACKOFFICE.getCode()){
+			//get current back office
+			Date date = dao.getCurrentBackOffice(user.getId());
+			Calendar cal = Calendar.getInstance();
+			if(date == null){
+				cal.setTime(new Date());
+				cal.add(Calendar.DATE, 365);
+			}else{
+				cal.setTime(date);
+				cal.add(Calendar.DATE, 365);
+			}
+			return dao.updateBackOffice(user.getId(), cal.getTime());
+		}
 		if (order.getType() == OrderType.ORDER_PROACTIVE.getCode()) {
 			if (revenueService.isActive(user, new Date())) {
 				Date activeDate = dao.getLatestDateProActive(order.getUserId());

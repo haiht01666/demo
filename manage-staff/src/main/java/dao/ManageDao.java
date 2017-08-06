@@ -115,5 +115,9 @@ public interface ManageDao {
 	public List<Order> getAllOrderType() throws SQLException;
 	
 	//public List<User> getAllOrder() throws SQLException;
+	
+	public Date getCurrentBackOffice(int userId) throws SQLException;
+	
+	public int updateBackOffice(int userId,Date date) throws SQLException;
 
 }

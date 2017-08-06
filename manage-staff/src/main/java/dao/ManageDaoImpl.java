@@ -1033,4 +1033,42 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		}
 		return lstOrder;
 	}
+
+	@Override
+	public Date getCurrentBackOffice(int userId) throws SQLException {
+		String sql = "SELECT back_office from users where id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userId);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				return rs.getDate(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			closeConnection(conn, stmt, rs, st);
+		}
+		return null;
+	}
+
+	@Override
+	public int updateBackOffice(int userId, Date date) throws SQLException {
+		String sql = "update users set back_office = ? where id = ?";
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(2, userId);
+			stmt.setDate(1, new java.sql.Date(date.getTime()));
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			closeConnection(conn, stmt, rs, st);
+		}
+	}
 }

@@ -3,7 +3,8 @@ package constant;
 public enum OrderType {
 	ORDER_PRODUCT(1,"Mua sản phẩm"),
 	ORDER_PROACTIVE(2,"Mua năng động"),
-	ORDER_PACKAGE(3,"Đăng ký gói");
+	ORDER_PACKAGE(3,"Đăng ký gói"),
+	ORDER_BACKOFFICE(4,"Mua backoffice");
 	
 	private int code;
 	
