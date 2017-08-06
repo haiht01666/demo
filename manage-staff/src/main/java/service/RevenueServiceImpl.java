@@ -14,6 +14,7 @@ import constant.LeverType;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import dao.RevenueDao;
+import model.Order;
 import model.Revenue;
 import model.RevenueApi;
 import model.Revenues;
@@ -83,9 +84,9 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public String getLever(User user, Date date) throws SQLException {
+	public String getLever(User user, Date date, List<Order> lstOrder) throws SQLException {
 		String baseLever = getBaseLever(user, date);
-		if(baseLever == null)
+		if (baseLever == null)
 			return LeverType.New.name();
 		if (!isActive(user, date))
 			return baseLever;
@@ -97,26 +98,28 @@ public class RevenueServiceImpl implements RevenueService {
 			cal1.setTime(user.getCdate());
 			cal1.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
 			cal1 = CommonUtils.setMaxHour(cal1);
-			if(date.after(cal1.getTime())){
-				//Nếu ngày check lever > ngày tạo 39 day thì sẽ check xem nó active hay ko ?
+			if (date.after(cal1.getTime())) {
+				// Nếu ngày check lever > ngày tạo 39 day thì sẽ check xem nó
+				// active hay ko ?
 				Date currentProActive = revenueDao.getProactiveDateCurrent(date, user.getId());
-				if(currentProActive == null){
+				if (currentProActive == null) {
 					return baseLever;
 				}
 				if (revenueDao.isProActive(user.getId(), currentProActive)) {
-					//nếu active liên tiếp 2 tháng thì sẽ tính lever từ ngày check - 30 day
+					// nếu active liên tiếp 2 tháng thì sẽ tính lever từ ngày
+					// check - 30 day
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(date);
 					cal.add(Calendar.DATE, -30);
 					dateFrom = cal.getTime();
 				} else {
-					//nếu không sẽ tính lever từ ngày active hiện tại
+					// nếu không sẽ tính lever từ ngày active hiện tại
 					dateFrom = currentProActive;
 				}
-			}else{
+			} else {
 				dateFrom = user.getCdate();
 			}
-			String lever = getFinalLever(user, dateFrom, dateTo);
+			String lever = getFinalLever(user, dateFrom, dateTo, lstOrder);
 			if (lever != null)
 				return lever;
 			else
@@ -126,22 +129,23 @@ public class RevenueServiceImpl implements RevenueService {
 		}
 	}
 
-	private String getFinalLever(User user, Date dateFrom, Date dateTo) throws SQLException {
+	private String getFinalLever(User user, Date dateFrom, Date dateTo, List<Order> lstOrder) throws SQLException {
 		Double totalRevenue = 0.0;
 		List<User> listChild = dao.getChild(user.getId());
-		//revenue of all child
+		// revenue of all child
 		List<Double> lstRevenueOfChild = new ArrayList<>();
-		//revenue of chile lever 1
+		// revenue of child lever 1
 		List<Double> lstRevenueOfChild1 = new ArrayList<>();
 
 		for (User child : listChild) {
 			Double totalRevenueChild = 0.0;
-			totalRevenueChild += dao.getRevenuePersonal(child, dateFrom, dateTo);
+			totalRevenueChild += totalRevenue(child, dateFrom, dateTo,lstOrder); //dao.getRevenuePersonal(child, dateFrom, dateTo);
 			lstRevenueOfChild1.add(totalRevenueChild);
 			List<User> lstAllChild = dao.getAllChild(child.getChildId());
-			for (User u : lstAllChild) {
-				totalRevenueChild += dao.getRevenuePersonal(u, dateFrom, dateTo);
-			}
+//			for (User u : lstAllChild) {
+//				totalRevenueChild += dao.getRevenuePersonal(u, dateFrom, dateTo);
+//			}
+			totalRevenueChild += totalRevenue(lstAllChild, dateFrom, dateTo, lstOrder);
 			lstRevenueOfChild.add(totalRevenueChild);
 			totalRevenue += totalRevenueChild;
 		}
@@ -173,9 +177,9 @@ public class RevenueServiceImpl implements RevenueService {
 				if (value >= LeverType.MSD.getAmount())
 					check = true;
 			}
-			if (countChildValid >= 2) 
+			if (countChildValid >= 2)
 				return LeverType.MSD.name();
-			else{
+			else {
 				if (check) {
 					for (Double value : lstRevenueOfChild) {
 						if (value < LeverType.MSD.getAmount() * 0.2) {
@@ -194,15 +198,15 @@ public class RevenueServiceImpl implements RevenueService {
 			// int countChildValid = 0;
 			boolean check = false;
 			boolean validTL = true;
-			//check s1 >= 20% 
+			// check s1 >= 20%
 			boolean checkS1 = false;
-			for(Double value : lstRevenueOfChild1){
-				if(value >=  LeverType.TL.getAmount() * 0.2){
+			for (Double value : lstRevenueOfChild1) {
+				if (value >= LeverType.TL.getAmount() * 0.2) {
 					checkS1 = true;
 					break;
 				}
 			}
-			if(!checkS1){
+			if (!checkS1) {
 				for (Double value : lstRevenueOfChild) {
 					if (value >= LeverType.TL.getAmount()) {
 						check = true;
@@ -238,7 +242,7 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public RevenueApi getTotalRevenueInfo(Date cdate,int userId) throws SQLException {
+	public RevenueApi getTotalRevenueInfo(Date cdate, int userId) throws SQLException {
 		return revenueDao.getRevenueInfo(cdate, userId);
 	}
 
@@ -248,7 +252,7 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public Double getTotalRevenue(Date date,User user) throws SQLException {
+	public Double getTotalRevenue(Date date, User user) throws SQLException {
 		Double result = 0.0;
 		List<User> lstAllChild = dao.getAllChild(user.getChildId());
 		for (User u : lstAllChild) {
@@ -265,6 +269,48 @@ public class RevenueServiceImpl implements RevenueService {
 	@Override
 	public int saveRevenues(Revenues lstRevenue) throws SQLException {
 		return revenueDao.saveRevenues(lstRevenue);
+	}
+
+	private Double totalRevenue(List<User> lstAllChild, Date dateFrom, Date dateTo, List<Order> lstOrder)
+			throws SQLException {
+		Calendar fromDate = Calendar.getInstance();
+		fromDate.setTime(dateFrom);
+		fromDate = CommonUtils.setMinHour(fromDate);
+		
+		Calendar toDate = Calendar.getInstance();
+		toDate.setTime(dateTo);
+		toDate = CommonUtils.setMaxHour(toDate);
+		
+		Double result = 0.0;
+		for (User child : lstAllChild) {
+			for (Order order : lstOrder) {
+				if (child.getId() == order.getUserId()) {
+					if ((order.getOrderDate().after(fromDate.getTime()) || order.getOrderDate().equals(fromDate.getTime()))
+							&& (order.getOrderDate().before(toDate.getTime()) || order.getOrderDate().equals(toDate.getTime())))
+						result += order.getTotal();
+				}
+			}
+		}
+		return result;
+	}
+
+	private Double totalRevenue(User child, Date dateFrom, Date dateTo, List<Order> lstOrder) throws SQLException {
+		Calendar fromDate = Calendar.getInstance();
+		fromDate.setTime(dateFrom);
+		fromDate = CommonUtils.setMinHour(fromDate);
+		
+		Calendar toDate = Calendar.getInstance();
+		toDate.setTime(dateTo);
+		toDate = CommonUtils.setMaxHour(toDate);
+		Double result = 0.0;
+		for (Order order : lstOrder) {
+			if (child.getId() == order.getUserId()) {
+				if ((order.getOrderDate().after(fromDate.getTime()) || order.getOrderDate().equals(fromDate.getTime()))
+						&& (order.getOrderDate().before(toDate.getTime()) || order.getOrderDate().equals(toDate.getTime())))
+					result += order.getTotal();
+			}
+		}
+		return result;
 	}
 
 }

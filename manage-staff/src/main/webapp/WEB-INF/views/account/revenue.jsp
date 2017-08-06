@@ -40,7 +40,7 @@
 						<th>Hoa hồng trực tiếp(BV)</th>
 						<th id="th-total">Tổng BV</th>
 						<th id="th-percen">Tỉ lệ hoa hồng</th>
-						<th id="th-value">Giá trị hoa hồng</th>
+						<th id="th-value">Hoa hồng nhóm(BV)</th>
 					</tr>
 				</thead>
 

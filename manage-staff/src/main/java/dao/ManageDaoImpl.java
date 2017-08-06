@@ -49,7 +49,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			stmt.setInt(3, lever);
 			stmt.setInt(4, memberId);
 			stmt.executeUpdate();
-			
+
 			stmt = conn.prepareStatement(sql2);
 			stmt.setString(1, "STAFF");
 			stmt.setInt(2, memberId);
@@ -101,7 +101,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			conn.rollback();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return memberId;
 	}
@@ -144,7 +144,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -188,7 +188,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -211,7 +211,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return 1;
 	}
@@ -246,7 +246,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return user;
 	}
@@ -284,7 +284,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstOrder;
 	}
@@ -308,7 +308,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -348,7 +348,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -373,7 +373,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -413,7 +413,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstOrder;
 	}
@@ -454,7 +454,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstOrder;
 	}
@@ -514,7 +514,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -541,7 +541,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -556,9 +556,9 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		while (rs.next()) {
 			result = rs.getBoolean(1);
 		}
-		closeConnection(conn,stmt,rs,st);
+		closeConnection(conn, stmt, rs, st);
 		return result;
-		
+
 	}
 
 	@Override
@@ -582,7 +582,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -605,7 +605,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -641,7 +641,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return false;
 	}
@@ -667,7 +667,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstUser;
 	}
@@ -691,7 +691,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -717,7 +717,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstUser;
 	}
@@ -739,7 +739,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -780,7 +780,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return lstOrder;
 	}
@@ -801,7 +801,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return null;
 	}
@@ -819,7 +819,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -842,7 +842,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0.0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -866,7 +866,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -885,7 +885,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -902,7 +902,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -926,7 +926,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return null;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return null;
 	}
@@ -944,7 +944,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -962,7 +962,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			return 0;
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 	}
 
@@ -982,7 +982,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
@@ -1005,37 +1005,32 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
 		return result;
 	}
 
 	@Override
-	public List<User> getRevenueInfo(Date dateFrom, Date dateTo,List<User> lstUser) throws SQLException {
-		List<User> result = new ArrayList<>();
-		String sql = "SELECT sum(total) as total FROM orders where user_id=? and (date_format(cdate, '%Y-%m-%d') between ? and ?)";
+	public List<Order> getAllOrderType() throws SQLException {
+		List<Order> lstOrder = new ArrayList<>();
+		String sql = "SELECT user_id,cdate,price*quantity FROM orders";
 		try {
 			conn = getConnection();
-			for(User user : lstUser){
-				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, user.getId());
-				stmt.setDate(2, new java.sql.Date(dateFrom.getTime()));
-				stmt.setDate(3, new java.sql.Date(dateTo.getTime()));
-				rs = stmt.executeQuery();
-				User us = new User();
-				while (rs.next()) {
-					us.setId(user.getId());
-					us.setTotalOrderValue(rs.getDouble(1));
-				}
-				result.add(us);
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Order order = new Order();
+				order.setUserId(rs.getInt(1));
+				order.setOrderDate(rs.getDate(2));
+				order.setTotal(rs.getDouble(3));
+				lstOrder.add(order);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			closeConnection(conn,stmt,rs,st);
+			closeConnection(conn, stmt, rs, st);
 		}
-		return result;
+		return lstOrder;
 	}
 }

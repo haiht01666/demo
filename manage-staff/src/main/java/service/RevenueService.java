@@ -2,7 +2,9 @@ package service;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
+import model.Order;
 import model.Revenue;
 import model.RevenueApi;
 import model.Revenues;
@@ -18,7 +20,7 @@ public interface RevenueService {
 	
 	public String getBaseLever(User user,Date date) throws SQLException;
 	
-	public String getLever(User user,Date date) throws SQLException;
+	public String getLever(User user,Date date,List<Order> lstOrder) throws SQLException;
 	
 	public Double getDirectRevenue(int userId,Date fromDate, Date endDate) throws SQLException;
 	

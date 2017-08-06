@@ -23,6 +23,7 @@ import constant.Status;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import model.Banner;
+import model.DatePerious;
 import model.EditLeverForm;
 import model.EditRoleForm;
 import model.Feedback;
@@ -305,7 +306,7 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
-		user.setLeverValue(revenueService.getLever(user, new Date()));
+		user.setLeverValue(revenueService.getLever(user, new Date(),dao.getAllOrderType()));
 		String status = "";
 		status = revenueService.isActive(user, new Date()) ? Status.ACTIVE : Status.INACTIVE;
 		user.setStatus(status);
@@ -316,32 +317,33 @@ public class ManageServiceImpl implements ManageService {
 	public List<Revenue> getRevenueGroup(RevenueForm form) throws SQLException {
 		List<User> lstUser = dao.getMembers();
 		List<Revenue> lstRevenue = new ArrayList<>();
+		List<Order> lstOrder = dao.getAllOrderType();
 		if (form.getType() == RevenueGroupType.WEEK.getValue()) {
-
 			for (User user : lstUser) {
+				
 				Calendar startDate = Calendar.getInstance();
 				startDate.setTime(form.getDateFrom());
 				startDate.add(Calendar.DATE, 1);
 				Calendar endDate = Calendar.getInstance();
 				endDate.setTime(form.getDateTo());
 				endDate.add(Calendar.DATE, 1);
-
+				
 				Double totalRevenue = new Double(0.0);
 				Revenue revenue = new Revenue();
 				revenue.setReceiverId(user.getId());
 				Double revenueProD = 0.0;
 				Date revenueDate = revenueService.getDateRevenue(user.getId());
-
+				List<User> lstAllChild = dao.getAllChild(user.getChildId());
 				boolean check = false;
 				for (Date date = startDate.getTime(); startDate.before(endDate); startDate.add(Calendar.DATE,
 						1), date = startDate.getTime()) {
-					// System.out.println(date);
+					System.out.println(date);
 					if (!revenueService.isActive(user, date))
 						continue;
-					String lever = revenueService.getLever(user, date);
+					String lever = revenueService.getLever(user, date,lstOrder);
 					if (lever.equals(LeverType.PRO_DISTRIBUTE.name())) {
 						if (check) {
-							Double total = totalRevenueGroup(user, date, date);
+							Double total = totalRevenueGroupNew(lstAllChild, date, date,lstOrder);//totalRevenueGroup(user,date,date);
 							revenueProD += total;
 							totalRevenue += total * 0.03;
 						} else {
@@ -349,7 +351,7 @@ public class ManageServiceImpl implements ManageService {
 								Calendar cal = Calendar.getInstance();
 								cal.setTime(date);
 								cal.add(Calendar.DATE, -30);
-								Double totalBVGroup = totalRevenueGroup(user, cal.getTime(), date);
+								Double totalBVGroup = totalRevenueGroupNew(lstAllChild, cal.getTime(), date,lstOrder);//totalRevenueGroup(user,cal.getTime(),date);
 								if (totalBVGroup >= LeverType.PRO_DISTRIBUTE.getAmount()) {
 									revenueProD += totalBVGroup;
 									totalRevenue += totalBVGroup * 0.03;
@@ -359,7 +361,7 @@ public class ManageServiceImpl implements ManageService {
 								Calendar cal = Calendar.getInstance();
 								cal.setTime(revenueDate);
 								cal.add(Calendar.DATE, 1);
-								Double totalBVGroup = totalRevenueGroup(user, cal.getTime(), date);
+								Double totalBVGroup = totalRevenueGroupNew(lstAllChild, cal.getTime(), date,lstOrder);//totalRevenueGroup(user,cal.getTime(),date);
 								if (totalBVGroup >= LeverType.PRO_DISTRIBUTE.getAmount()) {
 									revenueProD += totalBVGroup;
 									totalRevenue += totalBVGroup * 0.03;
@@ -373,7 +375,7 @@ public class ManageServiceImpl implements ManageService {
 						// nhận thêm 2% từ trước nữa
 						totalRevenue += revenueProD * 0.02;
 						revenueProD = 0.0;
-						totalRevenue += totalRevenueGroup(user, date, date) * 0.05;
+						totalRevenue += totalRevenueGroupNew(lstAllChild, date, date,lstOrder) * 0.05; //totalRevenueGroup(user, date, date)* 0.05;//
 					} else {
 						continue;
 					}
@@ -407,7 +409,7 @@ public class ManageServiceImpl implements ManageService {
 				boolean check = false;
 				for (Date date = dateFrom.getTime(); dateFrom.before(dateTo); dateFrom.add(Calendar.DATE,
 						1), date = dateFrom.getTime()) {
-					String lever = revenueService.getLever(user, date);
+					String lever = revenueService.getLever(user, date,lstOrder);
 					if (lever.equals(LeverType.GDSD.name())) {
 						check = true;
 						break;
@@ -454,7 +456,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom1.getTime(); dateFrom1.before(dateTo1); dateFrom1.add(Calendar.DATE,
 						1), date = dateFrom1.getTime()) {
 					// check first month
-					String lever = revenueService.getLever(user, date);
+					String lever = revenueService.getLever(user, date,lstOrder);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever1 = lever;
 						break;
@@ -482,7 +484,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom2.getTime(); dateFrom2.before(dateTo1); dateFrom2.add(Calendar.DATE,
 						1), date = dateFrom2.getTime()) {
 					// check second month
-					String lever = revenueService.getLever(user, date);
+					String lever = revenueService.getLever(user, date,lstOrder);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever2 = lever;
 						break;
@@ -511,7 +513,7 @@ public class ManageServiceImpl implements ManageService {
 				for (Date date = dateFrom3.getTime(); dateFrom3.before(dateTo3); dateFrom3.add(Calendar.DATE,
 						1), date = dateFrom3.getTime()) {
 					// check 3th month
-					String lever = revenueService.getLever(user, date);
+					String lever = revenueService.getLever(user, date,lstOrder);
 					if (lever.equals(LeverType.GDSD.name())) {
 						lever3 = lever;
 						break;
@@ -582,17 +584,22 @@ public class ManageServiceImpl implements ManageService {
 		// get all user
 		List<User> lstUser = dao.getMembers();
 		List<Revenue> revenues = new ArrayList<>();
-		Map<Integer, List<User>> mapRevenue = new HashMap<>();
+		List<Order> lstOrder = dao.getAllOrderType();
+		Map<Integer,DatePerious> mapDate = new HashMap<>();
 		for (int i = 1; i < 13; i++) {
+			DatePerious datePerious = new DatePerious();
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.MONTH, i - 1);
 			// first day of month
 			cal.set(Calendar.DAY_OF_MONTH, 1);
-			Date dateFrom = cal.getTime();
+			cal = CommonUtils.setMinHour(cal);
+			datePerious.setFromDate(cal.getTime());
+
 			// last day of mounth
 			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-			Date dateTo = cal.getTime();
-			mapRevenue.put(i-1, dao.getRevenueInfo(dateFrom, dateTo,lstUser));
+			cal = CommonUtils.setMaxHour(cal);
+			datePerious.setToDate(cal.getTime());
+			mapDate.put(i, datePerious);
 		}
 		for (User user : lstUser) {
 			Revenue revenue = new Revenue();
@@ -601,16 +608,8 @@ public class ManageServiceImpl implements ManageService {
 			List<User> lstAllChild = dao.getAllChild(user.getChildId());
 			boolean check = false;
 			for (int i = 1; i < 13; i++) {
-				Calendar cal = Calendar.getInstance();
-				cal.set(Calendar.MONTH, i - 1);
-				// first day of month
-				cal.set(Calendar.DAY_OF_MONTH, 1);
-				Date dateFrom = cal.getTime();
-				// last day of mounth
-				cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-				Date dateTo = cal.getTime();
 				Double value = 0.0;
-				value = totalRevenueGroupNew(lstAllChild, dateFrom, dateTo,mapRevenue.get(i-1));
+				value = totalRevenueGroupNew(lstAllChild,mapDate.get(i),lstOrder);
 				switch (i) {
 				case 1:
 					if (value > 0)
@@ -841,25 +840,44 @@ public class ManageServiceImpl implements ManageService {
 			result = dao.getMembers();
 		if(result != null){
 			for(User user : result ){
-				user.setLeverValue(revenueService.getLever(user, new Date()));
+				user.setLeverValue(revenueService.getLever(user, new Date(),dao.getAllOrderType()));
 			}
 		}
 		return result;
 	}
 	
-	private Double totalRevenueGroupNew(List<User> lstAllChild, Date dateFrom, Date dateTo,List<User> allRevenue) throws SQLException {
+	private Double totalRevenueGroupNew(List<User> lstAllChild,DatePerious mapDate,List<Order> lstOrder) throws SQLException {
 		Double result = 0.0;
 		for (User child : lstAllChild) {
-			for(User us : allRevenue){
-				if(child.getId() == us.getId()){
-					result += us.getTotalOrderValue();
-					break;
+			for(Order order : lstOrder){
+				if(child.getId() == order.getUserId()){
+					if((order.getOrderDate().after(mapDate.getFromDate())  || order.getOrderDate().equals(mapDate.getFromDate()))  && (order.getOrderDate().before(mapDate.getToDate()) || order.getOrderDate().equals(mapDate.getToDate())))
+						result += order.getTotal();
 				}	
 			}
 		}
 		return result;
 	}
 	
-
-
+	private Double totalRevenueGroupNew(List<User> lstAllChild,Date dateFrom, Date dateTo,List<Order> lstOrder) throws SQLException {
+		Calendar fromDate = Calendar.getInstance();
+		fromDate.setTime(dateFrom);
+		fromDate = CommonUtils.setMinHour(fromDate);
+		
+		Calendar toDate = Calendar.getInstance();
+		toDate.setTime(dateTo);
+		toDate = CommonUtils.setMaxHour(toDate);
+		
+		Double result = 0.0;
+		for (User child : lstAllChild) {
+			for(Order order : lstOrder){
+				if(child.getId() == order.getUserId()){
+					if((order.getOrderDate().after(fromDate.getTime())  || order.getOrderDate().equals(fromDate.getTime()))  && (order.getOrderDate().before(toDate.getTime()) || order.getOrderDate().equals(toDate.getTime())))
+						result += order.getTotal();
+				}	
+			}
+		}
+		return result;
+	}
+	
 }

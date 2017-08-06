@@ -143,6 +143,15 @@ public class CommonUtils {
 		cal.set(Calendar.MILLISECOND, 59);
     	return cal;
     }
+    
+    public static Calendar setMinHour(Calendar cal){
+    	cal.set(Calendar.HOUR_OF_DAY, 00);
+		cal.set(Calendar.MINUTE, 00);
+		cal.set(Calendar.SECOND, 00);
+		cal.set(Calendar.MILLISECOND, 00);
+    	return cal;
+    }
+
 
     public static void main(String[] arg) throws ParseException {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");

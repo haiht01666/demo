@@ -30,6 +30,7 @@ public interface ManageDao {
 
 	public User getUserById(int id) throws SQLException;
 
+	//get all order with type = 1
 	public List<Order> getAllOrder() throws SQLException;
 
 	public int createOrder(Order order) throws SQLException;
@@ -110,6 +111,9 @@ public interface ManageDao {
 	
 	public int createRevenue(Revenue revenue) throws SQLException;
 	
-	public List<User> getRevenueInfo(Date dateFrom, Date dateTo,List<User> lstUser) throws SQLException;
+	//get all order with type = 1
+	public List<Order> getAllOrderType() throws SQLException;
+	
+	//public List<User> getAllOrder() throws SQLException;
 
 }
