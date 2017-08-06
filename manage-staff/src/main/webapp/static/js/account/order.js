@@ -42,6 +42,7 @@ $(document).ready(function() {
 	// edit row
 	$('#edit-data').on( 'click', function () {
 		emptyMessageError();
+		 innitModal();
 		$('#lbl-price').empty();
 		$('#btn-edit-order').show();
 		$('#btn-add-order').hide();
@@ -55,7 +56,7 @@ $(document).ready(function() {
 		$('#txt-order-quantity').val($('tr.selected td:nth-child(5)').text());
 		$('#order-type').val($('tr.selected td:nth-child(6)').data('id'));
 		$('#add-order').modal('show');
-	
+		$('#txt-member-id').trigger('change');
 		$('#btn-edit-order').on('click',function(){
 			
 			$.ajax({
@@ -103,6 +104,7 @@ $(document).ready(function() {
 					$('#btn-add-order').attr('disabled',false);
 					$('#txt-member-name').val(response.resultData.dispName);
 					$('#txt-parent-id').val(response.resultData.parentId);
+					$('#txt-curent-lever').val(response.resultData.leverValue);
 				} else {
 					$('#msg-error-modal').append($('<div>',{class:'alert alert-danger'}).text(response.message?response.message:'Mã id không tồn tại hoặc đã được đăng ký!'));
 				}
@@ -196,6 +198,7 @@ $(document).ready(function() {
 			});
 		}
 		else{
+			$('#select-lever').css('display','none');
 			$('#txt-order-quantity').attr('disabled',false);
 			//$('#txt-order-price').val('');
 			//$('#lbl-price').text('');
@@ -228,6 +231,7 @@ function innitModal(){
 	 $('#txt-order-date').attr('disabled',false);	
 	 $('#select-lever').css('display','none');
 	 $('#order-type').prop('selectedIndex',0);
+	 $('#txt-curent-lever').val('');
 }
 
 function getFormData(){

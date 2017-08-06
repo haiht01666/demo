@@ -64,7 +64,11 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public User getUserById(int id) throws SQLException {
-		return dao.getUserById(id);
+		User user =dao.getUserById(id);
+		if(user != null && user.getCdate() != null){
+			user.setLeverValue(revenueService.getLever(user, new Date(), dao.getAllOrderType()));
+		}
+		return user;
 	}
 
 	@Override

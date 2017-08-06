@@ -93,6 +93,11 @@
 									<input type="text" id="txt-member-name" class="form-control"
 										placeholder="tên thành viên" readonly>
 								</div>
+								
+								<div class="form-group">
+									<input type="text" id="txt-curent-lever" class="form-control"
+										placeholder="Cấp bậc hiện tại" readonly>
+								</div>
 
 								<div class="form-group">
 									<input type="text" id="txt-order-name" class="form-control"
