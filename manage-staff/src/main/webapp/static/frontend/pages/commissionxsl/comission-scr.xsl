@@ -171,7 +171,7 @@
                                                             <img id="ComChk1_checkLogoImg" src="static/frontend/promotion/logo.png" width="170px" style="border-width:0px;"/>
                                                         </div>
                                                         <div class="checkBank">
-                                                            <span id="ComChk1_ckBankNameLbl">THE INTERNATIONAL BANK<br/>HOMETOWN, USA, 000000</span>
+                                                            <!--<span id="ComChk1_ckBankNameLbl">THE INTERNATIONAL BANK<br/>HOMETOWN, USA, 000000</span>-->
                                                         </div>
                                                     </td>
                                                     <td width="150" valign="top" align="right" class="checkInput" nowrap="" style="min-width: 150px">
@@ -209,15 +209,15 @@
                                                                 <span id="ComChk1_memoLbl" class="checkMemo"></span>
                                                             </div>
                                                             <div style="float: right; vertical-align: bottom; margin-top: 10px;">
-                                                                <img alt="" src="static/frontend/assets/images/checkSignature.png"/>
+                                                                <!--<img alt="" src="static/frontend/assets/images/checkSignature.png"/>-->
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td colspan="4" valign="bottom" align="center">
-                                                            <img alt="" src="static/frontend/assets/images/checkAcctBar.png"/>
-                                                        </td>
-                                                    </tr>
+                                                    <!--<tr>-->
+                                                        <!--<td colspan="4" valign="bottom" align="center">-->
+                                                            <!--<img alt="" src="static/frontend/assets/images/checkAcctBar.png"/>-->
+                                                        <!--</td>-->
+                                                    <!--</tr>-->
                                                 </tbody></table>
                                         </td>
                                     </tr>
