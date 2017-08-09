@@ -16,6 +16,11 @@ $(document).ready(function() {
 			"infoEmpty" : "No records available",
 			"infoFiltered" : "(filtered from _MAX_ total records)"
 		},
+		dom : 'lBfrtip',
+		buttons : [{
+			extend : 'excelHtml5',
+			title : 'Danh sach các đơn hàng '
+		}]
 	// disable sort
 	// aoColumnDefs: [
 	// {

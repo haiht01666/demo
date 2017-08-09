@@ -254,7 +254,7 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	@Override
 	public List<Order> getAllOrder() throws SQLException {
 		List<Order> lstOrder = new ArrayList<>();
-		String sql = "SELECT user_id,name,cdate,price,quantity,type,total,id FROM orders where type = 1";
+		String sql = "SELECT user_id,name,cdate,price,quantity,type,total,id FROM orders where type = "+OrderType.ORDER_PRODUCT.getCode() + " or type = " + OrderType.ORDER_PROACTIVE.getCode();
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
