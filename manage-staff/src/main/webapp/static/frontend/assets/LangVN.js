@@ -3250,6 +3250,8 @@ var pConstants_VN = {
     'INDEX_PAGE_TITLE' : 'Trang chủ',
     'INDEX_PAGE_BONUS_TITLE' : 'Thông tin tổng quan',
     'INDEX_PAGE_STATUS_TITLE' : 'Trạng thái hiện tại',
+    'INDEX_PAGE_ACTIVE_TITLE' : 'Số ngày active còn lại',
+    'INDEX_PAGE_BACKOFFICE_TITLE' : 'Số ngày backoffice còn lại',
     'INDEX_PAGE_RANK_TITLE' : 'Cấp bậc hiện tại',
     'INDEX_PAGE_STANDARD_TITLE' : 'Tiêu chuẩn hiện tại',
     'INDEX_PAGE_TOTAL_VOLUME_TITLE' : 'Doanh số cá nhân',

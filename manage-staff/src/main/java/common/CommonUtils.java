@@ -1,15 +1,14 @@
 package common;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import model.CompanyInfo;
 import org.apache.commons.lang.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.Months;
-import org.joda.time.Years;
+import org.joda.time.*;
 
 import model.TimeModel;
 
@@ -70,6 +69,13 @@ public class CommonUtils {
         c.add(Calendar.YEAR, yearPeriosNumber * -1);
         //cal start date, end date
         return df1.format(c.getTime());
+    }
+
+    public static int getBackOfficeNum(Date backOfficeDate) {
+        if(backOfficeDate == null){
+            return -2;
+        }
+        return getDaysCount(new Date(), backOfficeDate);
     }
 
     public static int numberWeekFromRegister(Date dateRegister, Date caculateDate) {
@@ -156,19 +162,20 @@ public class CommonUtils {
 
 
     public static int getDaysCount(Date begin, Date end) {
-        Calendar start = org.apache.commons.lang.time.DateUtils.toCalendar(begin);
-        start.set(Calendar.MILLISECOND, 0);
-        start.set(Calendar.SECOND, 0);
-        start.set(Calendar.MINUTE, 0);
-        start.set(Calendar.HOUR_OF_DAY, 0);
+        DateTime endDate = new DateTime(end);
+        DateTime beginDate = new DateTime(begin);
+        if(endDate.withTimeAtStartOfDay().isBefore(beginDate.withTimeAtStartOfDay())){
+            return -1;
+        }
+        return Days.daysBetween(beginDate.toLocalDate(), endDate.toLocalDate()).getDays();
+    }
 
-        Calendar finish = org.apache.commons.lang.time.DateUtils.toCalendar(end);
-        finish.set(Calendar.MILLISECOND, 999);
-        finish.set(Calendar.SECOND, 59);
-        finish.set(Calendar.MINUTE, 59);
-        finish.set(Calendar.HOUR_OF_DAY, 23);
-
-        long delta = finish.getTimeInMillis() - start.getTimeInMillis();
-        return (int) Math.ceil(delta / (1000.0 * 60 * 60 * 24));
+    public static void main(String[] args) throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 8, 12);
+        SimpleDateFormat df = new SimpleDateFormat("dd MM yyyy");
+        Integer i = CommonUtils.getBackOfficeNum(df.parse("09 08 2017"));
+        System.out.println(i);
+        System.out.println(CommonUtils.getDaysCount(new Date(), df.parse("11 08 2017")));
     }
 }

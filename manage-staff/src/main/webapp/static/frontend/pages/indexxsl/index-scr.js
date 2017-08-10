@@ -49,7 +49,9 @@ function requestJsonRequest() {
 function setDataInfo(dataInfo) {
     document.getElementById("dispName").innerHTML = dataInfo.userInfo.dispName;
     document.getElementById("accountId").innerHTML = dataInfo.userInfo.userCode;
-    document.getElementById("status").value = dataInfo.userInfo.status;
+    document.getElementById("status").value = dataInfo.userInfo.activeStatus.status;
+    document.getElementById("active").value = dataInfo.userInfo.activeStatus.dateNum;
+    document.getElementById("backOffice").value = dataInfo.userInfo.backOfficeNum;
     document.getElementById("rank").value = dataInfo.userInfo.leverValue;
     document.getElementById("groupMonthVolumeTitle").innerHTML = dataInfo.monthTime;
 

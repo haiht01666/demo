@@ -83,7 +83,7 @@ function sendJSONRequest(loginUser, loginPass) {
             if(response.result){
                 requestMBServiceSuccess(response.resultData);
             } else {
-                requestMBServiceFail();
+                requestMBServiceFail(response.resultData);
             }
         },
         error: requestMBServiceFail
@@ -130,14 +130,14 @@ function requestMBServiceSuccess(loginInfo) {
 };
 
 //event listener: http request success
-function requestMBServiceFail() {
+function requestMBServiceFail(errorMessage) {
     hideLoadingMask();
-    animationError();
+    animationError(errorMessage);
 };
 
-function animationError() {
+function animationError(errorMessage) {
     $("#enter_code").effect("shake", {times: 2, distance: '10', direction: 'top'}, 500);
-    showAlertText(CONST_STR.get("WRONG_PASSWORD"));
+    showAlertText(errorMessage);
 }
 
 function forgotPass(){

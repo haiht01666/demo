@@ -33,7 +33,7 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         User user = new User();
-        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.cdate FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
+        String sql = "SELECT u1.id ,u1.name,u1.email, u1.address, u1.phone, u1.birthday ,u1.identifier, u1.bank_name, u1.bank_account, u1.bank_branch, u1.bank_user, u1.avatar, u1.child_id, u1.city, u2.name as parentname, u1.cdate, u1.back_office FROM users u1 LEFT JOIN users u2 on u1.parent_id = u2.id where u1.id=?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -63,6 +63,7 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
                 user.setCity(rs.getString(14));
                 user.setParentName(rs.getString(15));
                 user.setSignUpDate(rs.getDate(16));
+                user.setBackOffice(rs.getDate(17));
             }
         } catch (Exception ex) {
             ex.printStackTrace();

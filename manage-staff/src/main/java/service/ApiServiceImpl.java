@@ -44,9 +44,21 @@ public class ApiServiceImpl implements ApiService {
             String passwordEncrypt = dao.getPasswordEncrypt(userId);
             if (!passwordEncoder.matches(password, passwordEncrypt)) {
                 result.setResult(false);
+                result.setResultData("Bạn đã nhập sai mật khẩu. Vui lòng nhập lại");
                 return result;
             }
             User user = dao.getLoginInfo(userId);
+            if (CommonUtils.getBackOfficeNum(user.getBackOffice()) == -1) {
+                String errorMessage = "Backoffice của bạn đã hết hạn , vui lòng liên hệ admin để mua backoffice";
+                result.setResult(false);
+                result.setResultData(errorMessage);
+                return result;
+            } else if (CommonUtils.getBackOfficeNum(user.getBackOffice()) == -2) {
+                String errorMessage = "Để sử dụng dịch vụ cần mua gói backoffice , vui lòng liên hệ admin để thực hiện mua backoffice";
+                result.setResult(false);
+                result.setResultData(errorMessage);
+                return result;
+            }
             result.setResult(true);
             result.setResultData(user);
         } catch (Exception e) {
@@ -213,7 +225,8 @@ public class ApiServiceImpl implements ApiService {
             User userInfo = dao.getLoginInfo(userCode);
             User userTmp = manageService.detailUser(Integer.parseInt(userCode));
             userInfo.setLeverValue(userTmp.getLeverValue());
-            userInfo.setStatus(userTmp.getStatus());
+            userInfo.setActiveStatus(userTmp.getActiveStatus());
+            userInfo.setBackOfficeNum(CommonUtils.getBackOfficeNum(userInfo.getBackOffice()));
             sumaryInfoModel.setUserInfo(userInfo);
 
             // lay doanh so ca nhan thang

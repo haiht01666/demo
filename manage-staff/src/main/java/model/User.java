@@ -78,55 +78,57 @@ public class User implements Serializable {
     private String userAvatar;
 
     private String city;
-    
+
     private Double totalOrderValue;
-    
+
     private ActiveStatus activeStatus;
+    private Date backOffice;
+    private int backOfficeNum;
 
     public ActiveStatus getActiveStatus() {
-		return activeStatus;
-	}
+        return activeStatus;
+    }
 
-	public void setActiveStatus(ActiveStatus activeStatus) {
-		this.activeStatus = activeStatus;
-	}
+    public void setActiveStatus(ActiveStatus activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 
-	public Double getTotalOrderValue() {
-		return totalOrderValue;
-	}
+    public Double getTotalOrderValue() {
+        return totalOrderValue;
+    }
 
-	public void setTotalOrderValue(Double totalOrderValue) {
-		this.totalOrderValue = totalOrderValue;
-	}
+    public void setTotalOrderValue(Double totalOrderValue) {
+        this.totalOrderValue = totalOrderValue;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	// cấp đại lý
+    // cấp đại lý
     private String agentLevel;
-    
+
     private String status;
-    
+
     private boolean completePackage;
 
     public boolean getCompletePackage() {
-		return completePackage;
-	}
+        return completePackage;
+    }
 
-	public void setCompletePackage(boolean isCompletePackage) {
-		this.completePackage = isCompletePackage;
-	}
+    public void setCompletePackage(boolean isCompletePackage) {
+        this.completePackage = isCompletePackage;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getLeverValue() {
+    public String getLeverValue() {
         return leverValue;
     }
 
@@ -350,5 +352,21 @@ public class User implements Serializable {
 
     public void setAgentLevel(String agentLevel) {
         this.agentLevel = agentLevel;
+    }
+
+    public Date getBackOffice() {
+        return backOffice;
+    }
+
+    public void setBackOffice(Date backOffice) {
+        this.backOffice = backOffice;
+    }
+
+    public int getBackOfficeNum() {
+        return backOfficeNum;
+    }
+
+    public void setBackOfficeNum(int backOfficeNum) {
+        this.backOfficeNum = backOfficeNum;
     }
 }

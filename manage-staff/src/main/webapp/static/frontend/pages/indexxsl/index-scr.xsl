@@ -68,6 +68,30 @@
                                 <tr>
                                     <td colspan="2" align="left" valign="middle" class="td-text">
                                         <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;">INDEX_PAGE_ACTIVE_TITLE</span>
+                                            <input id="active" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="width:35%;">INDEX_PAGE_BACKOFFICE_TITLE</span>
+                                            <input id="backOffice" type="text" disabled=""
+                                                   class="form-control form-control-righttext" style="width:100%;"
+                                                   value=""
+                                                   autocomplete="off" autocorrect="off" autocapitalize="off"
+                                                   spellcheck="off"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="left" valign="middle" class="td-text">
+                                        <div class="input-group">
                                             <span class="input-group-addon" style="width:35%;"><span>INDEX_PAGE_TOTAL_VOLUME_TITLE</span>
                                                 (<span id="groupMonthVolumeTitle"></span>)
                                             </span>
