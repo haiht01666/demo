@@ -14,6 +14,7 @@ import constant.LeverType;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import dao.RevenueDao;
+import model.ActiveStatus;
 import model.Order;
 import model.Revenue;
 import model.RevenueApi;
@@ -309,6 +310,49 @@ public class RevenueServiceImpl implements RevenueService {
 						&& (order.getOrderDate().before(toDate.getTime()) || order.getOrderDate().equals(toDate.getTime())))
 					result += order.getTotal();
 			}
+		}
+		return result;
+	}
+
+	@Override
+	public ActiveStatus getActiveStatus(User user, Date date) throws SQLException {
+		ActiveStatus result = new ActiveStatus();
+		if (user.getCdate() != null) {
+			// date create account
+			Date createDate = user.getCdate();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(createDate);
+			cal.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_39);
+			cal = CommonUtils.setMaxHour(cal);
+			if (date.after(cal.getTime())) {
+				// if date > create date + 39 day then check user buy pro-active
+				// ?
+				Date dateActive =  revenueDao.getDateActive(user.getId(), date);
+				if (dateActive == null){
+					result.setExpireDate(dateActive);
+					result.setStatus(constant.Status.INACTIVE);
+					
+				}
+				else {
+					Calendar cal1 = Calendar.getInstance();
+					cal1.setTime(dateActive);
+					cal1.add(Calendar.DATE, TimePeriodCheck.TIME_ORDER_PERIOD_30 - 1);
+					if (date.after(cal1.getTime())){
+						result.setExpireDate(dateActive);
+						result.setStatus(constant.Status.INACTIVE);
+					}
+					else{
+						result.setExpireDate(dateActive);
+						result.setStatus(constant.Status.ACTIVE);
+					}
+					result.setDateNum(cal1.getTime());
+				}
+			} else {
+				result.setExpireDate(cal.getTime());
+				result.setStatus(constant.Status.ACTIVE);
+				result.setDateNum(cal.getTime());
+			}
+
 		}
 		return result;
 	}

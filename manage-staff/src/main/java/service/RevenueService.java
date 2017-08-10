@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import model.ActiveStatus;
 import model.Order;
 import model.Revenue;
 import model.RevenueApi;
@@ -17,6 +18,8 @@ public interface RevenueService {
 	 * @return true if active , false if not
 	 */
 	public boolean isActive(User user,Date date) throws SQLException;
+	
+	public ActiveStatus getActiveStatus(User user,Date date) throws SQLException;
 	
 	public String getBaseLever(User user,Date date) throws SQLException;
 	

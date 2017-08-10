@@ -347,4 +347,29 @@ public class RevenueDaoImpl extends DBManager implements RevenueDao {
 
 		return result;
 	}
+
+	@Override
+	public Date getDateActive(int id, Date date) throws SQLException {
+		String sql = "Select cdate from orders where  type = ? and user_id = ? order by cdate desc";
+		try {
+			Date cdate = null;
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, OrderType.ORDER_PROACTIVE.getCode());
+			stmt.setInt(2, id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				cdate = rs.getDate(1);
+				break;
+			}
+			return cdate;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			conn.close();
+			stmt.close();
+			rs.close();
+		}
+	}
 }

@@ -70,7 +70,11 @@
 					
 					<div class="col-xs-12">
 						<label class="col-md-3 col-xs-4">Trạng thái</label> <span
-							class="col-md-9 col-xs-8">${userDetail.status }</span>
+							class="col-md-9 col-xs-8">${userDetail.activeStatus.status }</span>
+					</div>
+					<div class="col-xs-12">
+						<label class="col-md-3 col-xs-4">Expired</label> <span
+							class="col-md-9 col-xs-8">${userDetail.activeStatus.dateNum }</span>
 					</div>
 
 				</fieldset>

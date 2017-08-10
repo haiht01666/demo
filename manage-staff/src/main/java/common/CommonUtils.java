@@ -1,15 +1,17 @@
 package common;
 
-import model.TimeModel;
-import org.apache.commons.lang.StringUtils;
-import org.joda.time.*;
-
-import java.sql.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.Months;
+import org.joda.time.Years;
+
+import model.TimeModel;
 
 /**
  * Created by BlueSky on 4/12/2017.
@@ -153,8 +155,20 @@ public class CommonUtils {
     }
 
 
-    public static void main(String[] arg) throws ParseException {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.print(CommonUtils.numberWeekFromRegister(df.parse("08/07/2017"), new Date()));
+    public static int getDaysCount(Date begin, Date end) {
+        Calendar start = org.apache.commons.lang.time.DateUtils.toCalendar(begin);
+        start.set(Calendar.MILLISECOND, 0);
+        start.set(Calendar.SECOND, 0);
+        start.set(Calendar.MINUTE, 0);
+        start.set(Calendar.HOUR_OF_DAY, 0);
+
+        Calendar finish = org.apache.commons.lang.time.DateUtils.toCalendar(end);
+        finish.set(Calendar.MILLISECOND, 999);
+        finish.set(Calendar.SECOND, 59);
+        finish.set(Calendar.MINUTE, 59);
+        finish.set(Calendar.HOUR_OF_DAY, 23);
+
+        long delta = finish.getTimeInMillis() - start.getTimeInMillis();
+        return (int) Math.ceil(delta / (1000.0 * 60 * 60 * 24));
     }
 }

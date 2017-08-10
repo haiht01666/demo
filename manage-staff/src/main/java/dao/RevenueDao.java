@@ -10,6 +10,14 @@ import model.User;
 
 public interface RevenueDao {
 	public boolean isActive(int id , Date date) throws SQLException;
+	/**
+	 * Get latest date order proactive
+	 * @param id
+	 * @param date
+	 * @return
+	 * @throws SQLException
+	 */
+	public Date getDateActive(int id , Date date) throws SQLException;
 	public Date getProactiveDateCurrent(Date date,int userId)throws SQLException;
 	/**
 	 * Check user co active lien tiep ?

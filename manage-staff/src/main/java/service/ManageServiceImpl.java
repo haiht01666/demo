@@ -19,7 +19,6 @@ import constant.RevenueGroupType;
 import constant.RevenuePercent;
 import constant.RevenueType;
 import constant.Roles;
-import constant.Status;
 import constant.TimePeriodCheck;
 import dao.ManageDao;
 import model.Banner;
@@ -324,9 +323,7 @@ public class ManageServiceImpl implements ManageService {
 	public User detailUser(int id) throws SQLException {
 		User user = dao.getUserById(id);
 		user.setLeverValue(revenueService.getLever(user, new Date(),dao.getAllOrderType()));
-		String status = "";
-		status = revenueService.isActive(user, new Date()) ? Status.ACTIVE : Status.INACTIVE;
-		user.setStatus(status);
+		user.setActiveStatus(revenueService.getActiveStatus(user, new Date()));
 		return user;
 	}
 

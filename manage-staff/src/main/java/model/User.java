@@ -80,8 +80,18 @@ public class User implements Serializable {
     private String city;
     
     private Double totalOrderValue;
+    
+    private ActiveStatus activeStatus;
 
-    public Double getTotalOrderValue() {
+    public ActiveStatus getActiveStatus() {
+		return activeStatus;
+	}
+
+	public void setActiveStatus(ActiveStatus activeStatus) {
+		this.activeStatus = activeStatus;
+	}
+
+	public Double getTotalOrderValue() {
 		return totalOrderValue;
 	}
 
