@@ -78,6 +78,16 @@ public class ApiController {
 		return service.getListOrder(userCode, childId, limit, offset, orderby);
 	}
 
+	@RequestMapping(value = { "/getPersonalOrder" }, method = RequestMethod.POST)
+	public @ResponseBody AjaxResult getPersonalOrder(@RequestBody Map mapGetAllNpp) {
+		String userCode = (String)mapGetAllNpp.get("userCode");
+		String childId = (String)mapGetAllNpp.get("childId");
+		Integer limit = (Integer)mapGetAllNpp.get("limit");
+		Integer offset = (Integer)mapGetAllNpp.get("offset");
+		String orderby = (String) mapGetAllNpp.get("orderby");
+		return service.getListPersonalOrder(userCode, childId, limit, offset, orderby);
+	}
+
 	@RequestMapping(value = { "/getNppGraphical" }, method = RequestMethod.POST)
 	public @ResponseBody AjaxResult getNppGraphical(@RequestBody Map mapGetAllNpp) {
 		String userCode = (String)mapGetAllNpp.get("userCode");

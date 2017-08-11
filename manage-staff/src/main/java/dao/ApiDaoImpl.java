@@ -293,6 +293,29 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
         }
         return totalRecord;
     }
+    @Override
+    public long getTotalPersonalOrder(String userCode) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        long totalRecord = 0;
+        String sql;
+        sql = "SELECT count(*) FROM orders o where user_id = ?" ;
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                totalRecord = rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(conn, stmt, rs);
+        }
+        return totalRecord;
+    }
 
     @Override
     public List<Order> getListOrder(String userCode, Integer limit, Integer offset, String orderby) {
@@ -317,6 +340,68 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
                 "	o.user_id IN (" + childQuery + ")" +
                 "   AND o.type=" + OrderType.ORDER_PRODUCT.getCode() +
                 " order by o." + orderby;
+        if (limit != -1) {
+            sql += " LIMIT ?,?";
+        }
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userCode);
+            if (limit != -1) {
+                stmt.setInt(2, offset);
+                stmt.setInt(3, limit);
+            }
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setUserId(rs.getInt(1));
+                order.setUserName(rs.getString(2));
+                order.setOrderName(rs.getString(3));
+                order.setOrderDate(rs.getDate(4));
+                order.setPrice(rs.getDouble(5));
+                order.setQuantity(rs.getInt(6));
+                int type = rs.getInt(7);
+                if (type == OrderType.ORDER_PROACTIVE.getCode())
+                    order.setTypeValue(OrderType.ORDER_PROACTIVE.getValue());
+                else if (type == OrderType.ORDER_PACKAGE.getCode())
+                    order.setTypeValue(OrderType.ORDER_PACKAGE.getValue());
+                else if (type == OrderType.ORDER_PRODUCT.getCode())
+                    order.setTypeValue(OrderType.ORDER_PRODUCT.getValue());
+                else
+                    order.setTypeValue(OrderType.ORDER_PRODUCT.DefaultValue());
+                order.setTotal(rs.getDouble(8));
+                order.setChildId(rs.getString(9));
+                lstOrder.add(order);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(conn, stmt, rs);
+        }
+        return lstOrder;
+    }
+    @Override
+    public List<Order> getListPersonalOrder(String userCode, Integer limit, Integer offset, String orderby) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Order> lstOrder = new ArrayList<>();
+        String sql = "SELECT " +
+                "	o.user_id, " +
+                "	u. NAME user_name, " +
+                "	o. NAME, " +
+                "	o.cdate, " +
+                "	o.price, " +
+                "	o.quantity, " +
+                "	o.type, " +
+                "	o.total, " +
+                "	u.child_id " +
+                "FROM " +
+                "	orders o " +
+                "LEFT JOIN users u ON o.user_id = u.id " +
+                "WHERE " +
+                "	o.user_id = ? " +
+                " order by o.cdate DESC ";
         if (limit != -1) {
             sql += " LIMIT ?,?";
         }

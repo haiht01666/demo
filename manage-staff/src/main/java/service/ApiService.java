@@ -31,6 +31,8 @@ public interface ApiService {
 
     AjaxResult getListOrder(String listUserId, String childId, Integer limit, Integer offset, String orderby);
 
+    AjaxResult getListPersonalOrder(String listUserId, String childId, Integer limit, Integer offset, String orderby);
+
     AjaxResult getNppGraphical(String userCode);
 
     AjaxResult getSummaryInfo(String userCode, String time, int limit, int offset);

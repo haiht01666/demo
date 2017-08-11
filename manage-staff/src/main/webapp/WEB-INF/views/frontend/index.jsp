@@ -397,6 +397,13 @@ pageEncoding="UTF-8"%>
                                             </div>
                                         </li>
                                         <li>
+                                            <div onClick="navController.initWithRootView('personal/personal-list-order', true, 'xsl');"
+                                                 id='personal/personal-list-order'><em
+                                                    class="icon-arrowright"></em>
+                                                <div class="langNoStyle">MENU_PERSONAL_ORDER</div>
+                                            </div>
+                                        </li>
+                                        <li>
                                             <div onClick="navController.initWithRootView('accountxsl/account-change-password-scr', true, 'xsl');"
                                                  id='accountxsl/account-change-password-scr'><em
                                                     class="icon-arrowright"></em>

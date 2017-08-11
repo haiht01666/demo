@@ -3185,6 +3185,7 @@ var pConstants_VN = {
 	//MENU
     'MENU_PERSONAL_INFO_TITLE'                 : 'Quản trị cá nhân',
     'MENU_PERSONAL_INFO_DETAIL'                : 'Quản lý thông tin',
+    'MENU_PERSONAL_ORDER'                      : 'Quản lý dơn hàng cá nhân',
     'MENU_PERSONAL_INFO_PASSWORD'              : 'Thay đổi mật khẩu',
     'MENU_PERSONAL_INFO_SUPPORT'               : 'Liên hệ hỗ trợ từ công ty',
 

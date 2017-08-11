@@ -58,10 +58,20 @@ function drawChart() {
         }, '']
     ]);
     for (var i = 0; i < listNpp.length; i++) {
+        var colorActive = "";
+        if(listNpp[i].activeStatus.dateNum >= 15){
+            colorActive = "white"
+        } else if(listNpp[i].activeStatus.dateNum >= 5 && listNpp[i].activeStatus.dateNum < 15){
+            colorActive = "#f5de89"
+        } else{
+            colorActive = "#efa7a7"
+        }
         data.addRows([
             [{
                 v: listNpp[i].userCode,
-                f: '<div style="background-color:rgba(36, 58, 144, 0.93);color: white">' + listNpp[i].userCode + '</div>' + ((listNpp[i].userCode === 'open') ? '' : '<div><img src="./static/frontend/assets/images/ico/' + listNpp[i].leverValue + '.png"/></div>')
+                f: '<div style="width: 65px;background-color:rgba(36, 58, 144, 0.93);color: white">' + listNpp[i].dispName + '</div>' +
+                '<div style="background-color:rgba(36, 58, 144, 0.93);color: white; padding-top: 2px; padding-bottom: 2px;border-top: 1px solid #b9b9b9">' + listNpp[i].userCode + '</div>' +
+                ((listNpp[i].userCode === 'open') ? '' : '<div style="min-height: 50px;background-color:' + colorActive +'"><img src="./static/frontend/assets/images/ico/' + listNpp[i].leverValue + '.png"/></div>')
             }, listNpp[i].parentId.toString()]
         ]);
     }

@@ -175,6 +175,24 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
+    public AjaxResult getListPersonalOrder(String userCode, String childId, Integer limit, Integer offset,
+                                   String orderby) {
+        AjaxResult result = new AjaxResult();
+        try {
+            // get child order
+            long totalPersonalOrder = dao.getTotalPersonalOrder(userCode);
+            List<Order> listPersonalOrder = dao.getListPersonalOrder(userCode, limit, offset, orderby);
+            result.setResult(true);
+            result.setNumberRecord(totalPersonalOrder);
+            result.setResultData(listPersonalOrder);
+        } catch (Exception e) {
+            result.setResult(false);
+        }
+        return result;
+    }
+
+
+    @Override
     public AjaxResult getNppGraphical(String userCode) {
         AjaxResult result = new AjaxResult();
         try {
@@ -206,7 +224,8 @@ public class ApiServiceImpl implements ApiService {
                 }
                 npp.setAgentLevel(CommonUtils.getLevelChild(userInfo.getChildId(), npp.getChildId()));
                 npp.setLeverValue(levelUser);
-                npp.setStatus(userTmp.getStatus());
+                npp.setActiveStatus(userTmp.getActiveStatus());
+                npp.setStatus(userTmp.getActiveStatus().getStatus());
             }
             result.setResult(true);
             result.setResultData(nppGraphicModel);
