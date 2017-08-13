@@ -549,14 +549,13 @@ public class ManageDaoImpl extends DBManager implements ManageDao {
 	private boolean isUserEnable(int userId) throws SQLException {
 		boolean result = false;
 		String sql = "select enable from users where id =?";
-		conn = getConnection();
+		//conn = getConnection();
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, userId);
 		rs = stmt.executeQuery();
 		while (rs.next()) {
 			result = rs.getBoolean(1);
 		}
-		closeConnection(conn, stmt, rs, st);
 		return result;
 
 	}
