@@ -18460,3 +18460,6 @@ a.sb-button:hover {
   font-style: italic;
 }
 
+#scroller li{
+  width: 100%;
+}
