@@ -3330,6 +3330,11 @@ var pConstants_VN = {
     'GROUP_GRAPHICAL_DSD':'DSD:',
     'GROUP_GRAPHICAL_GDSD':'GDSD:',
     'GROUP_GRAPHICAL_TREE' : 'Tree Graphical',
+    'ACTIVE_DISPLAY' : 'Chú thích hiển thị trạng thái active',
+    'ACTIVE_STATUS' : 'Số ngày active còn lại > 15 ngày',
+    'WARNING_STATUS' : 'Số ngày active còn lại từ 5 - 15 ngày',
+    'RED_STATUS' : 'Số ngày active còn lại < 5 ngày',
+    'NOACTIVE_STATUS' : 'Không active',
 
     'CHANGE_PASS_SUCCESS' : 'Thay đổi mật khẩu thành công!',
     'CHANGE_PASS_FAIL' : 'Thay đổi mật khẩu thất bại!',

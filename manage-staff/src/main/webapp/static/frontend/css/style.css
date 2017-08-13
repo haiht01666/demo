@@ -1269,3 +1269,31 @@ td.checkInput
     height: 100px;
     float: left;
 }
+
+.lever-icon{
+    display: inline;
+}
+.lever-icon img{
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.active-icon{
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #314697;
+}
+.active-icon.active-status{
+    background-color: white;
+}
+.active-icon.warning-status{
+    background-color: #f5de89;
+}
+.active-icon.red-status{
+    background-color: #efa7a7;
+}
+.active-icon.noactive-status{
+    background-color: lightgray;
+}
+

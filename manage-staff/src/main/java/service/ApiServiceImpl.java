@@ -198,7 +198,9 @@ public class ApiServiceImpl implements ApiService {
         try {
             List<User> listNpp = dao.getNpp(false, userCode, -1, null, "id");
             User userInfo = dao.getLoginInfo(userCode);
-            userInfo.setLeverValue(manageService.getLeverUser(Integer.parseInt(userCode)));
+            User userDetail = manageService.detailUser(Integer.parseInt(userCode));
+            userInfo.setLeverValue(userDetail.getLeverValue());
+            userInfo.setActiveStatus(userDetail.getActiveStatus());
             NppGraphicModel nppGraphicModel = new NppGraphicModel();
             nppGraphicModel.setUserInfo(userInfo);
             nppGraphicModel.setListNpp(listNpp);

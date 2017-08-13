@@ -449,14 +449,13 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         BigDecimal weekGroupVolume = new BigDecimal(0);
-        String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?)" + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")" +" AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
+        String sql = "SELECT sum(total) as total FROM orders o where user_id IN (" + childQuery + ")" + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")" +" AND cdate between STR_TO_DATE(CONCAT(?,' 00:00:00'), '%d/%m/%Y %T') AND STR_TO_DATE(CONCAT(?,' 23:59:59'), '%d/%m/%Y %T')";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userCode);
-            stmt.setString(2, userCode);
-            stmt.setString(3, startDate);
-            stmt.setString(4, endDate);
+            stmt.setString(2, startDate);
+            stmt.setString(3, endDate);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 weekGroupVolume = rs.getBigDecimal(1);
@@ -524,13 +523,12 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?) " + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")"  + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
+        String sql = "SELECT sum(total) as total FROM orders o where user_id IN (" + childQuery + ") " + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")"  + " and  DATE_FORMAT(cdate,'%m/%Y') = ?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userCode);
-            stmt.setString(2, userCode);
-            stmt.setString(3, monthYear);
+            stmt.setString(2, monthYear);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 monthGroupVolume = rs.getBigDecimal(1);
@@ -573,13 +571,12 @@ public class ApiDaoImpl extends DBManager implements ApiDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         BigDecimal monthGroupVolume = new BigDecimal(0);
-        String sql = "SELECT sum(total) as total FROM orders o where (user_id IN (" + childQuery + ") OR user_id = ?) " + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")" + " and  DATE_FORMAT(cdate,'%Y') = ?";
+        String sql = "SELECT sum(total) as total FROM orders o where user_id IN (" + childQuery + ") " + " AND (o.type=" + OrderType.ORDER_PRODUCT.getCode() + " OR o.type=" + OrderType.ORDER_PROACTIVE.getCode()+ ")" + " and  DATE_FORMAT(cdate,'%Y') = ?";
         try {
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userCode);
-            stmt.setString(2, userCode);
-            stmt.setString(3, year);
+            stmt.setString(2, year);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 monthGroupVolume = rs.getBigDecimal(1);

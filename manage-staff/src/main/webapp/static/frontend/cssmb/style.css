@@ -1188,3 +1188,33 @@ td.checkInput
     min-width: 700px;
     overflow: scroll;
 }
+
+.lever-icon{
+    display: inline;
+    text-align: center;
+}
+.lever-icon img{
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+.lever-value{
+    padding-left: 50px;
+}
+.active-icon{
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #314697;
+}
+.active-icon.active-status{
+    background-color: white;
+}
+.active-icon.warning-status{
+    background-color: #f5de89;
+}
+.active-icon.red-status{
+    background-color: #efa7a7;
+}
+.active-icon.noactive-status{
+    background-color: lightgray;
+}
