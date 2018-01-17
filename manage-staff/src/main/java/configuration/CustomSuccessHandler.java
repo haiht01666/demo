@@ -34,7 +34,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
     }
      
     /**
-     * 
+     *test
      */
     protected String determineTargetUrl(Authentication authentication) {
         String url="";
